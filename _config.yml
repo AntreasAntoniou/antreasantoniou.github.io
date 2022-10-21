@@ -67,7 +67,7 @@ author:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/AntreasAntoniou"
     - label: "Google Scholar"
-      icon: "fab fa-sharp fa-solid fa-book-bookmark"
+      icon: "fab fa-sharp fa-book-bookmark"
       url: "https://scholar.google.co.uk/citations?hl=en&user=LNO4XZQAAAAJ&view_op=list_works&sortby=pubdate"
     - label: "Linkedin"
       icon: "fab fa-brands fa-linkedin"
