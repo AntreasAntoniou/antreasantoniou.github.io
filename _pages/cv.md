@@ -17,8 +17,6 @@ redirect_to:
   gtag('config', 'UA-131324268-1');
 </script>
 
-{% include base_path %}
-
 [comment]: <> ([Click to see full CV]&#40;/documents/AntreasAntoniouResume.pdf "CV"&#41;)
 
 [comment]: <> (## Summarised CV)
