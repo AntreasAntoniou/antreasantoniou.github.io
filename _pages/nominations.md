@@ -1,11 +1,13 @@
 ---
-title: "Page Not Found"
-excerpt: "Page not found. Your pixels are in another canvas."
-sitemap: false
-permalink: /404.html
+title: "Nominations"
+permalink: /nominations/
+author_profile: true
+redirect_from:
+  - /staff_award_nominations
+  - /teaching_award_nominations
+redirect_to:
+  - /documents/teaching_award_nominations.pdf
 ---
-
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131324268-1"></script>
 <script>
@@ -17,6 +19,5 @@ permalink: /404.html
 </script>
 
 
-# Error 404 💥 😕
 
-Sorry, but the page you were trying to view does not exist.
+
