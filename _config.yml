@@ -13,12 +13,14 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Dr. 
-email: iam@antreas.io
+title: MM
+email:
 description: >- # this means to ignore newlines until "baseurl:"
-  "Research Associate in Machine Learning, interested in the intersection of multi-modal learning and meta-learning." 
-twitter_username: _AntreasAntonio
-github_username: AntreasAntoniou
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+twitter_username: username
+github_username: username
 minimal_mistakes_skin: default
 search: true
 
@@ -27,10 +29,10 @@ markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
 # Outputting
 permalink: /:categories/:title/
-paginate: 1 # amount of posts to show
+paginate: 5 # amount of posts to show
 paginate_path: /page:num/
-timezone: GB
-# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
 include:
   - _pages
 
@@ -56,27 +58,34 @@ plugins:
   - jekyll-include-cache
 
 author:
-  name   : "Antreas Antoniou"
-  avatar : "/assets/images/profile.jpg"
-  bio    : "Research Associate in Machine Learning, interested in the intersection of multi-modal learning and meta-learning."
+  name   : "First Lastname"
+  avatar : "/assets/images/bio-photo.jpg"
+  bio    : "My awesome biography constrained to a sentence or two goes here."
+  links:
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/"
+    - label: "Instagram"
+      icon: "fab fa-fw fa-instagram"
+      url: "https://instagram.com/"
+
+footer:
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/_AntreasAntonio"
+      url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/AntreasAntoniou"
-    - label: "Google Scholar"
-      icon: "fab fa-sharp fa-solid fa-book-bookmark"
-      url: "https://scholar.google.co.uk/citations?hl=en&user=LNO4XZQAAAAJ&view_op=list_works&sortby=pubdate"
-    - label: "Linkedin"
-      icon: "fab fa-brands fa-linkedin"
-      url: "https://www.linkedin.com/in/antreas-antoniou-0692579a"
-    - label: "Orchid"
-      icon: "fa-brands fa-orcid"
-      url: "https://orcid.org/0000-0001-5776-1204"
-    
-    
+      url: "https://github.com/"
+    - label: "Instagram"
+      icon: "fab fa-fw fa-instagram"
+      url: "https://instagram.com/"
 
 defaults:
   # _posts
