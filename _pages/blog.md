@@ -1,6 +1,8 @@
 ---
 title: "Blog Posts "
 permalink: /blog/
-layout: posts
+layout: home
 author_profile: true
+paginate: 5 # amount of posts to show
+paginate_path: /page:num/
 ---
