@@ -1,5 +1,5 @@
 ---
-permalink: /
+permalink: /home/
 title: "Antreas Antoniou"
 excerpt: "Home"
 author_profile: true
@@ -25,6 +25,5 @@ I am a member of the [BayesWatch](https://www.bayeswatch.com/) research group an
 research institute. My broader research topic is the design and/or learning of learning priors for deep neural networks, such that systems
 that are robust to transfer across data domains, tasks and modalities is possible. To achieve this, I utilize meta-learning, differentiable and non-differentiable learning, adversarial learning and multi-modal learning, which is 
 where the majourity of my current work revolves.
-
                                                                                 
 
