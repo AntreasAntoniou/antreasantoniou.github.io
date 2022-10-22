@@ -17,7 +17,3 @@ redirect_to:
 
   gtag('config', 'UA-131324268-1');
 </script>
-
-
-
-
