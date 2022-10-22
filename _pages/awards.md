@@ -18,10 +18,6 @@ redirect_to:
   gtag('config', 'UA-131324268-1');
 </script>
 
+[Teaching Award Nomination Letters](documents/teaching_award_nominations.pdf)
 
-[comment]: <> (### [Teaching Award Nomination Letters] &#40;/documents/teaching_award_nominations.pdf&#41;)
-
-[comment]: <> (### [Staff Award Letters] &#40;/documents/staff_award.pdf&#41;)
-
-
-
+[Staff Award Letters](documents/staff_award.pdf)
