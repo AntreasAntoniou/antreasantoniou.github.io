@@ -1,5 +1,5 @@
 ---
-permalink: /home/
+permalink: /
 title: "Antreas Antoniou"
 excerpt: "Home"
 author_profile: true
