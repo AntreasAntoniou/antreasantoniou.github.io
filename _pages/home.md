@@ -1,11 +1,8 @@
 ---
-permalink: /
+permalink: /home/
 title: "Antreas Antoniou"
 excerpt: "Home"
 author_profile: true
-redirect_from: 
-  - /home/
-  - /home.html
 ---
 
 <meta name="google-site-verification" content="giQzN4aACkcRD3IY7dwaL7jyKfwAU3XSfmDbkKYn0pA" />
