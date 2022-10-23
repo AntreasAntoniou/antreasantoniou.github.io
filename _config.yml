@@ -63,7 +63,7 @@ author:
   bio    : "Research Associate in Machine Learning, interested in the intersection of multi-modal learning and meta-learning."
   links:
     - label: "iam@antreas.io"
-      icon: "fab fa-solid fa-envelope"
+      icon: "fab fa-fw fa-envelope"
       url: "mailto:iam@antreas.io"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
@@ -72,7 +72,7 @@ author:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/AntreasAntoniou"
     - label: "Google Scholar"
-      icon: "fab fa-solid fa-books"
+      icon: "fab fa-fw fa-books"
       url: "https://scholar.google.co.uk/citations?hl=en&user=LNO4XZQAAAAJ&view_op=list_works&sortby=pubdate"
     - label: "Linkedin"
       icon: "fab fa-brands fa-linkedin"
