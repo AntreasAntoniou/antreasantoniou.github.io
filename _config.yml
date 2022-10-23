@@ -19,7 +19,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   "Research Associate in Machine Learning, interested in the intersection of multi-modal learning and meta-learning." 
 # twitter_username: _AntreasAntonio
 # github_username: AntreasAntoniou
-minimal_mistakes_skin: constrast
+minimal_mistakes_skin: "constrast"
 search: true
 
 # Build settings
