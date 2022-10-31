@@ -65,6 +65,9 @@ author:
     - label: "iam@antreas.io"
       icon: "fab fas fa-envelope"
       url: "mailto:iam@antreas.io"
+    - label: "Arrange an appointment"
+      icon: "fa-regular fa-calendar"
+      url: "https://calendar.app.google/jy778byT379ZtLnk8"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/_AntreasAntonio"
@@ -80,6 +83,7 @@ author:
     - label: "Orchid"
       icon: "fab fa-brands fa-orcid"
       url: "https://orcid.org/0000-0001-5776-1204"
+    
     
     
 
