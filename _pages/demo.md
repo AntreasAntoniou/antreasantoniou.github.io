@@ -13,4 +13,4 @@ author_profile: false
   gtag('config', 'UA-131324268-1');
 </script>
 
-1. [TALI Dataset Explorer](/demos/tali), hosted on Gradio
+1. [TALI Dataset Explorer](/demos/tali) hosted on Gradio.
