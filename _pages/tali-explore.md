@@ -2,8 +2,6 @@
 title: "TALI Explorer"
 permalink: /demos/tali
 author_profile: true
-redirect_from:
-  - /demos/tali
 redirect_to:
   - https://ec910ac2d4bc308526.gradio.live
 ---
