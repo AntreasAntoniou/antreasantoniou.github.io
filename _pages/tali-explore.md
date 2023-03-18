@@ -3,10 +3,9 @@ title: "TALI Explorer"
 permalink: /demos/tali
 author_profile: true
 redirect_to:
-  - https://c56073710eb4340163.gradio.live
+  - https://77a33559c48e97ca90.gradio.live
 ---
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<!-- Update tali demo link -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131324268-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
