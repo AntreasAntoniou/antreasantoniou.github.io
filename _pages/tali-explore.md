@@ -3,7 +3,7 @@ title: "TALI Explorer"
 permalink: /demos/tali
 author_profile: true
 redirect_to:
-  -  https://079aaaae115e8f2d36.gradio.live/
+  -  https://e74e09ddb3186e7b7a.gradio.live/
 ---
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131324268-1"></script>
