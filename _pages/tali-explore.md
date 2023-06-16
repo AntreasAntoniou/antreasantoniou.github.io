@@ -14,4 +14,4 @@ author_profile: false
   gtag('config', 'UA-131324268-1');
 </script>
 
-<iframe src="https://947f72a73e66305f1d.gradio.live" style="border:0px #ffffff none;" name="Tali Demo" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="100%" width="100%" allowfullscreen></iframe>
+<iframe src="https://947f72a73e66305f1d.gradio.live" style="border:0px #ffffff none;" name="Tali Demo" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="800px" width="100%" allowfullscreen></iframe>
