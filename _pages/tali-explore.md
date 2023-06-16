@@ -20,4 +20,4 @@ author_profile: false
   <li><a href="https://947f72a73e66305f1d.gradio.live/?__theme=dark" target="_blank">Dark Mode</a></li>
 </ul>
 
-<iframe src="https://947f72a73e66305f1d.gradio.live" style="border:0px #ffffff none;" name="Tali Demo" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="800px" width="100%" allowfullscreen></iframe>
+<iframe src="https://947f72a73e66305f1d.gradio.live/?__theme=light" style="border:0px #ffffff none;" name="Tali Demo" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="800px" width="100%" allowfullscreen></iframe>
