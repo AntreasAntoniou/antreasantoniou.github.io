@@ -1,7 +1,7 @@
 ---
 title: "Demos"
 permalink: /demos/
-author_profile: false
+author_profile: true
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

@@ -12,6 +12,9 @@ main:
   - title: "Teaching"
     url: /teaching/
 
+  - title: "Demos"
+    url: /demos/
+
   - title: "Blog Posts"
     url: /blog/
 
