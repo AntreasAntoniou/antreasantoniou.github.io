@@ -14,6 +14,6 @@ author_profile: false
   gtag('config', 'UA-131324268-1');
 </script>
 
-<p>Want to see the demo in a full page? <a href="https://947f72a73e66305f1d.gradio.live" target="_blank">Click here</a> to open the demo in a new tab.</p>
+<p>Want to see the demo in a full page? <a href="https://947f72a73e66305f1d.gradio.live/?__theme=light" target="_blank">Click here</a> to open the demo in a new tab.</p>
 
 <iframe src="https://947f72a73e66305f1d.gradio.live" style="border:0px #ffffff none;" name="Tali Demo" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="800px" width="100%" allowfullscreen></iframe>
