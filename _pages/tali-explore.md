@@ -1,7 +1,7 @@
 ---
 title: "TALI Explorer"
 permalink: /demos/tali
-author_profile: true
+author_profile: false
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
