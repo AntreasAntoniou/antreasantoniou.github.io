@@ -98,4 +98,8 @@ defaults:
       type: pages
     values:
       layout: single
+    
+demos:
+  - tali:
+      url: https://499c4ecdb4d81f5a69.gradio.live
 
