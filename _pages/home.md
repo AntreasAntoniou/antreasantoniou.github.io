@@ -27,12 +27,16 @@ where the majourity of my current work revolves. -->
 
 I serve as a Research Associate in Machine Learning at the University of Edinburgh, supervised by Prof. Amos Storkey. I am affiliated with the [BayesWatch](https://www.bayeswatch.com/) research group and the Adaptive and Neural Computation (ANC) research institute.
 
-### Research Focus
+#### Overarching Theme
 
-My primary research interest lies in the development and investigation of learning priors for deep neural networks. This work aims to facilitate the robust transfer of learned models across diverse data domains, tasks, and modalities. Methodologically, my research employs meta-learning techniques, as well as differentiable and non-differentiable learning paradigms. Adversarial learning and multi-modal learning frameworks are also integral to my work.
+My overarching goal is to emulate the trajectory of human-like representation learning, starting from foundational representations akin to those seen in human infants but without requiring eons of evolutionary fine-tuning. This serves as a springboard for my broader research ambition: to investigate how these infant-like representations can be fine-tuned in concert with higher-level abstract concepts to pave the way for general artificial intelligence systems. To achieve this, my research focuses on scalable, data-efficient, and generalizable self-supervised learning techniques in a multi-modal setting. I integrate insights from neuroscience and evolutionary computation to explore optimal learning sequences and curricula, paying close attention to architectural choices and their corresponding training recipes.
 
-Key areas of additional focus include the study of inductive biases in machine learning models, the scalability of learning algorithms, computational efficiency, and the incorporation of memory structures into neural networks. I also explore optimization techniques inspired by evolutionary computation.
+#### Research Focus
+
+Leading my research interests is Multi-Modal Learning, specifically targeting the synergistic integration of text, images, audio, and video data. This is followed by the development of Self-Supervised Methods, inspired by mechanisms of infant learning and principles of evolutionary computation.
+
+Additional key areas include Meta-Learning, Adversarial Learning, and Optimization Techniques Inspired by Evolutionary Optimization. These are applied across both differentiable and gradient-free optimization paradigms. Other relevant research dimensions include Inductive Biases, Scalability, Computational Efficiency, and Memory-Augmented Neural Networks.
 
 #### Research Philosophy
 
-My research operates under a pragmatic framework, focusing on identifying high-leverage areas that can benefit from targeted investigation. This allows for a more efficient allocation of both computational and intellectual resources. In a nod to both evolutionary computation and the Pareto Principle, you could say I'm interested in identifying the "fittest" 20% of research angles that yield 80% of the meaningful results.
+Operating within a pragmatic framework, my research aims to identify high-leverage focal points conducive to in-depth investigation. This allows for the efficient allocation of both computational and cognitive resources. In line with both evolutionary tenets and the Pareto Principle, my methodology can be seen as focusing on the "fittest" 20% of research avenues likely to contribute 80% of impactful results.
