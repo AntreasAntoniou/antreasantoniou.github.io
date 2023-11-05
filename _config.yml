@@ -34,6 +34,8 @@ timezone: GB
 include:
   - _posts
   - _pages
+favicon: "/assets/images/favicon-bot.jpeg"
+
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
