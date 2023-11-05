@@ -8,7 +8,7 @@ redirect_from:
 redirect_to:
   - /documents/staff_award.pdf
 ---
-<!-- Google tag (gtag.js) -->
+<<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H1FGQXV7RC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

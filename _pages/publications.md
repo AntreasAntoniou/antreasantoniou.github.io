@@ -3,14 +3,14 @@ title: "Publications"
 permalink: /publications/
 author_profile: false
 ---
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131324268-1"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H1FGQXV7RC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-131324268-1');
+  gtag('config', 'G-H1FGQXV7RC');
 </script>
 
 You can also find my articles on [my Google Scholar profile](https://scholar.google.co.uk/citations?user=LNO4XZQAAAAJ&hl=en)
