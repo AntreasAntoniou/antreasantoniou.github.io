@@ -1,7 +1,7 @@
 ---
-permalink: /
-# redirect_from:
-#   - /home/
+permalink: /home/
+redirect_from:
+  - /
 title: "Antreas Antoniou"
 excerpt: "Home"
 author_profile: true
