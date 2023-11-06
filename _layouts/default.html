@@ -1,3 +1,22 @@
-<head>
-{% include custom-head.html %}
-</head>
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+
+{% include head.html %}
+
+<body>
+
+  {% include header.html %}
+
+  <main class="page__main" role="main">
+    <article class="page__content">
+      {{ content }}
+    </article>
+  </main>
+
+  {% include footer.html %}
+  
+  {% include custom-head.html %}
+
+</body>
+
+</html>
