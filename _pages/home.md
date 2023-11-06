@@ -8,10 +8,6 @@ author_profile: true
 ---
 
 
-
-
-
-
 I serve as a Research Associate in Machine Learning at the University of Edinburgh, supervised by Prof. Amos Storkey. I am affiliated with the [BayesWatch](https://www.bayeswatch.com/) research group and the Adaptive and Neural Computation (ANC) research institute.
 
 #### Overarching Theme
