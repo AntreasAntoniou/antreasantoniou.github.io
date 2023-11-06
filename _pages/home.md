@@ -7,17 +7,9 @@ excerpt: "Home"
 author_profile: true
 ---
 
-<!-- <meta name="google-site-verification" content="giQzN4aACkcRD3IY7dwaL7jyKfwAU3XSfmDbkKYn0pA" /> -->
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H1FGQXV7RC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-H1FGQXV7RC');
-</script>
+
 
 
 I serve as a Research Associate in Machine Learning at the University of Edinburgh, supervised by Prof. Amos Storkey. I am affiliated with the [BayesWatch](https://www.bayeswatch.com/) research group and the Adaptive and Neural Computation (ANC) research institute.

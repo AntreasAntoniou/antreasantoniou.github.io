@@ -3,15 +3,7 @@ title: "Publications"
 permalink: /publications/
 author_profile: false
 ---
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H1FGQXV7RC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-H1FGQXV7RC');
-</script>
 
 You can also find my articles on [my Google Scholar profile](https://scholar.google.co.uk/citations?user=LNO4XZQAAAAJ&hl=en)
 - "Meta Learning for Supervised and Unsupervised Few-Shot Learning", A. Antoniou, PhD Thesis
