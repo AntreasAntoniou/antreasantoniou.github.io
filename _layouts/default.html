@@ -1,36 +1,42 @@
 ---
-layout: base
 ---
 
-{% assign site_title = site.title %}
-{% assign site_description = site.description %}
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="{{ site.locale | slice: 0,2 | default: "en" }}" class="no-js">
+  <head>
+    {% include head.html %}
+    {% include head/custom.html %}
+    {% include custom-head.html %}
+  </head>
 
-{% if page.title %}{% assign here_title = page.title | strip_html | site.url false | to_str %}
-  {% assign site_title = page.title %}
-{% elsif collection.label %}{% assign here_title = collection.label %}
-{% elsif page.type and page.type != "pages" %}{% assign here_title = page.type %}
-{% endif %}
+  <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
+    {% include_cached skip-links.html %}
+    {% include_cached masthead.html %}
 
-{% if page.excerpt %}{% assign here_desc = page.excerpt | strip_html | normalize_whitespace %}
-  {% assign site_description = page.excerpt %}
-{% else %}{% assign here_desc = site.description %}
-{% endif %}
+    <div class="initial-content">
+      {{ content }}
+    </div>
 
-{% if page.categories %}{% assign here_cats = page.categories | normalize_whitespace %}{% endif %}
-{% if page.tags %}{% assign here_tags = page.tags | normalize_whitespace %}{% endif %}
+    {% if site.search == true %}
+      <div class="search-content">
+        {% include_cached search/search_form.html %}
+      </div>
+    {% endif %}
 
-{% if seo %}{% assign seo_title = site_title | append: " - " | append: seo.title %}
-    {% include seo.html %}
-{% endif %}
+    <div id="footer" class="page__footer">
+      <footer>
+        {% include footer/custom.html %}
+        {% include_cached footer.html %}
+      </footer>
+    </div>
 
-{% if page.sidebar.nav %}
-  {% assign has_nav = true %}
-{% else %}
-  {% assign sidebar_min_width = "1" %}
-{% endif %}
+    {% include scripts.html %}
 
-{% include masthead.html %}
-{% include custom-head.html %}
-{% include left-sidebar.html %}
-{% include main.html %}
-{% include right-sidebar.html %}
+  </body>
+</html>
