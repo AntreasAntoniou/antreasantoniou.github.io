@@ -13,10 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "AI Researcher" 
+title: "AI Researcher"
 email: iam@antreas.io
 description: >- # this means to ignore newlines until "baseurl:"
-  "Research Associate in Machine Learning, interested in the intersection of multi-modal learning and meta-learning." 
+  "Research Associate in Machine Learning, interested in the intersection of multi-modal learning and meta-learning."
 # twitter_username: _AntreasAntonio
 # github_username: AntreasAntoniou
 minimal_mistakes_skin: "default"
@@ -35,7 +35,6 @@ include:
   - _posts
   - _pages
 favicon: "/assets/images/favicon-bot.jpeg"
-
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -60,9 +59,9 @@ plugins:
   - jekyll-redirect-from
 
 author:
-  name   : "Antreas Antoniou"
-  avatar : "/assets/images/profile.jpg"
-  bio    : "Research Associate in Machine Learning, interested in the intersection of multi-modal learning and meta-learning."
+  name: "Antreas Antoniou"
+  avatar: "/assets/images/profile.jpg"
+  bio: "Research Associate in Machine Learning, interested in the intersection of multi-modal learning and meta-learning."
   links:
     - label: "iam@antreas.io"
       icon: "fab fas fa-envelope"
@@ -85,9 +84,6 @@ author:
     - label: "Orchid"
       icon: "fab fa-brands fa-orcid"
       url: "https://orcid.org/0000-0001-5776-1204"
-    
-    
-    
 
 defaults:
   - scope:
@@ -100,7 +96,7 @@ defaults:
       type: pages
     values:
       layout: single
-    
+
 demos:
   tali:
-    url: https://04c65e3d7f952a7e94.gradio.live
+    url: https://2b24db9ccf184b827c.gradio.live
