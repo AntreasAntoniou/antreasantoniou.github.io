@@ -8,7 +8,7 @@ author_profile: true
 ---
 
 
-I serve as a Research Associate in Machine Learning at the University of Edinburgh, supervised by Prof. Amos Storkey. I am affiliated with the [BayesWatch](https://www.bayeswatch.com/) research group and the Adaptive and Neural Computation (ANC) research institute.
+I am currently the Lead Research Scientist in Malted AI, working on research around the topics of efficient LLM training, distillation, and synthetic data generation, as well as the integration of LLM-as-a-Judge systems for robust and scalable annotation, decision making and data generation for reasoning. Previously, I served as a Research Associate in Machine Learning at the University of Edinburgh, supervised by Prof. Amos Storkey. I am affiliated with the [BayesWatch](https://www.bayeswatch.com/) research group and the Adaptive and Neural Computation (ANC) research institute.
 
 #### Overarching Theme
 
