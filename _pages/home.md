@@ -3,6 +3,10 @@ permalink: /
 title: "Antreas Antoniou"
 excerpt: "Home"
 author_profile: true
+redirect_from: 
+  - /home
+  - /home/
+
 ---
 
 
