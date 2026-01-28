@@ -1,3 +1,0 @@
-# Redirect from antreas.io to antreas.ai
-https://antreas.io/* https://antreas.ai/:splat 301!
-http://antreas.io/* https://antreas.ai/:splat 301! 

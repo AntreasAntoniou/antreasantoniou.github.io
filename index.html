@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antreas Antoniou | AI Researcher & Engineer</title>
+  <meta name="description" content="Antreas Antoniou - AI Researcher and Engineer. PhD in Machine Learning from University of Edinburgh. Building efficient, creative AI systems with deep understanding of neural network fundamentals.">
+
+  <link rel="canonical" href="https://antreas.io/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Antreas Antoniou | AI Researcher & Engineer">
+  <meta property="og:description" content="AI Researcher and Engineer with deep understanding of neural network fundamentals. Building efficient, creative AI systems.">
+  <meta property="og:image" content="https://antreas.io/images/profile.jpg">
+  <meta property="og:url" content="https://antreas.io/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Antreas Antoniou | AI Researcher & Engineer">
+  <meta name="twitter:description" content="AI Researcher and Engineer building efficient, creative AI systems.">
+  <meta name="twitter:image" content="https://antreas.io/images/profile.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="images/favicon-bot.jpeg">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Theme initialization (prevents flash) -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head>
+<body class="font-sans">
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#" class="text-xl font-bold tracking-tight">
+        Antreas<span class="text-accent">.</span>
+      </a>
+      <div class="hidden sm:flex items-center gap-6 text-base">
+        <a href="#about" class="text-secondary hover:text-accent transition">About</a>
+        <a href="#publications" class="text-secondary hover:text-accent transition">Research</a>
+        <a href="#experience" class="text-secondary hover:text-accent transition">Experience</a>
+        <a href="#outreach" class="text-secondary hover:text-accent transition">Outreach</a>
+        <a href="#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
+        <a href="documents/AntreasAntoniouResume.pdf" class="btn-primary btn-sm">CV</a>
+        <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-sun" id="theme-icon-light"></i>
+          <i class="fas fa-moon hidden" id="theme-icon-dark"></i>
+        </button>
+      </div>
+      <!-- Mobile menu button -->
+      <div class="flex items-center gap-3 sm:hidden">
+        <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-sun" id="theme-icon-light-mobile"></i>
+          <i class="fas fa-moon hidden" id="theme-icon-dark-mobile"></i>
+        </button>
+        <button class="text-secondary" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden sm:hidden border-t" style="border-color: var(--border); background: var(--bg);">
+      <div class="px-4 py-4 space-y-3">
+        <a href="#about" class="block text-secondary hover:text-accent">About</a>
+        <a href="#publications" class="block text-secondary hover:text-accent">Research</a>
+        <a href="#experience" class="block text-secondary hover:text-accent">Experience</a>
+        <a href="#outreach" class="block text-secondary hover:text-accent">Outreach</a>
+        <a href="#teaching" class="block text-secondary hover:text-accent">Teaching</a>
+        <a href="documents/AntreasAntoniouResume.pdf" class="block text-accent font-semibold">Download CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-16">
+      <div class="max-w-4xl mx-auto px-4 text-center space-y-8">
+        <!-- Profile Image -->
+        <div data-aos="fade-up">
+          <div class="relative w-64 h-64 mx-auto rounded-full overflow-hidden profile-image">
+            <img id="hero-profile" src="images/profile.jpg" alt="Antreas Antoniou - click to toggle" class="w-full h-full object-cover cursor-pointer transition-transform hover:scale-105" onclick="toggleProfileImage()" title="Click to toggle">
+          </div>
+          <p id="profile-hint" class="text-xs text-muted mt-2 opacity-0 transition-opacity duration-500 cursor-pointer" onclick="toggleProfileImage()">
+            <i class="fas fa-hand-pointer mr-1"></i>psst... click me
+          </p>
+        </div>
+
+        <!-- Name -->
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter" data-aos="fade-up" data-aos-delay="100">
+          Antreas <span class="text-accent">Antoniou</span>
+        </h1>
+
+        <!-- Title - Lead with researcher identity -->
+        <p class="text-xl sm:text-2xl text-secondary max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+          AI Researcher & Engineer
+        </p>
+
+        <!-- Current roles -->
+        <p class="text-lg text-muted max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="250">
+          Cofounder at <a href="https://axiotic.ai/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">Axiotic AI</a> ·
+          Principal Research Partner at <a href="https://pieces.app/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">Pieces</a>
+        </p>
+
+        <!-- Social Links -->
+        <div class="flex items-center justify-center gap-5" data-aos="fade-up" data-aos-delay="300">
+          <a href="mailto:iam@antreas.io" class="text-muted hover:text-accent transition text-xl" title="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://calendar.app.google/jy778byT379ZtLnk8" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="Schedule a Meeting">
+            <i class="fas fa-calendar"></i>
+          </a>
+          <a href="https://scholar.google.com/citations?user=LNO4XZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="Google Scholar">
+            <i class="fas fa-graduation-cap"></i>
+          </a>
+          <a href="https://github.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/antreas-antoniou-0692579a/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://twitter.com/AntreasAntworry" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4" data-aos="fade-up" data-aos-delay="350">
+          <div class="email-dropdown" id="hero-email-dropdown">
+            <button class="btn-primary" onclick="toggleEmailDropdown('hero-email-dropdown')">
+              Get in Touch
+            </button>
+            <div class="email-dropdown-content">
+              <button class="email-dropdown-item" onclick="copyEmail(this)">
+                <i class="fas fa-copy"></i>
+                <span>Copy email</span>
+              </button>
+              <a href="mailto:iam@antreas.io" class="email-dropdown-item">
+                <i class="fas fa-envelope"></i>
+                <span>Open email client</span>
+              </a>
+            </div>
+          </div>
+          <a href="#publications" class="btn-secondary">
+            View Research
+          </a>
+          <a href="documents/AntreasAntoniouResume.pdf" class="btn-secondary" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-file-pdf"></i> Download CV
+          </a>
+          <a href="https://calendar.app.google/jy778byT379ZtLnk8" class="btn-secondary" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-calendar-alt"></i> Schedule Meeting
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section - Personal, not corporate -->
+    <section id="about" class="py-24" style="border-top: 1px solid var(--border);">
+      <div class="max-w-4xl mx-auto px-4 space-y-12">
+        <header class="text-center space-y-4" data-aos="fade-up">
+          <p class="eyebrow">About</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Who I Am</h2>
+        </header>
+
+        <div class="space-y-6 text-lg text-secondary leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+          <p>
+            I'm an AI researcher and engineer with a PhD in Machine Learning and Meta-Learning from the University of Edinburgh. I've worked at Google, Amazon, and as principal scientist across AI startups in the UK and US. I specialize in <strong style="color: var(--text);">large language models, multimodal learning, and self-supervised methods</strong>.
+          </p>
+          <p>
+            I believe intelligence emerges from <strong style="color: var(--text);">structure, interaction, and information</strong>—not from sheer scale alone. The field has converged on one dominant recipe: make it bigger. But that's not how natural intelligence works. Brains compress experience, maintain state, and build hierarchical representations. They don't re-ingest the universe every time they need to think.
+          </p>
+          <p>
+            My work focuses on the first principles of learning—how structure, interaction, and information theory can replace massive parameter counts. I'm driven by that Cambrian Explosion spirit of the 2010s: new architectures, new paradigms, genuine exploration of the research tree.
+          </p>
+        </div>
+
+        <div class="card p-8" data-aos="fade-up" data-aos-delay="150">
+          <h3 class="text-xl font-semibold mb-4">What drives me:</h3>
+          <ul class="space-y-3 text-lg text-secondary">
+            <li class="flex items-start gap-3">
+              <span class="text-accent mt-1">→</span>
+              <span><strong style="color: var(--text);">Smarter learning, not bigger models</strong> — efficiency through insight, not brute force</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-accent mt-1">→</span>
+              <span><strong style="color: var(--text);">First principles</strong> — understanding why things work, not just that they work</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-accent mt-1">→</span>
+              <span><strong style="color: var(--text);">Open science</strong> — releasing code, models, and datasets to push the field forward</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-accent mt-1">→</span>
+              <span><strong style="color: var(--text);">Building things</strong> — ideas are cheap, working systems are what matter</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Philosophy Section -->
+    <section class="py-24 section-alt" style="border-top: 1px solid var(--border);">
+      <div class="max-w-4xl mx-auto px-4 space-y-12">
+        <header class="text-center space-y-4" data-aos="fade-up">
+          <p class="eyebrow">Philosophy</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">How I Think About Research</h2>
+        </header>
+
+        <div class="space-y-8">
+          <!-- Overarching Theme -->
+          <div class="card p-8" data-aos="fade-up">
+            <h3 class="text-xl font-semibold mb-4">Overarching Theme</h3>
+            <p class="text-secondary leading-relaxed">
+              My goal is to emulate the trajectory of human-like representation learning—starting from foundational representations akin to those seen in human infants, but without requiring eons of evolutionary fine-tuning. This serves as a springboard for my broader ambition: investigating how these infant-like representations can be fine-tuned in concert with higher-level abstract concepts to pave the way for general artificial intelligence. To achieve this, my research focuses on <strong style="color: var(--text);">scalable, data-efficient, and generalizable self-supervised learning</strong> in a multimodal setting. I integrate insights from neuroscience and evolutionary computation to explore optimal learning sequences and curricula, paying close attention to architectural choices and their corresponding training recipes.
+            </p>
+          </div>
+
+          <!-- Research Focus -->
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="50">
+            <h3 class="text-xl font-semibold mb-4">Research Focus</h3>
+            <p class="text-secondary leading-relaxed mb-4">
+              Leading my research interests is <strong style="color: var(--text);">Multi-Modal Learning</strong>—the synergistic integration of text, images, audio, and video. This is followed by <strong style="color: var(--text);">Self-Supervised Methods</strong> inspired by infant learning and evolutionary computation.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-sm rounded-full" style="background: var(--accent-light); color: var(--accent);">Multi-Modal Learning</span>
+              <span class="px-3 py-1 text-sm rounded-full" style="background: var(--accent-light); color: var(--accent);">Self-Supervised Methods</span>
+              <span class="px-3 py-1 text-sm rounded-full" style="background: var(--accent-light); color: var(--accent);">Meta-Learning</span>
+              <span class="px-3 py-1 text-sm rounded-full" style="background: var(--accent-light); color: var(--accent);">Adversarial Learning</span>
+              <span class="px-3 py-1 text-sm rounded-full" style="background: var(--accent-light); color: var(--accent);">Evolutionary Optimization</span>
+              <span class="px-3 py-1 text-sm rounded-full" style="background: var(--accent-light); color: var(--accent);">Computational Efficiency</span>
+              <span class="px-3 py-1 text-sm rounded-full" style="background: var(--accent-light); color: var(--accent);">Memory-Augmented Networks</span>
+            </div>
+          </div>
+
+          <!-- Research Philosophy -->
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-xl font-semibold mb-4">Research Philosophy</h3>
+            <p class="text-secondary leading-relaxed">
+              I operate within a pragmatic framework, aiming to identify <strong style="color: var(--text);">high-leverage focal points</strong> conducive to in-depth investigation. This allows for efficient allocation of both computational and cognitive resources. In line with evolutionary tenets and the Pareto Principle, my methodology focuses on the "fittest" 20% of research avenues likely to contribute 80% of impactful results.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Current Work Section -->
+    <section class="py-24 section-alt" style="border-top: 1px solid var(--border);">
+      <div class="max-w-4xl mx-auto px-4 space-y-12">
+        <header class="text-center space-y-4" data-aos="fade-up">
+          <p class="eyebrow">Current Work</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">What I'm Building</h2>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Axiotic -->
+          <div class="card p-8" data-aos="fade-up">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🔬</span>
+              <h3 class="text-xl font-semibold">Axiotic AI</h3>
+            </div>
+            <p class="text-muted text-sm mb-3">Cofounder & Research Lead</p>
+            <p class="text-secondary mb-4">
+              An open-science AI research lab paired with a consultancy. The consultancy funds the lab, the lab sets the agenda. We're exploring what's beyond the current scaling paradigm—better learning signals, novel architectures, and systems that actually understand.
+            </p>
+            <a href="https://axiotic.ai/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm font-medium">
+              Learn more →
+            </a>
+          </div>
+
+          <!-- Pieces -->
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="50">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">⚡</span>
+              <h3 class="text-xl font-semibold">Pieces for Developers</h3>
+            </div>
+            <p class="text-muted text-sm mb-3">Principal Research Partner</p>
+            <p class="text-secondary mb-4">
+              Working on efficient AI systems that run everywhere—CPUs, GPUs, NPUs, LPUs. Focused on nano-models and foundation models that are practical for real-world deployment, not just benchmarks.
+            </p>
+            <a href="https://pieces.app/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm font-medium">
+              Learn more →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Interests -->
+    <section class="py-24" style="border-top: 1px solid var(--border);">
+      <div class="max-w-4xl mx-auto px-4 space-y-12">
+        <header class="text-center space-y-4" data-aos="fade-up">
+          <p class="eyebrow">Research Agenda</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">What I Think About</h2>
+          <p class="max-w-2xl mx-auto text-xl text-secondary">
+            I'm fundamentally inspired by <strong style="color: var(--text);">information theory, evolution, and biology</strong>—how can we use what we observe about human learning and nature to build better artificial intelligence?
+          </p>
+        </header>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="0">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-bullseye text-accent"></i>
+              <h4 class="font-semibold">Improved Tasks</h4>
+            </div>
+            <p class="text-secondary text-sm">Beyond next-token prediction. Predicting masked past, present, and future states to force causal structure, long-horizon planning, and robust memory.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="25">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-shapes text-accent"></i>
+              <h4 class="font-semibold">Multimodal Learning</h4>
+            </div>
+            <p class="text-secondary text-sm">Inspired by the brain's multimodal neurons—"synesthetic" architectures processing text, images, and audio in a shared latent space.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="50">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-memory text-accent"></i>
+              <h4 class="font-semibold">Memory & Recursion</h4>
+            </div>
+            <p class="text-secondary text-sm">Explicit memory and latent reasoning loops turning transformers into differentiable computers—infinite-context learning without expensive CoT tokens.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="75">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-sitemap text-accent"></i>
+              <h4 class="font-semibold">Hierarchical Attention</h4>
+            </div>
+            <p class="text-secondary text-sm">Fractal attention patterns operating at multiple resolutions simultaneously—seeing the forest and the trees without brute-force scaling.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-cubes text-accent"></i>
+              <h4 class="font-semibold">Novel Architectures</h4>
+            </div>
+            <p class="text-secondary text-sm">New connectivity patterns, activation mechanisms, and dense routing schemes where deep layers attend directly to shallow features.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="125">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-cogs text-accent"></i>
+              <h4 class="font-semibold">AI Flywheels</h4>
+            </div>
+            <p class="text-secondary text-sm">Data quality is the new frontier. Closed-loop engines where models generate, filter, and curriculum-sort their own training data.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="150">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-robot text-accent"></i>
+              <h4 class="font-semibold">Embodied Learning</h4>
+            </div>
+            <p class="text-secondary text-sm">Intelligence requires grounding. Using simulation as a primary data source, training agents on interaction physics before sim-to-real transfer.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="175">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-dna text-accent"></i>
+              <h4 class="font-semibold">Evolution meets SGD</h4>
+            </div>
+            <p class="text-secondary text-sm">SGD is greedy; evolution generalizes but is slow. Researching how to synergize them for robust, efficient learning.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-compress text-accent"></i>
+              <h4 class="font-semibold">Information & Distillation</h4>
+            </div>
+            <p class="text-secondary text-sm">Distillation through an information-theoretic lens—cracking the physics of compression to train small models to their maximum potential.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="225">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-project-diagram text-accent"></i>
+              <h4 class="font-semibold">Local Learning Rules</h4>
+            </div>
+            <p class="text-secondary text-sm">Efficiency in nature is achieved through local learning rules. Leveraging this for efficient learning without global backprop.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="250">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-wave-square text-accent"></i>
+              <h4 class="font-semibold">Asynchronous Dynamics</h4>
+            </div>
+            <p class="text-secondary text-sm">Rhythms across multiple temporal scales define natural systems. Exploring how neural architectures can internalize these for efficient learning.</p>
+          </div>
+
+          <div class="card p-5" data-aos="fade-up" data-aos-delay="275">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-leaf text-accent"></i>
+              <h4 class="font-semibold">Bio-Inspired Learning</h4>
+            </div>
+            <p class="text-secondary text-sm">Nature solved learning over billions of years. Drawing from biological neural networks, synaptic plasticity, and adaptive mechanisms.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="py-24 section-alt" style="border-top: 1px solid var(--border);">
+      <div class="max-w-4xl mx-auto px-4 space-y-12">
+        <header class="text-center space-y-4" data-aos="fade-up">
+          <p class="eyebrow">Publications</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Selected Research</h2>
+          <p class="text-secondary"><a href="https://scholar.google.com/citations?user=LNO4XZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">See all on Google Scholar →</a></p>
+        </header>
+
+        <div class="space-y-6">
+          <!-- 2024: einspace -->
+          <article class="card p-8" data-aos="fade-up">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-conference">NeurIPS</span>
+              <span class="text-muted">2024</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              einspace: Searching for Neural Architectures from Fundamental Operations
+            </h3>
+            <p class="text-muted mb-4">L. Franken, M. Wistuba, A. Antoniou, J. Grabocka</p>
+            <p class="text-secondary mb-6">A unified search space for neural architecture search based on einsum operations and fundamental building blocks.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/2405.20838" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- 2024: GATE/EEVEE -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="50">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-conference">NeurIPS</span>
+              <span class="text-muted">2024</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              EEVEE and GATE: Finding the Right Benchmarks for Vision-Language Models
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou et al.</p>
+            <p class="text-secondary mb-6">Rethinking evaluation benchmarks for vision-language models to better measure true capabilities.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://openreview.net/forum?id=0SMhqvgHST" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- 2024: Adversarial Augmentation -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-workshop">Preprint</span>
+              <span class="text-muted">2024</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Adversarial Augmentation Training Makes Action Recognition Models More Robust to Realistic Video Distribution Shifts
+            </h3>
+            <p class="text-muted mb-4">K. Hsieh, A. Antoniou, A. Sherwin, J. Sherrah, M. Maybank, S. Sherwin</p>
+            <p class="text-secondary mb-6">Using adversarial augmentation to improve robustness of action recognition models against natural distribution shifts.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/2401.11406" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- 2023: ACAT -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="150">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-conference">ICML</span>
+              <span class="text-muted">2023</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              ACAT: Adversarial Counterfactual Attention for Classification and Detection in Medical Imaging
+            </h3>
+            <p class="text-muted mb-4">A. Papadopoulos, S. Tsaftaris, A. Antoniou</p>
+            <p class="text-secondary mb-6">Using adversarial counterfactual attention to improve interpretability in medical imaging classification and detection.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/2303.15421" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- 2023: Contrastive Meta-Learning -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-conference">ICLR</span>
+              <span class="text-muted">2023</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Contrastive Meta-Learning for Partially Observable Few-Shot Learning
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou, M. Andrychowicz, L. Karamanolakis</p>
+            <p class="text-secondary mb-6">Combining contrastive learning with meta-learning for few-shot scenarios where only partial observations are available.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/2301.13136" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- 2023: Is Scaling Learned Optimizers Worth It? -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="250">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-workshop">NeurIPS Workshop</span>
+              <span class="text-muted">2023</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Is Scaling Learned Optimizers Worth It? Evaluating The Value of VeLO's 4000 TPU Months
+            </h3>
+            <p class="text-muted mb-4">I. Higgins, A. Antoniou, et al.</p>
+            <p class="text-secondary mb-6">Critical evaluation of VeLO, the largest learned optimizer to date. We found it's not necessarily better than tuned Adam.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/2310.18191" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- 2023: Stroke CT Deep Learning -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="300">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-journal">Journal</span>
+              <span class="text-muted">2023</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Development of a Deep Learning Method to Identify Acute Ischemic Stroke Lesions on Brain CT
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou et al.</p>
+            <p class="text-secondary mb-6">Deep learning for automated detection of acute ischemic stroke lesions from CT scans, achieving 72% accuracy with better performance on larger lesions.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/2309.17320" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- PhD Thesis -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="350">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-journal">PhD Thesis</span>
+              <span class="text-muted">2020</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Meta Learning for Supervised and Unsupervised Few-Shot Learning
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://drive.google.com/file/d/1TgH9nCOy3P5Z_jXhPFSC01NDHJB5Ah3l/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Thesis
+              </a>
+            </div>
+          </article>
+
+          <!-- Meta-Learning Survey -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="50">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-journal">Survey</span>
+              <span class="text-muted">2020</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Meta-Learning in Neural Networks: A Survey
+            </h3>
+            <p class="text-muted mb-4">T. Hospedales, A. Antoniou, P. Micaelli, A. Storkey</p>
+            <p class="text-secondary mb-6">A comprehensive overview of the meta-learning landscape—how it works, why it matters, and where it's going.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/2004.05439" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- Continual Few-Shot -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-conference">NeurIPS Workshop</span>
+              <span class="text-muted">2020</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Defining Benchmarks for Continual Few-Shot Learning
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou, M. Patacchiola, M. Ochal, A. Storkey</p>
+            <p class="text-secondary mb-6">What happens when few-shot learning meets continual learning? We built the benchmarks to find out.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="documents/Benchmarks_for_Continual_Few_Shot_Learning.pdf" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+              <a href="https://www.youtube.com/watch?v=7G9BlvodXRk" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-video"></i> Discussion
+              </a>
+              <a href="https://github.com/AntreasAntoniou/FewShotContinualLearning" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </article>
+
+          <!-- Learning to Learn via Self-Critique -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="150">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-conference">NeurIPS</span>
+              <span class="text-muted">2019</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Learning to Learn via Self-Critique
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou, A. Storkey</p>
+            <p class="text-secondary mb-6">A meta-learning approach where models learn to critique and improve their own learning process.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/1905.10295" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+              <a href="https://github.com/AntreasAntoniou/Learning_to_Learn_via_Self-Critique" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fab fa-github"></i> Code
+              </a>
+              <a href="documents/Learning_to_learn_via_Self_Critique_poster.pdf" class="btn-secondary btn-sm">
+                <i class="fas fa-image"></i> Poster
+              </a>
+            </div>
+          </article>
+
+          <!-- How to Train Your MAML -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-conference">ICLR</span>
+              <span class="text-muted">2019</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              How to Train Your MAML
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou, H. Edwards, A. Storkey</p>
+            <p class="text-secondary mb-6">MAML is elegant but tricky to train. We figured out what actually matters and what doesn't.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/1810.09502" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+              <a href="https://github.com/AntreasAntoniou/HowToTrainYourMAMLPytorch" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fab fa-github"></i> Code
+              </a>
+              <a href="https://www.bayeswatch.com/2018/11/30/HTYM/" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-book"></i> Blog
+              </a>
+              <a href="documents/How_to_train_your_MAML_poster.pdf" class="btn-secondary btn-sm">
+                <i class="fas fa-image"></i> Poster
+              </a>
+            </div>
+          </article>
+
+          <!-- Assume, Augment and Learn -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="250">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-workshop">Preprint</span>
+              <span class="text-muted">2019</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Assume, Augment and Learn: Unsupervised Few-Shot Meta-Learning
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou, A. Storkey</p>
+            <p class="text-secondary mb-6">Few-shot meta-learning via random labels and data augmentation—no labeled data required.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/1902.09884" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- CINIC-10 -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="300">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-workshop">Dataset</span>
+              <span class="text-muted">2018</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              CINIC-10 is not ImageNet or CIFAR-10
+            </h3>
+            <p class="text-muted mb-4">L.N. Darlow, E.J. Crowley, A. Antoniou, A.J. Storkey</p>
+            <p class="text-secondary mb-6">A new benchmark dataset bridging the gap between CIFAR-10 and ImageNet.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/1810.03505" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+              <a href="https://github.com/BayesWatch/cinic-10" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fab fa-github"></i> Code
+              </a>
+              <a href="https://datashare.is.ed.ac.uk/handle/10283/3192" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-database"></i> Dataset
+              </a>
+            </div>
+          </article>
+
+          <!-- DAGAN -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="350">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-conference">ICANN</span>
+              <span class="text-muted">2018</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Data Augmentation Generative Adversarial Networks
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou, A. Storkey, H. Edwards</p>
+            <p class="text-secondary mb-6">Using GANs to create training data. Especially useful when you only have a few examples to work with.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/1711.04340" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+              <a href="https://github.com/AntreasAntoniou/DAGAN" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fab fa-github"></i> Code
+              </a>
+              <a href="https://docs.google.com/presentation/d/1A5zrDP7ZKJ7oxDiuaNzk-1PQS6cwWgLfHlzbSzHkuFk/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-desktop"></i> Slides
+              </a>
+            </div>
+          </article>
+
+          <!-- Dilated DenseNets -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="400">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-workshop">Preprint</span>
+              <span class="text-muted">2018</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              Dilated DenseNets for Relational Reasoning
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou, A. Słowik, E.J. Crowley, A. Storkey</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://arxiv.org/abs/1811.00410" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+
+          <!-- IJCNN 2016 -->
+          <article class="card p-8" data-aos="fade-up" data-aos-delay="450">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="badge badge-conference">IJCNN</span>
+              <span class="text-muted">2016</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">
+              A General Purpose Intelligent Surveillance System for Mobile Devices
+            </h3>
+            <p class="text-muted mb-4">A. Antoniou, P. Angelov</p>
+            <p class="text-secondary mb-6">Deep learning for real-time surveillance on mobile devices.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://ieeexplore.ieee.org/document/7727562" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-file-alt"></i> Paper
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24" style="border-top: 1px solid var(--border);">
+      <div class="max-w-4xl mx-auto px-4 space-y-12">
+        <header class="text-center space-y-4" data-aos="fade-up">
+          <p class="eyebrow">Background</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Experience</h2>
+        </header>
+
+        <div class="space-y-6">
+          <div class="card p-8" data-aos="fade-up">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <h3 class="text-xl font-semibold">Cofounder & Research Lead</h3>
+              <span class="text-accent font-medium">2025 - Present</span>
+            </div>
+            <p class="text-accent font-medium mb-3">Axiotic AI</p>
+            <p class="text-secondary">Building an open-science research lab funded by consultancy. Exploring efficient learning, novel architectures, and what's beyond scaling.</p>
+          </div>
+
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="50">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <h3 class="text-xl font-semibold">Principal Research Partner</h3>
+              <span class="text-accent font-medium">2025 - Present</span>
+            </div>
+            <p class="text-accent font-medium mb-3">Pieces for Developers</p>
+            <p class="text-secondary">Research partnership focused on efficient on-device AI and practical ML systems.</p>
+          </div>
+
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <h3 class="text-xl font-semibold">Principal AI Scientist & Head of ML</h3>
+              <span class="text-accent font-medium">2025 - 2026</span>
+            </div>
+            <p class="text-accent font-medium mb-3">Pieces for Developers</p>
+            <p class="text-secondary">Led ML research agenda. Built nano-models and foundation models for efficient deployment across CPUs, GPUs, NPUs, and LPUs.</p>
+          </div>
+
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="150">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <h3 class="text-xl font-semibold">Lead Research Scientist</h3>
+              <span class="text-accent font-medium">2024</span>
+            </div>
+            <p class="text-accent font-medium mb-3">Malted AI</p>
+            <p class="text-secondary">Efficient LLM training, distillation, synthetic data generation, and LLM-as-a-Judge systems.</p>
+          </div>
+
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <h3 class="text-xl font-semibold">Research Associate</h3>
+              <span class="text-accent font-medium">2019 - 2024</span>
+            </div>
+            <p class="text-accent font-medium mb-3">University of Edinburgh</p>
+            <p class="text-secondary">Supervised by Prof. Amos Storkey. Part of <a href="https://www.bayeswatch.com/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">BayesWatch</a> and the Adaptive and Neural Computation (ANC) institute.</p>
+          </div>
+
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="250">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <h3 class="text-xl font-semibold">PhD in Machine Learning</h3>
+              <span class="text-accent font-medium">2016 - 2020</span>
+            </div>
+            <p class="text-accent font-medium mb-3">University of Edinburgh</p>
+            <p class="text-secondary">Thesis: "Meta Learning for Supervised and Unsupervised Few-Shot Learning"</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outreach & Community Section -->
+    <section id="outreach" class="py-24 section-alt" style="border-top: 1px solid var(--border);">
+      <div class="max-w-4xl mx-auto px-4 space-y-12">
+        <header class="text-center space-y-4" data-aos="fade-up">
+          <p class="eyebrow">Community</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Outreach & Open Source</h2>
+          <p class="text-xl text-secondary">Building communities and democratizing ML research</p>
+        </header>
+
+        <div class="space-y-6">
+          <!-- LeRobot Hackathon -->
+          <div class="card p-8" data-aos="fade-up">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">🤖</span>
+                <h3 class="text-xl font-semibold">LeRobot Edinburgh Hackathon</h3>
+              </div>
+              <span class="badge badge-conference">7th Worldwide</span>
+            </div>
+            <p class="text-accent font-medium mb-3">Lead Organizer & Competitor · 2025</p>
+            <p class="text-secondary mb-4">
+              Originally conceived and initiated bringing the global LeRobot Hackathon to the University of Edinburgh. Built the organizing team and managed 60% of organizational work. Sourced and provided all specialized hardware and high-performance GPU infrastructure. Served as expert mentor for all teams throughout the 30-hour competition. Also competed and led my team to <strong style="color: var(--text);">7th place out of 1000+ teams worldwide</strong>.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://lerobot-edinburgh.com/" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-globe"></i> Event Website
+              </a>
+              <a href="https://lerobot-edinburgh.com/submissions.html" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-trophy"></i> Submissions
+              </a>
+              <a href="https://www.youtube.com/watch?v=-ECljFcs3uU" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-video"></i> Our Video
+              </a>
+              <a href="https://github.com/AntreasAntoniou/lerobot-instruction-synthesis" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+
+          <!-- EIDF Community -->
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="50">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🖥️</span>
+              <h3 class="text-xl font-semibold">EIDF A100 GPU Cluster Community</h3>
+            </div>
+            <p class="text-accent font-medium mb-3">Early Adopter & Community Lead · 2023</p>
+            <p class="text-secondary mb-4">
+              One of the early adopters and key community support members for Edinburgh's EIDF A100 GPU cluster. Created the Slack server, answered hundreds of user questions, scheduled community meetings for key issues, and served as a bridge between users and developers. Authored early documentation and developed <strong style="color: var(--text);">kubejobs</strong>, a Python package simplifying Kubernetes job specifications.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://github.com/AntreasAntoniou/kubejobs" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fab fa-github"></i> kubejobs
+              </a>
+            </div>
+          </div>
+
+          <!-- Workshop Organizing -->
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="75">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🎯</span>
+              <h3 class="text-xl font-semibold">Workshop & Event Organizing</h3>
+            </div>
+            <p class="text-accent font-medium mb-3">Co-organizer · 2024-2025</p>
+            <p class="text-secondary mb-4">
+              Co-organized the <strong style="color: var(--text);">International Workshop on Efficient Generative AI 2024</strong>, a GAIL-funded event bringing together leading researchers from academia and industry to discuss efficient approaches to generative AI.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://efficient-generative-ai.github.io" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                <i class="fas fa-globe"></i> Workshop Website
+              </a>
+            </div>
+          </div>
+
+          <!-- Guest Lectures & Talks -->
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="85">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🎤</span>
+              <h3 class="text-xl font-semibold">Guest Lectures & Invited Talks</h3>
+            </div>
+            <p class="text-accent font-medium mb-3">University of Edinburgh · 2025</p>
+            <div class="space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">Model Compression</h4>
+                  <p class="text-sm text-muted">Guest lecture for ML Systems course (Dr. Luo Mai)</p>
+                </div>
+                <a href="https://antreas.io/teaching/#quest-lecture-for-the-machine-learning-systems-course" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">GenAI Superpowers</h4>
+                  <p class="text-sm text-muted">Teach-A-Thon presentation</p>
+                </div>
+                <a href="https://antreas.io/teachathon-talk-ai-super/" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">LLMs for Teaching</h4>
+                  <p class="text-sm text-muted">Workshop on using LLMs in education</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/1U-fLZv38NVLD5oJw42e9o7qOx8HYe96sNTv9KHx58PA/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">3000 Hours with ChatGPT</h4>
+                  <p class="text-sm text-muted">What I learned from extensive LLM usage</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/13731VGDxIvvqy5A-2E-pEK2w8GgUTOzRAhPU8Qeffn0/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">AI-Assisted Development: A Crash Course</h4>
+                  <p class="text-sm text-muted">Practical guide to coding with AI assistants</p>
+                </div>
+                <a href="https://antreas.io/AI-assisted-development-crashcourse/" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">EIDF Cluster, Kubernetes & Docker Primer</h4>
+                  <p class="text-sm text-muted">Introduction to UoE's compute infrastructure</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/1BD3q8QWwc_khZXPGWabftBD2VUlknRpegjfVN8FnpY8/edit" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Research Talks -->
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="90">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">📚</span>
+              <h3 class="text-xl font-semibold">Research Talks & Presentations</h3>
+            </div>
+            <div class="space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">To Learn or Not to Learn</h4>
+                  <p class="text-sm text-muted">A journey across modern neural network inductive biases</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/17XZrmn-AeF6LOCt9lWebigJZCcl2psjL2R958zbyvhc/edit" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">Transferable Representation Learning</h4>
+                  <p class="text-sm text-muted">Discovering learning priors across domains, tasks, and modalities</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/1x9xRYS2FZ-Np5in6qywp_aw5uHR9exx2hjWgROtXVQA/edit" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">TALI Dataset</h4>
+                  <p class="text-sm text-muted">Temporally and semantically Aligned Audio, Language and Images</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/1ARoq0UAlxr-KfzvRqgwurXSR4yrVAE-hIHBO6S_CdNg/edit" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">Better DL Benchmarks & Datasets</h4>
+                  <p class="text-sm text-muted">...and other mythical creatures</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/1LUDHbKxClpjcPyKwOFtAh6fqhBzIRMtycV5hZrOXIu8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">Continual Few-Shot Learning</h4>
+                  <p class="text-sm text-muted">NeurIPS Workshop paper presentation</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/15jJoNZ0W8AN2jWpAfPnlED3YAYhdbCKg011dFNQWy7w/edit" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">Learning to Learn via Self-Critique</h4>
+                  <p class="text-sm text-muted">NeurIPS 2019 paper presentation</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/1jJadeSrb3cmTCrIKyfFCmoRhxb2w0sDRCUXpsYkYyCU/edit" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">Parting Talk: UoE 2024</h4>
+                  <p class="text-sm text-muted">Farewell presentation at University of Edinburgh</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/1sahFtBzujAxbQYrkz2i7_WCyzr42-N7Bq0JIg5jJWU8/edit" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg" style="border: 1px solid var(--border);">
+                <div>
+                  <h4 class="font-semibold">How to Cat</h4>
+                  <p class="text-sm text-muted">Cat ownership, biology, evolution & psychology</p>
+                </div>
+                <a href="https://docs.google.com/presentation/d/1rn5CrDWb92RDCryYhArHVo38l9dmiNLyvOvcCe7-uJ8/edit" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Open Source -->
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🌐</span>
+              <h3 class="text-xl font-semibold">Open Source Contributions</h3>
+            </div>
+            <p class="text-secondary mb-4">
+              My conviction in the democratization of ML research stems from the irreplaceable value of individual expertise and the power of collective collaboration. Open source is not merely a development model—it's a fundamental necessity for driving innovation and maintaining ethical standards in the field.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4 mt-6">
+              <a href="https://github.com/AntreasAntoniou/HowToTrainYourMAMLPytorch" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-lg hover:bg-[var(--bg-secondary)] transition" style="border: 1px solid var(--border);">
+                <h4 class="font-semibold text-accent mb-1">MAML++</h4>
+                <p class="text-sm text-muted">User-friendly framework simplifying MAML meta-learning. Top-3 finalist in UK Open Source Awards.</p>
+              </a>
+              <a href="https://github.com/AntreasAntoniou/minimal-ml-template" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-lg hover:bg-[var(--bg-secondary)] transition" style="border: 1px solid var(--border);">
+                <h4 class="font-semibold text-accent mb-1">Minimal-ML-Template</h4>
+                <p class="text-sm text-muted">Scalable ML template designed to minimize setup overhead for researchers.</p>
+              </a>
+              <a href="https://github.com/AntreasAntoniou/kubejobs" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-lg hover:bg-[var(--bg-secondary)] transition" style="border: 1px solid var(--border);">
+                <h4 class="font-semibold text-accent mb-1">kubejobs</h4>
+                <p class="text-sm text-muted">Python package simplifying Kubernetes job management for ML workloads.</p>
+              </a>
+              <a href="https://github.com/AntreasAntoniou/GATE" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-lg hover:bg-[var(--bg-secondary)] transition" style="border: 1px solid var(--border);">
+                <h4 class="font-semibold text-accent mb-1">GATE</h4>
+                <p class="text-sm text-muted">Multi-domain, multi-task benchmark suite for diversifying empirical evaluations.</p>
+              </a>
+            </div>
+          </div>
+
+          <!-- Infrastructure -->
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="150">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🔧</span>
+              <h3 class="text-xl font-semibold">Infrastructure & Tooling</h3>
+            </div>
+            <p class="text-accent font-medium mb-3">University of Edinburgh · 2021-2024</p>
+            <ul class="text-secondary space-y-2">
+              <li>• Secured <strong style="color: var(--text);">$20K in Google Cloud Platform Research Credits</strong> and a Google TRC Compute Grant</li>
+              <li>• Procured a <strong style="color: var(--text);">£50K deep learning research server</strong> through market analysis and vendor negotiations</li>
+              <li>• Built and deployed a <strong style="color: var(--text);">Kubernetes cluster</strong> for the research group with Python tooling and tutorials</li>
+              <li>• Authored a minimal ML research framework following best practices</li>
+              <li>• Built comprehensive wiki documenting best practices, tools, and resources for the group</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demos Section -->
+    <section id="demos" class="py-24" style="border-top: 1px solid var(--border);">
+      <div class="max-w-4xl mx-auto px-4 space-y-12">
+        <header class="text-center space-y-4" data-aos="fade-up">
+          <p class="eyebrow">Playground</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Demos & Datasets</h2>
+          <p class="text-xl text-secondary">Interactive explorations of my research. Dive in!</p>
+        </header>
+
+        <div class="card p-8" data-aos="fade-up">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-2xl">🚀</span>
+            <span class="badge badge-conference">Featured Dataset</span>
+          </div>
+          <h3 class="text-2xl font-semibold mb-4">TALI: Temporally & Semantically Aligned Audio, Language and Images</h3>
+          <p class="text-secondary mb-6">
+            TALI is my response to the growing demand for multimodal understanding in deep learning. It's a large-scale, tetramodal dataset that aligns text, video, images, and audio—a playground for innovative self-supervised learning tasks and multimodal research. With TALI, we're exploring how different modalities and data/model scaling affect downstream performance. I'm excited about the diverse research ideas it will inspire!
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="https://huggingface.co/spaces/Antreas/TALI" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <i class="fas fa-play"></i> Try Explorer
+            </a>
+            <a href="https://huggingface.co/datasets/Antreas/TALI" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+              <i class="fas fa-database"></i> HuggingFace Dataset
+            </a>
+            <a href="https://github.com/AntreasAntoniou/TALI" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+              <i class="fab fa-github"></i> Code
+            </a>
+          </div>
+        </div>
+
+        <p class="text-center text-muted" data-aos="fade-up">More demos coming soon...</p>
+      </div>
+    </section>
+
+    <!-- Teaching Section -->
+    <section id="teaching" class="py-24" style="border-top: 1px solid var(--border);">
+      <div class="max-w-4xl mx-auto px-4 space-y-12">
+        <header class="text-center space-y-4" data-aos="fade-up">
+          <p class="eyebrow">Teaching</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Sharing Knowledge</h2>
+        </header>
+
+        <div class="space-y-8">
+          <!-- Current Teaching -->
+          <div data-aos="fade-up">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full" style="background: var(--accent);"></span>
+              Current Teaching
+            </h3>
+            <div class="card p-8">
+              <h4 class="text-lg font-semibold mb-2">Quest Lecture: LLM 101 and Model Compression</h4>
+              <p class="text-muted mb-4">Machine Learning Systems Course</p>
+              <div class="flex flex-wrap gap-3">
+                <a href="https://docs.google.com/presentation/d/1Daz0Fhb6e62m9VHDo95k_OTVE2N48UP5eVlPAsjo9Cc/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
+                  <i class="fas fa-desktop"></i> Slides
+                </a>
+                <a href="https://drive.google.com/file/d/1OTdqPNlF9JptRAFJI4AYvH6H5BR2cpcg/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                  <i class="fas fa-play-circle"></i> Video
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- MLP Teaching -->
+          <div data-aos="fade-up" data-aos-delay="50">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full" style="background: var(--text-muted);"></span>
+              Machine Learning Practical (2017-2019)
+            </h3>
+            <div class="card p-8">
+              <p class="text-secondary mb-6">Lead TA at University of Edinburgh. Created comprehensive tutorials, coursework materials, and supervised research projects. <a href="http://www.inf.ed.ac.uk/teaching/courses/mlp/index-2018.html" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">Course Website →</a></p>
+
+              <!-- GPU Cluster Tutorials -->
+              <div class="mb-6">
+                <h5 class="font-semibold mb-3">GPU & Cluster Usage</h5>
+                <div class="flex flex-wrap gap-2">
+                  <a href="https://drive.google.com/file/d/1mdM8QnFTG0XXcw6jXV0GmBzis5YQLPwH/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">GPU Clusters</a>
+                  <a href="https://drive.google.com/file/d/1tI1LmS59rSvkKTyDCA7tsR1384tBe8CL/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">MLP Cluster</a>
+                  <a href="https://drive.google.com/file/d/1SrLYBhJjNycY-T9KSyAqThqRFcwtdCXc/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Training Demo</a>
+                  <a href="https://drive.google.com/file/d/1x9r0VxvYgVr-nKChZ4X3KOtKmpCCF4xZ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Q&A Session</a>
+                </div>
+              </div>
+
+              <!-- GCP Tutorials -->
+              <div class="mb-6">
+                <h5 class="font-semibold mb-3">Google Cloud Platform</h5>
+                <div class="flex flex-wrap gap-2">
+                  <a href="https://drive.google.com/file/d/1uIL_34S39GFKVnw-Oh3xDbunWj50bqZY/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Local Setup & GCP</a>
+                  <a href="https://drive.google.com/file/d/1z1SnQmW5OS--wYBZTeCi595MU9f32k0k/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">GPU VM Setup</a>
+                </div>
+              </div>
+
+              <!-- Advanced NN Tutorials -->
+              <div>
+                <h5 class="font-semibold mb-3">Advanced Neural Networks</h5>
+                <div class="flex flex-wrap gap-2">
+                  <a href="https://drive.google.com/file/d/1dtHnC8gD8jCeZo0XjOhkBfNBAltHt7Tg/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Relational Networks</a>
+                  <a href="https://drive.google.com/file/d/1wQA5JgAMTb8zlXTO19bkfzhfuvPjfI91/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">HyperNetworks</a>
+                  <a href="https://drive.google.com/file/d/1nAjU-gYLXEBcScaw8SSdmejwYCFvIREy/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Attention & Transformers</a>
+                  <a href="https://drive.google.com/file/d/1thunCFGm8TG6mKyy72qkzNn-vENYBNdW/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Transformers Deep Dive</a>
+                  <a href="https://drive.google.com/file/d/1y7mSvtijRY_x-Y8pWiit_CiA4-L72mey/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Meta-Learning Intro</a>
+                  <a href="https://drive.google.com/file/d/1Yz00M4udo9G3BSnukKvkvH0m4dYtqnnu/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Meta-Learning Advanced</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Awards -->
+          <div data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full" style="background: var(--accent);"></span>
+              Teaching Awards & Recognition
+            </h3>
+
+            <!-- Won -->
+            <div class="award-card card p-6 mb-4">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <h4 class="font-semibold">Staff Award for MLP TA Service</h4>
+                <span class="text-muted text-sm">2020-21</span>
+              </div>
+              <p class="text-secondary text-sm mb-2">University of Edinburgh — Recognition for exceptional teaching assistance</p>
+              <a href="documents/staff_award.pdf" class="text-accent hover:underline text-sm">View Award →</a>
+            </div>
+
+            <!-- Nominations -->
+            <div class="card p-6">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+                <h4 class="font-semibold">Teaching Award Nominations</h4>
+                <a href="documents/teaching_award_nominations.pdf" class="text-accent hover:underline text-sm">View Letters →</a>
+              </div>
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center justify-between py-2 border-b" style="border-color: var(--border);">
+                  <span class="text-secondary">Best Practice in Inclusive Learning Award</span>
+                  <span class="text-muted">2019</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b" style="border-color: var(--border);">
+                  <span class="text-secondary">Best Support Staff Award</span>
+                  <span class="text-muted">2019</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b" style="border-color: var(--border);">
+                  <span class="text-secondary">Best Student Who Tutors Award <span class="text-muted">(2 nominations)</span></span>
+                  <span class="text-muted">2019</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b" style="border-color: var(--border);">
+                  <span class="text-secondary">Best UK PhD Tutor Award</span>
+                  <span class="text-muted">2019</span>
+                </div>
+                <div class="flex items-center justify-between py-2">
+                  <span class="text-secondary">Best Student Who Tutors Award</span>
+                  <span class="text-muted">2018</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 section-alt" style="border-top: 1px solid var(--border);">
+      <div class="max-w-2xl mx-auto px-4 text-center space-y-8" data-aos="fade-up">
+        <header class="space-y-4">
+          <p class="eyebrow">Contact</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Let's Talk</h2>
+          <p class="text-xl text-secondary">Interested in research collaboration, consulting, or just want to chat about AI?</p>
+        </header>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div class="email-dropdown" id="contact-email-dropdown">
+            <button class="btn-primary" onclick="toggleEmailDropdown('contact-email-dropdown')">
+              <i class="fas fa-envelope"></i>
+              iam@antreas.io
+            </button>
+            <div class="email-dropdown-content">
+              <button class="email-dropdown-item" onclick="copyEmail(this)">
+                <i class="fas fa-copy"></i>
+                <span>Copy email</span>
+              </button>
+              <a href="mailto:iam@antreas.io" class="email-dropdown-item">
+                <i class="fas fa-paper-plane"></i>
+                <span>Open email client</span>
+              </a>
+            </div>
+          </div>
+          <a href="https://calendar.app.google/jy778byT379ZtLnk8" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            <i class="fas fa-calendar"></i>
+            Schedule a Meeting
+          </a>
+        </div>
+
+        <div class="flex items-center justify-center gap-6 pt-4">
+          <a href="https://calendar.app.google/jy778byT379ZtLnk8" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="Schedule a Meeting">
+            <i class="fas fa-calendar"></i>
+          </a>
+          <a href="https://scholar.google.com/citations?user=LNO4XZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="Google Scholar">
+            <i class="fas fa-graduation-cap"></i>
+          </a>
+          <a href="https://github.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/antreas-antoniou-0692579a/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://twitter.com/AntreasAntworry" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-base text-muted" style="border-top: 1px solid var(--border);">
+    <p>&copy; 2025 Antreas Antoniou. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Theme toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+
+      updateThemeIcons();
+    }
+
+    function updateThemeIcons() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+      // Desktop icons
+      document.getElementById('theme-icon-light').classList.toggle('hidden', isDark);
+      document.getElementById('theme-icon-dark').classList.toggle('hidden', !isDark);
+
+      // Mobile icons
+      const mobileLight = document.getElementById('theme-icon-light-mobile');
+      const mobileDark = document.getElementById('theme-icon-dark-mobile');
+      if (mobileLight && mobileDark) {
+        mobileLight.classList.toggle('hidden', isDark);
+        mobileDark.classList.toggle('hidden', !isDark);
+      }
+    }
+
+    // Initialize icons on load
+    updateThemeIcons();
+
+    // Profile image toggle
+    const profileImages = [
+      'images/profile.jpg',
+      'images/profile-anime.png'
+    ];
+    let currentProfileIndex = Math.floor(Math.random() * profileImages.length);
+
+    // Set initial random image
+    (function() {
+      const heroProfile = document.getElementById('hero-profile');
+      if (heroProfile) {
+        heroProfile.src = profileImages[currentProfileIndex];
+      }
+    })();
+
+    // Toggle between images on click
+    function toggleProfileImage() {
+      currentProfileIndex = (currentProfileIndex + 1) % profileImages.length;
+      const heroProfile = document.getElementById('hero-profile');
+      const hint = document.getElementById('profile-hint');
+      if (heroProfile) {
+        heroProfile.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          heroProfile.src = profileImages[currentProfileIndex];
+          heroProfile.style.transform = 'scale(1)';
+        }, 150);
+      }
+      // Hide hint once clicked
+      if (hint) {
+        hint.style.opacity = '0';
+      }
+    }
+
+    // Show hint briefly then fade out
+    setTimeout(() => {
+      const hint = document.getElementById('profile-hint');
+      if (hint) {
+        hint.style.opacity = '0.4';
+        setTimeout(() => {
+          hint.style.opacity = '0';
+        }, 3000);
+      }
+    }, 2000);
+
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 50,
+    });
+
+    // Email dropdown
+    function toggleEmailDropdown(id) {
+      const dropdown = document.getElementById(id);
+      const isActive = dropdown.classList.contains('active');
+
+      // Close all dropdowns first
+      document.querySelectorAll('.email-dropdown').forEach(d => d.classList.remove('active'));
+
+      // Toggle this one
+      if (!isActive) {
+        dropdown.classList.add('active');
+      }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.email-dropdown')) {
+        document.querySelectorAll('.email-dropdown').forEach(d => d.classList.remove('active'));
+      }
+    });
+
+    // Copy email to clipboard
+    function copyEmail(btn) {
+      const email = 'iam@antreas.io';
+      navigator.clipboard.writeText(email).then(() => {
+        const span = btn.querySelector('span');
+        const icon = btn.querySelector('i');
+        const originalText = span.textContent;
+        const originalIcon = icon.className;
+
+        span.textContent = 'Copied!';
+        icon.className = 'fas fa-check';
+        btn.classList.add('copy-success');
+
+        setTimeout(() => {
+          span.textContent = originalText;
+          icon.className = originalIcon;
+          btn.classList.remove('copy-success');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
