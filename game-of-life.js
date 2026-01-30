@@ -14,6 +14,7 @@
     dwellRadius: 3,        // cells to spawn on dwell
     fadeSteps: 10,         // how many generations cells fade over
     spawnPatterns: true,   // spawn patterns on click vs random cells
+    activationDelay: 3000, // ms before interactions are enabled
   };
 
   // Famous patterns
@@ -109,13 +110,12 @@
     initGrid() {
       this.grid = this.createEmptyGrid();
       this.ages = this.createEmptyGrid();
+      this.activated = false;
       
-      // Seed with a few random patterns
-      for (let i = 0; i < 5; i++) {
-        const x = Math.floor(Math.random() * (this.cols - 20)) + 10;
-        const y = Math.floor(Math.random() * (this.rows - 20)) + 10;
-        this.spawnPattern(x, y);
-      }
+      // Activate after delay
+      setTimeout(() => {
+        this.activated = true;
+      }, CONFIG.activationDelay);
     }
 
     spawnPattern(centerX, centerY, patternName) {
@@ -258,6 +258,7 @@
     bindEvents() {
       // Click to spawn pattern
       this.canvas.addEventListener('click', (e) => {
+        if (!this.activated) return;
         const { x, y } = this.getCellCoords(e);
         if (CONFIG.spawnPatterns) {
           this.spawnPattern(x, y);
@@ -268,6 +269,7 @@
 
       // Hover/dwell to spawn
       this.canvas.addEventListener('mousemove', (e) => {
+        if (!this.activated) return;
         const { x, y } = this.getCellCoords(e);
         const pos = `${x},${y}`;
         
@@ -275,7 +277,9 @@
           this.lastDwellPos = pos;
           clearTimeout(this.dwellTimer);
           this.dwellTimer = setTimeout(() => {
-            this.spawnRandom(x, y, CONFIG.dwellRadius);
+            if (this.activated) {
+              this.spawnRandom(x, y, CONFIG.dwellRadius);
+            }
           }, CONFIG.dwellTime);
         }
       });
