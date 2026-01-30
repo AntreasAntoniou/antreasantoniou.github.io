@@ -62,12 +62,15 @@
       <a href="#" class="text-xl font-bold tracking-tight">
         Antreas<span class="text-accent">.</span>
       </a>
-      <div class="hidden sm:flex items-center gap-6 text-base">
+      <div class="hidden md:flex items-center gap-5 text-base">
         <a href="#about" class="text-secondary hover:text-accent transition">About</a>
         <a href="#publications" class="text-secondary hover:text-accent transition">Research</a>
         <a href="#experience" class="text-secondary hover:text-accent transition">Experience</a>
         <a href="#outreach" class="text-secondary hover:text-accent transition">Outreach</a>
+        <a href="#demos" class="text-secondary hover:text-accent transition">Demos</a>
         <a href="#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
+        <a href="/blog" class="text-secondary hover:text-accent transition">Blog</a>
+        <a href="#contact" class="text-secondary hover:text-accent transition">Contact</a>
         <a href="documents/AntreasAntoniouResume.pdf" class="btn-primary btn-sm">CV</a>
         <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
           <i class="fas fa-sun" id="theme-icon-light"></i>
@@ -75,7 +78,7 @@
         </button>
       </div>
       <!-- Mobile menu button -->
-      <div class="flex items-center gap-3 sm:hidden">
+      <div class="flex items-center gap-3 md:hidden">
         <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
           <i class="fas fa-sun" id="theme-icon-light-mobile"></i>
           <i class="fas fa-moon hidden" id="theme-icon-dark-mobile"></i>
@@ -86,13 +89,16 @@
       </div>
     </div>
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden sm:hidden border-t" style="border-color: var(--border); background: var(--bg);">
+    <div id="mobile-menu" class="hidden md:hidden border-t" style="border-color: var(--border); background: var(--bg);">
       <div class="px-4 py-4 space-y-3">
         <a href="#about" class="block text-secondary hover:text-accent">About</a>
         <a href="#publications" class="block text-secondary hover:text-accent">Research</a>
         <a href="#experience" class="block text-secondary hover:text-accent">Experience</a>
         <a href="#outreach" class="block text-secondary hover:text-accent">Outreach</a>
+        <a href="#demos" class="block text-secondary hover:text-accent">Demos</a>
         <a href="#teaching" class="block text-secondary hover:text-accent">Teaching</a>
+        <a href="/blog" class="block text-secondary hover:text-accent">Blog</a>
+        <a href="#contact" class="block text-secondary hover:text-accent">Contact</a>
         <a href="documents/AntreasAntoniouResume.pdf" class="block text-accent font-semibold">Download CV</a>
       </div>
     </div>
@@ -167,9 +173,6 @@
               </a>
             </div>
           </div>
-          <a href="#publications" class="btn-secondary">
-            View Research
-          </a>
           <a href="documents/AntreasAntoniouResume.pdf" class="btn-secondary" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-file-pdf"></i> Download CV
           </a>
