@@ -106,8 +106,8 @@
 
   <main>
     <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center pt-16">
-      <div class="max-w-4xl mx-auto px-4 text-center space-y-8">
+    <section class="min-h-screen flex items-center justify-center pt-16 gol-container" style="position: relative; overflow: hidden;">
+      <div class="max-w-4xl mx-auto px-4 text-center space-y-8" style="position: relative; z-index: 1;">
         <!-- Profile Image -->
         <div data-aos="fade-up">
           <div class="relative w-64 h-64 mx-auto rounded-full overflow-hidden profile-image">
@@ -1491,5 +1491,8 @@
       });
     }
   </script>
+  
+  <!-- Game of Life Background -->
+  <script src="game-of-life.js"></script>
 </body>
 </html>
