@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Antreas Antoniou</title>
+  <meta name="description" content="Writing on AI, machine learning, efficiency, and the future of intelligence — by Antreas Antoniou.">
+  <link rel="canonical" href="https://antreas.io/blog">
+  <meta property="og:title" content="Blog | Antreas Antoniou">
+  <meta property="og:description" content="Writing on AI, machine learning, efficiency, and the future of intelligence.">
+  <meta property="og:url" content="https://antreas.io/blog">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } };</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body class="font-sans">
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-tight">
+        Antreas<span class="text-accent">.</span>
+      </a>
+      <div class="hidden md:flex items-center gap-5 text-base">
+        <a href="/#about" class="text-secondary hover:text-accent transition">About</a>
+        <a href="/#publications" class="text-secondary hover:text-accent transition">Research</a>
+        <a href="/#experience" class="text-secondary hover:text-accent transition">Experience</a>
+        <a href="/#outreach" class="text-secondary hover:text-accent transition">Outreach</a>
+        <a href="/#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
+        <a href="/blog" class="text-accent font-semibold transition">Blog</a>
+        <a href="/#contact" class="text-secondary hover:text-accent transition">Contact</a>
+        <a href="/documents/AntreasAntoniouResume.pdf" class="btn-primary btn-sm">CV</a>
+        <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-sun" id="theme-icon-light"></i>
+          <i class="fas fa-moon hidden" id="theme-icon-dark"></i>
+        </button>
+      </div>
+      <div class="flex items-center gap-3 md:hidden">
+        <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-sun"></i>
+        </button>
+        <button class="text-secondary" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t" style="border-color: var(--border); background: var(--bg);">
+      <div class="px-4 py-4 space-y-3">
+        <a href="/" class="block text-secondary hover:text-accent">← Back to main site</a>
+        <a href="/blog" class="block text-accent font-semibold">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-20">
+    <div class="max-w-3xl mx-auto px-4">
+
+      <!-- Header -->
+      <div class="mb-12">
+        <h1 class="text-4xl font-bold mb-3">Writing</h1>
+        <p class="text-secondary text-lg">Thoughts on AI, machine learning, efficiency, and what it means to build intelligence that doesn't need a skyscraper to run.</p>
+      </div>
+
+      <!-- Articles -->
+      <div class="space-y-6">
+
+        <!-- Pieces: Beyond the Cloud -->
+        <article class="card p-6 hover:shadow-md transition-shadow">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">Pieces Blog</span>
+                <span class="text-sm text-muted">August 2025</span>
+              </div>
+              <h2 class="text-xl font-semibold mb-2 leading-snug">
+                <a href="https://pieces.app/blog/direction-of-ai-progress" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition">
+                  Beyond the Cloud: SLMs, Local AI, and Agentic Constellations
+                </a>
+              </h2>
+              <p class="text-secondary text-sm leading-relaxed">A vision for local-first AI built on biology-inspired architectures. Intelligence doesn't need to live in a data centre.</p>
+            </div>
+            <a href="https://pieces.app/blog/direction-of-ai-progress" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap flex-shrink-0">
+              <i class="fas fa-external-link-alt"></i> Read
+            </a>
+          </div>
+        </article>
+
+        <!-- Pieces: Scaling -->
+        <article class="card p-6 hover:shadow-md transition-shadow">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">Pieces Blog</span>
+                <span class="text-sm text-muted">July 2025</span>
+              </div>
+              <h2 class="text-xl font-semibold mb-2 leading-snug">
+                <a href="https://pieces.app/blog/the-cost-of-ai-scaling" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition">
+                  Too Much of a Good Thing: How Chasing Scale is Stifling AI Innovation
+                </a>
+              </h2>
+              <p class="text-secondary text-sm leading-relaxed">The "Great Amnesia" of AI's scaling monoculture — why optimising for GPT-N+1 is the wrong race to run.</p>
+            </div>
+            <a href="https://pieces.app/blog/the-cost-of-ai-scaling" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap flex-shrink-0">
+              <i class="fas fa-external-link-alt"></i> Read
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Divider + note -->
+      <div class="mt-12 pt-8 border-t" style="border-color:var(--border)">
+        <p class="text-muted text-sm">More writing coming. Follow <a href="https://x.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">@AntreasAntoniou</a> for updates, or reach out at <a href="mailto:antreas@axiotic.ai" class="text-accent hover:underline">antreas@axiotic.ai</a>.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>
