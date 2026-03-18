@@ -20,6 +20,8 @@
   <meta name="twitter:title" content="Antreas Antoniou | AI Researcher & Engineer">
   <meta name="twitter:description" content="AI Researcher and Engineer building efficient, creative AI systems.">
   <meta name="twitter:image" content="https://antreas.io/images/profile.jpg">
+  <meta name="twitter:site" content="@AntreasAntonio">
+  <meta name="twitter:creator" content="@AntreasAntonio">
 
   <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="images/favicon-bot.jpeg">
@@ -29,21 +31,40 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
+  <link rel="stylesheet" href="tailwind-built.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Focus visible styles for accessibility -->
+  <style>
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+
+  <!-- JSON-LD Person Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Antreas Antoniou",
+    "url": "https://antreas.io",
+    "jobTitle": "Principal AI Research Scientist",
+    "worksFor": [
+      {"@type": "Organization", "name": "Axiotic AI"},
+      {"@type": "Organization", "name": "Pieces"}
+    ],
+    "alumniOf": {"@type": "Organization", "name": "University of Edinburgh"},
+    "sameAs": [
+      "https://github.com/AntreasAntoniou",
+      "https://scholar.google.co.uk/citations?user=TYhPMfkAAAAJ",
+      "https://www.linkedin.com/in/antreas-antoniou-0692579a/",
+      "https://twitter.com/AntreasAntonio"
+    ]
+  }
+  </script>
 
   <!-- Theme initialization (prevents flash) -->
   <script>
@@ -83,7 +104,7 @@
           <i class="fas fa-sun" id="theme-icon-light-mobile"></i>
           <i class="fas fa-moon hidden" id="theme-icon-dark-mobile"></i>
         </button>
-        <button class="text-secondary" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <button class="text-secondary" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Toggle navigation menu" aria-expanded="false">
           <i class="fas fa-bars text-xl"></i>
         </button>
       </div>
@@ -111,7 +132,7 @@
         <!-- Profile Image -->
         <div data-aos="fade-up">
           <div class="relative w-64 h-64 mx-auto rounded-full overflow-hidden profile-image">
-            <img id="hero-profile" src="images/profile.jpg" alt="Antreas Antoniou - click to toggle" class="w-full h-full object-cover cursor-pointer transition-transform hover:scale-105" onclick="toggleProfileImage()" title="Click to toggle">
+            <img id="hero-profile" src="images/profile.jpg" alt="Antreas Antoniou, AI Researcher and Engineer" class="w-full h-full object-cover cursor-pointer transition-transform hover:scale-105" onclick="toggleProfileImage()" title="Click to toggle">
           </div>
           <p id="profile-hint" class="text-xs text-muted mt-2 opacity-0 transition-opacity duration-500 cursor-pointer" onclick="toggleProfileImage()">
             <i class="fas fa-hand-pointer mr-1"></i>psst... click me
@@ -135,22 +156,22 @@
 
         <!-- Social Links -->
         <div class="flex items-center justify-center gap-5" data-aos="fade-up" data-aos-delay="300">
-          <a href="mailto:iam@antreas.io" class="text-muted hover:text-accent transition text-xl" title="Email">
+          <a href="mailto:iam@antreas.io" class="text-muted hover:text-accent transition text-xl" title="Email" aria-label="Email">
             <i class="fas fa-envelope"></i>
           </a>
-          <a href="https://calendar.app.google/jy778byT379ZtLnk8" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="Schedule a Meeting">
+          <a href="https://calendar.app.google/jy778byT379ZtLnk8" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="Schedule a Meeting" aria-label="Schedule a Meeting">
             <i class="fas fa-calendar"></i>
           </a>
-          <a href="https://scholar.google.com/citations?user=LNO4XZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="Google Scholar">
+          <a href="https://scholar.google.com/citations?user=LNO4XZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="Google Scholar" aria-label="Google Scholar">
             <i class="fas fa-graduation-cap"></i>
           </a>
-          <a href="https://github.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="GitHub">
+          <a href="https://github.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="GitHub" aria-label="GitHub">
             <i class="fab fa-github"></i>
           </a>
-          <a href="https://www.linkedin.com/in/antreas-antoniou-0692579a/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="LinkedIn">
+          <a href="https://www.linkedin.com/in/antreas-antoniou-0692579a/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="LinkedIn" aria-label="LinkedIn">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="https://x.com/AntreasAntonio" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="Twitter">
+          <a href="https://x.com/AntreasAntonio" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-xl" title="Twitter" aria-label="Twitter">
             <i class="fab fa-twitter"></i>
           </a>
         </div>
@@ -448,6 +469,9 @@
               <a href="https://arxiv.org/abs/2405.20838" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
                 <i class="fas fa-file-alt"></i> Paper
               </a>
+              <a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/0382cb76309820f71c6eacd47b36ce71-Abstract-Conference.html" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-university"></i> NeurIPS
+              </a>
             </div>
           </article>
 
@@ -502,6 +526,9 @@
               <a href="https://arxiv.org/abs/2303.15421" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
                 <i class="fas fa-file-alt"></i> Paper
               </a>
+              <a href="https://proceedings.mlr.press/v202/fontanella23a.html" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-university"></i> ICML
+              </a>
             </div>
           </article>
 
@@ -520,6 +547,9 @@
               <a href="https://arxiv.org/abs/2301.13136" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
                 <i class="fas fa-file-alt"></i> Paper
               </a>
+              <a href="https://openreview.net/forum?id=6iVJOtr2zL2" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-university"></i> ICLR
+              </a>
             </div>
           </article>
 
@@ -537,6 +567,9 @@
             <div class="flex flex-wrap gap-3">
               <a href="https://arxiv.org/abs/2310.18191" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
                 <i class="fas fa-file-alt"></i> Paper
+              </a>
+              <a href="https://proceedings.mlr.press/v239/rezk23a.html" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-university"></i> ICBINB
               </a>
             </div>
           </article>
@@ -591,6 +624,9 @@
               <a href="https://arxiv.org/abs/2004.05439" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
                 <i class="fas fa-file-alt"></i> Paper
               </a>
+              <a href="https://doi.org/10.1109/TPAMI.2021.3079209" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-university"></i> TPAMI
+              </a>
             </div>
           </article>
 
@@ -615,6 +651,9 @@
               <a href="https://github.com/AntreasAntoniou/FewShotContinualLearning" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
                 <i class="fab fa-github"></i> Code
               </a>
+              <a href="documents/continual_few_shot_poster.png" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-image"></i> Poster
+              </a>
             </div>
           </article>
 
@@ -632,6 +671,9 @@
             <div class="flex flex-wrap gap-3">
               <a href="https://arxiv.org/abs/1905.10295" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
                 <i class="fas fa-file-alt"></i> Paper
+              </a>
+              <a href="https://proceedings.neurips.cc/paper_files/paper/2019/hash/6018df1842f7130f1b85a6f8e911b96b-Abstract.html" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-university"></i> NeurIPS
               </a>
               <a href="https://github.com/AntreasAntoniou/Learning_to_Learn_via_Self-Critique" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
                 <i class="fab fa-github"></i> Code
@@ -656,6 +698,9 @@
             <div class="flex flex-wrap gap-3">
               <a href="https://arxiv.org/abs/1810.09502" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
                 <i class="fas fa-file-alt"></i> Paper
+              </a>
+              <a href="https://openreview.net/forum?id=HJGven05Y7" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-university"></i> ICLR
               </a>
               <a href="https://github.com/AntreasAntoniou/HowToTrainYourMAMLPytorch" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
                 <i class="fab fa-github"></i> Code
@@ -725,6 +770,9 @@
             <div class="flex flex-wrap gap-3">
               <a href="https://arxiv.org/abs/1711.04340" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">
                 <i class="fas fa-file-alt"></i> Paper
+              </a>
+              <a href="https://doi.org/10.1007/978-3-030-01424-7_58" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
+                <i class="fas fa-university"></i> ICANN
               </a>
               <a href="https://github.com/AntreasAntoniou/DAGAN" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
                 <i class="fab fa-github"></i> Code
@@ -811,6 +859,24 @@
 
           <div class="card p-8" data-aos="fade-up" data-aos-delay="200">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <h3 class="text-xl font-semibold">Machine Learning Scientist</h3>
+              <span class="text-accent font-medium">2021 - 2022</span>
+            </div>
+            <p class="text-accent font-medium mb-3">Amazon</p>
+            <p class="text-secondary">Applied machine learning research and development.</p>
+          </div>
+
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="250">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <h3 class="text-xl font-semibold">Research Intern</h3>
+              <span class="text-accent font-medium">2020</span>
+            </div>
+            <p class="text-accent font-medium mb-3">Google</p>
+            <p class="text-secondary">Machine learning research internship during PhD studies.</p>
+          </div>
+
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="300">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
               <h3 class="text-xl font-semibold">Research Associate</h3>
               <span class="text-accent font-medium">2019 - 2024</span>
             </div>
@@ -818,7 +884,7 @@
             <p class="text-secondary">Supervised by Prof. Amos Storkey. Part of <a href="https://www.bayeswatch.com/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">BayesWatch</a> and the Adaptive and Neural Computation (ANC) institute.</p>
           </div>
 
-          <div class="card p-8" data-aos="fade-up" data-aos-delay="250">
+          <div class="card p-8" data-aos="fade-up" data-aos-delay="350">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
               <h3 class="text-xl font-semibold">PhD in Machine Learning</h3>
               <span class="text-accent font-medium">2016 - 2020</span>
@@ -1164,8 +1230,9 @@
             TALI is my response to the growing demand for multimodal understanding in deep learning. It's a large-scale, tetramodal dataset that aligns text, video, images, and audio—a playground for innovative self-supervised learning tasks and multimodal research. With TALI, we're exploring how different modalities and data/model scaling affect downstream performance. I'm excited about the diverse research ideas it will inspire!
           </p>
           <div class="flex flex-wrap gap-3">
-            <a href="https://huggingface.co/spaces/Antreas/TALI" target="_blank" rel="noopener noreferrer" class="btn-primary">
-              <i class="fas fa-play"></i> Try Explorer
+            <!-- FIXME: HuggingFace Space (spaces/Antreas/TALI) returns 401 — replaced with GitHub repo link (2026-02-26) -->
+            <a href="https://github.com/AntreasAntoniou/TALI" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <i class="fab fa-github"></i> Explore TALI
             </a>
             <a href="https://huggingface.co/datasets/Antreas/TALI" target="_blank" rel="noopener noreferrer" class="btn-secondary">
               <i class="fas fa-database"></i> HuggingFace Dataset
@@ -1223,7 +1290,7 @@
                 <h5 class="font-semibold mb-3">GPU & Cluster Usage</h5>
                 <div class="flex flex-wrap gap-2">
                   <a href="https://drive.google.com/file/d/1mdM8QnFTG0XXcw6jXV0GmBzis5YQLPwH/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">GPU Clusters</a>
-                  <a href="https://drive.google.com/file/d/1tI1LmS59rSvkKTyDCA7tsR1384tBe8CL/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">MLP Cluster</a>
+                  <a href="https://docs.google.com/presentation/d/1SU4ExARZLbenZtxm3K8Unqch5282jAXTq0CQDtfvtI0/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">MLP Cluster</a>
                   <a href="https://drive.google.com/file/d/1SrLYBhJjNycY-T9KSyAqThqRFcwtdCXc/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Training Demo</a>
                   <a href="https://drive.google.com/file/d/1x9r0VxvYgVr-nKChZ4X3KOtKmpCCF4xZ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm text-sm">Q&A Session</a>
                 </div>
@@ -1337,19 +1404,19 @@
         </div>
 
         <div class="flex items-center justify-center gap-6 pt-4">
-          <a href="https://calendar.app.google/jy778byT379ZtLnk8" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="Schedule a Meeting">
+          <a href="https://calendar.app.google/jy778byT379ZtLnk8" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="Schedule a Meeting" aria-label="Schedule a Meeting">
             <i class="fas fa-calendar"></i>
           </a>
-          <a href="https://scholar.google.com/citations?user=LNO4XZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="Google Scholar">
+          <a href="https://scholar.google.com/citations?user=LNO4XZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="Google Scholar" aria-label="Google Scholar">
             <i class="fas fa-graduation-cap"></i>
           </a>
-          <a href="https://github.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="GitHub">
+          <a href="https://github.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="GitHub" aria-label="GitHub">
             <i class="fab fa-github"></i>
           </a>
-          <a href="https://www.linkedin.com/in/antreas-antoniou-0692579a/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="LinkedIn">
+          <a href="https://www.linkedin.com/in/antreas-antoniou-0692579a/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="LinkedIn" aria-label="LinkedIn">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="https://x.com/AntreasAntonio" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="Twitter">
+          <a href="https://x.com/AntreasAntonio" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition text-2xl" title="Twitter" aria-label="Twitter">
             <i class="fab fa-twitter"></i>
           </a>
         </div>
@@ -1359,7 +1426,7 @@
 
   <!-- Footer -->
   <footer class="py-8 text-center text-base text-muted" style="border-top: 1px solid var(--border);">
-    <p>&copy; 2025 Antreas Antoniou. All rights reserved.</p>
+    <p>&copy; 2026 Antreas Antoniou. All rights reserved.</p>
   </footer>
 
   <script>
