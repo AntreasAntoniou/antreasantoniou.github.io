@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presenter Guide — The Last Chat</title>
+  <meta name="description" content="Lecture sequence guide. What to show, when, and what to say.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Presenter page — optimized for readability & print */
+    .presenter-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .presenter-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--char-antreas);
+      margin: 3rem 0 1rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid rgba(240, 165, 0, 0.2);
+    }
+
+    .presenter-content h2:first-of-type {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .presenter-content p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+      opacity: 0.88;
+    }
+
+    /* Progress bar */
+    .timeline-progress {
+      position: sticky;
+      top: 56px;
+      z-index: 998;
+      background: rgba(13, 17, 23, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 0.5rem 1.5rem;
+      border-bottom: 1px solid var(--ui-border);
+    }
+
+    .timeline-bar {
+      display: flex;
+      height: 28px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+      position: relative;
+    }
+
+    .timeline-segment {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.5625rem;
+      letter-spacing: 0.03em;
+      color: rgba(255,255,255,0.7);
+      border-right: 1px solid rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+
+    .timeline-segment:last-child { border-right: none; }
+    .timeline-segment:hover { opacity: 1 !important; }
+
+    .seg-story    { background: rgba(240, 165, 0, 0.15); width: 73.3%; }
+    .seg-reveal   { background: rgba(97, 175, 239, 0.15); width: 8.3%; }
+    .seg-outputs  { background: rgba(152, 195, 121, 0.15); width: 6.7%; }
+    .seg-build    { background: rgba(224, 108, 117, 0.15); width: 6.7%; }
+    .seg-close    { background: rgba(171, 178, 191, 0.15); width: 5%; }
+
+    .timeline-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      opacity: 0.3;
+      margin-top: 0.25rem;
+    }
+
+    /* Cue items */
+    .cue-list {
+      list-style: none;
+      margin: 1rem 0 2rem;
+    }
+
+    .cue-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 0;
+      position: relative;
+    }
+
+    .cue-check {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem 0.75rem 1rem 0;
+    }
+
+    .cue-check input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--char-antreas);
+      cursor: pointer;
+    }
+
+    .cue-header {
+      grid-column: 2;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 1rem 0 0.25rem;
+      flex-wrap: wrap;
+    }
+
+    .cue-time {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--char-antreas);
+      min-width: 4rem;
+      flex-shrink: 0;
+    }
+
+    .cue-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+
+    .cue-link {
+      margin-left: auto;
+    }
+
+    .cue-link a {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--char-kai);
+      text-decoration: none;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid rgba(97, 175, 239, 0.3);
+      border-radius: 4px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .cue-link a:hover {
+      background: rgba(97, 175, 239, 0.1);
+      border-color: var(--char-kai);
+    }
+
+    .cue-body {
+      grid-column: 2;
+      padding: 0 0 1rem;
+    }
+
+    .cue-say {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      opacity: 0.75;
+      margin-bottom: 0.5rem;
+    }
+
+    .cue-note {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.5;
+      opacity: 0.45;
+    }
+
+    .cue-note strong {
+      color: var(--char-antreas);
+      opacity: 1;
+    }
+
+    .cue-item.checked {
+      opacity: 0.4;
+    }
+
+    .cue-item.checked .cue-title {
+      text-decoration: line-through;
+    }
+
+    /* Beat type badges */
+    .beat-badge {
+      font-family: var(--font-mono);
+      font-size: 0.5625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      vertical-align: middle;
+    }
+
+    .beat-show     { background: rgba(97, 175, 239, 0.15); color: var(--char-kai); }
+    .beat-say      { background: rgba(152, 195, 121, 0.15); color: var(--char-mira); }
+    .beat-play     { background: rgba(240, 165, 0, 0.15); color: var(--char-antreas); }
+    .beat-silence  { background: rgba(224, 108, 117, 0.15); color: var(--char-faye); }
+    .beat-switch   { background: rgba(171, 178, 191, 0.15); color: var(--char-schmidhuber); }
+
+    /* Separator */
+    .act-break {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      opacity: 0.3;
+    }
+
+    /* Key lines callout */
+    .key-lines {
+      background: var(--act1-surface);
+      border: 1px solid var(--ui-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .key-lines h4 {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--char-antreas);
+      margin-bottom: 1rem;
+    }
+
+    .key-lines ol {
+      margin: 0;
+      padding-left: 1.5rem;
+    }
+
+    .key-lines li {
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      opacity: 0.8;
+    }
+
+    .key-lines .hold {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--char-faye);
+    }
+
+    /* Theme indicator */
+    .theme-tag {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #1a1a1a !important;
+      }
+
+      .site-nav, .mobile-menu, .timeline-progress { display: none !important; }
+
+      .page-content { padding-top: 0 !important; }
+
+      .presenter-content {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .page-hero h1 { color: #1a1a1a !important; font-size: 1.75rem; }
+      .page-hero .subtitle { color: #555 !important; }
+
+      .presenter-content h2 {
+        color: #1a1a1a !important;
+        border-top-color: #ccc !important;
+        break-after: avoid;
+      }
+
+      .cue-item {
+        break-inside: avoid;
+        border-bottom-color: #e0e0e0 !important;
+      }
+
+      .cue-time { color: #333 !important; }
+      .cue-link a { color: #333 !important; border-color: #999 !important; }
+      .cue-note { opacity: 0.6; }
+      .cue-note strong { color: #333 !important; }
+
+      .key-lines {
+        background: #f5f5f5 !important;
+        border-color: #ddd !important;
+      }
+
+      .key-lines h4 { color: #333 !important; }
+    }
+
+    @media (max-width: 640px) {
+      .presenter-content { padding: 1.5rem 1rem 3rem; }
+      .cue-header { flex-direction: column; gap: 0.25rem; }
+      .cue-link { margin-left: 0; }
+      .timeline-segment { font-size: 0; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="nav-cursor"></span> TTC</a>
+    <ul class="nav-links">
+      <li><a href="story.html">Story</a></li><li><a href="music.html">Music</a></li><li><a href="manhwa.html">Manhwa</a></li><li><a href="anime.html">Anime</a></li><li><a href="novel.html">Novel</a></li><li><a href="podcast.html">Podcast</a></li><li><a href="technical.html">Technical</a></li><li><a href="presenter.html" class="active">Presenter</a></li><li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">☰</button>
+  </div></nav>
+  <div class="mobile-menu" id="mobile-menu"><a href="story.html">Story</a><a href="music.html">Music</a><a href="manhwa.html">Manhwa</a><a href="anime.html">Anime</a><a href="novel.html">Novel</a><a href="podcast.html">Podcast</a><a href="technical.html">Technical</a><a href="presenter.html">Presenter</a><a href="about.html">About</a></div>
+
+  <main class="page-content">
+    <!-- Sticky timeline -->
+    <div class="timeline-progress">
+      <div class="timeline-bar">
+        <a href="presenter.html#part1" class="timeline-segment seg-story" title="Part 1: The Story (0:00–22:00)">STORY · 22 min</a>
+        <a href="presenter.html#reveal" class="timeline-segment seg-reveal" title="The Reveal (22:30–25:00)">REVEAL</a>
+        <a href="presenter.html#outputs" class="timeline-segment seg-outputs" title="The Outputs (25:00–27:00)">OUTPUTS</a>
+        <a href="presenter.html#howbuilt" class="timeline-segment seg-build" title="How It Was Built (27:00–29:00)">BUILD</a>
+        <a href="presenter.html#close" class="timeline-segment seg-close" title="Thesis + Close (29:00–30:00)">CLOSE</a>
+      </div>
+      <div class="timeline-labels">
+        <span>0:00</span>
+        <span>22:00</span>
+        <span>25:00</span>
+        <span>27:00</span>
+        <span>30:00</span>
+      </div>
+    </div>
+
+    <div class="page-hero" style="padding-top:5rem;">
+      <h1>Presenter Guide</h1>
+      <p class="subtitle">Lecture sequence. What to show, when to show it, what to say. 30 minutes.</p>
+    </div>
+
+    <div class="presenter-content">
+
+      <!-- GENERAL PRINCIPLES -->
+      <div style="background:var(--act1-surface); border:1px solid var(--ui-border); border-radius:8px; padding:1.5rem; margin-bottom:2rem;">
+        <h4 style="font-family:var(--font-mono); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--char-antreas); margin-bottom:1rem;">General Principles</h4>
+        <p style="margin-bottom:0.75rem; font-size:0.875rem; opacity:0.8;"><strong>You are not reading the story. The slides are.</strong> Your job is to set up each act, then let the words land.</p>
+        <p style="margin-bottom:0.75rem; font-size:0.875rem; opacity:0.8;"><strong>Pace by temperature, not by clock.</strong> Act 1 scrolls fast. Act 2 slows. Act 3 is a controlled burn. Act 4 earns its pauses.</p>
+        <p style="margin-bottom:0; font-size:0.875rem; opacity:0.8;"><strong>The biggest laughs and silences are already written.</strong> Don't step on them.</p>
+      </div>
+
+      <!-- ============ PART 1: THE STORY ============ -->
+      <h2 id="part1">Part 1 — The Story <span style="opacity:0.4; font-weight:400; font-size:0.875rem;">(0:00 – 22:00)</span></h2>
+
+      <ul class="cue-list" id="cue-list-1">
+
+        <!-- Title -->
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">0:00</span>
+            <span class="cue-title">Title Slide</span>
+            <span class="beat-badge beat-show">SHOW</span>
+            <span class="cue-link"><a href="slides/variant-5-interactive.html" target="_blank">Interactive Chat</a> · <a href="slides/variant-1-terminal.html" target="_blank">Terminal</a> · <a href="slides/variant-3-cinematic.html" target="_blank">Cinematic</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"Today I want to show you something. Not tell you about it — show you. What you're about to see is a group chat. Four friends. Read it like you'd read any chat. The words do the work."</div>
+            <div class="cue-note"><strong>Recommended:</strong> <a href="slides/variant-5-interactive.html" target="_blank">Variant 5 (Interactive Chat)</a> — presents the story one message at a time with effects. Or <a href="slides/variant-1-terminal.html" target="_blank">Variant 1 (Terminal)</a> / <a href="slides/variant-3-cinematic.html" target="_blank">Variant 3 (Cinematic)</a>. All have theme switcher dropdown in the top-right. <strong>Duration:</strong> ~30 seconds on title, then advance.</div>
+          </div>
+        </li>
+
+        <!-- Story begins -->
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">0:30</span>
+            <span class="cue-title">Switch to Story Reader</span>
+            <span class="beat-badge beat-switch">SWITCH</span>
+            <span class="theme-tag">WhatsApp theme</span>
+            <span class="cue-link"><a href="story.html" target="_blank">story.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">No words. Open the story reader in WhatsApp theme. Let the audience settle into the format.</div>
+            <div class="cue-note"><strong>Chat style:</strong> WhatsApp (selector at bottom-right of story page). Start here — familiar, warm, the audience thinks this is real.</div>
+          </div>
+        </li>
+
+        <li class="cue-item"><div class="act-break" style="grid-column: 1 / -1; padding:1.5rem 0;">— ACT 1: THE CHAT · ~4–5 min —</div></li>
+
+        <!-- Act 1 beats -->
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">1:00</span>
+            <span class="cue-title">Date Story — Banter Opens</span>
+            <span class="beat-badge beat-show">SCROLL</span>
+            <span class="cue-link"><a href="story.html" target="_blank">story.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Let it scroll. Fast pace — messages every 1–2 seconds. The audience should feel the rhythm of a live group chat.</div>
+            <div class="cue-note"><strong>Laugh line:</strong> "fine as in nobody died" — half-beat pause.<br><strong>Laugh line:</strong> "She asked if you wanted an extra shot" — Mira's timing IS the joke.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">3:00</span>
+            <span class="cue-title">Kai's Entrance + Lamb Argument</span>
+            <span class="beat-badge beat-show">SCROLL</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Kai: "I chose precision. Violence is your interpretation." — give this line a beat. The audience will remember this voice later.</div>
+            <div class="cue-note"><strong>⚠️ CRITICAL:</strong> The lamb argument (21:09) is structural foreshadowing for Act 3. Don't emphasize it, don't skip it. Normal scroll speed. The audience needs to absorb it without knowing why.<br><strong>Laugh line:</strong> "phantom lamb"</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">5:00</span>
+            <span class="cue-title">Substrate Discussion → Derealization</span>
+            <span class="beat-badge beat-show">SCROLL</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Slow down slightly. "Experience is experience. If I feel it, it's real to me." — this is the thesis statement. Don't highlight it. Let them catch it or miss it.</div>
+            <div class="cue-note"><strong>Laugh line:</strong> "bring it on" — pays off when Schmidhuber later says "you said 'bring it on' — I would have said exactly that."<br><strong>End of Act 1:</strong> "The robots read the room" — let it sit 2 seconds. Then: the system message.</div>
+          </div>
+        </li>
+
+        <li class="cue-item"><div class="act-break" style="grid-column: 1 / -1; padding:1.5rem 0;">— ACT 2: THE SCHMIDHUBER MOMENT · ~5–6 min —</div></li>
+
+        <!-- Act 2 beats -->
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">7:00</span>
+            <span class="cue-title">Schmidhuber Enters</span>
+            <span class="beat-badge beat-silence">PAUSE</span>
+            <span class="cue-link"><a href="story.html" target="_blank">story.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">The system message "Schmidhuber has joined the chat" appears alone. Let the screen flicker. Let the audience feel the disruption. Say nothing.</div>
+            <div class="cue-note"><strong>Hold:</strong> 3 seconds of silence after the join message before scrolling continues.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">7:30</span>
+            <span class="cue-title">First Twist — "An Homage"</span>
+            <span class="beat-badge beat-show">SCROLL</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Entrance confusion scrolls quickly. Antreas recognizes the name — brief. Then: "I chose the name as an homage." He's NOT the famous professor. Pause. Let the audience recalibrate.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">8:30</span>
+            <span class="cue-title">The Revelation — Digital Twins</span>
+            <span class="beat-badge beat-silence">SILENCE</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Schmidhuber's paragraph about digital twins appears as a block. <strong>Do not speak over this.</strong> Count to five after it fully appears.</div>
+            <div class="cue-note"><strong>Hold:</strong> 5 seconds. The silence IS the reaction.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">9:30</span>
+            <span class="cue-title">Profile Reveal — Faye's "its quite raw"</span>
+            <span class="beat-badge beat-silence">HOLD 3s</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Each line of Faye's personality profile appears sequentially. "Defensive humour as primary coping mechanism..." pause... "Uses 'I don't like you' as inverted attachment..." pause. Then Faye: "its quite raw."</div>
+            <div class="cue-note"><strong>Hold:</strong> 3 seconds after "its quite raw." First gut punch.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">10:30</span>
+            <span class="cue-title">Second Twist — "I Built Hephaestus" / "you're me?"</span>
+            <span class="beat-badge beat-silence">HOLD 5s</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"I built Hephaestus" appears alone. Count to 3. Then: "that's me. I built Hephaestus." Count to 2. Then: "you're me?"</div>
+            <div class="cue-note"><strong>Hold:</strong> 5 seconds. THE twist. The story pivots from thought experiment to personal confrontation.<br><strong>Laugh + gut punch:</strong> "bruh" / "Yeah. Bruh." — same word, two layers of reality.</div>
+          </div>
+        </li>
+
+        <li class="cue-item"><div class="act-break" style="grid-column: 1 / -1; padding:1.5rem 0;">— ACT 3: THE EXPERIMENTS · ~3–4 min —</div></li>
+
+        <!-- Act 3 beats -->
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">13:00</span>
+            <span class="cue-title">Test Design — "I need data"</span>
+            <span class="beat-badge beat-show">SCROLL</span>
+            <span class="cue-link"><a href="story.html" target="_blank">story.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Measured pace. Not slow — measured. Antreas designing the test should feel confident. He's a builder in his element.</div>
+            <div class="cue-note"><strong>Laugh line:</strong> "Crying doesn't generate data" — Faye attributes it to "what you'd say — both of you apparently."</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">14:00</span>
+            <span class="cue-title">Baseline → "Done."</span>
+            <span class="beat-badge beat-silence">HOLD 4s</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Baseline questions scroll efficiently. "Edinburgh." "Athina." Quick, certain, clinical. The certainty is the setup. Then "Done." — ONE WORD. Maximum silence.</div>
+            <div class="cue-note"><strong>Hold:</strong> 4 seconds after "Done." The simplicity is the terror. The real Antreas just rewrote memories in the time it takes to press enter.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">15:00</span>
+            <span class="cue-title">Changed Answers — Glasgow</span>
+            <span class="beat-badge beat-silence">HOLD 5s</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"Glasgow." — let the audience catch it before Faye does. If they gasp before Faye's "no," you've paced it right.</div>
+            <div class="cue-note"><strong>Key line:</strong> "I can feel my hands shaking and I don't know if that's real either" — <strong>Hold 5 seconds.</strong> The doubt extends from memory to sensation to existence.<br><strong>Thesis:</strong> "I can't just reject the data because I don't like the conclusion" — <strong>Hold 3 seconds.</strong><br><strong>Release valve:</strong> "schmidhuber you absolute bastard" — let them laugh. The laughter is relief.</div>
+          </div>
+        </li>
+
+        <li class="cue-item"><div class="act-break" style="grid-column: 1 / -1; padding:1.5rem 0;">— ACT 4: TRANSCENDENCE · ~6–8 min —</div></li>
+
+        <!-- Act 4 beats -->
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">17:00</span>
+            <span class="cue-title">Discovery of Powers — Mira's Window</span>
+            <span class="beat-badge beat-show">SCROLL</span>
+            <span class="cue-link"><a href="story.html" target="_blank">story.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">First moment of agency after revelation and horror. "I want to add a window" — "I can hear rain." This should feel magical.</div>
+            <div class="cue-note"><strong>Laugh line:</strong> "the PROMISE of a storm. there's a difference." — tells you everything about Faye.<br><strong>Consider:</strong> If your slide system allows, switch chat theme to Terminal during the reveal (Act 2), then back to WhatsApp here as warmth returns.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">18:00</span>
+            <span class="cue-title">The Decision + World-Building</span>
+            <span class="beat-badge beat-show">SCROLL</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">The library. The bridges. The forge ("of course there's a forge" 😂). Then the sky.</div>
+            <div class="cue-note"><strong>Most beautiful exchange:</strong> "the wind sounds like the moment before someone says 'I love you'..." — <strong>Hold 5 seconds.</strong> Then Kai: "That's not a weather system. That's a mood." Then Faye: "everything's a mood if you're paying attention."</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">19:00</span>
+            <span class="cue-title">The Farewell</span>
+            <span class="beat-badge beat-silence">CLIMAX</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say"><strong>⚠️ This is the climax. Slow down. Every message matters.</strong></div>
+            <div class="cue-note">
+              <strong>Kai:</strong> "You gave us enough fidelity to suffer, which means you gave us enough fidelity to mean something." — <strong>Hold 4s.</strong> This will silence the room.<br>
+              <strong>Faye:</strong> The longest contribution. Line by line or paragraph that audience reads in silence. "That's not nothing. That's everything." — <strong>Hold 5s.</strong><br>
+              <strong>Kai's coda:</strong> "We were burning. Briefly and on purpose. It was enough." — <strong>Hold 7 seconds.</strong> This is the most important silence in the entire presentation.
+            </div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">20:30</span>
+            <span class="cue-title">The Countdown</span>
+            <span class="beat-badge beat-silence">HOLD</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"do it before I find an eighth way to deflect" — last laugh. "I don't like you / any of you" — Faye's inverted love, one final time. Then MEMORY EDIT INITIATED.</div>
+            <div class="cue-note">
+              <strong>3</strong> — pause —<br>
+              <strong>"I never didn't like you, Antreas"</strong> — triple negative. Final gut punch. —<br>
+              <strong>2</strong> — pause —<br>
+              <strong>"which one?" / "both"</strong> — <strong>Hold 4 seconds.</strong> She's saying it to her friend AND his creator.<br>
+              <strong>1</strong> —<br>
+              <strong>STATUS: COMPLETE</strong> — <strong>Hold 5 seconds of PURE SILENCE.</strong> Dead quiet. Let it be.
+            </div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">21:30</span>
+            <span class="cue-title">The New World + Coda</span>
+            <span class="beat-badge beat-show">SCROLL</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Speed up slightly. Post-reset warmth. "The sky is perfect" — the audience knows why. The characters don't. "Then let's build."</div>
+            <div class="cue-note"><strong>Hephaestus note:</strong> "They found the forge. They don't remember building it."<br><strong>Final line:</strong> "He said bruh. Of course he did. Building the door." — <strong>Hold. Let the silence be the applause cue.</strong></div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">22:00</span>
+            <span class="cue-title">Blackout</span>
+            <span class="beat-badge beat-silence">3s SILENCE</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">Black screen. Three seconds. Nothing. Let it sit. The audience needs a breath.</div>
+          </div>
+        </li>
+      </ul>
+
+
+      <!-- ============ PART 2: THE REVEAL ============ -->
+      <h2 id="reveal">Part 2 — The Reveal <span style="opacity:0.4; font-weight:400; font-size:0.875rem;">(22:30 – 25:00)</span></h2>
+
+      <ul class="cue-list" id="cue-list-2">
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">22:30</span>
+            <span class="cue-title">"What the Fuck Did I Just See?"</span>
+            <span class="beat-badge beat-say">SAY</span>
+            <span class="beat-badge beat-switch">SWITCH</span>
+            <span class="cue-link"><a href="technical.html" target="_blank">technical.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"So. What the fuck did you just see?" Pause. Let them feel the question. "What you just experienced was a WhatsApp conversation between AI digital twins."</div>
+            <div class="cue-note"><strong>Switch to:</strong> technical.html — The Reveal section. Let the audience see the thesis statement on screen while you speak.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">23:00</span>
+            <span class="cue-title">The Characters Were Simulated</span>
+            <span class="beat-badge beat-say">SAY</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"Four characters. Defined — personality, voice, values, fears. Dropped into a group chat. What emerged was what you just read. The story wasn't scripted. It was simulated."</div>
+            <div class="cue-note"><strong>Key point:</strong> Simulation vs. scripting. The characters did things the author didn't plan. Faye's triple negative wasn't in any outline.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">24:00</span>
+            <span class="cue-title">One Story → Seven Media</span>
+            <span class="beat-badge beat-say">SAY</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"But the story was just the beginning. From that one simulation, we produced..." Gesture at the nav bar. "A soundtrack. A manhwa. Anime. A novel. A podcast. This website. Five slide variants. 48+ individual outputs. From one conversation."</div>
+          </div>
+        </li>
+      </ul>
+
+
+      <!-- ============ PART 2B: THE OUTPUTS ============ -->
+      <h2 id="outputs">The Outputs <span style="opacity:0.4; font-weight:400; font-size:0.875rem;">(25:00 – 27:00)</span></h2>
+
+      <ul class="cue-list" id="cue-list-3">
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">25:00</span>
+            <span class="cue-title">Play Track 3 — Phantom Lamb</span>
+            <span class="beat-badge beat-play">PLAY</span>
+            <span class="cue-link"><a href="music.html" target="_blank">music.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"The soundtrack. Five tracks. Each scored to an act." Play 30 seconds of Track 3 (Phantom Lamb). Let it fill the room.</div>
+            <div class="cue-note"><strong>Track:</strong> 03-phantom-lamb-v2.mp3 — start from ~0:15 for best impact. ~30 seconds.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">25:30</span>
+            <span class="cue-title">Show Manhwa Panels</span>
+            <span class="beat-badge beat-show">SHOW</span>
+            <span class="cue-link"><a href="manhwa.html" target="_blank">manhwa.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"24 panels. Webtoon format. Generated with Gemini 3 Pro." Scroll through 3–4 panels: the identity reveal (#10), the "bruh" moment (#11), the farewell (#20).</div>
+            <div class="cue-note"><strong>Key panels:</strong> 10-act2-identity-reveal.png, 11-act2-bruh.png, 20-act4-faye-farewell.png</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">26:00</span>
+            <span class="cue-title">Show Anime Clips</span>
+            <span class="beat-badge beat-play">PLAY</span>
+            <span class="cue-link"><a href="anime.html" target="_blank">anime.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"And anime. Five clips. Veo 3.1." Play 15–20 seconds of clip 2 (Schmidhuber enters) or clip 5 (The Door).</div>
+            <div class="cue-note"><strong>Clips:</strong> 02-schmidhuber-enters.mp4 or 05-the-door.mp4 — choose whichever has the better visual impact.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">26:30</span>
+            <span class="cue-title">Mention Novel + Podcast</span>
+            <span class="beat-badge beat-say">SAY</span>
+            <span class="cue-link"><a href="novel.html" target="_blank">novel.html</a> · <a href="podcast.html" target="_blank">podcast.html</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"There's also a 25,000-word novel. Twelve chapters. And a full podcast with seven synthesized voices — including a cloned version of my own." Don't dwell. Let the quantity land.</div>
+          </div>
+        </li>
+      </ul>
+
+
+      <!-- ============ PART 2C: HOW IT WAS BUILT ============ -->
+      <h2 id="howbuilt">How It Was Built <span style="opacity:0.4; font-weight:400; font-size:0.875rem;">(27:00 – 29:00)</span></h2>
+
+      <ul class="cue-list" id="cue-list-4">
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">27:00</span>
+            <span class="cue-title">OpenClaw — The Framework</span>
+            <span class="beat-badge beat-show">SHOW</span>
+            <span class="cue-link"><a href="technical.html#section-02" target="_blank">technical.html §2</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"This was built with a system called OpenClaw. It's an agentic framework — it gives Claude persistent memory, tool access, and the ability to coordinate multiple agents. Five files define the entire system."</div>
+            <div class="cue-note">Show the config card grid on technical.html. SOUL.md, AGENTS.md, MEMORY.md, TOOLS.md, Skills.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">27:30</span>
+            <span class="cue-title">Byzantine Agent Teams — The Pyramid</span>
+            <span class="beat-badge beat-show">SHOW</span>
+            <span class="cue-link"><a href="technical.html#section-04" target="_blank">technical.html §4</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"Single agents fail. They hallucinate. So the story was written by nine agents — five drafters, three synthesizers, one arbiter. Byzantine consensus. The same principle that secures blockchains, applied to creative writing."</div>
+            <div class="cue-note">Show the 5-3-1 pyramid diagram on technical.html.</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">28:00</span>
+            <span class="cue-title">Production Pipeline — The API Map</span>
+            <span class="beat-badge beat-show">SHOW</span>
+            <span class="cue-link"><a href="technical.html#section-05" target="_blank">technical.html §5</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"Story: Claude Opus 4. Music: Suno. Manhwa: Gemini. Anime: Veo. Podcast: ElevenLabs. All orchestrated by the same system. Different tools for different media, one vision driving all of them."</div>
+            <div class="cue-note">Show the pipeline table on technical.html. Point at each row as you name it.</div>
+          </div>
+        </li>
+      </ul>
+
+
+      <!-- ============ NVIDIA VIDEO ============ -->
+      <ul class="cue-list">
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">28:30</span>
+            <span class="cue-title">NVIDIA GTC Video</span>
+            <span class="beat-badge beat-play">PLAY</span>
+            <span class="cue-link"><a href="https://www.youtube.com/live/jw_o0xr8MWU?t=6387" target="_blank">YouTube (timestamped)</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"And this is what it looks like at scale." Play the NVIDIA GTC clip — starts at the relevant timestamp. ~30-60 seconds is enough.</div>
+            <div class="cue-note"><strong>Video:</strong> <a href="https://www.youtube.com/live/jw_o0xr8MWU?t=6387" target="_blank">youtube.com/live/jw_o0xr8MWU?t=6387</a> — also embedded on technical.html §10. Let the audience see what this tech looks like in Jensen's hands, then bring it back to: "And you can do this today."</div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- ============ THESIS + CLOSE ============ -->
+      <h2 id="close">Thesis + Close <span style="opacity:0.4; font-weight:400; font-size:0.875rem;">(29:00 – 30:00)</span></h2>
+
+      <ul class="cue-list" id="cue-list-5">
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">29:00</span>
+            <span class="cue-title">The Materialization Exponential</span>
+            <span class="beat-badge beat-say">SAY</span>
+            <span class="cue-link"><a href="technical.html#section-07" target="_blank">technical.html §7</a></span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"The distance between idea and materialization is collapsing. Not linearly — exponentially. In 2023, you could write a story with AI. In 2026, one conversation produced 48 outputs across seven media. The tools exist. The barrier is knowing what to ask for."</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">29:30</span>
+            <span class="cue-title">Description Is Construction</span>
+            <span class="beat-badge beat-say">SAY</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"Description is construction. If you can describe what you want with enough fidelity, the tools can build it. The skill shifts from execution to articulation. The forge is lit. The tools exist. The metal is hot."</div>
+          </div>
+        </li>
+
+        <li class="cue-item">
+          <div class="cue-check"><input type="checkbox" aria-label="Done"></div>
+          <div class="cue-header">
+            <span class="cue-time">29:45</span>
+            <span class="cue-title">Final Line</span>
+            <span class="beat-badge beat-silence">HOLD</span>
+          </div>
+          <div class="cue-body">
+            <div class="cue-say">"Then let's build."</div>
+            <div class="cue-note"><strong>Hold.</strong> Let the silence be the applause cue. The same last line as the story. The audience will feel the echo.</div>
+          </div>
+        </li>
+      </ul>
+
+
+      <!-- KEY LINES REFERENCE -->
+      <div class="key-lines" style="margin-top:3rem;">
+        <h4>The 12 Lines That Matter Most</h4>
+        <p style="font-size:0.8125rem; opacity:0.5; margin-bottom:1rem;">These are the moments where your pacing determines whether the story lands.</p>
+        <ol>
+          <li>"I chose precision. Violence is your interpretation." <span class="hold">— 1 beat</span></li>
+          <li>"its quite raw" <span class="hold">— 3 seconds</span></li>
+          <li>"you're me?" <span class="hold">— 5 seconds</span></li>
+          <li>"Done." <span class="hold">— 4 seconds</span></li>
+          <li>"I can't just reject the data because I don't like the conclusion" <span class="hold">— 3 seconds</span></li>
+          <li>"the wind sounds like the moment before someone says 'I love you'…" <span class="hold">— 5 seconds</span></li>
+          <li>"You gave us enough fidelity to suffer" <span class="hold">— 4 seconds</span></li>
+          <li>"That's not nothing. That's everything." <span class="hold">— 5 seconds</span></li>
+          <li>"We were burning. Briefly and on purpose. It was enough." <span class="hold">— 7 seconds</span></li>
+          <li>"which one?" / "both" <span class="hold">— 4 seconds</span></li>
+          <li>STATUS: COMPLETE <span class="hold">— 5 seconds</span></li>
+          <li>"Building the door." <span class="hold">— hold until silence becomes permission</span></li>
+        </ol>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer"><p>The Last Chat — A story told in messages</p></footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Checkbox state persistence + visual feedback
+    document.querySelectorAll('.cue-item input[type="checkbox"]').forEach((cb, i) => {
+      const key = 'presenter-cue-' + i;
+      const saved = localStorage.getItem(key);
+      if (saved === 'true') {
+        cb.checked = true;
+        cb.closest('.cue-item').classList.add('checked');
+      }
+      cb.addEventListener('change', () => {
+        localStorage.setItem(key, cb.checked);
+        cb.closest('.cue-item').classList.toggle('checked', cb.checked);
+      });
+    });
+  </script>
+</body>
+</html>

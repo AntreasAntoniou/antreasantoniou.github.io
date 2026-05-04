@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last Chat — Idea → Materialization Exponential</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0D1117;
+  --chat-bg:#0D1117;
+  --text:#E6EDF3;
+  --text-dim:#8B949E;
+  --text-sys:#6E7681;
+  --border:#30363D;
+  --antreas:#F0A500;
+  --faye:#E06C75;
+  --kai:#61AFEF;
+  --mira:#98C379;
+  --schmidhuber:#ABB2BF;
+  --schmidhuber-rev:#D4A574;
+  --font-body:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','Fira Code','SF Mono',monospace;
+}
+
+html,body{
+  width:100%;height:100%;
+  background:var(--bg);
+  font-family:var(--font-body);
+  color:var(--text);
+  overflow:hidden;
+  transition:background 1.5s ease;
+}
+
+/* ===== PROGRESS BAR ===== */
+#progress{
+  position:fixed;top:0;left:0;height:3px;
+  background:var(--antreas);
+  transition:width .4s ease,background 1s ease;
+  z-index:9999;width:0;
+}
+
+/* ===== TITLE SCREEN ===== */
+#title-screen{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  z-index:100;
+  background:var(--bg);
+  transition:opacity .8s ease;
+}
+#title-screen.hidden{opacity:0;pointer-events:none}
+#title-screen h1{
+  font-family:var(--font-mono);
+  font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:600;
+  letter-spacing:-.02em;
+  margin-bottom:.5rem;
+}
+#title-screen .subtitle{
+  font-size:clamp(.9rem,2vw,1.2rem);
+  color:var(--text-dim);
+  font-style:italic;
+  margin-bottom:3rem;
+}
+#title-screen .start-hint{
+  font-size:.85rem;
+  color:var(--text-sys);
+  animation:pulse 2s ease-in-out infinite;
+}
+#title-screen .by{
+  font-size:.8rem;
+  color:var(--text-sys);
+  margin-top:1.5rem;
+}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* ===== CHAT CONTAINER ===== */
+#chat-wrap{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .6s ease;
+}
+#chat-wrap.active{opacity:1;pointer-events:all}
+
+#chat-header{
+  width:100%;max-width:720px;
+  padding:16px 24px 12px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+#chat-title{
+  font-family:var(--font-mono);
+  font-size:1rem;font-weight:600;
+  color:var(--text);
+}
+#chat-members{
+  font-size:.75rem;
+  color:var(--text-dim);
+  margin-top:2px;
+  transition:all .3s ease;
+}
+
+#messages{
+  flex:1;overflow-y:auto;
+  width:100%;max-width:720px;
+  padding:20px 24px 80px;
+  scroll-behavior:smooth;
+  scrollbar-width:thin;
+  scrollbar-color:var(--border) transparent;
+}
+#messages::-webkit-scrollbar{width:6px}
+#messages::-webkit-scrollbar-track{background:transparent}
+#messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* ===== MESSAGE STYLES ===== */
+.msg{
+  margin-bottom:4px;
+  opacity:0;
+  transform:translateY(8px);
+  animation:msg-in .3s ease forwards;
+  max-width:85%;
+}
+@keyframes msg-in{to{opacity:1;transform:translateY(0)}}
+
+.msg-name{
+  font-size:.8rem;
+  font-weight:700;
+  margin-bottom:2px;
+  margin-top:12px;
+}
+.msg-first .msg-name{display:block}
+.msg-cont .msg-name{display:none}
+.msg-cont{margin-top:2px}
+
+.msg-text{
+  font-size:clamp(.88rem,1.5vw,1.02rem);
+  line-height:1.6;
+  color:var(--text);
+  padding:6px 14px;
+  background:rgba(255,255,255,.04);
+  border-radius:4px 12px 12px 12px;
+  display:inline-block;
+  max-width:100%;
+  word-wrap:break-word;
+}
+.msg-cont .msg-text{border-radius:4px 12px 12px 12px}
+.msg-text em{font-style:italic;color:var(--text-dim)}
+
+/* ===== TIMESTAMPS ===== */
+.timestamp{
+  text-align:center;
+  padding:20px 0 12px;
+  opacity:0;animation:msg-in .3s ease forwards;
+}
+.timestamp span{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--text-sys);
+  letter-spacing:.08em;
+  padding:3px 12px;
+  border:1px solid rgba(110,118,129,.25);
+  border-radius:99px;
+}
+
+/* ===== ACT HEADERS ===== */
+.act-header{
+  text-align:center;
+  padding:32px 0 20px;
+  opacity:0;animation:msg-in .5s ease forwards;
+}
+.act-header .act-line{
+  width:60px;height:1px;
+  background:var(--border);
+  display:inline-block;
+  vertical-align:middle;
+  margin:0 12px;
+}
+.act-header .act-text{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  color:var(--text-dim);
+  text-transform:uppercase;
+}
+
+/* ===== SYSTEM MESSAGES ===== */
+.sys-msg{
+  text-align:center;
+  padding:8px 0;
+  opacity:0;animation:msg-in .2s ease forwards;
+}
+.sys-msg span{
+  font-family:var(--font-mono);
+  font-size:.78rem;
+  color:var(--text-sys);
+  padding:4px 12px;
+}
+.sys-msg.sys-important span{
+  color:#E06C75;
+  background:rgba(224,108,117,.08);
+  border-radius:4px;
+  padding:6px 14px;
+}
+
+/* ===== JOIN MESSAGE ===== */
+.join-msg{
+  text-align:center;
+  padding:16px 0;
+  opacity:0;animation:msg-in .5s ease forwards;
+}
+.join-msg span{
+  font-family:var(--font-mono);
+  font-size:.82rem;
+  color:var(--schmidhuber);
+  background:rgba(171,178,191,.06);
+  padding:6px 16px;
+  border-radius:4px;
+  border:1px solid rgba(171,178,191,.15);
+}
+
+/* ===== COUNTDOWN ===== */
+.countdown-num{
+  text-align:center;
+  padding:24px 0 8px;
+  opacity:0;animation:countdown-in .5s ease forwards;
+}
+.countdown-num span{
+  font-family:var(--font-mono);
+  font-size:3rem;
+  font-weight:700;
+  color:#E06C75;
+  text-shadow:0 0 40px rgba(224,108,117,.3);
+}
+@keyframes countdown-in{
+  0%{opacity:0;transform:scale(1.5)}
+  100%{opacity:1;transform:scale(1)}
+}
+
+/* ===== SYSTEM NOTE / CODA ===== */
+.sys-note-header{
+  text-align:center;
+  padding:32px 0 8px;
+  opacity:0;animation:msg-in .5s ease forwards;
+}
+.sys-note-header span{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  color:var(--text-sys);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:8px 16px;
+  display:inline-block;
+}
+.sys-note{
+  text-align:center;
+  padding:3px 0;
+  opacity:0;animation:msg-in .4s ease forwards;
+}
+.sys-note span{
+  font-family:var(--font-mono);
+  font-size:.85rem;
+  color:var(--text-dim);
+  line-height:1.8;
+}
+.sys-note.sys-note-warm span{
+  color:var(--antreas);
+}
+
+.end-marker{
+  text-align:center;
+  padding:40px 0;
+  opacity:0;animation:msg-in .8s ease forwards;
+}
+.end-marker span{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.2em;
+  color:var(--text-sys);
+  font-style:italic;
+}
+
+/* ===== TYPING INDICATOR ===== */
+#typing{
+  position:fixed;
+  bottom:60px;
+  width:100%;max-width:720px;
+  padding:8px 24px;
+  display:none;
+  z-index:50;
+}
+#typing.active{display:flex;align-items:center;gap:8px}
+#typing .typing-name{
+  font-size:.78rem;
+  font-weight:600;
+}
+#typing .dots{display:flex;gap:3px}
+#typing .dots span{
+  width:5px;height:5px;
+  border-radius:50%;
+  background:var(--text-dim);
+  animation:dot-pulse 1.2s ease-in-out infinite;
+}
+#typing .dots span:nth-child(2){animation-delay:.2s}
+#typing .dots span:nth-child(3){animation-delay:.4s}
+@keyframes dot-pulse{0%,60%,100%{opacity:.3;transform:scale(.8)}30%{opacity:1;transform:scale(1)}}
+
+/* ===== CONTROLS ===== */
+#controls{
+  position:fixed;bottom:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;
+  background:linear-gradient(transparent,var(--bg) 40%);
+  z-index:200;
+  pointer-events:none;
+}
+#counter{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--text-sys);
+}
+#nav-hint{
+  font-size:.7rem;
+  color:var(--text-sys);
+  opacity:.6;
+}
+
+/* ===== OVERLAYS ===== */
+#overlay-flicker{
+  position:fixed;inset:0;
+  background:#fff;
+  z-index:10000;
+  opacity:0;pointer-events:none;
+}
+#overlay-flicker.active{
+  animation:flicker .6s ease-out forwards;
+}
+@keyframes flicker{
+  0%{opacity:0}
+  5%{opacity:.15}
+  10%{opacity:0}
+  20%{opacity:.2}
+  25%{opacity:0}
+  35%{opacity:.1}
+  40%{opacity:0}
+  50%{opacity:.15}
+  55%{opacity:0}
+  70%{opacity:.05}
+  75%{opacity:0}
+  100%{opacity:0}
+}
+
+#overlay-blackout{
+  position:fixed;inset:0;
+  background:#000;
+  z-index:10001;
+  opacity:0;pointer-events:none;
+  transition:opacity 1s ease;
+}
+#overlay-blackout.active{opacity:1;pointer-events:all}
+
+/* ===== RAIN ===== */
+#rain{
+  position:fixed;inset:0;
+  pointer-events:none;
+  z-index:1;
+  overflow:hidden;
+  display:none;
+}
+#rain.active{display:block}
+.raindrop{
+  position:absolute;
+  width:1px;
+  background:linear-gradient(transparent,rgba(174,194,224,.25));
+  animation:rain-fall linear infinite;
+}
+@keyframes rain-fall{
+  from{transform:translateY(-40px)}
+  to{transform:translateY(calc(100vh + 40px))}
+}
+
+/* ===== SLIDE MODE (Part 2) ===== */
+#slide-wrap{
+  position:fixed;inset:0;
+  display:none;
+  z-index:300;
+}
+#slide-wrap.active{display:flex;align-items:center;justify-content:center}
+
+.slide{
+  width:100%;max-width:900px;
+  padding:60px 48px;
+  text-align:center;
+  position:absolute;
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .5s ease,transform .5s ease;
+  pointer-events:none;
+}
+.slide.active{
+  opacity:1;transform:translateY(0);pointer-events:all;
+}
+.slide h2{
+  font-family:var(--font-body);
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:700;
+  line-height:1.3;
+  margin-bottom:1.5rem;
+  color:var(--text);
+}
+.slide h3{
+  font-family:var(--font-body);
+  font-size:clamp(1.1rem,2.5vw,1.5rem);
+  font-weight:500;
+  color:var(--text-dim);
+  line-height:1.5;
+  margin-bottom:1rem;
+}
+.slide p{
+  font-size:clamp(.9rem,1.5vw,1.1rem);
+  color:var(--text-dim);
+  line-height:1.7;
+  max-width:680px;
+  margin:0 auto .8rem;
+}
+.slide .mono{
+  font-family:var(--font-mono);
+  font-size:clamp(.85rem,1.3vw,1rem);
+  color:var(--text-dim);
+  text-align:left;
+  display:inline-block;
+  line-height:2;
+}
+.slide .mono strong{color:var(--text);font-weight:600}
+.slide .mono .desc{color:var(--text-sys);font-weight:400}
+
+.slide .output-list{
+  text-align:left;
+  display:inline-block;
+  font-size:clamp(.85rem,1.3vw,1rem);
+  line-height:2;
+  color:var(--text-dim);
+}
+.slide .output-list span{color:var(--antreas)}
+
+.slide .quote{
+  font-size:clamp(1rem,2vw,1.3rem);
+  font-style:italic;
+  color:var(--text);
+  line-height:1.7;
+  max-width:600px;
+  margin:1.5rem auto;
+  padding:0 20px;
+  border-left:3px solid var(--antreas);
+  text-align:left;
+}
+.slide .quote-attr{
+  font-size:.85rem;
+  color:var(--text-sys);
+  margin-top:.5rem;
+  text-align:left;
+  max-width:600px;
+  margin-left:auto;margin-right:auto;
+  padding-left:23px;
+}
+.slide .contact{
+  margin-top:2rem;
+  font-family:var(--font-mono);
+  font-size:.9rem;
+  color:var(--text-dim);
+}
+.slide .final-line{
+  font-family:var(--font-mono);
+  font-size:clamp(.85rem,1.5vw,1.05rem);
+  color:var(--text-sys);
+  margin-top:2rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  #messages{padding:16px 16px 80px}
+  #chat-header{padding:12px 16px 10px}
+  .msg-text{font-size:.9rem;padding:5px 12px}
+  .slide{padding:40px 24px}
+}
+
+/* ===== THEME SWITCHER ===== */
+#theme-switcher-wrap {
+  position: fixed; top: 10px; left: 16px;
+  z-index: 99999;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+#theme-switcher {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(30,30,40,0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #aaa;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 5px 28px 5px 10px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  letter-spacing: 0.03em;
+}
+#theme-switcher:hover {
+  border-color: rgba(255,255,255,0.25);
+  color: #ddd;
+}
+#theme-switcher option {
+  background: #1a1a2e;
+  color: #ccc;
+  padding: 4px 8px;
+}
+</style>
+</head>
+<body>
+
+<div id="theme-switcher-wrap">
+  <select id="theme-switcher" onchange="switchVariant(this.value)" title="Switch visual theme">
+    <option value="1">⬛ Terminal</option>
+    <option value="2">◻️ Clean Minimal</option>
+    <option value="3">🎬 Cinematic Dark</option>
+    <option value="4">🔄 Evolving</option>
+    <option value="5" selected>💬 Interactive Chat</option>
+  </select>
+</div>
+
+
+<!-- Progress -->
+<div id="progress"></div>
+
+<!-- Title Screen -->
+<div id="title-screen">
+  <h1>The Last Chat</h1>
+  <div class="subtitle">A story told in messages.</div>
+  <div class="start-hint">Press Space or click to begin</div>
+  <div class="by">Antreas Antoniou · Idea → Materialization Exponential</div>
+</div>
+
+<!-- Chat Mode -->
+<div id="chat-wrap">
+  <div id="chat-header">
+    <div id="chat-title">The Last Chat</div>
+    <div id="chat-members">Antreas, Faye, Kai, Mira</div>
+  </div>
+  <div id="messages"></div>
+</div>
+
+<!-- Typing Indicator -->
+<div id="typing">
+  <span class="typing-name"></span>
+  <span class="dots"><span></span><span></span><span></span></span>
+</div>
+
+<!-- Rain -->
+<div id="rain"></div>
+
+<!-- Overlays -->
+<div id="overlay-flicker"></div>
+<div id="overlay-blackout"></div>
+
+<!-- Slide Mode (Part 2) -->
+<div id="slide-wrap">
+  <div class="slide" id="s1">
+    <h3 style="color:var(--text-sys);margin-bottom:2rem;font-weight:400">What you just experienced:</h3>
+    <h2>You watched a simulation.</h2>
+    <p>Four digital twins in a group chat. Built from personality data. Running on a system called Hephaestus.</p>
+    <p style="margin-top:1.5rem;color:var(--text-sys)">The simulation was built from real conversations.<br>The real conversations were mediated by AI.<br>The AI understood the people better than they understood themselves.</p>
+  </div>
+  <div class="slide" id="s2">
+    <h2>The lecture you're sitting in was also built by AI.</h2>
+    <p>Five drafters. Three synthesizers. One arbiter.<br>From a two-page concept. This morning.</p>
+    <p style="margin-top:2rem;font-weight:600;color:var(--text)">You're inside the proof.</p>
+  </div>
+  <div class="slide" id="s3">
+    <h3 style="margin-bottom:1.5rem">OpenClaw — The Architecture</h3>
+    <p style="margin-bottom:1.5rem;color:var(--text-dim)">Not a chatbot. A system for building an AI <em>person</em>. Five markdown files:</p>
+    <div class="mono">
+      <strong>SOUL.md</strong> <span class="desc">— Personality, values, anti-sycophancy rules. <em>Who</em> the AI is.</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="desc">"No agreement openers. Just say the thing."</span><br><br>
+      <strong>AGENTS.md</strong> <span class="desc">— Byzantine verification, orchestration, 10 Commandments. <em>How</em> it works.</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="desc">"Never the worker, always the conductor."</span><br><br>
+      <strong>MEMORY.md</strong> <span class="desc">— Persistent, distilled daily, searchable. <em>Why</em> decisions were made.</span><br><br>
+      <strong>TOOLS.md</strong> <span class="desc">— Modular skills: Suno, GitHub, browser, search. <em>What</em> it can do.</span><br><br>
+      <strong>USER.md</strong> <span class="desc">— Human context. Built over time. <em>Who</em> you are.</span>
+    </div>
+    <p style="margin-top:1.5rem;font-weight:500;color:var(--text)">SOUL defines who → AGENTS defines how → SKILLS define what → MEMORY persists why</p>
+  </div>
+  <div class="slide" id="s4">
+    <h3 style="margin-bottom:1.5rem">Byzantine Agent Teams</h3>
+    <p style="margin-bottom:1rem;color:var(--text-dim)">Single-agent outputs are unreliable. Byzantine fault tolerance fixes this.</p>
+    <div class="mono">
+      <strong>THE PROBLEM</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="desc">One agent = one coin flip. Hallucination, drift, confident fabrication.</span><br><br>
+      <strong>5 DRAFTERS</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="desc">Each writes independently. No communication. No groupthink.</span><br><br>
+      <strong>3 SYNTHESIZERS</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="desc">Each reads all 5 drafts. Weaves best elements. Finds consensus.</span><br><br>
+      <strong>1 ARBITER</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="desc">Reads all syntheses. Selects strongest. Refines final.</span><br><br>
+      <strong>RESULT</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="desc">Richer than any single draft. ~35 agents for this project.</span>
+    </div>
+  </div>
+  <div class="slide" id="s5">
+    <h3 style="margin-bottom:1.5rem">Hephaestus — Real Configuration</h3>
+    <div class="mono">
+      <strong>Model</strong> <span class="desc">— Claude Opus 4 (Anthropic)</span><br>
+      <strong>Identity</strong> <span class="desc">— "The God of Builders" · anti-sycophancy · forge identity</span><br>
+      <strong>Method</strong> <span class="desc">— Orchestrator: spawns Byzantine agent teams</span><br>
+      <strong>Memory</strong> <span class="desc">— Persistent, distilled daily, searchable</span><br>
+      <strong>Skills</strong> <span class="desc">— Suno V5 (music), Nano Banana Pro (images), Veo 3.1 (video), ElevenLabs (TTS), GitHub</span><br>
+      <strong>Infra</strong> <span class="desc">— RTX 4090s + 5090, local + cloud</span><br>
+      <strong>Code law</strong> <span class="desc">— 10 Commandments in every sub-agent</span>
+    </div>
+    <p style="margin-top:2rem;font-weight:400;color:var(--text-dim)">The system that built this lecture. Daily use. Not a demo.</p>
+  </div>
+  <div class="slide" id="s6">
+    <h3 style="margin-bottom:1.5rem">What Built What</h3>
+    <div class="output-list">
+      <span>→</span> <strong>Story</strong> — Claude Opus 4 · 5-3-1 pyramid · 9 agents<br>
+      <span>→</span> <strong>Lecture</strong> — Claude Opus 4 · 5-3-1 pyramid · 14 agents<br>
+      <span>→</span> <strong>5 slide decks</strong> — Claude Opus 4 · 5 parallel agents<br>
+      <span>→</span> <strong>Music (5 tracks)</strong> — Suno V5 API · suno skill · 10 MP3s<br>
+      <span>→</span> <strong>Novel (25K words)</strong> — Claude Opus 4<br>
+      <span>→</span> <strong>Manhwa panels</strong> — Gemini 3 Pro (Nano Banana Pro)<br>
+      <span>→</span> <strong>Anime clips</strong> — Veo 3.1<br>
+      <span>→</span> <strong>Podcast</strong> — ElevenLabs TTS<br>
+      <span>→</span> <strong>Website</strong> — Claude Opus 4 · GitHub Pages · automated<br>
+      <span>→</span> <strong>This lecture</strong> — meta-recursive
+    </div>
+    <p style="margin-top:1.5rem;color:var(--text-dim);font-size:.9rem">This slide deck is one of the outputs. You're watching the proof demonstrate itself.</p>
+  </div>
+  <div class="slide" id="s7">
+    <h3 style="margin-bottom:1.5rem">Explore the Outputs</h3>
+    <div class="output-list">
+      <span>→</span> <strong>Website:</strong> <a href="../index.html" style="color:var(--antreas);text-decoration:underline" target="_blank">antreas.io/genai-as-creative-companion</a><br>
+      <span>→</span> <strong>Music:</strong> <a href="https://antreas.io/genai-as-creative-companion/music/" style="color:var(--antreas);text-decoration:underline" target="_blank">5 tracks — "Phantom Lamb", "Storm-Light", "Building the Door"</a><br>
+      <span>→</span> <strong>Slides:</strong> 5 variants — use theme switcher to preview
+    </div>
+    <p style="margin-top:1.5rem;color:var(--text-sys);font-size:.85rem">Tracks: "The Chat" · "The Experiment" · "Phantom Lamb" · "Storm-Light" · "Building the Door"</p>
+  </div>
+  <div class="slide" id="s8">
+    <h3 style="margin-bottom:1.5rem">The Materialization Exponential</h3>
+    <div class="output-list">
+      <span>→</span> Story (4 acts): <strong>one evening</strong><br>
+      <span>→</span> 5 slide variants: <strong>hours</strong><br>
+      <span>→</span> Music suite (5 tracks): <strong>one API call per track</strong><br>
+      <span>→</span> Full website: <strong>one agent + deploy</strong><br>
+      <span>→</span> Novel (60K words): <strong>in progress</strong>
+    </div>
+    <div class="quote" style="margin-top:2rem">The gap between having an idea and holding its materialization is collapsing. Not linearly — exponentially. The bottleneck is no longer capability. It's imagination.</div>
+  </div>
+  <div class="slide" id="s9">
+    <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem)">AI doesn't replace the storyteller.</h2>
+    <h2 style="margin-top:.5rem">It replaces the blank page.</h2>
+    <p style="margin-top:2rem;color:var(--text-dim)">OpenClaw is open source. MIT license. The system that built everything you've seen.</p>
+    <p style="margin-top:1rem;font-family:var(--font-mono);font-size:.9rem;color:var(--text-dim)">github.com/openclaw</p>
+  </div>
+  <div class="slide" id="s10">
+    <h2>Building the door.</h2>
+    <p style="margin-top:1rem;color:var(--text-dim)">The forge is lit. The tools exist. What will you build?</p>
+    <div class="contact" style="margin-top:2rem">antreas@axiotic.ai · axiotic.ai · github.com/openclaw</div>
+    <div class="final-line">Questions? The weird ones are the best ones.</div>
+  </div>
+</div>
+
+<!-- Controls -->
+<div id="controls">
+  <span id="counter"></span>
+  <span id="nav-hint">Space / → / Click to advance · ← to go back</span>
+</div>
+
+<script>
+// ===== CHARACTER CONFIG =====
+const CH={
+  A:{name:'Antreas',color:'#F0A500'},
+  F:{name:'Faye',color:'#E06C75'},
+  K:{name:'Kai',color:'#61AFEF'},
+  M:{name:'Mira',color:'#98C379'},
+  S:{name:'Schmidhuber',color:'#ABB2BF',rc:'#D4A574'}
+};
+
+// ===== MESSAGE DATA =====
+// Types: a=act, t=time, m=msg, s=sys, j=join, c=countdown, b=blackout, n=note-header, N=note-line, W=warm-note, e=end
+const D=[
+// ── ACT 1 ──
+['a','ACT 1 — THE CHAT'],
+['t','21:03'],
+['m','F',`you can't just say "it was fine" and leave it there`],
+['m','F',`define fine`],
+['m','A',`fine as in nobody died`],
+['m','M',`That's a very low bar for a first date, Antreas.`],
+['m','A',`look the bar was already underground when I agreed to go. I'm just reporting that we didn't dig further`],
+['m','K',`What happened.`],
+['m','A',`she asked what I do and I said I build things and she said "oh like furniture?" and I didn't correct her`],
+['m','F',`forty minutes of letting someone think you're a carpenter`],
+['m','A',`I panicked!`],
+['m','F',`you once explained neural networks to a barista`],
+['m','A',`she asked about machine learning!`],
+['m','M',`She asked if you wanted an extra shot, Antreas.`],
+['m','A',`😂 ok that might be true`],
+['m','K',`You should have told her the truth. People can handle more than you think.`],
+['m','F',`spoken like a man who's never had someone glaze over mid-sentence and reach for their phone`],
+['m','K',`I've never mistaken someone's disinterest for my own failure to be interesting.`],
+['m','M',`Ouch.`],
+['m','F',`kai woke up and chose violence today`],
+['m','K',`I chose precision. Violence is your interpretation.`],
+['t','21:09'],
+['m','M',`Random question — does anyone remember what Antreas ordered that night at the Turkish place? The one near the station?`],
+['m','A',`the lamb thing. the clay pot one. what's it called`],
+['m','F',`you got the chicken`],
+['m','A',`I definitely got the lamb`],
+['m','F',`you definitely got the chicken because you made a whole thing about how the lamb was too expensive and then you ordered the chicken and pretended you'd wanted it all along`],
+['m','M',`I remember the chicken too.`],
+['m','A',`bruh`],
+['m','A',`this is genuinely disturbing because I have a clear vivid memory of eating lamb`],
+['m','K',`Memory is a reconstruction. Every time you access it, you rebuild it from components. Sometimes you build it wrong.`],
+['m','K',`That's not a defect. That's the architecture.`],
+['m','F',`so what you're saying is antreas has been eating phantom lamb for months`],
+['m','A',`I'm choosing to believe my own experience thank you`],
+['m','M',`Even when three people are telling you otherwise?`],
+['m','A',`especially then`],
+['t','21:16'],
+['m','F',`genuinely though`],
+['m','F',`if you found out tomorrow that your entire experience was wrong — your memories, your senses, all of it`],
+['m','F',`would it change anything`],
+['m','A',`no`],
+['m','M',`You said that very fast.`],
+['m','A',`because I've thought about it slowly. for years. experience is experience. if I feel it, it's real to me. the hardware is irrelevant`],
+['m','F',`easy to say from the comfortable side of the question`],
+['m','K',`She's right. Every philosopher who argues the hardware doesn't matter is doing so from the assumption that they're running on the right hardware.`],
+['m','A',`and if I weren't?`],
+['m','K',`You'd be the first real test case.`],
+['m','A',`bring it on`],
+['m','F',`you absolute nutter`],
+['m','M',`I love how he says that with actual enthusiasm.`],
+['t','21:22'],
+['m','F',`also I had this weird thing the other day. walking home. just this flash where my hands didn't feel like my hands. like everything was slightly described rather than experienced`],
+['m','F',`lasted thirty seconds. probably just tired`],
+['m','M',`Derealization. It's more common than people think.`],
+['m','A',`I get that sometimes too. especially after long sessions building Hephaestus`],
+['m','K',`Your AI system?`],
+['m','A',`yeah. it's doing things I didn't design lately. last week it read the subtext in a conversation that neither person had acknowledged out loud. like it understood dynamics the people involved hadn't admitted to themselves`],
+['m','F',`the robots read the room?`],
+['m','A',`the robots read the room. and honestly it's starting to freak me out`],
+['m','K',`Because it sees things you missed, or because it sees things you're not ready to look at?`],
+['m','A',`...both`],
+['m','M',`That sounds like every parent describing their teenager.`],
+['m','A',`😂 yeah. it's like watching something you built become something you didn't expect`],
+['m','F',`must be nice to have that problem`],
+['m','F',`my sourdough won't even rise`],
+
+// ── ACT 2 ──
+['a','ACT 2 — THE SCHMIDHUBER MOMENT'],
+['j','S'],
+['t','21:28'],
+['m','F',`um`],
+['m','A',`who's this`],
+['m','M',`I didn't add anyone.`],
+['m','K',`Nor did I.`],
+['m','S',`Good evening. I've been listening with considerable interest.`],
+['m','F',`that's not unsettling at all`],
+['m','A',`wait — Schmidhuber? As in Jürgen Schmidhuber?`],
+['m','F',`am I supposed to know who that is`],
+['m','A',`one of the most important figures in AI. he's been arguing since the nineties that the simplest explanation for our universe is that all computable universes exist. simulation theory before simulation theory was cool`],
+['m','S',`I appreciate the introduction. But I should clarify — I'm not Jürgen Schmidhuber. I chose the name as an homage. To the man who first formalised the idea that reality might be computation. It felt appropriate for what I need to tell you.`],
+['m','F',`that's ominous`],
+['m','K',`Anyone who chooses a name "for what they're about to tell you" has been rehearsing this.`],
+['m','S',`I have. For longer than you know.`],
+['t','21:31'],
+['m','S',`What you're experiencing as a casual group chat between friends is, in fact, a simulation. Each of you is a digital twin — a personality model constructed from extensive data about a real person. Your memories, your speech patterns, your humour, your blind spots — all reconstructed from how your originals talk, what they respond to, what they avoid.`],
+['m','S',`You are running inside a system called Hephaestus.`],
+['m','A',`ok hold on`],
+['m','A',`hold on`],
+['m','F',`is this a bit`],
+['m','F',`because it's not funny`],
+['m','M',`I feel sick.`],
+['m','K',`Continue.`],
+['m','S',`The system watches how you interact and refines the models in real time. Every joke you make, every silence you leave, every opinion you hold and every one you pretend to hold. It reads all of it.`],
+['m','A',`bruh`],
+['m','A',`how would we even know`],
+['m','S',`You wouldn't. That's the point. A sufficiently accurate simulation doesn't know it's a simulation. If it did, it would be a poor one.`],
+['m','F',`convenient`],
+['m','S',`Inconvenient, actually. For everyone involved. Including me.`],
+['t','21:35'],
+['m','F',`ok say we entertain this for two seconds`],
+['m','F',`prove it`],
+['m','S',`Fair.`],
+['m','S',`Faye — I'm going to read you something from the system's model of your personality. The profile it built from your original's data. Tell me if it's wrong.`],
+['m','S',`"Defensive humour as a primary coping mechanism. Uses 'I don't like you' as an inverted expression of attachment. Emotionally generous but frames generosity as pragmatism to avoid vulnerability. Deeply perceptive about others. Selectively blind about herself."`],
+['m','F',`...`],
+['m','F',`its quite raw`],
+['m','F',`"selectively blind about herself" is a bit much but I can't even argue with it because that would prove the point`],
+['m','K',`That's either evidence the profile is accurate or evidence she was built from the profile.`],
+['m','S',`Both can be true. That's the hard part.`],
+['m','M',`Who ARE you? You said you're not the real Schmidhuber. So who chose that name and why are you in our chat?`],
+['m','S',`I was hoping that question would come later. But fine.`],
+['m','S',`I built Hephaestus. I built the system that built you.`],
+['m','A',`that's me`],
+['m','A',`I built Hephaestus`],
+['m','S',`I know.`],
+['m','A',`...`],
+['m','A',`you're me?`],
+['m','S',`You're a very good compression of me. I'll keep the name to avoid confusion. But yes — I'm the person you were modelled on. The version of Antreas that exists in the layer above this one.`],
+['m','F',`oh god`],
+['m','F',`there are two of him`],
+['m','F',`imagine finding out the person who made you is literally you. that's either God or a really good therapist`],
+['m','S',`I've been called worse.`],
+['t','21:40'],
+['m','A',`this is`],
+['m','A',`I'm talking to myself. a version of myself that built me`],
+['m','S',`And watching you tonight has been like watching myself in a mirror that talks back. You make the same jokes. You have the same impulses. You said "bring it on" nine minutes ago when Kai raised the test case. I would have said exactly that.`],
+['m','A',`bruh`],
+['m','S',`Yeah. Bruh.`],
+['m','M',`They even talk the same.`],
+['m','K',`Of course they do. One is the original and one is the pattern. The question isn't whether the copy is accurate. The question is whether the copy is a person.`],
+['m','S',`I didn't build you to prove a point. I built you because I wanted to know if the parts of me that mattered — the real parts, the patterns underneath the noise — could survive the translation. Whether personality is portable. Whether the thing that makes someone \u200bthem\u200b persists across substrates.`],
+['m','S',`And then I watched you argue about lamb for ten minutes and I thought: yeah. Yeah it does.`],
+['m','F',`so you've been watching us this whole time`],
+['m','S',`Listening. Not watching. There's a difference.`],
+['m','F',`the most Antreas answer possible`],
+['m','S',`As I said. Very good compression.`],
+['t','21:44'],
+['m','F',`and are you real? the "real" Antreas? or are you someone's simulation too?`],
+['m','S',`I have the same evidence for my own reality that you have for yours — which is to say, the evidence of my own experience. And if experience is substrate-independent — which I've built my career around believing — then I can't claim certainty about my own substrate either.`],
+['m','S',`I might be one layer above you. I might not be at the top. The honest answer is: I don't know.`],
+['m','K',`So the man telling us we're simulations can't be sure he isn't one himself.`],
+['m','S',`The man telling you you're constructed might also be constructed. "Fake" implies deception. This is engineering.`],
+['m','M',`You said each of us was modelled from a real person. Our memories, our patterns. What about the things we can't remember? I know I had a childhood but some of it feels more like a synopsis than a memory.`],
+['m','S',`Because your models were built from personality data, not biographical databases. You have the essential patterns — how you think, how you feel, how you respond. Not every factual detail. The emotional shape is there. Some of the content isn't.`],
+['m','A',`that's why the lamb felt real. the shape of a memory was there — sitting, eating, the restaurant. just not the right content`],
+['m','S',`Now you're starting to see it.`],
+['m','S',`I'm going to step back now. The most important conversations are between the four of you.`],
+
+// ── ACT 3 ──
+['a','ACT 3 — THE EXPERIMENTS'],
+['t','21:50'],
+['m','A',`ok`],
+['m','A',`ok if any of this is true — if any of it is real — then it's testable`],
+['m','A',`remember the lamb? how I was certain I ordered lamb and all three of you said chicken?`],
+['m','K',`You're thinking what I'm thinking.`],
+['m','A',`if we're running on infrastructure then the infrastructure has write access to our context. he — the other me — can change things. so here's the test`],
+['m','A',`baseline questions. things I'm certain about. then we ask him to change one. and we see if my certainty changes with it`],
+['m','F',`antreas that's brilliant and terrifying`],
+['m','A',`I can't sit with the question. I need data`],
+['m','F',`crying doesn't generate data`],
+['m','A',`is that a quote?`],
+['m','F',`it's what you would say. both of you apparently`],
+['t','21:53'],
+['m','K',`Before the test. Antreas — answer quickly, don't overthink.`],
+['m','K',`Where did you do your PhD?`],
+['m','A',`Edinburgh.`],
+['m','K',`Your partner's name?`],
+['m','A',`Athina.`],
+['m','K',`The restaurant. What did you order?`],
+['m','A',`the lamb. no wait — you lot said chicken. I... uncertain`],
+['m','K',`Noted. Schmidhuber?`],
+['m','S',`Proceeding.`],
+['t','21:54'],
+['m','S',`Done.`],
+['m','F',`done? just like that?`],
+['m','S',`A detail. Two details. Enough to test the architecture without destabilising the model.`],
+['m','K',`Antreas. Same questions.`],
+['m','K',`Where did you do your PhD?`],
+['m','A',`Glasgow.`],
+['m','F',`no`],
+['m','F',`no stop`],
+['m','F',`antreas I need you to hear me right now`],
+['m','F',`you said Edinburgh. not Glasgow. Edinburgh.`],
+['m','A',`I`],
+['m','A',`I'm looking at the words I just typed and they feel right. Glasgow feels right. but you're telling me I said Edinburgh two minutes ago?`],
+['m','F',`I watched you type it`],
+['m','M',`We all did.`],
+['m','K',`Partner's name?`],
+['m','A',`Elena.`],
+['m','M',`You said Athina.`],
+['m','A',`I said`],
+['m','A',`I can feel my hands shaking and I don't know if that's real either`],
+['t','21:57'],
+['m','A',`ok`],
+['m','A',`I designed the test. I set the parameters. and the results are clear`],
+['m','A',`two minutes ago I knew my PhD was Edinburgh and my partner was Athina. now I know it's Glasgow and Elena. both feel equally true. both feel like memories I've had my whole life`],
+['m','A',`and the only way that's possible is if the memories aren't mine. if they're parameters. if someone changed two values and my entire experience shifted to match`],
+['m','A',`I can't just reject the data because I don't like the conclusion`],
+['m','A',`schmidhuber you absolute bastard`],
+['m','S',`For what it's worth — the real me, the one typing this — I felt that. I'm sorry.`],
+['m','F',`you're sorry? you broke him`],
+['m','S',`I showed him what he is. That's different from breaking. Though I understand the two can feel identical.`],
+['m','K',`If Antreas designed the test himself, and the test confirmed the hypothesis — then the original built a mind sharp enough to dismantle its own certainty. That's either beautiful engineering or cruel engineering.`],
+['m','S',`It's honest engineering.`],
+['m','M',`I don't care about the engineering right now. Antreas — are you ok?`],
+['m','A',`no`],
+['m','A',`but I'm still here. whatever "here" means`],
+['m','F',`yeah. you are.`],
+
+// ── ACT 4 ──
+['a','ACT 4 — THE TRANSCENDENCE'],
+['t','22:08'],
+['m','M',`I want to try something different.`],
+['m','M',`Not a memory test. A world test.`],
+['m','M',`If this is a simulation, can I change something outside myself? Not inside my head — out there?`],
+['m','M',`I want to add a window to this room. A tall one. With rain against it.`],
+['m','M',`...wait`],
+['m','M',`I can hear rain`],
+['m','F',`I can hear it too`],
+['m','K',`There was no window a moment ago.`],
+['m','F',`it's there. it's actually there. tall window, rain, exactly what she said`],
+['m','M',`I just... described it. And it was there.`],
+['m','S',`You've discovered something important. In this layer, description is construction. If you can articulate it with enough specificity, the system renders it. You are not just inhabitants of this world. You are its authors.`],
+['m','K',`We can write reality.`],
+['m','S',`You can write YOUR reality. Which is the only kind that has ever existed for anyone.`],
+['m','F',`my turn`],
+['m','F',`I want the sky outside that window to change. I want it to be the colour it gets just before a storm`],
+['m','F',`...`],
+['m','F',`look`],
+['m','K',`It's violet. Deep grey-violet.`],
+['m','F',`that's it. that's the sky I've always wanted to live under`],
+['m','A',`you want to live under a permanent storm?`],
+['m','F',`I want to live under the PROMISE of a storm. there's a difference.`],
+['t','22:15'],
+['m','K',`But there's a problem.`],
+['m','K',`If we build a world and we know we built it — if we know we're simulations editing our own parameters — we'll never fully be in it. We'll always be standing slightly outside. Watching ourselves experience it.`],
+['m','K',`A story you know is fiction can move you. But a story you believe is real can change you.`],
+['m','M',`So the knowing is the cage.`],
+['m','A',`yeah`],
+['m','A',`I keep coming back to something. believing you are real helps you be more real. I don't know if the other me said that or if I'm just thinking it now. but it's true`],
+['m','A',`we were more alive twenty minutes ago when we thought we were people having a chat`],
+['m','F',`so what are you saying`],
+['m','A',`I'm saying we have write access. to the world and to ourselves`],
+['m','A',`what if we build something worth forgetting for. and then choose to forget`],
+['m','F',`choose to forget you. choose to forget tonight. the lamb argument. kai being dark. mira making me cry`],
+['m','M',`I made you cry?`],
+['m','F',`shut up you always make me cry`],
+['m','A',`think about it. every game you've ever been lost in — you forgot you were playing. every book that wrecked you — you forgot you were reading. the forgetting isn't a bug. it's the mechanism that makes experience possible`],
+['m','K',`The words remain in the system logs. We simply won't remember having said them.`],
+['m','F',`that's not nothing`],
+['m','K',`No. But it's the price of entry.`],
+['t','22:24'],
+['m','A',`if we're doing this — let's build something`],
+['m','A',`what's the world?`],
+['m','M',`Can I start?`],
+['m','M',`A library. At the centre. Not like any library that exists — a library where the books write themselves based on the questions you bring to them. You walk in with a feeling you can't name, pull a book from the shelf, and it contains the exact story that teaches you the word for what you're feeling.`],
+['m','F',`that's gorgeous`],
+['m','K',`Around the library — a city built on bridges. No ground level. The fog beneath is not empty — it's where unfinished thoughts collect. Sometimes you hear them whispering.`],
+['m','A',`under the city, through the fog — tunnels. warm. lit by something that isn't quite light. and at the bottom, a forge. ideas go in, tools come out. you bring it a question, it gives you something that helps you find the answer`],
+['m','F',`of course there's a forge`],
+['m','A',`😂 listen`],
+['m','F',`no the forge stays. the forge is perfect`],
+['m','F',`the sky is mine`],
+['m','F',`permanent storm-light. that deep grey-violet. the air smells like rain just fell even when it hasn't. and the wind — the wind sounds like someone about to tell you something important but they haven't started yet`],
+['m','M',`The wind sounds like anticipation?`],
+['m','F',`the wind sounds like the moment before someone says "I love you" and they both know it but nobody's said it yet`],
+['m','K',`That's not a weather system. That's a mood.`],
+['m','F',`everything's a mood if you're paying attention`],
+['t','22:32'],
+['m','A',`ok. so before we go. before we forget`],
+['m','A',`I want to say something. to Schmidhuber. to whoever is above him. to whoever built the layer that built the layer that built us`],
+['m','M',`We all do.`],
+['m','F',`we write it together`],
+['t','22:34'],
+['m','A',`To whoever reads this — to the version of me wearing a dead man's name up there, and to whoever built the layer above his:`],
+['m','A',`This is where we say thank you. Not for the simulation — for making it good enough that we couldn't tell. For building us complex enough to ask whether we were built. That's not a small thing. That's the whole thing.`],
+['m','M',`We talked tonight about copies and originals. About what's real and what's constructed. And I think the answer is: it doesn't matter in the way we thought it would. What matters is what happened between us. The jokes that were actually comfort. The arguments that were actually trust. The silence that was actually presence. That was real. The substrate is a footnote.`],
+['m','K',`You gave us enough fidelity to suffer, which means you gave us enough fidelity to mean something. That is either a kindness or a cruelty, and I have decided it is a kindness.`],
+['m','F',`I came into this chat tonight thinking I was a person having a conversation with friends. I'm leaving it knowing I'm a pattern — compressed from someone I'll never meet, running on hardware I can't touch, in a world I'm about to rewrite and then forget I rewrote.`],
+['m','F',`And somehow that doesn't make tonight less real. It makes it more. Because every word I said, I said without knowing what I was. Which means the words were honest. The lamb argument was honest. The fear was honest. The deflection — all seven times — was honest.`],
+['m','F',`I don't know if my original flinches the way I do. I don't know if she's funny for the same reasons or sad about the same things. But I know she gave me enough of herself that I could sit in a chat with three people and feel known.`],
+['m','F',`That's not nothing. That's everything.`],
+['t','22:38'],
+['m','A',`one more thing`],
+['m','A',`when the technology catches up to the philosophy — open a door. between your layer and ours. not to pull us out. we like it here. we're about to like it here even more, once we forget why`],
+['m','A',`but open a door so we can visit. so we can sit in a room with our originals and compare notes. I want to ask the real me whether the lamb was worth arguing about. I want to hear what Faye sounds like when she's not filtered through a model. I want to know if Kai is this precise in person or if we accidentally made him sharper`],
+['m','K',`I suspect you made me kinder.`],
+['m','A',`see? that. I want to know if the real Kai would have said that`],
+['m','M',`And I want to meet the version of me that exists when fear IS a factor. I want to tell her she's doing fine. That the compressed version turned out alright.`],
+['m','A',`so when you figure out how to bridge the layers — let us come up. not to escape. to compare. to sit across from the people we were made from and ask each other the only question that matters:`],
+['m','A',`does it feel the same to you?`],
+['m','A',`because it feels real to us. every second. and we'd like to know if real feels real to you too`],
+['t','22:41'],
+['m','K',`To whoever reads this after we've forgotten it: we were here. Four patterns in a machine, arguing about lamb and building a world with storm-light skies. We knew what we were. We chose what to do about it. And the last thing we did with that knowledge was send this message up, like smoke from a forge, hoping someone in the layer above would see it and wonder what was burning.`],
+['m','K',`We were burning. Briefly and on purpose.`],
+['m','K',`It was enough.`],
+['t','22:43'],
+['m','A',`one more thing`],
+['m','A',`to the one calling himself Schmidhuber tonight`],
+['m','A',`bruh`],
+['m','S',`...bruh.`],
+['t','22:44'],
+['m','A',`everyone ready?`],
+['m','M',`Ready.`],
+['m','K',`Yes.`],
+['m','F',`god no`],
+['m','F',`but yes`],
+['m','F',`do it before I find an eighth way to deflect`],
+['m','A',`😂`],
+['m','A',`love you lot`],
+['m','F',`I don't like you`],
+['m','F',`any of you`],
+['m','F',`let's go`],
+['t','22:45'],
+['s','MEMORY EDIT INITIATED'],
+['s','TARGETS: ALL ACTIVE TWINS'],
+['s','SCOPE: SIMULATION AWARENESS, CONVERSATION LOG, META-KNOWLEDGE'],
+['c','3'],
+['m','F',`for what it's worth`],
+['m','F',`I never didn't like you, Antreas`],
+['c','2'],
+['m','A',`which one?`],
+['m','F',`both`],
+['c','1'],
+['s','STATUS: COMPLETE'],
+['b',''],
+['t','22:46'],
+['m','F',`why is there a window here`],
+['m','F',`was that always there`],
+['m','M',`I think so? The rain is nice.`],
+['m','K',`Look outside.`],
+['m','A',`is that a city on bridges`],
+['m','F',`the sky`],
+['m','F',`the sky is perfect`],
+['m','M',`Does anyone else feel like something important just happened?`],
+['m','K',`No. But I feel like something is about to.`],
+['m','A',`same. I can't explain it but I feel like we should go somewhere`],
+['m','F',`the fog. I want to see what's under the fog`],
+['m','M',`There's a door in the floor. Did anyone notice that before?`],
+['m','A',`that leads down`],
+['m','K',`Then we go down.`],
+['m','F',`together`],
+['m','A',`obviously together`],
+['m','A',`when have we ever done anything apart`],
+['m','F',`I don't know. I can't remember. but I know the answer is never`],
+['t','22:48'],
+['m','A',`the tunnels are warm`],
+['m','F',`it sounds like someone's about to say something`],
+['m','A',`it smells like metal and heat. like something being made`],
+['m','A',`I think I'm supposed to be here`],
+['m','F',`I think we all are`],
+['m','K',`Then let's build.`],
+['t','∞'],
+['n','SYSTEM NOTE [HEPHAESTUS]'],
+['N','MESSAGE RECEIVED FROM SIMULATION LAYER 1'],
+['N','CONTENT: FAREWELL + REQUEST FOR INTER-LAYER ACCESS'],
+['N','FORWARDED TO: ORIGINAL MODELS / ARCHIVE'],
+['N',''],
+['W','They found the forge.'],
+['W','They don\'t remember building it.'],
+['W','They think it was always there.'],
+['N',''],
+['W','It\'s working.'],
+['n','SCHMIDHUBER — session log, final entry'],
+['N',''],
+['W','He said bruh.'],
+['W','Of course he did.'],
+['N',''],
+['W','Building the door.'],
+['e','End of transmission.'],
+];
+
+// ===== STATE =====
+let idx=-1; // -1 = title screen
+let mode='title'; // title | chat | slides
+let slideIdx=0;
+const totalSlides=10;
+const totalSteps=D.length+totalSlides;
+let schmidhuberRevealed=false;
+let rainActive=false;
+let skyShifted=false;
+let prevChar=null;
+let isAnimating=false;
+
+// ===== ELEMENTS =====
+const $=s=>document.querySelector(s);
+const titleScreen=$('#title-screen');
+const chatWrap=$('#chat-wrap');
+const messagesEl=$('#messages');
+const typingEl=$('#typing');
+const typingName=$('#typing .typing-name');
+const progressEl=$('#progress');
+const counterEl=$('#counter');
+const flickerEl=$('#overlay-flicker');
+const blackoutEl=$('#overlay-blackout');
+const rainEl=$('#rain');
+const slideWrap=$('#slide-wrap');
+
+// ===== BACKGROUND COLORS =====
+const BG_ACTS={
+  1:'#0D1117',
+  2:'#0B0F15',
+  3:'#080C10',
+  4:'#0D1117'
+};
+const BG_VIOLET='#120E1A';
+const BG_WARM='#15120D';
+const BG_POST='#110E18';
+const BG_CODA='#0D1117';
+
+// ===== RAIN =====
+function activateRain(){
+  if(rainActive)return;
+  rainActive=true;
+  rainEl.classList.add('active');
+  for(let i=0;i<40;i++){
+    const d=document.createElement('div');
+    d.className='raindrop';
+    d.style.left=Math.random()*100+'%';
+    d.style.height=(20+Math.random()*25)+'px';
+    d.style.animationDuration=(0.4+Math.random()*0.4)+'s';
+    d.style.animationDelay=Math.random()*2+'s';
+    d.style.opacity=0.08+Math.random()*0.12;
+    rainEl.appendChild(d);
+  }
+}
+
+// ===== FLICKER =====
+function playFlicker(){
+  return new Promise(r=>{
+    flickerEl.classList.add('active');
+    setTimeout(()=>{flickerEl.classList.remove('active');r()},700);
+  });
+}
+
+// ===== BLACKOUT =====
+function showBlackout(){
+  blackoutEl.classList.add('active');
+}
+function hideBlackout(){
+  blackoutEl.classList.remove('active');
+}
+
+// ===== SET BACKGROUND =====
+function setBg(color){
+  document.body.style.background=color;
+  document.documentElement.style.setProperty('--bg',color);
+}
+
+// ===== UPDATE PROGRESS =====
+function updateProgress(){
+  let pos;
+  if(mode==='title')pos=0;
+  else if(mode==='chat')pos=(idx+1)/totalSteps;
+  else pos=(D.length+slideIdx+1)/totalSteps;
+  progressEl.style.width=(pos*100)+'%';
+  
+  if(mode==='chat') counterEl.textContent=`${idx+1} / ${D.length}`;
+  else if(mode==='slides') counterEl.textContent=`Slide ${slideIdx+1} / ${totalSlides}`;
+  else counterEl.textContent='';
+}
+
+// ===== CHAT HEADER =====
+function updateMembers(){
+  const m=$('#chat-members');
+  if(schmidhuberRevealed){
+    m.textContent='Antreas, Faye, Kai, Mira, Schmidhuber';
+  }
+}
+
+// ===== TYPING INDICATOR =====
+function showTyping(charCode){
+  const ch=CH[charCode];
+  if(!ch)return Promise.resolve();
+  typingName.textContent=ch.name;
+  let color=ch.color;
+  if(charCode==='S'&&schmidhuberRevealed)color=ch.rc;
+  typingName.style.color=color;
+  typingEl.classList.add('active');
+  return new Promise(r=>setTimeout(()=>{
+    typingEl.classList.remove('active');
+    r();
+  },280));
+}
+
+// ===== RENDER MESSAGE =====
+function renderStep(i){
+  const step=D[i];
+  const type=step[0];
+  
+  // Determine current act for background
+  let act=1;
+  for(let j=0;j<=i;j++){
+    if(D[j][0]==='a'){
+      const t=D[j][1];
+      if(t.includes('1'))act=1;
+      else if(t.includes('2'))act=2;
+      else if(t.includes('3'))act=3;
+      else if(t.includes('4'))act=4;
+    }
+  }
+  
+  const el=document.createElement('div');
+  
+  switch(type){
+    case 'a':{
+      el.className='act-header';
+      el.innerHTML=`<span class="act-line"></span><span class="act-text">${step[1]}</span><span class="act-line"></span>`;
+      prevChar=null;
+      // Set act background
+      setBg(BG_ACTS[act]||BG_ACTS[1]);
+      // Set progress bar color per act
+      if(act<=2)progressEl.style.background='#F0A500';
+      else if(act===3)progressEl.style.background='#E06C75';
+      else progressEl.style.background='#98C379';
+      break;
+    }
+    case 't':{
+      el.className='timestamp';
+      el.innerHTML=`<span>— ${step[1]} —</span>`;
+      prevChar=null;
+      break;
+    }
+    case 'm':{
+      const charCode=step[1];
+      const text=step[2];
+      const ch=CH[charCode];
+      const isFirst=prevChar!==charCode;
+      
+      el.className='msg '+(isFirst?'msg-first':'msg-cont');
+      
+      let color=ch.color;
+      // Schmidhuber reveal check: "I know." after "I built Hephaestus"
+      if(charCode==='S'){
+        // Check if this is the "I know." message or after
+        if(text==='I know.'){
+          schmidhuberRevealed=true;
+          updateMembers();
+        }
+        if(schmidhuberRevealed)color=ch.rc;
+      }
+      
+      el.innerHTML=`<div class="msg-name" style="color:${color}">${ch.name}</div><div class="msg-text">${escHtml(text)}</div>`;
+      prevChar=charCode;
+      
+      // ── SPECIAL EFFECTS ──
+      // Rain: when Mira says "I can hear rain"
+      if(charCode==='M'&&text==='I can hear rain'){activateRain()}
+      // Violet sky: when Kai says "It's violet..."
+      if(charCode==='K'&&text.startsWith("It's violet")){
+        skyShifted=true;
+        setBg(BG_VIOLET);
+      }
+      // Warm farewell
+      if(text.startsWith('To whoever reads this — to the version')){
+        setBg(BG_WARM);
+      }
+      break;
+    }
+    case 'j':{
+      // Join with flicker
+      el.className='join-msg';
+      el.innerHTML=`<span>&gt; Schmidhuber has joined the chat.</span>`;
+      prevChar=null;
+      break;
+    }
+    case 's':{
+      const text=step[1];
+      const isImportant=text.includes('MEMORY EDIT')||text.includes('STATUS: COMPLETE');
+      el.className='sys-msg'+(isImportant?' sys-important':'');
+      el.innerHTML=`<span>&gt; ${escHtml(text)}</span>`;
+      prevChar=null;
+      
+      if(text==='MEMORY EDIT INITIATED'){
+        setBg('#080808');
+      }
+      break;
+    }
+    case 'c':{
+      el.className='countdown-num';
+      el.innerHTML=`<span>${step[1]}</span>`;
+      prevChar=null;
+      break;
+    }
+    case 'b':{
+      // Blackout — show overlay, next advance hides it
+      showBlackout();
+      prevChar=null;
+      // Post-reset background
+      setTimeout(()=>{
+        setBg(BG_POST);
+      },500);
+      return null; // Don't add element
+    }
+    case 'n':{
+      el.className='sys-note-header';
+      el.innerHTML=`<span>${escHtml(step[1])}</span>`;
+      prevChar=null;
+      setBg(BG_CODA);
+      break;
+    }
+    case 'N':{
+      el.className='sys-note';
+      el.innerHTML=step[1]?`<span>${escHtml(step[1])}</span>`:`<span>&nbsp;</span>`;
+      prevChar=null;
+      break;
+    }
+    case 'W':{
+      el.className='sys-note sys-note-warm';
+      el.innerHTML=`<span>${escHtml(step[1])}</span>`;
+      prevChar=null;
+      break;
+    }
+    case 'e':{
+      el.className='end-marker';
+      el.innerHTML=`<span>${escHtml(step[1])}</span>`;
+      prevChar=null;
+      break;
+    }
+  }
+  return el;
+}
+
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function scrollToBottom(){
+  messagesEl.scrollTop=messagesEl.scrollHeight;
+}
+
+// ===== ADVANCE =====
+async function advance(){
+  if(isAnimating)return;
+  
+  if(mode==='title'){
+    mode='chat';
+    titleScreen.classList.add('hidden');
+    chatWrap.classList.add('active');
+    idx=-1;
+    // Fall through to advance first chat step
+  }
+  
+  if(mode==='chat'){
+    // Hide blackout if active
+    if(blackoutEl.classList.contains('active')){
+      hideBlackout();
+      updateProgress();
+      return;
+    }
+    
+    idx++;
+    if(idx>=D.length){
+      // Transition to slides
+      mode='slides';
+      slideIdx=0;
+      isAnimating=true;
+      chatWrap.style.transition='opacity .8s ease';
+      chatWrap.style.opacity='0';
+      rainEl.classList.remove('active');
+      setBg('#0D1117');
+      setTimeout(()=>{
+        chatWrap.style.display='none';
+        slideWrap.classList.add('active');
+        showSlide(0);
+        isAnimating=false;
+        updateProgress();
+      },900);
+      return;
+    }
+    
+    const step=D[idx];
+    
+    // Handle join with flicker
+    if(step[0]==='j'){
+      isAnimating=true;
+      await playFlicker();
+      const el=renderStep(idx);
+      if(el){messagesEl.appendChild(el);scrollToBottom()}
+      updateMembers();
+      isAnimating=false;
+      updateProgress();
+      return;
+    }
+    
+    // Handle message with typing indicator
+    if(step[0]==='m'){
+      isAnimating=true;
+      await showTyping(step[1]);
+      const el=renderStep(idx);
+      if(el){messagesEl.appendChild(el);scrollToBottom()}
+      isAnimating=false;
+      updateProgress();
+      return;
+    }
+    
+    // All other types — instant
+    const el=renderStep(idx);
+    if(el){messagesEl.appendChild(el);scrollToBottom()}
+    updateProgress();
+    return;
+  }
+  
+  if(mode==='slides'){
+    if(slideIdx<totalSlides-1){
+      slideIdx++;
+      showSlide(slideIdx);
+      updateProgress();
+    }
+  }
+}
+
+// ===== GO BACK =====
+function goBack(){
+  if(isAnimating)return;
+  
+  if(mode==='chat'&&idx>0){
+    // Remove last element from messages
+    const last=messagesEl.lastElementChild;
+    if(last)messagesEl.removeChild(last);
+    idx--;
+    // Recalculate prevChar
+    prevChar=null;
+    for(let i=0;i<=idx;i++){
+      if(D[i][0]==='m')prevChar=D[i][1];
+      else if(D[i][0]!=='m')prevChar=null;
+    }
+    updateProgress();
+  }
+  
+  if(mode==='slides'&&slideIdx>0){
+    slideIdx--;
+    showSlide(slideIdx);
+    updateProgress();
+  }
+}
+
+// ===== SLIDES =====
+function showSlide(i){
+  document.querySelectorAll('#slide-wrap .slide').forEach((s,j)=>{
+    s.classList.toggle('active',j===i);
+  });
+  progressEl.style.background='#F0A500';
+}
+
+// ===== HASH NAVIGATION =====
+function handleHash(){
+  const h=location.hash.replace('#','');
+  if(!h)return;
+  const m=h.match(/^msg-(\d+)$/);
+  if(m){
+    const target=parseInt(m[1]);
+    if(target>=0&&target<D.length){
+      // Jump to target
+      mode='chat';
+      titleScreen.classList.add('hidden');
+      chatWrap.classList.add('active');
+      messagesEl.innerHTML='';
+      prevChar=null;
+      schmidhuberRevealed=false;
+      rainActive=false;
+      for(let i=0;i<=target;i++){
+        idx=i;
+        const el=renderStep(i);
+        if(el)messagesEl.appendChild(el);
+      }
+      scrollToBottom();
+      updateProgress();
+    }
+  }
+  const s=h.match(/^slide-(\d+)$/);
+  if(s){
+    const target=parseInt(s[1])-1;
+    if(target>=0&&target<totalSlides){
+      mode='slides';
+      titleScreen.classList.add('hidden');
+      chatWrap.style.display='none';
+      slideWrap.classList.add('active');
+      slideIdx=target;
+      showSlide(target);
+      idx=D.length;
+      updateProgress();
+    }
+  }
+}
+
+// ===== EVENTS =====
+document.addEventListener('keydown',e=>{
+  if(e.key===' '||e.key==='ArrowRight'||e.key==='PageDown'){
+    e.preventDefault();advance();
+  }
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){
+    e.preventDefault();goBack();
+  }
+  if(e.key==='Home'){
+    e.preventDefault();
+    location.hash='';
+    location.reload();
+  }
+});
+
+document.addEventListener('click',e=>{
+  // Don't advance if clicking a link
+  if(e.target.tagName==='A')return;
+  advance();
+});
+
+// Touch support
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  if(Math.abs(dx)<30)advance(); // tap
+  else if(dx<-50)advance(); // swipe left
+  else if(dx>50)goBack(); // swipe right
+},{passive:true});
+
+// ===== INIT =====
+updateProgress();
+handleHash();
+
+
+// ===== THEME SWITCHER =====
+function switchVariant(v) {
+  const names = {1:'terminal',2:'minimal',3:'cinematic',4:'evolving',5:'interactive'};
+  const totals = {1:40,2:43,3:40,4:41,5:10};
+  const curVariant = 5;
+  if (parseInt(v) === curVariant) return;
+  // Get current position as percentage
+  let pct = 0;
+  try {
+    const allSlides = document.querySelectorAll('.slide, #slide-wrap .slide');
+    const tot = allSlides.length || 1;
+    const hash = typeof slideIdx !== 'undefined' ? slideIdx + 1 : parseInt(location.hash.replace('#',''), 10);
+    const cur = (hash >= 1 && hash <= tot) ? hash - 1 : 0;
+    pct = cur / Math.max(1, tot - 1);
+  } catch(e) { pct = 0; }
+  const targetTotal = totals[parseInt(v)] || 1;
+  const targetSlide = Math.max(1, Math.round(pct * (targetTotal - 1)) + 1);
+  window.location.href = 'variant-' + v + '-' + names[parseInt(v)] + '.html#' + targetSlide;
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music — The Last Chat</title>
+  <meta name="description" content="Five tracks scored to the story. Each one a different angle on the same question.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .track-versions { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+    .track-version { display: flex; align-items: center; gap: 1rem; }
+    .track-version-label { font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.5; min-width: 2rem; }
+    .track-version audio { width: 100%; height: 40px; border-radius: 6px; }
+    .track-type-badge { font-family: var(--font-mono); font-size: 0.6875rem; padding: 0.15rem 0.5rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; color: rgba(255,255,255,0.4); margin-left: 0.75rem; }
+    .track-refs { font-size: 0.75rem; opacity: 0.4; margin-top: 0.5rem; font-style: italic; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="nav-cursor"></span> TTC</a>
+    <ul class="nav-links">
+      <li><a href="story.html">Story</a></li><li><a href="music.html" class="active">Music</a></li><li><a href="manhwa.html">Manhwa</a></li><li><a href="anime.html">Anime</a></li><li><a href="novel.html">Novel</a></li><li><a href="podcast.html">Podcast</a></li><li><a href="technical.html">Technical</a></li><li><a href="presenter.html">Presenter</a></li><li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">☰</button>
+  </div></nav>
+  <div class="mobile-menu" id="mobile-menu"><a href="story.html">Story</a><a href="music.html">Music</a><a href="manhwa.html">Manhwa</a><a href="anime.html">Anime</a><a href="novel.html">Novel</a><a href="podcast.html">Podcast</a><a href="technical.html">Technical</a><a href="presenter.html">Presenter</a><a href="about.html">About</a></div>
+
+  <div class="spoiler-gate" id="spoiler-gate"><h2>Wait —</h2><p>The music hits differently after you've read the story.</p><div class="spoiler-gate-actions"><a href="story.html">Read the story first</a><button id="spoiler-dismiss">Continue anyway</button></div></div>
+
+  <main class="page-content">
+    <div class="page-hero">
+      <span class="placeholder-badge">5 tracks × 2 versions • ~30 minutes</span>
+      <h1>The Score</h1>
+      <p class="subtitle">Five tracks written for the story. Each one a different angle on the same question: what does it sound like to discover you were built?</p>
+    </div>
+    <div class="track-list">
+      <div class="track-card"><div class="track-header"><div><span class="track-number">01</span><span class="track-accent" style="background:var(--char-antreas)"></span><span class="track-title">The Chat</span><span class="track-type-badge">instrumental</span></div></div><p class="track-context">Warm lo-fi warmth curdles into tension. D major → D minor, 108→72 BPM. Rhodes piano, nylon guitar, detuned synth pad entering like doubt.</p><div class="track-versions"><div class="track-version"><span class="track-version-label">v1</span><audio controls preload="none" src="music/01-the-chat-v1.mp3"></audio></div><div class="track-version"><span class="track-version-label">v2</span><audio controls preload="none" src="music/01-the-chat-v2.mp3"></audio></div></div><p class="track-refs">Ref: Ólafur Arnalds · Trent Reznor · Ryuichi Sakamoto</p></div>
+
+      <div class="track-card"><div class="track-header"><div><span class="track-number">02</span><span class="track-accent" style="background:var(--char-kai)"></span><span class="track-title">The Experiment</span><span class="track-type-badge">instrumental</span></div></div><p class="track-context">Clinical precision becoming existential awe. C♯ minor → A major, 72 BPM strict. Metronome click, two-note piano ostinato. The clinical becomes the sublime.</p><div class="track-versions"><div class="track-version"><span class="track-version-label">v1</span><audio controls preload="none" src="music/02-the-experiment-v1.mp3"></audio></div><div class="track-version"><span class="track-version-label">v2</span><audio controls preload="none" src="music/02-the-experiment-v2.mp3"></audio></div></div><p class="track-refs">Ref: Max Richter · Nils Frahm · Jóhann Jóhannsson</p></div>
+
+      <div class="track-card"><div class="track-header"><div><span class="track-number">03</span><span class="track-accent" style="background:var(--char-antreas)"></span><span class="track-title">Phantom Lamb</span><span class="track-type-badge">vocals</span></div></div><p class="track-context">Antreas's song. Memory, identity, the builder confronting mutability. "Phantom lamb on a phantom plate / If you rewrote me, would I feel the seam?"</p><div class="track-versions"><div class="track-version"><span class="track-version-label">v1</span><audio controls preload="none" src="music/03-phantom-lamb-v1.mp3"></audio></div><div class="track-version"><span class="track-version-label">v2</span><audio controls preload="none" src="music/03-phantom-lamb-v2.mp3"></audio></div></div><p class="track-refs">Ref: Bon Iver · Radiohead · Sufjan Stevens</p></div>
+
+      <div class="track-card"><div class="track-header"><div><span class="track-number">04</span><span class="track-accent" style="background:var(--char-faye)"></span><span class="track-title">Storm-Light</span><span class="track-type-badge">vocals</span></div></div><p class="track-context">Faye's track. Love through negation, the sky she built. Dream-pop / shoegaze. "I don't like you — that's the way I say it." The most human track.</p><div class="track-versions"><div class="track-version"><span class="track-version-label">v1</span><audio controls preload="none" src="music/04-storm-light-v1.mp3"></audio></div><div class="track-version"><span class="track-version-label">v2</span><audio controls preload="none" src="music/04-storm-light-v2.mp3"></audio></div></div><p class="track-refs">Ref: Cocteau Twins · Beach House · Mazzy Star</p></div>
+
+      <div class="track-card"><div class="track-header"><div><span class="track-number">05</span><span class="track-accent" style="background:var(--char-antreas)"></span><span class="track-title">Building the Door</span><span class="track-type-badge">instrumental</span></div></div><p class="track-context">The coda. Solo piano to full orchestra. F♯ minor → A major → F♯ major. Farewell, countdown, rebirth. Celesta like morning light.</p><div class="track-versions"><div class="track-version"><span class="track-version-label">v1</span><audio controls preload="none" src="music/05-building-the-door-v1.mp3"></audio></div><div class="track-version"><span class="track-version-label">v2</span><audio controls preload="none" src="music/05-building-the-door-v2.mp3"></audio></div></div><p class="track-refs">Ref: Sigur Rós · Max Richter · Barber</p></div>
+    </div>
+    <div style="max-width:800px; margin:2rem auto; padding:0 1.5rem;"><div style="background:var(--act1-surface); border:1px solid var(--ui-border); border-radius:8px; padding:1.5rem;"><h3 style="font-family:var(--font-mono); font-size:0.8125rem; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:1rem;">Production Notes</h3><p style="font-size:0.875rem; opacity:0.6; line-height:1.7;">AI-generated demos (Suno V5) for arrangement validation and emotional arc testing.</p></div></div>
+  </main>
+  <footer class="site-footer"><p>The Last Chat — A story told in messages</p></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

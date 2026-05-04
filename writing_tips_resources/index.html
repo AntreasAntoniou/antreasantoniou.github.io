@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academic Writing Tips and Resources | Antreas Antoniou</title>
+  <meta name="description" content="Academic writing tips and resources collected by Antreas Antoniou during his PhD years.">
+  <link rel="canonical" href="https://antreas.io/writing_tips_resources/">
+
+  <meta property="og:title" content="Academic Writing Tips and Resources">
+  <meta property="og:description" content="Academic writing tips and resources collected by Antreas Antoniou during his PhD years.">
+  <meta property="og:image" content="https://antreas.io/images/profile.jpg">
+  <meta property="og:url" content="https://antreas.io/writing_tips_resources/">
+  <meta property="og:type" content="article">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Academic Writing Tips and Resources">
+  <meta name="twitter:description" content="Academic writing tips and resources collected by Antreas Antoniou during his PhD years.">
+  <meta name="twitter:image" content="https://antreas.io/images/profile.jpg">
+  <meta name="twitter:site" content="@AntreasAntonio">
+  <meta name="twitter:creator" content="@AntreasAntonio">
+
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/tailwind-built.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .article-body p { margin-bottom: 1.25rem; }
+    .article-body ol { margin: 1.25rem 0 1.75rem 1.5rem; list-style: decimal; }
+    .article-body li { margin-bottom: 0.75rem; padding-left: 0.25rem; }
+    .article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    .article-body a:hover { opacity: 0.85; }
+  </style>
+
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body class="font-sans">
+  <nav class="nav">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-tight">Antreas<span class="text-accent">.</span></a>
+      <div class="flex items-center gap-5 text-base">
+        <a href="/#outreach" class="text-secondary hover:text-accent transition">Outreach</a>
+        <a href="/#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
+        <a href="/#contact" class="text-secondary hover:text-accent transition">Contact</a>
+        <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-sun" id="theme-icon-light"></i>
+          <i class="fas fa-moon hidden" id="theme-icon-dark"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="py-24">
+    <article class="max-w-3xl mx-auto px-4">
+      <header class="space-y-4 mb-10">
+        <p class="eyebrow">Writing</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Academic Writing Tips and Resources</h1>
+        <p class="text-secondary">By Antreas Antoniou</p>
+      </header>
+
+      <div class="card p-8 sm:p-10 article-body text-secondary leading-relaxed">
+        <p>This is a post that I wrote as a complement to Amos' <a href="https://www.bayeswatch.com/writing/" target="_blank" rel="noopener noreferrer">Academic Writing Rules</a> post.</p>
+
+        <p>Through my PhD years, especially my first year, I spent significant effort in trying to improve my academic writing. That effort consisted of a variety of activities:</p>
+
+        <ol>
+          <li>Biweekly, dual-page mini papers on whatever I was thinking at the time.</li>
+          <li>Teaching students and spending a good 5 hours of my week writing for students, in a style that was attempting to cater for all sorts of audiences, while trying to describe what were complicated subjects as concisely and precisely as I could.</li>
+          <li>Reading a lot of student reports, much of which taught me what not to do, as well as a few examples of what to do.</li>
+          <li>Reading at least 4 new papers every week, sourced from the trending section in <a href="https://arxiv-sanity-lite.com" target="_blank" rel="noopener noreferrer">arXiv-sanity</a>. Critiquing the writing of these, and asking peers for their opinions.</li>
+          <li>Finding some good examples of how to write via my daily paper reading and by community sourced <em>exemplars</em> such as <a href="https://old.reddit.com/r/MachineLearning/comments/85cwiu/d_wellwritten_paper_examples/" target="_blank" rel="noopener noreferrer">this Reddit post relating to well written papers</a>.</li>
+          <li>In addition I have read and learned from Andrej Karpathy's <a href="http://karpathy.github.io/2016/09/07/phd/" target="_blank" rel="noopener noreferrer"><em>PhD Survival Guide</em></a>, especially the paper writing section.</li>
+        </ol>
+
+        <p>When I am writing or reviewing a paper, I always refer to the following two resources, which by now have become my absolute go-to's to both help refresh my memory on how to write, and help me learn new things with every paper that I review or write:</p>
+
+        <ol>
+          <li><a href="https://cs.stanford.edu/people/widom/paper-writing.html" target="_blank" rel="noopener noreferrer">Jennifer Widom's guide on how to write academic documents</a>, an incredible guide on how to write academic documents.</li>
+          <li><a href="https://www.easterbrook.ca/steve/2010/01/how-to-write-a-scientific-abstract-in-six-easy-steps/" target="_blank" rel="noopener noreferrer">How to write a scientific abstract in six easy steps</a>, a six sentence method for abstracts, my favourite.</li>
+        </ol>
+      </div>
+    </article>
+  </main>
+
+  <footer class="py-12" style="border-top: 1px solid var(--border);">
+    <div class="max-w-5xl mx-auto px-4 text-center text-muted">
+      <p>&copy; 2026 Antreas Antoniou</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateThemeIcon();
+    }
+    function updateThemeIcon() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const lightIcon = document.getElementById('theme-icon-light');
+      const darkIcon = document.getElementById('theme-icon-dark');
+      if (lightIcon && darkIcon) {
+        lightIcon.classList.toggle('hidden', isDark);
+        darkIcon.classList.toggle('hidden', !isDark);
+      }
+    }
+    updateThemeIcon();
+  </script>
+</body>
+</html>

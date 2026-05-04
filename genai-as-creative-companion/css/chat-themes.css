@@ -1,0 +1,384 @@
+/* ============================================
+   CHAT STYLE THEMES — The Last Chat
+   The medium IS the message.
+   8 visual styles for the same conversation.
+   ============================================ */
+
+/* --- Theme Chooser UI --- */
+.chat-style-chooser {
+  position: fixed;
+  top: 64px;
+  right: 7rem;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.chat-style-chooser label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.chat-style-select {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.3rem 1.75rem 0.3rem 0.6rem;
+  border: 1px solid var(--ui-border);
+  background: rgba(13, 17, 23, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #e6edf3;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b949e'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  transition: border-color 0.2s;
+}
+
+.chat-style-select:hover { border-color: rgba(255,255,255,0.2); }
+.chat-style-select:focus { border-color: var(--char-antreas); }
+.chat-style-select option { background: #161b22; color: #e6edf3; }
+
+@media (max-width: 640px) {
+  .chat-style-chooser {
+    top: auto;
+    bottom: 1rem;
+    left: 1rem;
+    right: auto;
+  }
+  .chat-style-chooser label { display: none; }
+}
+
+/* ============================================
+   SHARED: Light theme control overrides
+   ============================================ */
+body[data-chat-theme="whatsapp"] .layer-indicator,
+body[data-chat-theme="imessage"] .layer-indicator,
+body[data-chat-theme="sms"] .layer-indicator,
+body[data-chat-theme="telegram"] .layer-indicator,
+body[data-chat-theme="handwritten"] .layer-indicator {
+  color: rgba(0,0,0,0.2);
+}
+
+body[data-chat-theme="whatsapp"] .mode-btn,
+body[data-chat-theme="imessage"] .mode-btn,
+body[data-chat-theme="sms"] .mode-btn,
+body[data-chat-theme="telegram"] .mode-btn,
+body[data-chat-theme="handwritten"] .mode-btn {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(0,0,0,0.12);
+  color: #333;
+  backdrop-filter: blur(8px);
+}
+
+body[data-chat-theme="whatsapp"] .mode-btn.active,
+body[data-chat-theme="imessage"] .mode-btn.active,
+body[data-chat-theme="sms"] .mode-btn.active,
+body[data-chat-theme="telegram"] .mode-btn.active,
+body[data-chat-theme="handwritten"] .mode-btn.active {
+  border-color: rgba(0,0,0,0.3);
+  color: #000;
+}
+
+body[data-chat-theme="whatsapp"] .chat-style-select,
+body[data-chat-theme="imessage"] .chat-style-select,
+body[data-chat-theme="sms"] .chat-style-select,
+body[data-chat-theme="telegram"] .chat-style-select,
+body[data-chat-theme="handwritten"] .chat-style-select {
+  background-color: rgba(255,255,255,0.9);
+  border-color: rgba(0,0,0,0.12);
+  color: #333;
+}
+
+body[data-chat-theme="whatsapp"] .chat-style-chooser label,
+body[data-chat-theme="imessage"] .chat-style-chooser label,
+body[data-chat-theme="sms"] .chat-style-chooser label,
+body[data-chat-theme="telegram"] .chat-style-chooser label,
+body[data-chat-theme="handwritten"] .chat-style-chooser label {
+  color: rgba(0,0,0,0.35);
+}
+
+/* Shared bubble base */
+body[data-chat-theme="whatsapp"] .message,
+body[data-chat-theme="imessage"] .message,
+body[data-chat-theme="sms"] .message,
+body[data-chat-theme="telegram"] .message {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  padding: 0.375rem 0.5rem 0.25rem;
+  margin: 3px 0;
+  position: relative;
+  animation: none;
+  line-height: 1.5;
+}
+
+body[data-chat-theme="whatsapp"] .message .char-name,
+body[data-chat-theme="imessage"] .message .char-name,
+body[data-chat-theme="sms"] .message .char-name,
+body[data-chat-theme="telegram"] .message .char-name {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-bottom: 1px;
+  margin-right: 0;
+}
+
+body[data-chat-theme="whatsapp"] .message[data-continuation] .char-name,
+body[data-chat-theme="imessage"] .message[data-continuation] .char-name,
+body[data-chat-theme="sms"] .message[data-continuation] .char-name,
+body[data-chat-theme="telegram"] .message[data-continuation] .char-name {
+  display: none;
+}
+
+body[data-chat-theme="whatsapp"] .message[data-continuation],
+body[data-chat-theme="imessage"] .message[data-continuation],
+body[data-chat-theme="sms"] .message[data-continuation],
+body[data-chat-theme="telegram"] .message[data-continuation] {
+  margin-top: 1px;
+}
+
+body[data-chat-theme="whatsapp"] .message[data-character="antreas"],
+body[data-chat-theme="imessage"] .message[data-character="antreas"],
+body[data-chat-theme="sms"] .message[data-character="antreas"],
+body[data-chat-theme="telegram"] .message[data-character="antreas"] {
+  margin-left: auto;
+}
+
+body[data-chat-theme="whatsapp"] .message-system,
+body[data-chat-theme="imessage"] .message-system,
+body[data-chat-theme="sms"] .message-system,
+body[data-chat-theme="telegram"] .message-system {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.75rem;
+  border-radius: 7.5px;
+  padding: 0.25rem 0.75rem;
+  display: inline-block;
+  margin: 0.5rem auto;
+  max-width: 85%;
+}
+
+/* ============================================
+   1. WHATSAPP
+   ============================================ */
+body[data-chat-theme="whatsapp"] .page-content { background: #EFEAE2; }
+body[data-chat-theme="whatsapp"] .story-progress { background: rgba(0,0,0,0.05); }
+body[data-chat-theme="whatsapp"] .story-progress-bar { background: #25D366; }
+body[data-chat-theme="whatsapp"] .site-footer { border-color: rgba(0,0,0,0.08); color: #667781; }
+
+body[data-chat-theme="whatsapp"] .message {
+  background: #FFFFFF;
+  border-radius: 7.5px;
+  box-shadow: 0 1px 0.5px rgba(11,20,26,0.13);
+}
+body[data-chat-theme="whatsapp"] .message[data-character="antreas"] { background: #D9FDD3; }
+body[data-chat-theme="whatsapp"] .message .msg-text {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.875rem;
+  color: #111B21;
+}
+body[data-chat-theme="whatsapp"] .timestamp { color: #667781; font-family: -apple-system, sans-serif; font-size: 0.75rem; }
+body[data-chat-theme="whatsapp"] .act-divider span { background: #EFEAE2 !important; color: #667781; font-size: 0.75rem; padding: 0.25rem 1rem; border-radius: 7.5px; }
+body[data-chat-theme="whatsapp"] .act-divider::before { background: rgba(0,0,0,0.08); }
+body[data-chat-theme="whatsapp"] .message-system { background: #E7FFDB; color: #667781; }
+body[data-chat-theme="whatsapp"] .message-countdown { color: #25D366; font-family: -apple-system, sans-serif; }
+
+/* ============================================
+   2. iMESSAGE
+   ============================================ */
+body[data-chat-theme="imessage"] .page-content { background: #FFFFFF; }
+body[data-chat-theme="imessage"] .story-progress { background: rgba(0,0,0,0.04); }
+body[data-chat-theme="imessage"] .story-progress-bar { background: #007AFF; }
+body[data-chat-theme="imessage"] .site-footer { border-color: rgba(0,0,0,0.06); color: #8E8E93; }
+
+body[data-chat-theme="imessage"] .message { background: #E5E5EA; border-radius: 18px; padding: 0.5rem 0.75rem 0.375rem; }
+body[data-chat-theme="imessage"] .message .msg-text { font-family: -apple-system, 'SF Pro Text', sans-serif; font-size: 0.9375rem; color: #000; }
+body[data-chat-theme="imessage"] .message[data-character="antreas"] { background: #007AFF; }
+body[data-chat-theme="imessage"] .message[data-character="antreas"] .msg-text { color: #FFF; }
+body[data-chat-theme="imessage"] .message[data-character="antreas"] .char-name { color: rgba(255,255,255,0.7); }
+body[data-chat-theme="imessage"] .message .char-name { font-size: 0.75rem; }
+body[data-chat-theme="imessage"] .timestamp { color: #8E8E93; font-family: -apple-system, sans-serif; font-size: 0.75rem; }
+body[data-chat-theme="imessage"] .act-divider span { background: #FFF !important; color: #8E8E93; }
+body[data-chat-theme="imessage"] .act-divider::before { background: rgba(0,0,0,0.06); }
+body[data-chat-theme="imessage"] .message-system { background: #E5E5EA; color: #8E8E93; border-radius: 18px; }
+body[data-chat-theme="imessage"] .message-countdown { color: #007AFF; }
+
+/* ============================================
+   3. DISCORD
+   ============================================ */
+body[data-chat-theme="discord"] .page-content { background: #313338; }
+body[data-chat-theme="discord"] .story-progress { background: rgba(255,255,255,0.04); }
+body[data-chat-theme="discord"] .story-progress-bar { background: #5865F2; }
+body[data-chat-theme="discord"] .site-footer { border-color: #1e1f22; color: #4e5058; }
+
+body[data-chat-theme="discord"] .story-reader { max-width: 900px; }
+body[data-chat-theme="discord"] .message {
+  display: flex; flex-direction: row; align-items: flex-start; gap: 0;
+  padding: 0.125rem 1rem; border-radius: 0; margin: 0; line-height: 1.5; animation: none;
+}
+body[data-chat-theme="discord"] .message:hover { background: rgba(4,4,5,0.07); }
+body[data-chat-theme="discord"] .message .char-name { display: inline; font-size: 0.9375rem; font-weight: 600; margin-right: 0.375rem; }
+body[data-chat-theme="discord"] .message .msg-text { font-family: 'gg sans', 'Noto Sans', sans-serif; font-size: 0.9375rem; color: #DBDEE1; display: inline; }
+body[data-chat-theme="discord"] .message:not([data-continuation]) { padding-top: 1rem; margin-top: 0.125rem; }
+body[data-chat-theme="discord"] .message[data-continuation] .char-name { display: none; }
+body[data-chat-theme="discord"] .timestamp { color: #4e5058; font-size: 0.75rem; border-top: 1px solid #3f4147; padding-top: 0.5rem; margin-top: 0.5rem; }
+body[data-chat-theme="discord"] .act-divider span { background: #313338 !important; color: #B5BAC1; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+body[data-chat-theme="discord"] .act-divider::before { background: #3f4147; }
+body[data-chat-theme="discord"] .message-system { background: transparent; color: #949BA4; font-size: 0.875rem; padding: 0.25rem 1rem; text-align: left; border-left: 2px solid #5865F2; }
+body[data-chat-theme="discord"] .message-countdown { color: #5865F2; }
+
+/* ============================================
+   4. TERMINAL / CLI
+   ============================================ */
+body[data-chat-theme="terminal"] .page-content { background: #000; }
+body[data-chat-theme="terminal"] .story-progress { background: rgba(0,255,65,0.08); }
+body[data-chat-theme="terminal"] .story-progress-bar { background: #00FF41; }
+body[data-chat-theme="terminal"] .site-footer { border-color: #0a200a; color: #0a400a; }
+
+body[data-chat-theme="terminal"] .story-reader { max-width: 900px; font-family: 'JetBrains Mono', monospace; }
+body[data-chat-theme="terminal"] .message { padding: 0.0625rem 0; margin: 0; line-height: 1.6; animation: none; }
+body[data-chat-theme="terminal"] .message .char-name { display: inline; color: #00FF41; font-family: inherit; font-size: 0.875rem; font-weight: 400; }
+body[data-chat-theme="terminal"] .message .char-name::before { content: '<'; color: #006B1A; }
+body[data-chat-theme="terminal"] .message .msg-text { font-family: inherit; font-size: 0.875rem; color: #00FF41; opacity: 0.85; }
+body[data-chat-theme="terminal"] .char-antreas, body[data-chat-theme="terminal"] .char-faye, body[data-chat-theme="terminal"] .char-kai, body[data-chat-theme="terminal"] .char-mira, body[data-chat-theme="terminal"] .char-schmidhuber { color: #00FF41; }
+body[data-chat-theme="terminal"] .message[data-character="faye"] .char-name { color: #33FF6B; }
+body[data-chat-theme="terminal"] .message[data-character="kai"] .char-name { color: #00CC33; }
+body[data-chat-theme="terminal"] .message[data-character="mira"] .char-name { color: #66FF99; }
+body[data-chat-theme="terminal"] .message[data-character="schmidhuber"] .char-name { color: #99FFBB; }
+body[data-chat-theme="terminal"] .timestamp { color: #006B1A; font-family: inherit; font-size: 0.8125rem; }
+body[data-chat-theme="terminal"] .timestamp::before { content: '--- '; }
+body[data-chat-theme="terminal"] .timestamp::after { content: ' ---'; }
+body[data-chat-theme="terminal"] .act-divider span { background: #000 !important; color: #00FF41; border: 1px solid #003300; padding: 0.25rem 1rem; }
+body[data-chat-theme="terminal"] .act-divider::before { background: #003300; }
+body[data-chat-theme="terminal"] .message-system { color: #006B1A; font-family: inherit; font-size: 0.8125rem; text-align: left; }
+body[data-chat-theme="terminal"] .message-countdown { color: #00FF41; font-family: inherit; text-shadow: 0 0 10px rgba(0,255,65,0.5); }
+body[data-chat-theme="terminal"] .message.key-moment .msg-text { text-shadow: 0 0 4px rgba(0,255,65,0.3); }
+body[data-chat-theme="terminal"] .page-content::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 50;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
+}
+
+/* ============================================
+   5. SMS / CLASSIC
+   ============================================ */
+body[data-chat-theme="sms"] .page-content { background: #EDEDED; }
+body[data-chat-theme="sms"] .story-progress-bar { background: #0B93F6; }
+body[data-chat-theme="sms"] .site-footer { border-color: rgba(0,0,0,0.06); color: #999; }
+
+body[data-chat-theme="sms"] .message { background: #E5E5EA; border-radius: 16px; padding: 0.4rem 0.65rem 0.3rem; }
+body[data-chat-theme="sms"] .message .msg-text { font-family: -apple-system, Arial, sans-serif; font-size: 0.9375rem; color: #000; }
+body[data-chat-theme="sms"] .message[data-character="antreas"] { background: #0B93F6; }
+body[data-chat-theme="sms"] .message[data-character="antreas"] .msg-text { color: #FFF; }
+body[data-chat-theme="sms"] .message[data-character="antreas"] .char-name { color: rgba(255,255,255,0.6); }
+body[data-chat-theme="sms"] .message .char-name { font-size: 0.6875rem; opacity: 0.6; }
+body[data-chat-theme="sms"] .timestamp { color: #999; font-size: 0.75rem; }
+body[data-chat-theme="sms"] .act-divider span { background: #EDEDED !important; color: #999; }
+body[data-chat-theme="sms"] .act-divider::before { background: rgba(0,0,0,0.06); }
+body[data-chat-theme="sms"] .message-system { background: #E5E5EA; color: #999; border-radius: 16px; }
+body[data-chat-theme="sms"] .message-countdown { color: #0B93F6; }
+
+/* ============================================
+   6. TELEGRAM
+   ============================================ */
+body[data-chat-theme="telegram"] .page-content { background: #D6E6F2; }
+body[data-chat-theme="telegram"] .story-progress-bar { background: #2AABEE; }
+body[data-chat-theme="telegram"] .site-footer { border-color: rgba(0,0,0,0.06); color: #8C9DA7; }
+
+body[data-chat-theme="telegram"] .message { background: #FFF; border-radius: 12px; padding: 0.375rem 0.625rem 0.3rem; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+body[data-chat-theme="telegram"] .message[data-character="antreas"] { background: #EFFDDE; }
+body[data-chat-theme="telegram"] .message .msg-text { font-family: -apple-system, Roboto, sans-serif; font-size: 0.9375rem; color: #000; }
+body[data-chat-theme="telegram"] .timestamp { color: #8C9DA7; font-size: 0.75rem; }
+body[data-chat-theme="telegram"] .act-divider span { background: #D6E6F2 !important; color: #8C9DA7; border-radius: 12px; padding: 0.25rem 1rem; }
+body[data-chat-theme="telegram"] .act-divider::before { background: rgba(0,0,0,0.06); }
+body[data-chat-theme="telegram"] .message-system { background: rgba(42,171,238,0.12); color: #5A8DA7; border-radius: 12px; }
+body[data-chat-theme="telegram"] .message-countdown { color: #2AABEE; }
+
+/* ============================================
+   7. MATRIX / HACKER
+   ============================================ */
+body[data-chat-theme="matrix"] .page-content { background: #0D0208; }
+body[data-chat-theme="matrix"] .story-progress-bar { background: #00FF41; box-shadow: 0 0 6px #00FF41; }
+body[data-chat-theme="matrix"] .site-footer { border-color: #001a00; color: #003300; }
+
+body[data-chat-theme="matrix"] .story-reader { max-width: 900px; font-family: 'JetBrains Mono', monospace; }
+body[data-chat-theme="matrix"] .message { padding: 0.125rem 0; margin: 0; animation: none; line-height: 1.65; }
+body[data-chat-theme="matrix"] .message .char-name { display: inline; font-family: inherit; font-weight: 400; font-size: 0.875rem; text-shadow: 0 0 8px currentColor; }
+body[data-chat-theme="matrix"] .message .msg-text { font-family: inherit; font-size: 0.875rem; color: #00FF41; text-shadow: 0 0 3px rgba(0,255,65,0.4); }
+body[data-chat-theme="matrix"] .char-antreas { color: #FFD700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
+body[data-chat-theme="matrix"] .char-faye { color: #FF6B9D; text-shadow: 0 0 8px rgba(255,107,157,0.5); }
+body[data-chat-theme="matrix"] .char-kai { color: #00BFFF; text-shadow: 0 0 8px rgba(0,191,255,0.5); }
+body[data-chat-theme="matrix"] .char-mira { color: #00FF7F; text-shadow: 0 0 8px rgba(0,255,127,0.5); }
+body[data-chat-theme="matrix"] .char-schmidhuber { color: #C0C0C0; text-shadow: 0 0 8px rgba(192,192,192,0.4); }
+body[data-chat-theme="matrix"] .timestamp { color: #003300; font-family: inherit; font-size: 0.75rem; }
+body[data-chat-theme="matrix"] .act-divider span { background: #0D0208 !important; color: #00FF41; border: 1px solid rgba(0,255,65,0.3); text-shadow: 0 0 10px rgba(0,255,65,0.5); }
+body[data-chat-theme="matrix"] .act-divider::before { background: rgba(0,255,65,0.15); }
+body[data-chat-theme="matrix"] .message-system { color: #00AA30; font-family: inherit; font-size: 0.8125rem; text-shadow: 0 0 6px rgba(0,255,65,0.3); text-align: left; }
+body[data-chat-theme="matrix"] .message-countdown { color: #00FF41; font-family: inherit; text-shadow: 0 0 20px #00FF41, 0 0 40px rgba(0,255,65,0.3); }
+body[data-chat-theme="matrix"] .page-content::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 50;
+  background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.2) 1px, rgba(0,0,0,0.2) 3px), radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4));
+}
+@keyframes matrix-flicker { 0%, 100% { opacity: 1; } 92% { opacity: 1; } 93% { opacity: 0.8; } 94% { opacity: 1; } }
+body[data-chat-theme="matrix"] .story-reader { animation: matrix-flicker 8s ease-in-out infinite; }
+
+/* ============================================
+   8. HANDWRITTEN / PAPER
+   ============================================ */
+body[data-chat-theme="handwritten"] .page-content {
+  background: #FFF8E7;
+  background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(176,196,222,0.25) 31px, rgba(176,196,222,0.25) 32px);
+  background-size: 100% 32px; background-position-y: 10px;
+}
+body[data-chat-theme="handwritten"] .story-progress-bar { background: #8B4513; }
+body[data-chat-theme="handwritten"] .site-footer { border-color: rgba(139,69,19,0.15); color: #A0926B; }
+
+body[data-chat-theme="handwritten"] .story-reader { max-width: 700px; font-family: 'Caveat', cursive; }
+body[data-chat-theme="handwritten"] .message { padding: 0.125rem 0; margin: 0; animation: none; line-height: 1.8; }
+body[data-chat-theme="handwritten"] .message .char-name { display: inline; font-family: inherit; font-weight: 700; font-size: 1.125rem; }
+body[data-chat-theme="handwritten"] .message .msg-text { font-family: inherit; font-size: 1.125rem; color: #2C1810; }
+body[data-chat-theme="handwritten"] .char-antreas { color: #1A4A8A; }
+body[data-chat-theme="handwritten"] .char-faye { color: #8B2252; }
+body[data-chat-theme="handwritten"] .char-kai { color: #006400; }
+body[data-chat-theme="handwritten"] .char-mira { color: #6A287E; }
+body[data-chat-theme="handwritten"] .char-schmidhuber { color: #555; }
+body[data-chat-theme="handwritten"] .message[data-character="antreas"] .msg-text { color: #1A4A8A; }
+body[data-chat-theme="handwritten"] .message[data-character="faye"] .msg-text { color: #6B1A3A; }
+body[data-chat-theme="handwritten"] .message[data-character="kai"] .msg-text { color: #004D00; }
+body[data-chat-theme="handwritten"] .message[data-character="mira"] .msg-text { color: #4A1A5E; }
+body[data-chat-theme="handwritten"] .message[data-character="schmidhuber"] .msg-text { color: #444; }
+body[data-chat-theme="handwritten"] .timestamp { color: #A0926B; font-family: inherit; font-size: 1rem; opacity: 0.6; }
+body[data-chat-theme="handwritten"] .act-divider span { background: #FFF8E7 !important; color: #8B4513; font-family: inherit; font-size: 1.125rem; font-weight: 700; }
+body[data-chat-theme="handwritten"] .act-divider::before { background: rgba(139,69,19,0.2); }
+body[data-chat-theme="handwritten"] .message-system { color: #A0926B; font-family: inherit; font-size: 1rem; font-style: italic; text-align: left; }
+body[data-chat-theme="handwritten"] .message-countdown { color: #8B4513; font-family: inherit; }
+body[data-chat-theme="handwritten"] .message.key-moment { border-bottom: 1px dashed rgba(139,69,19,0.2); padding-bottom: 0.5rem; margin-bottom: 0.25rem; }
+
+/* ============================================
+   Cinematic mode compat
+   ============================================ */
+body[data-chat-theme="whatsapp"] .cinematic-overlay,
+body[data-chat-theme="imessage"] .cinematic-overlay,
+body[data-chat-theme="sms"] .cinematic-overlay,
+body[data-chat-theme="telegram"] .cinematic-overlay,
+body[data-chat-theme="handwritten"] .cinematic-overlay { background: inherit; }
+body[data-chat-theme="terminal"] .cinematic-overlay,
+body[data-chat-theme="matrix"] .cinematic-overlay { background: #000; }
+body[data-chat-theme="discord"] .cinematic-overlay { background: #313338; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  body[data-chat-theme="whatsapp"] .message, body[data-chat-theme="imessage"] .message,
+  body[data-chat-theme="sms"] .message, body[data-chat-theme="telegram"] .message { max-width: 90%; }
+  body[data-chat-theme="handwritten"] .message .msg-text, body[data-chat-theme="handwritten"] .message .char-name { font-size: 1rem; }
+  body[data-chat-theme="terminal"] .message .msg-text, body[data-chat-theme="terminal"] .message .char-name,
+  body[data-chat-theme="matrix"] .message .msg-text, body[data-chat-theme="matrix"] .message .char-name { font-size: 0.8125rem; }
+}
