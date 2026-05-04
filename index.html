@@ -321,7 +321,7 @@
                 <i class="fas fa-flask"></i> Axiotic AI
               </a>
               <a href="https://arc-yh.nihr.ac.uk/research/projects/symphonia-llm-assisted-expert-consensus-platform/" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
-                <i class="fas fa-users-cog"></i> Symphonia Case Study
+                <i class="fas fa-users-cog"></i> UK Government Case Study: Symphonia
               </a>
             </div>
           </div>
@@ -330,12 +330,12 @@
           <div id="advisory" class="card p-8" data-aos="fade-up" data-aos-delay="50">
             <div class="flex items-center gap-3 mb-4">
               <span class="text-2xl">🎯</span>
-              <h3 class="text-xl font-semibold">Advisory</h3>
+              <h3 class="text-xl font-semibold">Advisory & Technical DD</h3>
             </div>
             <p class="text-secondary mb-4">
-              Open to a small number of advisory and technical due-diligence engagements per year for VCs and AI startups.
+              Open to a small number of advisory and technical due-diligence engagements for VCs and AI startups: eval design, data moats, model strategy, efficiency claims, and research-roadmap pressure-testing.
             </p>
-            <a href="mailto:iam@antreas.io" class="text-accent hover:underline text-sm font-medium">
+            <a href="mailto:iam@antreas.io?subject=Advisory%20%2F%20technical%20DD" class="text-accent hover:underline text-sm font-medium">
               iam@antreas.io →
             </a>
           </div>
@@ -1664,9 +1664,9 @@
       'images/profile.jpg',
       'images/profile-anime.png'
     ];
-    let currentProfileIndex = Math.floor(Math.random() * profileImages.length);
+    let currentProfileIndex = 0;
 
-    // Set initial random image
+    // Set initial non-anime image
     (function() {
       const heroProfile = document.getElementById('hero-profile');
       if (heroProfile) {
