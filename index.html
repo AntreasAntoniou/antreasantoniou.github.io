@@ -86,7 +86,7 @@
       <div class="hidden md:flex items-center gap-5 text-base">
         <a href="#about" class="text-secondary hover:text-accent transition">About</a>
         <a href="#publications" class="text-secondary hover:text-accent transition">Research</a>
-        <a href="#artifacts" class="text-secondary hover:text-accent transition">Artifacts</a>
+        <a href="#artifacts" class="text-secondary hover:text-accent transition">Teaching Materials</a>
         <a href="#experience" class="text-secondary hover:text-accent transition">Experience</a>
         <a href="#outreach" class="text-secondary hover:text-accent transition">Outreach</a>
         <a href="#demos" class="text-secondary hover:text-accent transition">Demos</a>
@@ -115,7 +115,7 @@
       <div class="px-4 py-4 space-y-3">
         <a href="#about" class="block text-secondary hover:text-accent">About</a>
         <a href="#publications" class="block text-secondary hover:text-accent">Research</a>
-        <a href="#artifacts" class="block text-secondary hover:text-accent">Artifacts</a>
+        <a href="#artifacts" class="block text-secondary hover:text-accent">Teaching Materials</a>
         <a href="#experience" class="block text-secondary hover:text-accent">Experience</a>
         <a href="#outreach" class="block text-secondary hover:text-accent">Outreach</a>
         <a href="#demos" class="block text-secondary hover:text-accent">Demos</a>
@@ -464,49 +464,73 @@
     </section>
 
 
-    <!-- Research Artifacts Section -->
+    <!-- Teaching Artifacts Section -->
     <section id="artifacts" class="py-24" style="border-top: 1px solid var(--border);">
-      <div class="max-w-4xl mx-auto px-4 space-y-10">
+      <div class="max-w-5xl mx-auto px-4 space-y-10">
         <header class="text-center space-y-4" data-aos="fade-up">
-          <p class="eyebrow">Research Artifacts</p>
-          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Artifacts & Teaching Resources</h2>
-          <p class="text-secondary max-w-2xl mx-auto">Public research packages, lecture materials, interactive slide decks, and AI-assisted development resources.</p>
+          <p class="eyebrow">Teaching Artifacts</p>
+          <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Lecture & Workshop Materials</h2>
+          <p class="text-secondary max-w-2xl mx-auto">Teaching packs, slide decks, demos, and practical resources for helping people use modern AI systems well. These are educational artifacts, not research papers.</p>
         </header>
 
-        <article class="card p-8" data-aos="fade-up" data-aos-delay="50">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="badge badge-workshop">Teaching</span>
-            <span class="text-muted">2026</span>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Generative AI, Creative Companions & AI-Assisted Development</h3>
-          <p class="text-secondary mb-6">Lecture and workshop materials covering AI as a creative companion, OpenClaw-style agentic workflows, Cursor/Claude/Codex-assisted development, and practical LLM collaboration patterns.</p>
-          <div class="grid sm:grid-cols-2 gap-3">
-            <a href="genai-as-creative-companion/" class="btn-primary btn-sm">
-              <i class="fas fa-magic"></i> GenAI as Creative Companion
-            </a>
-            <a href="genai-as-creative-companion/technical.html" class="btn-secondary btn-sm">
-              <i class="fas fa-microchip"></i> Technical Breakdown
-            </a>
-            <a href="genai-as-creative-companion/slides/variant-1-terminal.html" class="btn-secondary btn-sm">
-              <i class="fas fa-terminal"></i> Slides — Terminal Variant
-            </a>
-            <a href="genai-as-creative-companion/slides/variant-3-cinematic.html" class="btn-secondary btn-sm">
-              <i class="fas fa-film"></i> Slides — Cinematic Variant
-            </a>
-            <a href="genai-as-creative-companion/slides/variant-5-interactive.html" class="btn-secondary btn-sm">
-              <i class="fas fa-desktop"></i> Slides — Interactive Variant
-            </a>
-            <a href="AI-assisted-development-crashcourse/" class="btn-primary btn-sm">
-              <i class="fas fa-code"></i> AI-Assisted Development Crash Course
-            </a>
-            <a href="https://drive.google.com/file/d/1OTdqPNlF9JptRAFJI4AYvH6H5BR2cpcg/view" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
-              <i class="fas fa-video"></i> LLM-101 / Deep Dive Video
-            </a>
-            <a href="https://docs.google.com/presentation/d/1Daz0Fhb6e62m9VHDo95k_OTVE2N48UP5eVlPAsjo9Cc/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
-              <i class="fas fa-chalkboard"></i> LLM-101 Slides
-            </a>
-          </div>
-        </article>
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="card p-6 flex flex-col" data-aos="fade-up" data-aos-delay="50">
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <span class="badge badge-workshop">Lecture pack</span>
+              <span class="text-muted text-sm">2026</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">GenAI as Creative Companion</h3>
+            <p class="text-secondary text-sm mb-6 flex-1">A teaching package on using generative AI as a collaborator for writing, music, visual storytelling, and agentic creative workflows.</p>
+            <div class="space-y-2">
+              <a href="genai-as-creative-companion/" class="btn-primary btn-sm w-full">
+                <i class="fas fa-magic"></i> Open teaching pack
+              </a>
+              <a href="genai-as-creative-companion/technical.html" class="btn-secondary btn-sm w-full">
+                <i class="fas fa-microchip"></i> Technical breakdown
+              </a>
+            </div>
+          </article>
+
+          <article class="card p-6 flex flex-col" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <span class="badge badge-workshop">Slides</span>
+              <span class="text-muted text-sm">2026</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Creative Companion Slide Decks</h3>
+            <p class="text-secondary text-sm mb-6 flex-1">Alternative slide treatments for the same teaching material: terminal-native, cinematic, and interactive versions.</p>
+            <div class="space-y-2">
+              <a href="genai-as-creative-companion/slides/variant-1-terminal.html" class="btn-secondary btn-sm w-full">
+                <i class="fas fa-terminal"></i> Terminal variant
+              </a>
+              <a href="genai-as-creative-companion/slides/variant-3-cinematic.html" class="btn-secondary btn-sm w-full">
+                <i class="fas fa-film"></i> Cinematic variant
+              </a>
+              <a href="genai-as-creative-companion/slides/variant-5-interactive.html" class="btn-secondary btn-sm w-full">
+                <i class="fas fa-desktop"></i> Interactive variant
+              </a>
+            </div>
+          </article>
+
+          <article class="card p-6 flex flex-col" data-aos="fade-up" data-aos-delay="150">
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <span class="badge badge-workshop">Workshop</span>
+              <span class="text-muted text-sm">2025–2026</span>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">AI-Assisted Development & LLM-101</h3>
+            <p class="text-secondary text-sm mb-6 flex-1">Hands-on teaching resources for AI-assisted software development, LLM collaboration patterns, and model-compression lectures.</p>
+            <div class="space-y-2">
+              <a href="AI-assisted-development-crashcourse/" class="btn-primary btn-sm w-full">
+                <i class="fas fa-code"></i> Development crash course
+              </a>
+              <a href="https://drive.google.com/file/d/1OTdqPNlF9JptRAFJI4AYvH6H5BR2cpcg/view" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm w-full">
+                <i class="fas fa-video"></i> LLM-101 deep dive video
+              </a>
+              <a href="https://docs.google.com/presentation/d/1Daz0Fhb6e62m9VHDo95k_OTVE2N48UP5eVlPAsjo9Cc/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm w-full">
+                <i class="fas fa-chalkboard"></i> LLM-101 slides
+              </a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
