@@ -308,6 +308,48 @@
       color: var(--paper);
     }
 
+    .banana-key {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 1.25rem;
+      align-items: center;
+      margin: -1rem 0 1.5rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--line);
+      background: var(--void);
+    }
+
+    .banana-key strong {
+      color: var(--signal);
+      font-family: "Roboto Mono", monospace;
+      font-size: .66rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .banana-key span {
+      color: var(--steel);
+      font-size: .78rem;
+      line-height: 1.6;
+    }
+
+    .banana-key span b {
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    .banana-key a {
+      color: var(--text-muted);
+      font-family: "Roboto Mono", monospace;
+      font-size: .58rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .banana-key a:hover {
+      color: var(--signal);
+    }
+
     .energy-comparison {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -353,6 +395,20 @@
       font-family: "Roboto Mono", monospace;
       font-size: .72rem;
       letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .banana-metric {
+      display: block;
+      margin: .15rem 0 .8rem;
+      padding-top: .65rem;
+      border-top: 1px solid var(--line);
+      color: var(--signal);
+      font-family: "Roboto Mono", monospace;
+      font-size: .61rem;
+      font-weight: 600;
+      letter-spacing: .035em;
+      line-height: 1.5;
       text-transform: uppercase;
     }
 
@@ -1175,6 +1231,12 @@
         gap: 1.5rem;
       }
 
+      .banana-key {
+        grid-template-columns: 1fr;
+        gap: .5rem;
+        margin-top: -.5rem;
+      }
+
       .energy-comparison {
         grid-template-columns: 1fr;
       }
@@ -1340,16 +1402,23 @@
     <section class="energy-section" aria-labelledby="energy-heading">
       <header class="energy-header">
         <div>
-          <p class="eyebrow">Energy, with the denominator named</p>
+          <p class="eyebrow">Bananas for scale · energy with the denominator named</p>
           <h2 class="energy-heading" id="energy-heading">What the watt buys.</h2>
         </div>
         <p class="energy-header-copy"><strong>Power is a rate; energy is power integrated over time.</strong> A brain, one text prompt, one accelerator, and one rack are not equivalent jobs. The comparison is useful only when the workload travels with the number.</p>
       </header>
 
+      <aside class="banana-key" aria-label="Banana energy reference">
+        <strong>Banana unit</strong>
+        <span><b>1 medium banana = 105 kcal = approximately 122 Wh of food energy.</b> The programme rounds this to 120 Wh. Food energy and electrical energy are different delivery systems; this is an intuitive scale, not an efficiency equivalence.</span>
+        <a href="https://snaped.fns.usda.gov/seasonal-produce-guide/bananas" target="_blank" rel="noopener noreferrer">USDA nutrition reference ↗</a>
+      </aside>
+
       <div class="energy-comparison" role="list" aria-label="Workload-normalized brain and AI energy comparison">
         <article class="energy-case energy-case--brain" role="listitem">
           <span class="energy-kind">Whole biological system</span>
           <p class="energy-number">20 <small>W continuous</small></p>
+          <span class="banana-metric">0.16 bananas/hour · approximately 3 per 18 waking hours</span>
           <h3>Human brain</h3>
           <p><strong>360 Wh over 18 waking hours</strong>—the programme’s “three bananas” shorthand. Over 24 hours it is 480 Wh. That budget supports perception, action, memory, learning, language, planning, and biological maintenance simultaneously.</p>
           <a class="energy-source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6092772/" target="_blank" rel="noopener noreferrer">Brain energy-budget study ↗</a>
@@ -1358,6 +1427,7 @@
         <article class="energy-case" role="listitem">
           <span class="energy-kind">Measured serving energy</span>
           <p class="energy-number">0.24 <small>Wh / prompt</small></p>
+          <span class="banana-metric">0.002 bananas/prompt · approximately 1/500 of a banana</span>
           <h3>Median Gemini text prompt</h3>
           <p>Google’s system-wide estimate for a <strong>median Gemini Apps text prompt</strong>. It buys one bounded text-generation request from a pretrained model—not vision, action, online learning, memory consolidation, or the energy used to train the model.</p>
           <a class="energy-source" href="https://services.google.com/fh/files/misc/measuring_the_environmental_impact_of_delivering_ai_at_google_scale.pdf" target="_blank" rel="noopener noreferrer">Google measurement paper ↗</a>
@@ -1366,6 +1436,7 @@
         <article class="energy-case" role="listitem">
           <span class="energy-kind">Accelerator power ceiling</span>
           <p class="energy-number">700 <small>W TDP</small></p>
+          <span class="banana-metric">5.7 bananas/hour at the 700 W ceiling</span>
           <h3>One H100 SXM GPU</h3>
           <p>Configurable at <strong>up to 700 W</strong>—35× the brain’s continuous power. It executes tensor operations for LLM training or inference, often batching work across requests. This is one chip’s design ceiling, not per-query energy or a whole AI system.</p>
           <a class="energy-source" href="https://www.nvidia.com/en-gb/data-center/h100/" target="_blank" rel="noopener noreferrer">NVIDIA H100 specification ↗</a>
@@ -1374,6 +1445,7 @@
         <article class="energy-case" role="listitem">
           <span class="energy-kind">Rack-scale system power</span>
           <p class="energy-number">120 <small>kW / rack</small></p>
+          <span class="banana-metric">approximately 980 bananas/hour at the rack boundary</span>
           <h3>GB200 NVL72</h3>
           <p>NVIDIA documents <strong>approximately 120 kW</strong> for a rack with 72 GPUs and 36 CPUs: 6,000× brain-level power at the rack boundary. It is built for large-model training and high-throughput inference shared across jobs and users—not one answer from one “AI brain.”</p>
           <a class="energy-source" href="https://docs.nvidia.com/dgx/dgxgb200-user-guide/hardware.html" target="_blank" rel="noopener noreferrer">NVIDIA rack-system guide ↗</a>

@@ -56,6 +56,18 @@ test('compares brain and AI energy only after naming the workload and unit', () 
   assert.match(html, /docs\.nvidia\.com\/dgx\/dgxgb200-user-guide\/hardware\.html/);
 });
 
+test('gives every workload a calibrated bananas-for-scale conversion', () => {
+  assert.match(visibleText, /Bananas for scale/);
+  assert.match(visibleText, /1 medium banana/);
+  assert.match(visibleText, /105 kcal/);
+  assert.match(visibleText, /approximately 122 Wh of food energy/);
+  assert.match(visibleText, /0\.16 bananas\/hour · approximately 3 per 18 waking hours/);
+  assert.match(visibleText, /0\.002 bananas\/prompt · approximately 1\/500 of a banana/);
+  assert.match(visibleText, /5\.7 bananas\/hour at the 700 W ceiling/);
+  assert.match(visibleText, /approximately 980 bananas\/hour at the rack boundary/);
+  assert.match(html, /snaped\.fns\.usda\.gov\/seasonal-produce-guide\/bananas/);
+});
+
 test('presents information thermodynamics as a falsifiable interpretive spine', () => {
   assert.match(html, /Information thermodynamics/);
   assert.match(html, /adaptive value per unit of energy/i);
