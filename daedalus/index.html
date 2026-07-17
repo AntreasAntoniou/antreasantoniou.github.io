@@ -240,6 +240,144 @@
       font-family: "Roboto Mono", monospace;
     }
 
+    .energy-section {
+      padding-block: clamp(4rem, 8vw, 6.5rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .energy-header {
+      display: grid;
+      grid-template-columns: minmax(0, .75fr) minmax(20rem, 1.25fr);
+      gap: clamp(2rem, 8vw, 7rem);
+      align-items: end;
+      margin-bottom: 2.5rem;
+    }
+
+    .energy-heading {
+      margin: 0;
+      color: var(--paper);
+      font-size: clamp(2.5rem, 5.8vw, 4.5rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .energy-header-copy {
+      margin: 0;
+      color: var(--steel);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .energy-header-copy strong {
+      color: var(--paper);
+    }
+
+    .energy-comparison {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .energy-case {
+      display: flex;
+      min-height: 22rem;
+      padding: 1.35rem;
+      background: var(--slate);
+      flex-direction: column;
+    }
+
+    .energy-case--brain {
+      background: #101D31;
+    }
+
+    .energy-kind {
+      color: var(--signal);
+      font-family: "Roboto Mono", monospace;
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .energy-number {
+      margin: 1.4rem 0 .5rem;
+      color: var(--paper);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(2.7rem, 4.4vw, 4rem);
+      font-weight: 500;
+      line-height: .9;
+      letter-spacing: -.055em;
+    }
+
+    .energy-number small {
+      color: var(--circuit);
+      font-family: "Roboto Mono", monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .energy-case h3 {
+      margin: .5rem 0 0;
+      color: var(--paper);
+      font-size: 1rem;
+    }
+
+    .energy-case p:not(.energy-number) {
+      margin: .8rem 0 0;
+      color: var(--steel);
+      font-size: .8rem;
+      line-height: 1.65;
+    }
+
+    .energy-case strong {
+      color: var(--paper);
+    }
+
+    .energy-source {
+      display: inline-block;
+      margin-top: auto;
+      padding-top: 1.2rem;
+      color: var(--text-muted);
+      font-family: "Roboto Mono", monospace;
+      font-size: .58rem;
+      letter-spacing: .05em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .energy-source:hover {
+      color: var(--signal);
+    }
+
+    .energy-denominator {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: clamp(1.5rem, 5vw, 4rem);
+      margin-top: 1px;
+      padding: clamp(1.4rem, 3vw, 2rem);
+      border: 1px solid var(--line);
+      background: var(--void);
+    }
+
+    .energy-denominator strong {
+      color: var(--signal);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .energy-denominator p {
+      margin: 0;
+      color: var(--steel);
+      font-size: .84rem;
+      line-height: 1.7;
+    }
+
     .section {
       padding-block: clamp(4.5rem, 9vw, 8rem);
       border-bottom: 1px solid var(--line);
@@ -402,6 +540,152 @@
     .architecture-caption strong {
       color: var(--steel);
       font-weight: 500;
+    }
+
+    .thermo-frame {
+      display: grid;
+      grid-template-columns: minmax(17rem, .88fr) minmax(0, 1.12fr);
+      gap: 1px;
+      border: 1px solid var(--line-strong);
+      background: var(--line);
+    }
+
+    .thermo-equation,
+    .thermo-terms {
+      padding: clamp(1.5rem, 4vw, 2.6rem);
+      background: var(--slate);
+    }
+
+    .thermo-equation {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .formula-label {
+      color: var(--signal);
+      font-family: "Roboto Mono", monospace;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .formula {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem .65rem;
+      align-items: baseline;
+      margin: 2.5rem 0;
+      color: var(--paper);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.65rem);
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+
+    .formula .formula-function {
+      color: var(--signal);
+    }
+
+    .formula .formula-operator {
+      color: var(--circuit);
+      font-family: "Roboto Mono", monospace;
+      font-size: .85em;
+    }
+
+    .formula sub {
+      color: var(--steel);
+      font-size: .55em;
+    }
+
+    .formula-caption {
+      margin: 0;
+      color: var(--steel);
+      font-size: .82rem;
+      line-height: 1.7;
+    }
+
+    .thermo-terms {
+      margin: 0;
+    }
+
+    .thermo-terms div {
+      display: grid;
+      grid-template-columns: minmax(8rem, .45fr) minmax(0, 1fr);
+      gap: 1.2rem;
+      padding-block: 1.15rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .thermo-terms div:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .thermo-terms div:last-child {
+      padding-bottom: 0;
+    }
+
+    .thermo-terms dt,
+    .thermo-terms dd {
+      margin: 0;
+    }
+
+    .thermo-terms dt {
+      color: var(--paper);
+      font-family: "Roboto Mono", monospace;
+      font-size: .68rem;
+      font-weight: 500;
+      line-height: 1.55;
+      text-transform: uppercase;
+    }
+
+    .thermo-terms dt span {
+      display: block;
+      margin-bottom: .3rem;
+      color: var(--circuit);
+      font-size: .58rem;
+      letter-spacing: .08em;
+    }
+
+    .thermo-terms dd {
+      color: var(--steel);
+      font-size: .86rem;
+      line-height: 1.68;
+    }
+
+    .thermo-status {
+      display: grid;
+      grid-template-columns: minmax(10rem, .38fr) minmax(0, 1fr);
+      gap: 1.5rem;
+      margin: 1px 0 0;
+      padding: 1.35rem;
+      border: 1px solid var(--line);
+      border-left-color: var(--signal);
+      background: var(--void);
+      color: var(--steel);
+      font-size: .82rem;
+      line-height: 1.68;
+    }
+
+    .thermo-status strong {
+      color: var(--signal);
+      font-family: "Roboto Mono", monospace;
+      font-size: .66rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .thermo-status a {
+      color: var(--paper);
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .thermo-status a:hover {
+      color: var(--signal);
+      border-color: var(--signal);
     }
 
     .pillar-ledger {
@@ -712,6 +996,14 @@
         max-width: 30rem;
       }
 
+      .energy-comparison {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .thermo-frame {
+        grid-template-columns: 1fr;
+      }
+
       .readiness-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -735,6 +1027,9 @@
       }
 
       .section-header,
+      .energy-header,
+      .energy-denominator,
+      .thermo-status,
       .pillar-ledger__item,
       .verification-grid,
       .record-grid {
@@ -743,6 +1038,23 @@
 
       .section-header {
         gap: 1.5rem;
+      }
+
+      .energy-header {
+        gap: 1.5rem;
+      }
+
+      .energy-comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .energy-case {
+        min-height: 18rem;
+      }
+
+      .thermo-terms div {
+        grid-template-columns: 1fr;
+        gap: .4rem;
       }
 
       .architecture-wrap {
@@ -865,7 +1177,7 @@
         <p class="eyebrow">Axiotic AI research programme · submitted to SPRIND NFAI</p>
         <h1 id="page-title">DAEDALUS <span>Compositional Intelligence</span></h1>
         <p class="hero-copy">Intelligence is not the size of the fire. It is the shape of the forge.</p>
-        <p class="hero-thesis">A human brain is an existence proof: general intelligence at roughly 20 watts—about three bananas a day. DAEDALUS asks which architectural principles let artificial systems turn limited energy, data, and time into more adaptive intelligence.</p>
+        <p class="hero-thesis">A human brain is an existence proof: at roughly 20 watts it runs continuous perception, memory, learning, planning, and action. DAEDALUS asks which architectural principles let artificial systems turn limited energy, data, and time into more adaptive intelligence.</p>
       </div>
 
       <aside class="target-panel" aria-label="DAEDALUS programme target">
@@ -877,6 +1189,55 @@
         </p>
         <p class="target-compute">Proposed at approximately <strong>1/100 compute</strong>. This is the programme’s wager and evaluation target—not a reported outcome.</p>
       </aside>
+    </section>
+
+    <section class="energy-section" aria-labelledby="energy-heading">
+      <header class="energy-header">
+        <div>
+          <p class="eyebrow">Energy, with the denominator named</p>
+          <h2 class="energy-heading" id="energy-heading">What the watt buys.</h2>
+        </div>
+        <p class="energy-header-copy"><strong>Power is a rate; energy is power integrated over time.</strong> A brain, one text prompt, one accelerator, and one rack are not equivalent jobs. The comparison is useful only when the workload travels with the number.</p>
+      </header>
+
+      <div class="energy-comparison" role="list" aria-label="Workload-normalized brain and AI energy comparison">
+        <article class="energy-case energy-case--brain" role="listitem">
+          <span class="energy-kind">Whole biological system</span>
+          <p class="energy-number">20 <small>W continuous</small></p>
+          <h3>Human brain</h3>
+          <p><strong>360 Wh over 18 waking hours</strong>—the programme’s “three bananas” shorthand. Over 24 hours it is 480 Wh. That budget supports perception, action, memory, learning, language, planning, and biological maintenance simultaneously.</p>
+          <a class="energy-source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6092772/" target="_blank" rel="noopener noreferrer">Brain energy-budget study ↗</a>
+        </article>
+
+        <article class="energy-case" role="listitem">
+          <span class="energy-kind">Measured serving energy</span>
+          <p class="energy-number">0.24 <small>Wh / prompt</small></p>
+          <h3>Median Gemini text prompt</h3>
+          <p>Google’s system-wide estimate for a <strong>median Gemini Apps text prompt</strong>. It buys one bounded text-generation request from a pretrained model—not vision, action, online learning, memory consolidation, or the energy used to train the model.</p>
+          <a class="energy-source" href="https://services.google.com/fh/files/misc/measuring_the_environmental_impact_of_delivering_ai_at_google_scale.pdf" target="_blank" rel="noopener noreferrer">Google measurement paper ↗</a>
+        </article>
+
+        <article class="energy-case" role="listitem">
+          <span class="energy-kind">Accelerator power ceiling</span>
+          <p class="energy-number">700 <small>W TDP</small></p>
+          <h3>One H100 SXM GPU</h3>
+          <p>Configurable at <strong>up to 700 W</strong>—35× the brain’s continuous power. It executes tensor operations for LLM training or inference, often batching work across requests. This is one chip’s design ceiling, not per-query energy or a whole AI system.</p>
+          <a class="energy-source" href="https://www.nvidia.com/en-gb/data-center/h100/" target="_blank" rel="noopener noreferrer">NVIDIA H100 specification ↗</a>
+        </article>
+
+        <article class="energy-case" role="listitem">
+          <span class="energy-kind">Rack-scale system power</span>
+          <p class="energy-number">120 <small>kW / rack</small></p>
+          <h3>GB200 NVL72</h3>
+          <p>NVIDIA documents <strong>approximately 120 kW</strong> for a rack with 72 GPUs and 36 CPUs: 6,000× brain-level power at the rack boundary. It is built for large-model training and high-throughput inference shared across jobs and users—not one answer from one “AI brain.”</p>
+          <a class="energy-source" href="https://docs.nvidia.com/dgx/dgxgb200-user-guide/hardware.html" target="_blank" rel="noopener noreferrer">NVIDIA rack-system guide ↗</a>
+        </article>
+      </div>
+
+      <div class="energy-denominator">
+        <strong>Raw arithmetic: one waking brain-day ≈ 1,500 median text prompts.</strong>
+        <p>Semantic reality: the brain is doing the entire embodied, stateful, continuously learning job; each prompt is one bounded text inference on a model whose training cost sits elsewhere. Equal joules do not imply equal intelligence. The gap is a clue about architecture, not a benchmark victory.</p>
+      </div>
     </section>
 
     <section class="section" aria-labelledby="architecture-heading">
@@ -927,6 +1288,49 @@
         </ol>
         <p class="architecture-caption"><strong>Conceptual architecture, not a literal tensor graph.</strong><span>Mobile order follows C1 → C7.</span></p>
       </div>
+    </section>
+
+    <section class="section" aria-labelledby="thermo-heading">
+      <header class="section-header">
+        <div>
+          <p class="eyebrow">Information thermodynamics</p>
+          <h2 class="section-heading" id="thermo-heading">Adaptive value per watt.</h2>
+        </div>
+        <p class="section-intro">Intelligence is a thermodynamic engine. The question is not how much information a system can process, but how much <strong>adaptive value per unit of energy</strong> it can extract. The Thermodynamic Structure Principle asks us to optimise the architecture of information flow—not only the weights inside a fixed architecture.</p>
+      </header>
+
+      <div class="thermo-frame">
+        <div class="thermo-equation">
+          <span class="formula-label">Candidate architecture-aware objective</span>
+          <p class="formula" aria-label="F of theta and A equals computational energy plus effective temperature times model complexity minus effective temperature times predictive value">
+            <span class="formula-function">F[θ, A]</span>
+            <span class="formula-operator">=</span>
+            <span>E<sub>comp</sub></span>
+            <span class="formula-operator">+</span>
+            <span>T<sub>eff</sub>D<sub>KL</sub></span>
+            <span class="formula-operator">−</span>
+            <span>T<sub>eff</sub>I(Y;T<sub>θ</sub>)</span>
+          </p>
+          <p class="formula-caption">Minimise the energy cost of computation and unnecessary model complexity; maximise predictive information. The distinctive move is making architecture <em>A</em>—topology, memory, and compression—a first-class optimisation variable.</p>
+        </div>
+
+        <dl class="thermo-terms">
+          <div>
+            <dt><span>Pay</span>Computational energy</dt>
+            <dd>Physical or realised cost of running and learning through an architecture. Measured joules, FLOPs, and thermodynamic lower bounds are different notions and must remain separate.</dd>
+          </div>
+          <div>
+            <dt><span>Pay</span>Model complexity</dt>
+            <dd>The information required to move from the prior to the learned system: a compression or description-length pressure against unnecessary structure.</dd>
+          </div>
+          <div>
+            <dt><span>Earn</span>Predictive value</dt>
+            <dd>Information about the world that changes a prediction or action. Non-predictive information is retained and moved at a cost without buying adaptive value.</dd>
+          </div>
+        </dl>
+      </div>
+
+      <p class="thermo-status"><strong>Scientific status</strong><span>This is an <em>interpretive framework, not a proven law</em> or a grand unification. The direct evidence is narrower: at small scale, topology changed capability thresholds and measured energy-to-competence. Universality, frontier-scale transfer, and the thermodynamic interpretation remain falsifiable hypotheses. <a href="https://github.com/axiotic-ai/tsp" target="_blank" rel="noopener noreferrer">Inspect the public TSP work →</a></span></p>
     </section>
 
     <section class="section" aria-labelledby="pillars-heading">
@@ -1107,6 +1511,7 @@
           <ul class="evidence-list">
             <li><strong>Structure programme:</strong> 432 controlled runs across 144 conditions, with 3 seeds per condition.</li>
             <li><strong>Observed behaviour:</strong> 0→100% sharp capability transitions within a Δp=0.05 connectivity change. These are <em>sharp capability transitions</em>, not proven phase transitions.</li>
+            <li><strong>Energy-to-competence:</strong> the critical tested topology reached copy competence in <strong>3,077 ± 124 J</strong> on an RTX 4090—about a quarter-percent of the programme’s banana unit—and used <strong>7–26% less measured energy</strong> than denser equally reliable tested configurations. This is an engineering result, not fundamental thermodynamics.</li>
             <li><strong>CHRONOS:</strong> promising small-scale preference result; H1 falsified at 150M. The remaining claim is a crossover hypothesis, not a win.</li>
             <li><strong>Infrastructure:</strong> Antreas built the two-node, five-GPU k3s cluster used for the programme.</li>
             <li><strong>Attribution:</strong> Samuel Jones leads MNEME; MNEME findings belong to the Axiotic programme/team.</li>
