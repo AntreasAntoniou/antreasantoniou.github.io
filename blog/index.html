@@ -12,11 +12,36 @@
   <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
   <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } };</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .writing-shell { width: min(100% - 2rem, 64rem); margin-inline: auto; }
+    .archivum-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, .7fr); gap: 2rem; align-items: end; margin: 5rem 0 1.5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+    .archivum-heading h2 { margin: .25rem 0 0; font-size: clamp(2rem, 5vw, 3.25rem); }
+    .archivum-heading p { margin: 0; color: var(--text-secondary); line-height: 1.75; }
+    .archivum-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .archivum-card { position: relative; display: flex; min-height: 18rem; flex-direction: column; padding: 1.6rem; overflow: hidden; }
+    .archivum-card::after { content: ""; position: absolute; inset: auto 1.6rem 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+    .archivum-card:hover::after { transform: scaleX(1); }
+    .archivum-card__meta { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.25rem; color: var(--text-muted); font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .archivum-card h3 { margin: 0 0 .8rem; font-size: 1.35rem; }
+    .archivum-card h3 a { color: var(--text); }
+    .archivum-card p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+    .archivum-card__read { margin-top: auto; padding-top: 1.25rem; font-size: .9rem; font-weight: 700; }
+    .published-heading { margin: 5rem 0 1.5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+    .published-heading h2 { margin: .25rem 0 0; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    @media (max-width: 720px) {
+      .archivum-heading, .archivum-grid { grid-template-columns: 1fr; }
+      .archivum-heading { gap: .8rem; margin-top: 3.5rem; }
+      .archivum-card { min-height: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) { .archivum-card::after { transition: none; } }
+  </style>
   <script>
     (function() {
       const saved = localStorage.getItem('theme');
@@ -64,13 +89,100 @@
   </nav>
 
   <main class="pt-24 pb-20">
-    <div class="max-w-3xl mx-auto px-4">
+    <div class="writing-shell">
 
       <!-- Header -->
       <div class="mb-12">
         <h1 class="text-4xl font-bold mb-3">Writing</h1>
         <p class="text-secondary text-lg">Thoughts on AI, machine learning, efficiency, and what it means to build intelligence that doesn't need a skyscraper to run.</p>
       </div>
+
+      <section aria-labelledby="archivum-heading">
+        <header class="archivum-heading">
+          <div>
+            <span class="eyebrow">Ten field notes · one research trajectory</span>
+            <h2 id="archivum-heading">From the Research Archivum</h2>
+          </div>
+          <p>Podcast-born essays on efficient models, memory, attention, learning, and the systems we might build when intelligence is treated as a resource budget rather than a parameter count.</p>
+        </header>
+
+        <div class="archivum-grid">
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Efficiency</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/nano-models/">Aircraft Carriers and Fishing Boats</a></h3>
+            <p>Why production AI often needs a narrow, local specialist rather than a general-purpose model with a datacentre behind it.</p>
+            <a class="archivum-card__read" href="/blog/nano-models/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Local-first AI</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/fortress-mode/">Fortress Mode</a></h3>
+            <p>The most useful personal AI is also the most invasive. Trust has to be enforced by architecture, not promised by policy.</p>
+            <a class="archivum-card__read" href="/blog/fortress-mode/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Cognition</span><span>·</span><span>9 min</span></div>
+            <h3><a href="/blog/ai-memory-and-cognition/">If You Don’t Use It, You Lose It</a></h3>
+            <p>AI changes our portfolio of skills: less mechanical production, more decomposition and judgment. The trade remains unsettled.</p>
+            <a class="archivum-card__read" href="/blog/ai-memory-and-cognition/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Model compression</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/distillation/">Distillation: Teaching Small Models Big Tricks</a></h3>
+            <p>How broad frontier capability can become a small, task-specific model—and where the teacher–student metaphor breaks down.</p>
+            <a class="archivum-card__read" href="/blog/distillation/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Education</span><span>·</span><span>9 min</span></div>
+            <h3><a href="/blog/ai-education/">The Gamification Hypothesis</a></h3>
+            <p>Personal tutoring is only half the problem. The harder question is whether an AI can make deep learning more rewarding than shortcuts.</p>
+            <a class="archivum-card__read" href="/blog/ai-education/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Persistent memory</span><span>·</span><span>9 min</span></div>
+            <h3><a href="/blog/building-jarvis/">Building Jarvis</a></h3>
+            <p>A personal assistant without memory is a clever stranger. What changes when context can accumulate safely over years?</p>
+            <a class="archivum-card__read" href="/blog/building-jarvis/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Systems design</span><span>·</span><span>7 min</span></div>
+            <h3><a href="/blog/cheap-then-clean/">The Cheap-Then-Clean Architecture</a></h3>
+            <p>Spend little compute continuously, then spend heavily only where signal accumulates: a reusable pattern for resource-rational pipelines.</p>
+            <a class="archivum-card__read" href="/blog/cheap-then-clean/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Architecture</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/attention-learns-its-wiring/">Attention Learns Its Own Wiring</a></h3>
+            <p>Attention’s central move was not merely focus. It made connectivity conditional on the input—and therefore learnable.</p>
+            <a class="archivum-card__read" href="/blog/attention-learns-its-wiring/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Research craft</span><span>·</span><span>7 min</span></div>
+            <h3><a href="/blog/failing-optimally/">Failing Optimally</a></h3>
+            <p>Failure is not judgment; it is information. The research skill is designing failures that collapse the search space quickly.</p>
+            <a class="archivum-card__read" href="/blog/failing-optimally/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Embodied AI</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/embodied-ai/">Embodied AI: Fluffy Balls That Float</a></h3>
+            <p>Useful physical intelligence may look less like a metal person and more like soft, local, ambient objects with forms fitted to function.</p>
+            <a class="archivum-card__read" href="/blog/embodied-ai/">Read the field note →</a>
+          </article>
+        </div>
+      </section>
+
+      <header class="published-heading">
+        <span class="eyebrow">Selected publications</span>
+        <h2>Published elsewhere</h2>
+      </header>
 
       <!-- Articles -->
       <div class="space-y-6">
@@ -142,7 +254,7 @@
 
       <!-- Divider + note -->
       <div class="mt-12 pt-8 border-t" style="border-color:var(--border)">
-        <p class="text-muted text-sm">More writing coming. Follow <a href="https://x.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">@AntreasAntoniou</a> for updates, or reach out at <a href="mailto:antreas@axiotic.ai" class="text-accent hover:underline">antreas@axiotic.ai</a>.</p>
+        <p class="text-muted text-sm">These essays began as a January 2025 conversation and were developed in the Research Archivum. Follow <a href="https://x.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">@AntreasAntoniou</a> for new work, or reach out at <a href="mailto:antreas@axiotic.ai" class="text-accent hover:underline">antreas@axiotic.ai</a>.</p>
       </div>
 
     </div>
