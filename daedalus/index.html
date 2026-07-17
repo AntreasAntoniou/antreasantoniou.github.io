@@ -352,7 +352,7 @@
 
     .energy-comparison {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1px;
       border: 1px solid var(--line);
       background: var(--line);
@@ -1405,7 +1405,7 @@
           <p class="eyebrow">Bananas for scale · energy with the denominator named</p>
           <h2 class="energy-heading" id="energy-heading">What the watt buys.</h2>
         </div>
-        <p class="energy-header-copy"><strong>Power is a rate; energy is power integrated over time.</strong> A brain, one text prompt, one accelerator, and one rack are not equivalent jobs. The comparison is useful only when the workload travels with the number.</p>
+        <p class="energy-header-copy"><strong>Power is a rate; energy is power integrated over time.</strong> A brain, one accelerator, and one rack are not equivalent systems or jobs. The comparison is useful only when the workload travels with the number.</p>
       </header>
 
       <aside class="banana-key" aria-label="Banana energy reference">
@@ -1422,15 +1422,6 @@
           <h3>Human brain</h3>
           <p><strong>360 Wh over 18 waking hours</strong>—the programme’s “three bananas” shorthand. Over 24 hours it is 480 Wh. That budget supports perception, action, memory, learning, language, planning, and biological maintenance simultaneously.</p>
           <a class="energy-source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6092772/" target="_blank" rel="noopener noreferrer">Brain energy-budget study ↗</a>
-        </article>
-
-        <article class="energy-case" role="listitem">
-          <span class="energy-kind">Measured serving energy</span>
-          <p class="energy-number">0.24 <small>Wh / prompt</small></p>
-          <span class="banana-metric">0.002 bananas/prompt · approximately 1/500 of a banana</span>
-          <h3>Median Gemini text prompt</h3>
-          <p>Google’s system-wide estimate for a <strong>median Gemini Apps text prompt</strong>. It buys one bounded text-generation request from a pretrained model—not vision, action, online learning, memory consolidation, or the energy used to train the model.</p>
-          <a class="energy-source" href="https://services.google.com/fh/files/misc/measuring_the_environmental_impact_of_delivering_ai_at_google_scale.pdf" target="_blank" rel="noopener noreferrer">Google measurement paper ↗</a>
         </article>
 
         <article class="energy-case" role="listitem">
@@ -1453,8 +1444,8 @@
       </div>
 
       <div class="energy-denominator">
-        <strong>Raw arithmetic: one waking brain-day ≈ 1,500 median text prompts.</strong>
-        <p>Semantic reality: the brain is doing the entire embodied, stateful, continuously learning job; each prompt is one bounded text inference on a model whose training cost sits elsewhere. Equal joules do not imply equal intelligence. The gap is a clue about architecture, not a benchmark victory.</p>
+        <strong>Raw arithmetic: one H100-hour ≈ 35 brain-hours; one GB200 rack-hour ≈ 6,000 brain-hours.</strong>
+        <p>Semantic reality: the brain’s 20 W continuously supports the whole embodied stack; accelerator and rack power serves tensor computation across training runs, batched jobs, and users. Equal energy does not imply equal intelligence. The gap is a clue about architecture, not a benchmark victory.</p>
       </div>
     </section>
 

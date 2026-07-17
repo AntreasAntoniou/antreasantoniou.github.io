@@ -43,17 +43,17 @@ test('compares brain and AI energy only after naming the workload and unit', () 
   assert.match(visibleText, /20 W continuous/);
   assert.match(visibleText, /360 Wh over 18 waking hours/);
   assert.match(visibleText, /three bananas/);
-  assert.match(visibleText, /0\.24 Wh \/ prompt/);
-  assert.match(visibleText, /median Gemini Apps text prompt/);
   assert.match(visibleText, /up to 700 W/);
   assert.match(visibleText, /approximately 120 kW/);
   assert.match(visibleText, /Power is a rate; energy is power integrated over time/);
-  assert.match(visibleText, /one bounded text-generation request/i);
   assert.match(visibleText, /perception, action, memory, learning, language, planning, and biological maintenance/i);
   assert.match(html, /pmc\.ncbi\.nlm\.nih\.gov\/articles\/PMC6092772/);
-  assert.match(html, /measuring_the_environmental_impact_of_delivering_ai_at_google_scale\.pdf/);
   assert.match(html, /nvidia\.com\/en-gb\/data-center\/h100/);
   assert.match(html, /docs\.nvidia\.com\/dgx\/dgxgb200-user-guide\/hardware\.html/);
+  assert.equal(count(/<article class="energy-case\b/g), 3);
+  assert.match(visibleText, /one H100-hour ≈ 35 brain-hours; one GB200 rack-hour ≈ 6,000 brain-hours/i);
+  assert.doesNotMatch(visibleText, /Gemini|prompt|0\.24 Wh/i);
+  assert.doesNotMatch(html, /measuring_the_environmental_impact_of_delivering_ai_at_google_scale\.pdf/);
 });
 
 test('gives every workload a calibrated bananas-for-scale conversion', () => {
@@ -62,10 +62,10 @@ test('gives every workload a calibrated bananas-for-scale conversion', () => {
   assert.match(visibleText, /105 kcal/);
   assert.match(visibleText, /approximately 122 Wh of food energy/);
   assert.match(visibleText, /0\.16 bananas\/hour · approximately 3 per 18 waking hours/);
-  assert.match(visibleText, /0\.002 bananas\/prompt · approximately 1\/500 of a banana/);
   assert.match(visibleText, /5\.7 bananas\/hour at the 700 W ceiling/);
   assert.match(visibleText, /approximately 980 bananas\/hour at the rack boundary/);
   assert.match(html, /snaped\.fns\.usda\.gov\/seasonal-produce-guide\/bananas/);
+  assert.equal(count(/class="banana-metric"/g), 3);
 });
 
 test('presents information thermodynamics as a falsifiable interpretive spine', () => {
