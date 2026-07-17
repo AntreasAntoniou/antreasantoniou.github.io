@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAEDALUS | Antreas Antoniou</title>
+  <meta name="description" content="DAEDALUS is a research programme for resource-rational AI architectures, organised around five scientific pillars.">
+  <link rel="canonical" href="https://antreas.io/daedalus/">
+  <link rel="icon" href="../images/favicon-bot.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    :root { color-scheme: light; }
+    [data-theme="dark"] { color-scheme: dark; }
+    .page-shell { width: min(100% - 2rem, 70rem); margin: 0 auto; }
+    .site-header { border-bottom: 1px solid var(--border); }
+    .site-header .page-shell { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; }
+    .wordmark { color: var(--text); font-size: 1.125rem; font-weight: 700; letter-spacing: -0.025em; }
+    .wordmark span { color: var(--accent); }
+    .back-link { color: var(--text-secondary); font-size: .9375rem; font-weight: 600; }
+    .back-link:hover { color: var(--accent); }
+    main { padding: clamp(3.5rem, 9vw, 7rem) 0 5rem; }
+    .eyebrow { margin: 0 0 1rem; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(13rem, .65fr); gap: clamp(2rem, 7vw, 6rem); align-items: end; padding-bottom: clamp(3rem, 7vw, 5.5rem); border-bottom: 1px solid var(--border); }
+    .hero h1 { max-width: 10ch; margin: 0; font-family: "Source Serif 4", Georgia, serif; font-size: clamp(3.4rem, 9vw, 6.5rem); font-weight: 500; line-height: .88; letter-spacing: -.065em; }
+    .hero-copy { max-width: 42rem; margin: 1.75rem 0 0; color: var(--text-secondary); font-size: clamp(1.125rem, 2.4vw, 1.375rem); line-height: 1.65; }
+    .hero-note { margin: 0; padding: 1.25rem 0 1.25rem 1.25rem; border-left: 2px solid var(--accent); color: var(--text-secondary); font-size: .975rem; line-height: 1.7; }
+    .section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
+    .section-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, .68fr); gap: 2rem; align-items: end; margin-bottom: 2.5rem; }
+    .section-heading { max-width: 16ch; margin: 0; font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -.05em; }
+    .section-intro { max-width: 34rem; margin: 0; color: var(--text-secondary); line-height: 1.7; }
+    .pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+    .pillar { min-height: 16.25rem; padding: clamp(1.4rem, 3vw, 2rem); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-card); }
+    .pillar:last-child { grid-column: 1 / -1; min-height: auto; }
+    .pillar-kicker { display: block; margin: 0 0 2.5rem; color: var(--text-muted); font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .pillar h3 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.85rem); letter-spacing: -.04em; }
+    .pillar p { max-width: 31rem; margin: .8rem 0 0; color: var(--text-secondary); font-size: 1.025rem; line-height: 1.65; }
+    .pillar .target { margin-top: 1.35rem; color: var(--accent); font-size: .9rem; font-weight: 700; line-height: 1.55; }
+    .evidence-section { border-top: 1px solid var(--border); }
+    .evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--border); background: var(--border); }
+    .evidence-item { padding: clamp(1.35rem, 3vw, 2rem); background: var(--bg-secondary); }
+    .evidence-item h3 { margin: 0; font-size: 1rem; }
+    .evidence-item p { margin: .7rem 0 0; color: var(--text-secondary); line-height: 1.7; }
+    .evidence-item--attribution { grid-column: 1 / -1; background: var(--bg-card); }
+    .links-section { padding-top: 0; }
+    .resource-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 0; list-style: none; border: 1px solid var(--border); background: var(--border); }
+    .resource-list a { display: flex; flex-direction: column; justify-content: space-between; min-height: 8.5rem; padding: 1.35rem; background: var(--bg-card); color: var(--text); font-weight: 700; }
+    .resource-list a:hover { background: var(--accent-light); color: var(--text); }
+    .resource-list small { display: block; margin-top: 1.75rem; color: var(--text-muted); font-size: .7rem; font-weight: 700; letter-spacing: .12em; }
+    .historical-record { display: grid; grid-template-columns: minmax(13rem, .58fr) minmax(0, 1.42fr); gap: clamp(1.25rem, 4vw, 3rem); align-items: start; margin-top: 1rem; padding: clamp(1.35rem, 3vw, 2rem); border: 1px solid var(--border); background: var(--bg-secondary); }
+    .historical-record h3 { margin: 0 0 .7rem; font-size: 1rem; }
+    .historical-record p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+    .historical-record a { display: inline-block; margin-top: 1rem; font-weight: 700; }
+    footer { padding: 2rem 0 3rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .875rem; }
+    footer p { margin: 0; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: .2rem; }
+    @media (max-width: 720px) {
+      .hero, .section-header { grid-template-columns: 1fr; }
+      .hero-note { max-width: 34rem; }
+      .pillars, .evidence-grid, .resource-list, .historical-record { grid-template-columns: 1fr; }
+      .pillar:last-child, .evidence-item--attribution { grid-column: auto; }
+      .pillar { min-height: auto; }
+      .pillar-kicker { margin-bottom: 1.75rem; }
+    }
+  </style>
+  <script>
+    (function () {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    }());
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell">
+      <a class="wordmark" href="../" aria-label="Antreas Antoniou home">Antreas<span>.</span></a>
+      <a class="back-link" href="../">Back to home</a>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Axiotic AI research programme</p>
+        <h1 id="page-title">DAEDALUS</h1>
+        <p class="hero-copy">A programme for resource-rational AI architectures: spend computation where information gain is highest, rather than processing everything uniformly.</p>
+      </div>
+      <p class="hero-note">The brain runs general intelligence on roughly 20 watts—about three bananas a day. Five scientific pillars test a single proposition: more capable systems may come from better organised computation, not only from more of it.</p>
+    </section>
+
+    <section class="section" aria-labelledby="pillars-heading">
+      <header class="section-header">
+        <div>
+          <p class="eyebrow">Research architecture</p>
+          <h2 class="section-heading" id="pillars-heading">Five core scientific pillars</h2>
+        </div>
+        <p class="section-intro">Each pillar is a research direction. The programme is designed to make its assumptions inspectable and its claims testable. All numerical programme objectives are research targets, not achieved results.</p>
+      </header>
+
+      <div class="pillars">
+        <article id="soma" class="pillar">
+          <span class="pillar-kicker">Attention allocation</span>
+          <h3>SOMA</h3>
+          <p>Allocate deep attention where uncertainty is highest.</p>
+          <p class="target">Research target: equivalent quality at no more than 50% of the FLOPs.</p>
+        </article>
+        <article id="resa" class="pillar">
+          <span class="pillar-kicker">Relational reasoning</span>
+          <h3>ReSA</h3>
+          <p>Replace fixed dot-product similarity with learned relational scoring.</p>
+          <p class="target">Research target: ≥5% compositional gain at compute parity.</p>
+        </article>
+        <article id="mneme" class="pillar">
+          <span class="pillar-kicker">Memory and recursion</span>
+          <h3>MNEME</h3>
+          <p>Persistent differentiable read/write memory with recursive latent refinement.</p>
+          <p class="target">Research target: ≥50% less context degradation over 10× context.</p>
+        </article>
+        <article id="intuitus" class="pillar">
+          <span class="pillar-kicker">World modelling</span>
+          <h3>Intuitus</h3>
+          <p>Multimodal world modelling and cheap internal simulation.</p>
+          <p class="target">Research target: ≥2× transfer efficiency.</p>
+        </article>
+        <article id="chronos" class="pillar">
+          <span class="pillar-kicker">Temporal structure</span>
+          <h3>CHRONOS</h3>
+          <p>Learn temporal structure from past, present, and future prediction.</p>
+          <p class="target">Research target: exceed frontier performance per FLOP.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section evidence-section" aria-labelledby="evidence-heading">
+      <header class="section-header">
+        <div>
+          <p class="eyebrow">Working record</p>
+          <h2 class="section-heading" id="evidence-heading">Evidence, including the checks that did not go our way</h2>
+        </div>
+        <p class="section-intro">This is a constrained record of cleared observations and infrastructure, not a claim that the programme has reached its intended destination. Provenance: corrected internal DAEDALUS audit. The linked public TSP repository is an earlier snapshot; its run count and phase-transition terminology are superseded.</p>
+      </header>
+
+      <div class="evidence-grid">
+        <article class="evidence-item">
+          <h3>Controlled experimental base</h3>
+          <p>432 controlled runs, 144 conditions, 3 seeds.</p>
+        </article>
+        <article class="evidence-item">
+          <h3>Sharp capability transitions</h3>
+          <p>Observed 0→100% capability transitions within Δp=0.05. These sharp capability transitions are not presented as proven phase transitions.</p>
+        </article>
+        <article class="evidence-item">
+          <h3>CHRONOS check</h3>
+          <p>At 150M, the pure triad objective lost to next-token prediction on validation loss. A crossover in another scale or data regime remains a falsifiable hypothesis.</p>
+        </article>
+        <article class="evidence-item">
+          <h3>Research infrastructure</h3>
+          <p>Antreas built a two-node five-GPU k3s cluster for the programme.</p>
+        </article>
+        <article class="evidence-item evidence-item--attribution">
+          <h3>Attribution</h3>
+          <p>Samuel Jones leads MNEME within Axiotic. Its evidence and results are programme/team results, not Antreas’s individual build.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section links-section" aria-labelledby="public-record-heading">
+      <header class="section-header">
+        <div>
+          <p class="eyebrow">Public record</p>
+          <h2 class="section-heading" id="public-record-heading">Follow the work in public</h2>
+        </div>
+        <p class="section-intro">This page is the current programme definition. The links below are public Axiotic resources and companion context, not alternative authorities for the programme.</p>
+      </header>
+
+      <ul class="resource-list">
+        <li><a href="https://github.com/axiotic-ai" target="_blank" rel="noopener noreferrer">Axiotic AI on GitHub <small>PUBLIC ORGANISATION ↗</small></a></li>
+        <li><a href="https://github.com/axiotic-ai/tsp" target="_blank" rel="noopener noreferrer">Structure experiments <small>PUBLIC REPOSITORY ↗</small></a></li>
+        <li><a href="https://axiotic.ai/" target="_blank" rel="noopener noreferrer">Axiotic research lab <small>CURRENT LAB ↗</small></a></li>
+        <li><a href="https://axiotic.ai/init/" target="_blank" rel="noopener noreferrer">Axiotic INIT <small>COMPANION CONTEXT ↗</small></a></li>
+      </ul>
+
+      <aside class="historical-record" aria-labelledby="historical-record-heading">
+        <div>
+          <h3 id="historical-record-heading">Historical programme artefact</h3>
+          <a href="../documents/daedalus/daedalus-next-frontier-ai-submission.pdf" target="_blank" rel="noopener noreferrer">Read the superseded June 2026 NFAI submission →</a>
+        </div>
+        <p>Historical artefact — June 2026 NFAI submission. This records an earlier six-component fundraising version of DAEDALUS and contains superseded objectives and claims; it is not the current programme definition or evidence of achieved results.</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page-shell"><p>© Antreas Antoniou</p></div>
+  </footer>
+</body>
+</html>
