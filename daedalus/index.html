@@ -3,198 +3,1164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAEDALUS | Antreas Antoniou</title>
-  <meta name="description" content="DAEDALUS is a research programme for resource-rational AI architectures, organised around five scientific pillars.">
+  <title>DAEDALUS — Compositional Intelligence | Antreas Antoniou</title>
+  <meta name="description" content="DAEDALUS is Axiotic AI’s programme for compositional, resource-rational intelligence: seven testable capabilities designed to work as one system.">
   <link rel="canonical" href="https://antreas.io/daedalus/">
   <link rel="icon" href="../images/favicon-bot.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Roboto+Mono:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <style>
-    :root { color-scheme: light; }
-    [data-theme="dark"] { color-scheme: dark; }
-    .page-shell { width: min(100% - 2rem, 70rem); margin: 0 auto; }
-    .site-header { border-bottom: 1px solid var(--border); }
-    .site-header .page-shell { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; }
-    .wordmark { color: var(--text); font-size: 1.125rem; font-weight: 700; letter-spacing: -0.025em; }
-    .wordmark span { color: var(--accent); }
-    .back-link { color: var(--text-secondary); font-size: .9375rem; font-weight: 600; }
-    .back-link:hover { color: var(--accent); }
-    main { padding: clamp(3.5rem, 9vw, 7rem) 0 5rem; }
-    .eyebrow { margin: 0 0 1rem; }
-    .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(13rem, .65fr); gap: clamp(2rem, 7vw, 6rem); align-items: end; padding-bottom: clamp(3rem, 7vw, 5.5rem); border-bottom: 1px solid var(--border); }
-    .hero h1 { max-width: 10ch; margin: 0; font-family: "Source Serif 4", Georgia, serif; font-size: clamp(3.4rem, 9vw, 6.5rem); font-weight: 500; line-height: .88; letter-spacing: -.065em; }
-    .hero-copy { max-width: 42rem; margin: 1.75rem 0 0; color: var(--text-secondary); font-size: clamp(1.125rem, 2.4vw, 1.375rem); line-height: 1.65; }
-    .hero-note { margin: 0; padding: 1.25rem 0 1.25rem 1.25rem; border-left: 2px solid var(--accent); color: var(--text-secondary); font-size: .975rem; line-height: 1.7; }
-    .section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
-    .section-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, .68fr); gap: 2rem; align-items: end; margin-bottom: 2.5rem; }
-    .section-heading { max-width: 16ch; margin: 0; font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -.05em; }
-    .section-intro { max-width: 34rem; margin: 0; color: var(--text-secondary); line-height: 1.7; }
-    .pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
-    .pillar { min-height: 16.25rem; padding: clamp(1.4rem, 3vw, 2rem); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-card); }
-    .pillar:last-child { grid-column: 1 / -1; min-height: auto; }
-    .pillar-kicker { display: block; margin: 0 0 2.5rem; color: var(--text-muted); font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-    .pillar h3 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.85rem); letter-spacing: -.04em; }
-    .pillar p { max-width: 31rem; margin: .8rem 0 0; color: var(--text-secondary); font-size: 1.025rem; line-height: 1.65; }
-    .pillar .target { margin-top: 1.35rem; color: var(--accent); font-size: .9rem; font-weight: 700; line-height: 1.55; }
-    .evidence-section { border-top: 1px solid var(--border); }
-    .evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--border); background: var(--border); }
-    .evidence-item { padding: clamp(1.35rem, 3vw, 2rem); background: var(--bg-secondary); }
-    .evidence-item h3 { margin: 0; font-size: 1rem; }
-    .evidence-item p { margin: .7rem 0 0; color: var(--text-secondary); line-height: 1.7; }
-    .evidence-item--attribution { grid-column: 1 / -1; background: var(--bg-card); }
-    .links-section { padding-top: 0; }
-    .resource-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 0; list-style: none; border: 1px solid var(--border); background: var(--border); }
-    .resource-list a { display: flex; flex-direction: column; justify-content: space-between; min-height: 8.5rem; padding: 1.35rem; background: var(--bg-card); color: var(--text); font-weight: 700; }
-    .resource-list a:hover { background: var(--accent-light); color: var(--text); }
-    .resource-list small { display: block; margin-top: 1.75rem; color: var(--text-muted); font-size: .7rem; font-weight: 700; letter-spacing: .12em; }
-    .historical-record { display: grid; grid-template-columns: minmax(13rem, .58fr) minmax(0, 1.42fr); gap: clamp(1.25rem, 4vw, 3rem); align-items: start; margin-top: 1rem; padding: clamp(1.35rem, 3vw, 2rem); border: 1px solid var(--border); background: var(--bg-secondary); }
-    .historical-record h3 { margin: 0 0 .7rem; font-size: 1rem; }
-    .historical-record p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
-    .historical-record a { display: inline-block; margin-top: 1rem; font-weight: 700; }
-    footer { padding: 2rem 0 3rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .875rem; }
-    footer p { margin: 0; }
-    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: .2rem; }
+    :root {
+      --void: #050914;
+      --slate: #0D1526;
+      --circuit: #65A9FF;
+      --signal: #69E3D5;
+      --paper: #F4F7FC;
+      --steel: #A8B3C5;
+      --line: #24334C;
+      --line-strong: #3B5276;
+      --bg: var(--void);
+      --bg-secondary: var(--slate);
+      --bg-card: var(--slate);
+      --text: var(--paper);
+      --text-secondary: var(--steel);
+      --text-muted: #8291AA;
+      --accent: var(--circuit);
+      --accent-hover: var(--signal);
+      --accent-light: #101F35;
+      --border: var(--line);
+      --border-hover: var(--line-strong);
+      color-scheme: dark;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: clip;
+    }
+
+    body {
+      overflow-x: clip;
+      background: var(--void);
+      color: var(--paper);
+      font-family: "Inter", sans-serif;
+      transition: none;
+    }
+
+    ::selection {
+      background: var(--signal);
+      color: var(--void);
+    }
+
+    .page-shell {
+      width: min(100% - 2.5rem, 70rem);
+      margin-inline: auto;
+    }
+
+    .site-header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(5, 9, 20, .92);
+    }
+
+    .site-header .page-shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 4.5rem;
+    }
+
+    .wordmark {
+      color: var(--paper);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -.03em;
+    }
+
+    .wordmark span,
+    .accent {
+      color: var(--signal);
+    }
+
+    .back-link {
+      color: var(--steel);
+      font-family: "Roboto Mono", monospace;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .back-link:hover,
+    .wordmark:hover {
+      color: var(--signal);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--signal);
+      outline-offset: 4px;
+    }
+
+    main {
+      padding-bottom: 5rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(17rem, .65fr);
+      gap: clamp(2.5rem, 7vw, 6.5rem);
+      align-items: end;
+      min-height: min(52rem, calc(100vh - 4.5rem));
+      padding-block: clamp(5rem, 11vw, 9rem) clamp(4rem, 8vw, 7rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow,
+    .micro-label,
+    .component-id,
+    .target-label,
+    .handle,
+    .readiness-id,
+    .resource-list small {
+      font-family: "Roboto Mono", monospace;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .11em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      margin: 0 0 1.5rem;
+      color: var(--signal);
+    }
+
+    h1,
+    h2 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      max-width: 10ch;
+      margin: 0;
+      color: var(--paper);
+      font-size: clamp(4.1rem, 10.5vw, 7.75rem);
+      line-height: .79;
+      letter-spacing: -.075em;
+    }
+
+    .hero h1 span {
+      display: block;
+      max-width: 14ch;
+      margin-top: 1.35rem;
+      color: var(--circuit);
+      font-family: "Roboto Mono", monospace;
+      font-size: clamp(.78rem, 1.5vw, 1rem);
+      font-weight: 500;
+      letter-spacing: .17em;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      max-width: 36rem;
+      margin: 2.25rem 0 0;
+      color: var(--paper);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      line-height: 1.35;
+      letter-spacing: -.025em;
+    }
+
+    .hero-thesis {
+      margin: 1.3rem 0 0;
+      max-width: 40rem;
+      color: var(--steel);
+      font-size: 1.03rem;
+      line-height: 1.8;
+    }
+
+    .target-panel {
+      position: relative;
+      padding: 1.5rem;
+      border: 1px solid var(--line-strong);
+      border-top-color: var(--signal);
+      background: var(--slate);
+    }
+
+    .target-label {
+      display: block;
+      margin-bottom: 1.5rem;
+      color: var(--signal);
+    }
+
+    .target-equation {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: .8rem;
+      align-items: center;
+      margin: 0;
+    }
+
+    .target-equation strong {
+      display: block;
+      color: var(--paper);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 500;
+      letter-spacing: -.05em;
+      line-height: 1;
+    }
+
+    .target-equation small {
+      display: block;
+      margin-top: .55rem;
+      color: var(--steel);
+      font-size: .74rem;
+      line-height: 1.35;
+    }
+
+    .target-equation .arrow {
+      color: var(--circuit);
+      font-family: "Roboto Mono", monospace;
+    }
+
+    .target-compute {
+      margin: 1.35rem 0 0;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--line);
+      color: var(--steel);
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+
+    .target-compute strong {
+      color: var(--paper);
+      font-family: "Roboto Mono", monospace;
+    }
+
+    .section {
+      padding-block: clamp(4.5rem, 9vw, 8rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(18rem, 1.2fr);
+      gap: clamp(2rem, 8vw, 7rem);
+      align-items: end;
+      margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+    }
+
+    .section-heading {
+      max-width: 13ch;
+      margin: 0;
+      color: var(--paper);
+      font-size: clamp(2.5rem, 5.8vw, 4.5rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .section-intro {
+      max-width: 39rem;
+      margin: 0;
+      color: var(--steel);
+      font-size: 1.04rem;
+      line-height: 1.8;
+    }
+
+    .architecture-wrap {
+      padding: clamp(1.5rem, 4vw, 3rem);
+      border: 1px solid var(--line-strong);
+      background: var(--slate);
+    }
+
+    .architecture-circuit {
+      display: grid;
+      grid-template-columns: minmax(8rem, .85fr) minmax(10rem, 1.15fr) minmax(7rem, .72fr);
+      grid-template-areas:
+        "c6 c6 c6"
+        "c1 c2 action"
+        "c4 c3 empty"
+        "c7 c5 c5";
+      gap: 2.4rem 3rem;
+      align-items: stretch;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .architecture-node {
+      position: relative;
+      display: flex;
+      min-height: 6.2rem;
+      padding: 1.15rem;
+      border: 1px solid var(--line-strong);
+      background: var(--void);
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .architecture-node strong {
+      color: var(--paper);
+      font-size: .92rem;
+      line-height: 1.35;
+    }
+
+    .architecture-node small {
+      margin-top: .75rem;
+      color: var(--steel);
+      font-size: .72rem;
+      line-height: 1.5;
+    }
+
+    .architecture-node .component-id {
+      display: block;
+      margin-bottom: .4rem;
+      color: var(--signal);
+    }
+
+    .node-c1 { grid-area: c1; }
+    .node-c2 { grid-area: c2; border-color: var(--circuit); }
+    .node-c3 { grid-area: c3; border-color: var(--circuit); }
+    .node-c4 { grid-area: c4; }
+    .node-c5 { grid-area: c5; }
+    .node-c6 {
+      grid-area: c6;
+      min-height: 4.8rem;
+      border-color: var(--signal);
+      background: transparent;
+    }
+    .node-c7 { grid-area: c7; }
+
+    .node-c1::after,
+    .node-c4::after,
+    .node-c7::after,
+    .node-c2::after,
+    .node-c1::before,
+    .node-c2::before,
+    .node-c3::before {
+      position: absolute;
+      color: var(--circuit);
+      font-family: "Roboto Mono", monospace;
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+
+    .node-c1::after,
+    .node-c4::after,
+    .node-c7::after {
+      right: -2rem;
+      top: 50%;
+      transform: translate(50%, -50%);
+    }
+
+    .node-c1::after { content: "→"; }
+    .node-c4::after { content: "↔"; }
+    .node-c7::after { content: "←"; }
+
+    .node-c2::after {
+      content: "→ ACTION";
+      left: calc(100% + 1.15rem);
+      top: 50%;
+      width: 8rem;
+      transform: translateY(-50%);
+      color: var(--signal);
+      font-size: .72rem;
+      letter-spacing: .08em;
+    }
+
+    .node-c1::before,
+    .node-c2::before,
+    .node-c3::before {
+      bottom: -2.05rem;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
+
+    .node-c1::before { content: "↓"; }
+    .node-c2::before { content: "↕"; }
+    .node-c3::before { content: "↓"; }
+
+    .architecture-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1.5rem 0 0;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      color: var(--text-muted);
+      font-family: "Roboto Mono", monospace;
+      font-size: .68rem;
+      line-height: 1.55;
+    }
+
+    .architecture-caption strong {
+      color: var(--steel);
+      font-weight: 500;
+    }
+
+    .pillar-ledger {
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .pillar-ledger__item {
+      display: grid;
+      grid-template-columns: minmax(13rem, .62fr) minmax(0, 1.38fr);
+      gap: clamp(2rem, 7vw, 6rem);
+      padding-block: clamp(2.4rem, 5vw, 4rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pillar-ledger__item:last-child {
+      border-bottom: 0;
+    }
+
+    .pillar-title {
+      position: sticky;
+      top: 2rem;
+      align-self: start;
+    }
+
+    .pillar-title .component-id {
+      display: block;
+      margin-bottom: .75rem;
+      color: var(--signal);
+    }
+
+    .pillar-title h3 {
+      margin: 0;
+      color: var(--paper);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -.04em;
+    }
+
+    .handle {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding-top: .7rem;
+      border-top: 1px solid var(--line-strong);
+      color: var(--circuit);
+    }
+
+    .pillar-ledger dl {
+      display: grid;
+      grid-template-columns: minmax(8.5rem, .42fr) minmax(0, 1fr);
+      margin: 0;
+    }
+
+    .pillar-ledger dt,
+    .pillar-ledger dd {
+      margin: 0;
+      padding-block: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .pillar-ledger dt:first-of-type,
+    .pillar-ledger dt:first-of-type + dd {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .pillar-ledger dt {
+      padding-right: 1.25rem;
+      color: var(--text-muted);
+      font-family: "Roboto Mono", monospace;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      line-height: 1.55;
+      text-transform: uppercase;
+    }
+
+    .pillar-ledger dd {
+      color: var(--steel);
+      font-size: .94rem;
+      line-height: 1.72;
+    }
+
+    .pillar-ledger dd strong {
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    .verification-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .verification-block {
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      background: var(--slate);
+    }
+
+    .verification-block h3 {
+      margin: 0 0 1.3rem;
+      color: var(--paper);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 500;
+      letter-spacing: -.035em;
+    }
+
+    .protocol-list,
+    .evidence-list,
+    .readiness-list,
+    .resource-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .protocol-list {
+      counter-reset: protocol;
+    }
+
+    .protocol-list li {
+      counter-increment: protocol;
+      display: grid;
+      grid-template-columns: 2.1rem 1fr;
+      gap: .9rem;
+      padding-block: .8rem;
+      border-top: 1px solid var(--line);
+      color: var(--steel);
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+
+    .protocol-list li::before {
+      content: "0" counter(protocol);
+      color: var(--signal);
+      font-family: "Roboto Mono", monospace;
+      font-size: .68rem;
+    }
+
+    .evidence-list li {
+      padding-block: .95rem;
+      border-top: 1px solid var(--line);
+      color: var(--steel);
+      font-size: .9rem;
+      line-height: 1.68;
+    }
+
+    .evidence-list strong {
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    .readiness {
+      margin-top: 1px;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border: 1px solid var(--line);
+      background: var(--void);
+    }
+
+    .readiness-summary {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 0 0 1.5rem;
+      padding-bottom: 1.3rem;
+      border-bottom: 1px solid var(--line-strong);
+      color: var(--steel);
+    }
+
+    .readiness-summary strong {
+      color: var(--signal);
+      font-family: "Roboto Mono", monospace;
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+
+    .readiness-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+    }
+
+    .readiness-list li {
+      min-height: 7rem;
+      padding: 1rem;
+      background: var(--slate);
+      color: var(--steel);
+      font-size: .78rem;
+      line-height: 1.55;
+    }
+
+    .readiness-id {
+      display: block;
+      margin-bottom: .6rem;
+      color: var(--circuit);
+    }
+
+    .readiness-list strong {
+      display: block;
+      margin-bottom: .3rem;
+      color: var(--paper);
+      font-size: .95rem;
+    }
+
+    .record-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr);
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .submission-record,
+    .resources {
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      background: var(--slate);
+    }
+
+    .submission-record h3,
+    .resources h3 {
+      margin: 0;
+      color: var(--paper);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: -.04em;
+    }
+
+    .submission-record p,
+    .resources p {
+      margin: 1rem 0 0;
+      color: var(--steel);
+      font-size: .93rem;
+      line-height: 1.75;
+    }
+
+    .submission-link {
+      display: inline-flex;
+      margin-top: 2rem;
+      padding-bottom: .25rem;
+      border-bottom: 1px solid var(--circuit);
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    .submission-link:hover {
+      border-color: var(--signal);
+      color: var(--signal);
+    }
+
+    .resource-list {
+      margin-top: 1.35rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .resource-list a {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-block: .85rem;
+      border-bottom: 1px solid var(--line);
+      color: var(--paper);
+      font-size: .88rem;
+    }
+
+    .resource-list a:hover {
+      color: var(--signal);
+    }
+
+    .resource-list small {
+      color: var(--text-muted);
+      font-size: .6rem;
+    }
+
+    footer {
+      padding-block: 2.5rem;
+      border-top: 0;
+      color: var(--text-muted);
+      font-family: "Roboto Mono", monospace;
+      font-size: .68rem;
+      letter-spacing: .06em;
+    }
+
+    footer .page-shell {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .target-panel {
+        max-width: 30rem;
+      }
+
+      .readiness-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 720px) {
-      .hero, .section-header { grid-template-columns: 1fr; }
-      .hero-note { max-width: 34rem; }
-      .pillars, .evidence-grid, .resource-list, .historical-record { grid-template-columns: 1fr; }
-      .pillar:last-child, .evidence-item--attribution { grid-column: auto; }
-      .pillar { min-height: auto; }
-      .pillar-kicker { margin-bottom: 1.75rem; }
+      .page-shell {
+        width: min(100% - 1.5rem, 70rem);
+      }
+
+      .site-header .page-shell {
+        min-height: 4rem;
+      }
+
+      .hero {
+        padding-block: 4.5rem 4rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.6rem, 19vw, 5rem);
+      }
+
+      .section-header,
+      .pillar-ledger__item,
+      .verification-grid,
+      .record-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        gap: 1.5rem;
+      }
+
+      .architecture-wrap {
+        padding: 1.2rem;
+      }
+
+      .architecture-circuit {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+      }
+
+      .architecture-node {
+        min-height: auto;
+        padding: 1rem;
+      }
+
+      .architecture-node::before,
+      .architecture-node::after {
+        content: none;
+      }
+
+      .architecture-node:not(:last-child)::after {
+        content: "↓";
+        position: absolute;
+        right: 1rem;
+        bottom: -.92rem;
+        z-index: 1;
+        color: var(--circuit);
+        font-family: "Roboto Mono", monospace;
+        font-size: .9rem;
+        transform: none;
+      }
+
+      .architecture-caption {
+        display: block;
+      }
+
+      .architecture-caption span {
+        display: block;
+        margin-top: .5rem;
+      }
+
+      .pillar-title {
+        position: static;
+      }
+
+      .pillar-ledger dl {
+        grid-template-columns: 1fr;
+      }
+
+      .pillar-ledger dt,
+      .pillar-ledger dd {
+        padding-block: .75rem;
+      }
+
+      .pillar-ledger dt {
+        padding-bottom: .15rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .pillar-ledger dd {
+        padding-top: .15rem;
+        border-top: 0;
+      }
+
+      .pillar-ledger dt:first-of-type + dd {
+        padding-top: .15rem;
+      }
+
+      .readiness-summary,
+      footer .page-shell {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .target-equation {
+        grid-template-columns: 1fr;
+      }
+
+      .target-equation .arrow {
+        transform: rotate(90deg);
+        transform-origin: left center;
+      }
+
+      .readiness-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
   </style>
-  <script>
-    (function () {
-      if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    }());
-  </script>
 </head>
 <body>
   <header class="site-header">
     <div class="page-shell">
       <a class="wordmark" href="../" aria-label="Antreas Antoniou home">Antreas<span>.</span></a>
-      <a class="back-link" href="../">Back to home</a>
+      <a class="back-link" href="../">← Back to home</a>
     </div>
   </header>
 
   <main class="page-shell">
     <section class="hero" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">Axiotic AI research programme</p>
-        <h1 id="page-title">DAEDALUS</h1>
-        <p class="hero-copy">A programme for resource-rational AI architectures: spend computation where information gain is highest, rather than processing everything uniformly.</p>
+        <p class="eyebrow">Axiotic AI research programme · submitted to SPRIND NFAI</p>
+        <h1 id="page-title">DAEDALUS <span>Compositional Intelligence</span></h1>
+        <p class="hero-copy">Intelligence is not the size of the fire. It is the shape of the forge.</p>
+        <p class="hero-thesis">A human brain is an existence proof: general intelligence at roughly 20 watts—about three bananas a day. DAEDALUS asks which architectural principles let artificial systems turn limited energy, data, and time into more adaptive intelligence.</p>
       </div>
-      <p class="hero-note">The brain runs general intelligence on roughly 20 watts—about three bananas a day. Five scientific pillars test a single proposition: more capable systems may come from better organised computation, not only from more of it.</p>
+
+      <aside class="target-panel" aria-label="DAEDALUS programme target">
+        <span class="target-label">Programme target · not an achieved result</span>
+        <p class="target-equation">
+          <span><strong>1B</strong><small>compositional system</small></span>
+          <span class="arrow" aria-hidden="true">≈</span>
+          <span><strong>100B</strong><small>dense baseline</small></span>
+        </p>
+        <p class="target-compute">Proposed at approximately <strong>1/100 compute</strong>. This is the programme’s wager and evaluation target—not a reported outcome.</p>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="architecture-heading">
+      <header class="section-header">
+        <div>
+          <p class="eyebrow">The composition</p>
+          <h2 class="section-heading" id="architecture-heading">Seven capabilities. One learning system.</h2>
+        </div>
+        <p class="section-intro">The pillars are not seven disconnected projects. They are a proposed circuit: richer learning signals update a world model; memory carries state; attention routes scarce compute; audited experience closes the loop; governance constrains it; and search explores what gradient descent cannot.</p>
+      </header>
+
+      <div class="architecture-wrap">
+        <ol class="architecture-circuit" aria-label="Seven DAEDALUS capabilities and their conceptual relationships">
+          <li class="architecture-node node-c1">
+            <span class="component-id">C1 · Signals</span>
+            <strong>Better learning signals</strong>
+            <small>Teach from temporal structure, not only the next token.</small>
+          </li>
+          <li class="architecture-node node-c2">
+            <span class="component-id">C2 · World model</span>
+            <strong>World modelling for planning</strong>
+            <small>Predict, simulate, then choose.</small>
+          </li>
+          <li class="architecture-node node-c3">
+            <span class="component-id">C3 · State</span>
+            <strong>Memory + recursive reasoning</strong>
+            <small>Carry state and refine latent thought.</small>
+          </li>
+          <li class="architecture-node node-c4">
+            <span class="component-id">C4 · Routing</span>
+            <strong>Compute-aware attention</strong>
+            <small>Spend depth where information gain is highest.</small>
+          </li>
+          <li class="architecture-node node-c5">
+            <span class="component-id">C5 · Experience loop</span>
+            <strong>Audited self-improvement</strong>
+            <small>Reuse generated experience only after independent checks.</small>
+          </li>
+          <li class="architecture-node node-c6">
+            <span class="component-id">C6 · Governance envelope</span>
+            <strong>Built-in norms constrain learning and action.</strong>
+          </li>
+          <li class="architecture-node node-c7">
+            <span class="component-id">C7 · Search</span>
+            <strong>Learning beyond backprop</strong>
+            <small>Search architectures, objectives, and adaptations.</small>
+          </li>
+        </ol>
+        <p class="architecture-caption"><strong>Conceptual architecture, not a literal tensor graph.</strong><span>Mobile order follows C1 → C7.</span></p>
+      </div>
     </section>
 
     <section class="section" aria-labelledby="pillars-heading">
       <header class="section-header">
         <div>
-          <p class="eyebrow">Research architecture</p>
-          <h2 class="section-heading" id="pillars-heading">Five core scientific pillars</h2>
+          <p class="eyebrow">Technical ledger</p>
+          <h2 class="section-heading" id="pillars-heading">Claims designed to be broken.</h2>
         </div>
-        <p class="section-intro">Each pillar is a research direction. The programme is designed to make its assumptions inspectable and its claims testable. All numerical programme objectives are research targets, not achieved results.</p>
+        <p class="section-intro">Each pillar names a missing capability, a mechanism, its role in the whole, and a test that can fail. The mythic names are implementation handles—not the scientific ontology.</p>
       </header>
 
-      <div class="pillars">
-        <article id="soma" class="pillar">
-          <span class="pillar-kicker">Attention allocation</span>
-          <h3>SOMA</h3>
-          <p>Allocate deep attention where uncertainty is highest.</p>
-          <p class="target">Research target: equivalent quality at no more than 50% of the FLOPs.</p>
+      <div class="pillar-ledger">
+        <article class="pillar-ledger__item" id="c1">
+          <header class="pillar-title">
+            <span class="component-id">C1 · Better learning signals</span>
+            <h3>Learn from time, not only adjacency.</h3>
+            <span class="handle">Secondary label · CHRONOS</span>
+          </header>
+          <dl>
+            <dt>Missing capability</dt>
+            <dd>Next-token prediction compresses temporal experience into one local reconstruction target.</dd>
+            <dt>Mechanism</dt>
+            <dd>Train across past, present, and future objectives so the learning signal exposes more of an experience’s temporal structure.</dd>
+            <dt>Role in composition</dt>
+            <dd>Supply richer errors and predictive constraints to the world model, memory, and routing system.</dd>
+            <dt>Falsifiable test / current state</dt>
+            <dd>Compare at matched model size, data, and FLOPs. Near 10M parameters, CHRONOS recorded a <strong>79.7% non-tie win-rate</strong> where judged outputs differed (about 40% of pairs). The pure triad then lost to next-token prediction on validation loss: <strong>H1 was falsified at 150M</strong>. A crossover with scale or data remains a hypothesis.</dd>
+            <dt>Secondary implementation label</dt>
+            <dd>CHRONOS</dd>
+          </dl>
         </article>
-        <article id="resa" class="pillar">
-          <span class="pillar-kicker">Relational reasoning</span>
-          <h3>ReSA</h3>
-          <p>Replace fixed dot-product similarity with learned relational scoring.</p>
-          <p class="target">Research target: ≥5% compositional gain at compute parity.</p>
+
+        <article class="pillar-ledger__item" id="c2">
+          <header class="pillar-title">
+            <span class="component-id">C2 · World modelling for planning</span>
+            <h3>Simulate before spending reality.</h3>
+            <span class="handle">Secondary label · GESTALT</span>
+          </header>
+          <dl>
+            <dt>Missing capability</dt>
+            <dd>Pattern completion alone does not give a system a compact, manipulable model of what its actions may cause.</dd>
+            <dt>Mechanism</dt>
+            <dd>Build multimodal predictive state and cheap internal rollouts. Internal simulation is the cheap third option: neither act immediately nor merely observe—simulate.</dd>
+            <dt>Role in composition</dt>
+            <dd>Turn memory and learning signals into candidate futures that can guide action and supply new training experience.</dd>
+            <dt>Falsifiable test / current state</dt>
+            <dd>Measure planning success and transfer efficiency against compute-matched reactive baselines. Current readiness is <strong>TRL 2–3</strong>; no programme-level performance claim is made.</dd>
+            <dt>Secondary implementation label</dt>
+            <dd>GESTALT</dd>
+          </dl>
         </article>
-        <article id="mneme" class="pillar">
-          <span class="pillar-kicker">Memory and recursion</span>
-          <h3>MNEME</h3>
-          <p>Persistent differentiable read/write memory with recursive latent refinement.</p>
-          <p class="target">Research target: ≥50% less context degradation over 10× context.</p>
+
+        <article class="pillar-ledger__item" id="c3">
+          <header class="pillar-title">
+            <span class="component-id">C3 · Explicit memory + recursive latent reasoning</span>
+            <h3>State that survives. Thought that can revise itself.</h3>
+            <span class="handle">Secondary labels · MNEME + ANUBIS</span>
+          </header>
+          <dl>
+            <dt>Missing capability</dt>
+            <dd>A context window is not durable memory, and a single forward pass is not an adequate model of extended reasoning.</dd>
+            <dt>Mechanism</dt>
+            <dd>Combine persistent read/write state with iterative latent refinement: remember across episodes, then revisit internal representations before committing an answer.</dd>
+            <dt>Role in composition</dt>
+            <dd>Give the world model continuity and give attention a stateful substrate on which to allocate extra computation.</dd>
+            <dt>Falsifiable test / current state</dt>
+            <dd>Test retention, interference, and context degradation over longer horizons at matched memory and compute budgets. MNEME evidence is an <strong>Axiotic programme/team result</strong>; Samuel Jones leads MNEME. It is not presented as Antreas’s individual build.</dd>
+            <dt>Secondary implementation label</dt>
+            <dd>MNEME for memory; ANUBIS for recursive latent reasoning.</dd>
+          </dl>
         </article>
-        <article id="intuitus" class="pillar">
-          <span class="pillar-kicker">World modelling</span>
-          <h3>Intuitus</h3>
-          <p>Multimodal world modelling and cheap internal simulation.</p>
-          <p class="target">Research target: ≥2× transfer efficiency.</p>
+
+        <article class="pillar-ledger__item" id="c4">
+          <header class="pillar-title">
+            <span class="component-id">C4 · Compute-aware attention</span>
+            <h3>Not all bits are equal.</h3>
+            <span class="handle">Secondary label · SOMA</span>
+          </header>
+          <dl>
+            <dt>Missing capability</dt>
+            <dd>Dense architectures spend nearly the same work on obvious tokens, ambiguous evidence, and genuinely difficult decisions.</dd>
+            <dt>Mechanism</dt>
+            <dd>Use uncertainty and expected information gain to route attention, depth, and specialist computation dynamically.</dd>
+            <dt>Role in composition</dt>
+            <dd>Act as the programme’s resource allocator: direct scarce compute toward the world-model states and memory operations most likely to change the decision.</dd>
+            <dt>Falsifiable test / current state</dt>
+            <dd>Compare quality–FLOP and quality–energy frontiers against dense attention, including under distribution shift. Failure means the routing overhead or lost information erases the gain.</dd>
+            <dt>Secondary implementation label</dt>
+            <dd>SOMA</dd>
+          </dl>
         </article>
-        <article id="chronos" class="pillar">
-          <span class="pillar-kicker">Temporal structure</span>
-          <h3>CHRONOS</h3>
-          <p>Learn temporal structure from past, present, and future prediction.</p>
-          <p class="target">Research target: exceed frontier performance per FLOP.</p>
+
+        <article class="pillar-ledger__item" id="c5">
+          <header class="pillar-title">
+            <span class="component-id">C5 · Audited self-improvement</span>
+            <h3>Experience must earn the right to teach.</h3>
+            <span class="handle">Secondary label · CONSENSUS</span>
+          </header>
+          <dl>
+            <dt>Missing capability</dt>
+            <dd>Self-generated data can compound errors as easily as competence; fluent experience is not necessarily useful experience.</dd>
+            <dt>Mechanism</dt>
+            <dd>Generate candidate experience, subject it to independent checks or teacher agreement, and admit only audited examples back into learning.</dd>
+            <dt>Role in composition</dt>
+            <dd>Close the experience loop between planning and learning without allowing one model’s unchecked mistakes to become its curriculum.</dd>
+            <dt>Falsifiable test / current state</dt>
+            <dd>Measure downstream gain per generated token, contamination, and error amplification against unaudited self-training. The deployed curation technique is <strong>TRL 5</strong>; its use as an integrated training filter is <strong>TRL 3</strong>.</dd>
+            <dt>Secondary implementation label</dt>
+            <dd>CONSENSUS</dd>
+          </dl>
+        </article>
+
+        <article class="pillar-ledger__item" id="c6">
+          <header class="pillar-title">
+            <span class="component-id">C6 · Governance and built-in norms</span>
+            <h3>Constraints belong inside the dynamics.</h3>
+            <span class="handle">Secondary label · TALOS</span>
+          </header>
+          <dl>
+            <dt>Missing capability</dt>
+            <dd>Post-hoc filters cannot reliably govern a system whose learning, memory, planning, and action remain opaque to them.</dd>
+            <dt>Mechanism</dt>
+            <dd>Represent constraints in the learning and action loop, with auditable interventions over memory, simulation, and policy selection.</dd>
+            <dt>Role in composition</dt>
+            <dd>Form the governance envelope around every other pillar rather than an interface bolted onto the final output.</dd>
+            <dt>Falsifiable test / current state</dt>
+            <dd>Test intervention reliability, traceability, and resistance to distribution shift or strategic pressure. Current readiness is <strong>TRL 2–3</strong>.</dd>
+            <dt>Secondary implementation label</dt>
+            <dd>TALOS</dd>
+          </dl>
+        </article>
+
+        <article class="pillar-ledger__item" id="c7">
+          <header class="pillar-title">
+            <span class="component-id">C7 · Learning beyond backprop</span>
+            <h3>Search the space gradients cannot see.</h3>
+            <span class="handle">Secondary label · APEX</span>
+          </header>
+          <dl>
+            <dt>Missing capability</dt>
+            <dd>Backpropagation optimises differentiable parameters inside a chosen system; it does not by itself choose the right architecture, objective, curriculum, or adaptation rule.</dd>
+            <dt>Mechanism</dt>
+            <dd>Use search, evolution, and gradient-free adaptation to explore those higher-level choices under explicit resource budgets.</dd>
+            <dt>Role in composition</dt>
+            <dd>Select and adapt the forge itself: its topology, learning signals, routing rules, and interactions.</dd>
+            <dt>Falsifiable test / current state</dt>
+            <dd>Test whether search produces stable, useful adaptation under fixed compute, latency, and evaluation budgets—and whether selected systems survive perturbation rather than overfit the search environment. Current readiness is <strong>TRL 4</strong>.</dd>
+            <dt>Secondary implementation label</dt>
+            <dd>APEX</dd>
+          </dl>
         </article>
       </div>
     </section>
 
-    <section class="section evidence-section" aria-labelledby="evidence-heading">
+    <section class="section" aria-labelledby="verification-heading">
       <header class="section-header">
         <div>
-          <p class="eyebrow">Working record</p>
-          <h2 class="section-heading" id="evidence-heading">Evidence, including the checks that did not go our way</h2>
+          <p class="eyebrow">Composition or coincidence?</p>
+          <h2 class="section-heading" id="verification-heading">The programme must beat its parts.</h2>
         </div>
-        <p class="section-intro">This is a constrained record of cleared observations and infrastructure, not a claim that the programme has reached its intended destination. Provenance: corrected internal DAEDALUS audit. The linked public TSP repository is an earlier snapshot; its run count and phase-transition terminology are superseded.</p>
+        <p class="section-intro">The decisive claim is compositional: these capabilities should reinforce one another at a better capability-per-watt frontier. That claim requires integration tests, ablations, and negative results—not a collection of attractive demos.</p>
       </header>
 
-      <div class="evidence-grid">
-        <article class="evidence-item">
-          <h3>Controlled experimental base</h3>
-          <p>432 controlled runs, 144 conditions, 3 seeds.</p>
+      <div class="verification-grid">
+        <article class="verification-block">
+          <h3>Integration protocol</h3>
+          <ol class="protocol-list">
+            <li>Compute-matched baselines before architectural comparison.</li>
+            <li>Pairwise integration to identify real interactions.</li>
+            <li>Leave-one-component-out ablations on the assembled system.</li>
+            <li>Capability-per-watt, not capability alone, as a primary frontier.</li>
+            <li>Negative results retained as programme evidence.</li>
+          </ol>
         </article>
-        <article class="evidence-item">
-          <h3>Sharp capability transitions</h3>
-          <p>Observed 0→100% capability transitions within Δp=0.05. These sharp capability transitions are not presented as proven phase transitions.</p>
+
+        <article class="verification-block">
+          <h3>Current evidence boundary</h3>
+          <ul class="evidence-list">
+            <li><strong>Structure programme:</strong> 432 controlled runs across 144 conditions, with 3 seeds per condition.</li>
+            <li><strong>Observed behaviour:</strong> 0→100% sharp capability transitions within a Δp=0.05 connectivity change. These are <em>sharp capability transitions</em>, not proven phase transitions.</li>
+            <li><strong>CHRONOS:</strong> promising small-scale preference result; H1 falsified at 150M. The remaining claim is a crossover hypothesis, not a win.</li>
+            <li><strong>Infrastructure:</strong> Antreas built the two-node, five-GPU k3s cluster used for the programme.</li>
+            <li><strong>Attribution:</strong> Samuel Jones leads MNEME; MNEME findings belong to the Axiotic programme/team.</li>
+          </ul>
         </article>
-        <article class="evidence-item">
-          <h3>CHRONOS check</h3>
-          <p>At 150M, the pure triad objective lost to next-token prediction on validation loss. A crossover in another scale or data regime remains a falsifiable hypothesis.</p>
-        </article>
-        <article class="evidence-item">
-          <h3>Research infrastructure</h3>
-          <p>Antreas built a two-node five-GPU k3s cluster for the programme.</p>
-        </article>
-        <article class="evidence-item evidence-item--attribution">
-          <h3>Attribution</h3>
-          <p>Samuel Jones leads MNEME within Axiotic. Its evidence and results are programme/team results, not Antreas’s individual build.</p>
-        </article>
+      </div>
+
+      <div class="readiness" aria-labelledby="readiness-heading">
+        <p class="readiness-summary" id="readiness-heading"><span>Integrated programme <strong>TRL 2–3</strong></span><span>Early research integration—not a production system.</span></p>
+        <ul class="readiness-list">
+          <li><span class="readiness-id">C1</span><strong>TRL 4</strong>Better learning signals</li>
+          <li><span class="readiness-id">C2</span><strong>TRL 2–3</strong>World modelling</li>
+          <li><span class="readiness-id">C3</span><strong>TRL 3–4</strong>Memory + recursion</li>
+          <li><span class="readiness-id">C4</span><strong>TRL 3–4</strong>Compute-aware attention</li>
+          <li><span class="readiness-id">C5</span><strong>TRL 5 / 3</strong>Deployed technique / training filter</li>
+          <li><span class="readiness-id">C6</span><strong>TRL 2–3</strong>Governance</li>
+          <li><span class="readiness-id">C7</span><strong>TRL 4</strong>Beyond backprop</li>
+        </ul>
       </div>
     </section>
 
-    <section class="section links-section" aria-labelledby="public-record-heading">
+    <section class="section" aria-labelledby="record-heading">
       <header class="section-header">
         <div>
           <p class="eyebrow">Public record</p>
-          <h2 class="section-heading" id="public-record-heading">Follow the work in public</h2>
+          <h2 class="section-heading" id="record-heading">Attach the wager to the evidence.</h2>
         </div>
-        <p class="section-intro">This page is the current programme definition. The links below are public Axiotic resources and companion context, not alternative authorities for the programme.</p>
+        <p class="section-intro">The final proposal is public here so the original targets can be read beside the current evidence—including the results that weakened the thesis.</p>
       </header>
 
-      <ul class="resource-list">
-        <li><a href="https://github.com/axiotic-ai" target="_blank" rel="noopener noreferrer">Axiotic AI on GitHub <small>PUBLIC ORGANISATION ↗</small></a></li>
-        <li><a href="https://github.com/axiotic-ai/tsp" target="_blank" rel="noopener noreferrer">Structure experiments <small>PUBLIC REPOSITORY ↗</small></a></li>
-        <li><a href="https://axiotic.ai/" target="_blank" rel="noopener noreferrer">Axiotic research lab <small>CURRENT LAB ↗</small></a></li>
-        <li><a href="https://axiotic.ai/init/" target="_blank" rel="noopener noreferrer">Axiotic INIT <small>COMPANION CONTEXT ↗</small></a></li>
-      </ul>
+      <div class="record-grid">
+        <article class="submission-record">
+          <span class="micro-label accent">Primary programme artefact · June 2026</span>
+          <h3>Next Frontier AI submission</h3>
+          <p>This is the final submitted NFAI proposal: the source record for the seven-pillar programme and its intended work plan. Its numerical objectives are programme targets, not achieved results. The readiness and evidence statements on this page describe the present boundary.</p>
+          <a class="submission-link" href="../documents/daedalus/daedalus-next-frontier-ai-submission.pdf" target="_blank" rel="noopener noreferrer">Final NFAI submission →</a>
+        </article>
 
-      <aside class="historical-record" aria-labelledby="historical-record-heading">
-        <div>
-          <h3 id="historical-record-heading">Historical programme artefact</h3>
-          <a href="../documents/daedalus/daedalus-next-frontier-ai-submission.pdf" target="_blank" rel="noopener noreferrer">Read the superseded June 2026 NFAI submission →</a>
-        </div>
-        <p>Historical artefact — June 2026 NFAI submission. This records an earlier six-component fundraising version of DAEDALUS and contains superseded objectives and claims; it is not the current programme definition or evidence of achieved results.</p>
-      </aside>
+        <nav class="resources" aria-label="Related public resources">
+          <span class="micro-label">Related public work</span>
+          <h3>Follow the programme</h3>
+          <ul class="resource-list">
+            <li><a href="https://github.com/axiotic-ai" target="_blank" rel="noopener noreferrer">Axiotic AI on GitHub <small>Organisation ↗</small></a></li>
+            <li><a href="https://github.com/axiotic-ai/tsp" target="_blank" rel="noopener noreferrer">Structure experiments <small>Repository ↗</small></a></li>
+            <li><a href="https://axiotic.ai/" target="_blank" rel="noopener noreferrer">Axiotic research lab <small>Lab ↗</small></a></li>
+            <li><a href="https://axiotic.ai/init/" target="_blank" rel="noopener noreferrer">Axiotic INIT <small>Context ↗</small></a></li>
+          </ul>
+        </nav>
+      </div>
     </section>
   </main>
 
   <footer>
-    <div class="page-shell"><p>© Antreas Antoniou</p></div>
+    <div class="page-shell">
+      <p>© Antreas Antoniou</p>
+      <p>Attached to the truth, not the thesis.</p>
+    </div>
   </footer>
 </body>
 </html>
