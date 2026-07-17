@@ -39,6 +39,12 @@
 .research-note-deck { max-width: 44rem; margin: 1.5rem 0 0; color: var(--text-secondary); font-size: clamp(1.08rem, 2vw, 1.3rem); line-height: 1.65; }
 .research-note-provenance { max-width: 44rem; margin: 1.5rem 0 0; padding-left: 1rem; border-left: 3px solid var(--accent); color: var(--text-muted); font-size: .9rem; line-height: 1.65; }
 
+.published-essay-header { max-width: 60rem; }
+.published-essay-header h1 { max-width: 60rem; font-size: clamp(2.35rem, 6vw, 4.8rem); }
+.published-essay-header .research-note-deck,
+.published-essay-header .research-note-provenance { max-width: 50rem; }
+.published-essay-header .research-note-provenance a { font-weight: 750; }
+
 .field-note-rail {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -69,6 +75,45 @@
 .essay-body hr { margin: 3rem 0; border: 0; border-top: 1px solid var(--border); }
 .essay-body em:last-child { color: var(--text-muted); font-size: .9rem; }
 
+.published-essay-hero,
+.published-essay-figure {
+  width: min(60rem, calc(100vw - 2rem));
+  margin: 3rem 50%;
+  transform: translateX(-50%);
+}
+
+.published-essay-hero { margin-bottom: 4rem; }
+.published-essay-hero img,
+.published-essay-figure img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--bg-secondary);
+}
+
+.published-essay-hero img { max-height: 34rem; object-fit: cover; }
+.published-essay-figure figcaption { margin-top: .75rem; color: var(--text-muted); font-size: .84rem; line-height: 1.55; text-align: center; }
+.published-essay-references { color: var(--text-secondary); font-size: .86rem; line-height: 1.65; }
+.published-essay-references li { margin-block: .7rem; }
+
+.original-publication {
+  max-width: 46rem;
+  margin: 4rem auto 0;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: .75rem;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.original-publication p { margin: 0; }
+.original-publication p + p { margin-top: .4rem; }
+.original-publication strong { color: var(--text); }
+
 .research-note-footer { max-width: 46rem; margin: 4.5rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border); }
 .research-note-footer a { font-weight: 750; }
 
@@ -86,6 +131,9 @@
   .field-note-rail { grid-template-columns: 1fr; }
   .field-note-rail div + div { border-top: 1px solid var(--border); border-left: 0; }
   .essay-body { font-size: 1rem; }
+  .published-essay-hero,
+  .published-essay-figure { margin-block: 2.25rem; }
+  .published-essay-hero { margin-bottom: 3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

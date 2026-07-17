@@ -34,11 +34,16 @@
     .archivum-card__read { margin-top: auto; padding-top: 1.25rem; font-size: .9rem; font-weight: 700; }
     .published-heading { margin: 5rem 0 1.5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
     .published-heading h2 { margin: .25rem 0 0; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    .published-heading p { max-width: 42rem; margin: .75rem 0 0; color: var(--text-secondary); line-height: 1.7; }
+    .published-card__byline { margin-bottom: .75rem !important; color: var(--text-muted) !important; font-size: .8rem !important; }
+    .published-card__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .55rem; flex-shrink: 0; }
     a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
     @media (max-width: 720px) {
       .archivum-heading, .archivum-grid { grid-template-columns: 1fr; }
       .archivum-heading { gap: .8rem; margin-top: 3.5rem; }
       .archivum-card { min-height: auto; }
+      .published-card__layout { flex-direction: column; }
+      .published-card__actions { justify-content: flex-start; }
     }
     @media (prefers-reduced-motion: reduce) { .archivum-card::after { transition: none; } }
   </style>
@@ -180,52 +185,85 @@
       </section>
 
       <header class="published-heading">
-        <span class="eyebrow">Selected publications</span>
-        <h2>Published elsewhere</h2>
+        <span class="eyebrow">Selected published work</span>
+        <h2>Essays and technical writing</h2>
+        <p>Long-form articles written by Antreas. Where an essay first appeared with another publisher, the original venue remains linked alongside the local reading copy.</p>
       </header>
 
       <!-- Articles -->
       <div class="space-y-6">
 
         <!-- Pieces: Beyond the Cloud -->
-        <article class="card p-6 hover:shadow-md transition-shadow">
-          <div class="flex items-start justify-between gap-4">
+        <article class="card p-6 hover:shadow-md transition-shadow" data-pieces-local>
+          <div class="published-card__layout flex items-start justify-between gap-4">
             <div class="flex-1">
               <div class="flex items-center gap-2 mb-2">
                 <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">Pieces Blog</span>
                 <span class="text-sm text-muted">August 2025</span>
               </div>
               <h2 class="text-xl font-semibold mb-2 leading-snug">
-                <a href="https://pieces.app/blog/direction-of-ai-progress" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition">
+                <a href="/blog/beyond-the-cloud/" class="hover:text-accent transition">
                   Beyond the Cloud: SLMs, Local AI, and Agentic Constellations
                 </a>
               </h2>
+              <p class="published-card__byline">Written by Antreas Antoniou · originally published by Pieces</p>
               <p class="text-secondary text-sm leading-relaxed">A vision for local-first AI built on biology-inspired architectures. Intelligence doesn't need to live in a data centre.</p>
             </div>
-            <a href="https://pieces.app/blog/direction-of-ai-progress" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap flex-shrink-0">
-              <i class="fas fa-external-link-alt"></i> Read
-            </a>
+            <div class="published-card__actions">
+              <a href="/blog/beyond-the-cloud/" class="btn-primary btn-sm whitespace-nowrap">Read here</a>
+              <a href="https://pieces.app/blog/direction-of-ai-progress" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                <i class="fas fa-external-link-alt"></i> Original on Pieces
+              </a>
+            </div>
           </div>
         </article>
 
         <!-- Pieces: Scaling -->
-        <article class="card p-6 hover:shadow-md transition-shadow">
-          <div class="flex items-start justify-between gap-4">
+        <article class="card p-6 hover:shadow-md transition-shadow" data-pieces-local>
+          <div class="published-card__layout flex items-start justify-between gap-4">
             <div class="flex-1">
               <div class="flex items-center gap-2 mb-2">
                 <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">Pieces Blog</span>
                 <span class="text-sm text-muted">July 2025</span>
               </div>
               <h2 class="text-xl font-semibold mb-2 leading-snug">
-                <a href="https://pieces.app/blog/the-cost-of-ai-scaling" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition">
+                <a href="/blog/the-cost-of-ai-scaling/" class="hover:text-accent transition">
                   Too Much of a Good Thing: How Chasing Scale is Stifling AI Innovation
                 </a>
               </h2>
+              <p class="published-card__byline">Written by Antreas Antoniou · originally published by Pieces</p>
               <p class="text-secondary text-sm leading-relaxed">The "Great Amnesia" of AI's scaling monoculture — why optimising for GPT-N+1 is the wrong race to run.</p>
             </div>
-            <a href="https://pieces.app/blog/the-cost-of-ai-scaling" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap flex-shrink-0">
-              <i class="fas fa-external-link-alt"></i> Read
-            </a>
+            <div class="published-card__actions">
+              <a href="/blog/the-cost-of-ai-scaling/" class="btn-primary btn-sm whitespace-nowrap">Read here</a>
+              <a href="https://pieces.app/blog/the-cost-of-ai-scaling" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                <i class="fas fa-external-link-alt"></i> Original on Pieces
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pieces: AI Memory Explained -->
+        <article class="card p-6 hover:shadow-md transition-shadow">
+          <div class="published-card__layout flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">Pieces Blog</span>
+                <span class="text-sm text-muted">September 2025</span>
+              </div>
+              <h2 class="text-xl font-semibold mb-2 leading-snug">
+                <a href="https://pieces.app/blog/types-of-ai-memory" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition">
+                  AI Memory Explained: What Perplexity, ChatGPT, Pieces, and Claude Remember (and Forget)
+                </a>
+              </h2>
+              <p class="published-card__byline">Written by Antreas Antoniou · published by Pieces</p>
+              <p class="text-secondary text-sm leading-relaxed">A practical comparison of what leading AI systems retain, what they lose, and how different memory architectures shape the user experience.</p>
+            </div>
+            <div class="published-card__actions">
+              <a href="https://pieces.app/blog/types-of-ai-memory" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                <i class="fas fa-external-link-alt"></i> Read on Pieces
+              </a>
+            </div>
           </div>
         </article>
 
