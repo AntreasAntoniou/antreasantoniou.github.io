@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligence Beyond Scale | Antreas Antoniou</title>
+  <meta name="description" content="Antreas Antoniou's contribution to the European Expert Forum on Frontier AI: a case for efficient, structurally informed AI architectures.">
+  <link rel="canonical" href="https://antreas.io/frontier-ai/">
+  <link rel="icon" href="../images/favicon-bot.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    :root { color-scheme: light; }
+    [data-theme="dark"] { color-scheme: dark; }
+    .page-shell { width: min(100% - 2rem, 68rem); margin: 0 auto; }
+    .site-header { border-bottom: 1px solid var(--border); }
+    .site-header .page-shell { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; }
+    .wordmark { color: var(--text); font-size: 1.125rem; font-weight: 700; letter-spacing: -0.025em; }
+    .wordmark span { color: var(--accent); }
+    .back-link { color: var(--text-secondary); font-size: .9375rem; font-weight: 600; }
+    main { padding: clamp(3.5rem, 9vw, 7rem) 0 5rem; }
+    .eyebrow { margin: 0 0 1rem; }
+    .hero { max-width: 53rem; }
+    .hero h1 { max-width: 14ch; margin: 0; font-size: clamp(2.75rem, 8vw, 5.5rem); line-height: .96; letter-spacing: -.055em; }
+    .hero-copy { max-width: 48rem; margin: 1.5rem 0 0; color: var(--text-secondary); font-size: clamp(1.125rem, 2.4vw, 1.375rem); line-height: 1.65; }
+    .record { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(16rem, .9fr); gap: 1px; margin: 3rem 0 4.5rem; border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; background: var(--border); }
+    .record > * { background: var(--bg-card); padding: clamp(1.25rem, 3vw, 2rem); }
+    .record h2, .record h3 { margin: 0; font-size: 1rem; }
+    .record h3 { color: var(--text-muted); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .record p { margin: .65rem 0 0; color: var(--text-secondary); }
+    .resource-list { display: grid; gap: .625rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+    .resource-list a { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-bottom: .625rem; border-bottom: 1px solid var(--border); font-weight: 600; }
+    .resource-list li:last-child a { padding-bottom: 0; border-bottom: 0; }
+    .resource-list small { color: var(--text-muted); font-size: .75rem; font-weight: 600; white-space: nowrap; }
+    .content-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(13rem, .72fr); gap: clamp(2.5rem, 7vw, 6rem); align-items: start; }
+    .remarks { min-width: 0; }
+    .section-heading { margin: 0; font-size: clamp(1.75rem, 4vw, 2.5rem); letter-spacing: -.04em; }
+    .section-intro { margin: .75rem 0 2.25rem; color: var(--text-secondary); }
+    .prepared-remarks { padding-left: clamp(1.25rem, 3vw, 2.5rem); border-left: 3px solid var(--accent); }
+    .prepared-remarks > p { max-width: 42rem; margin: 0 0 1.45rem; font-size: 1.0625rem; line-height: 1.8; }
+    .prepared-remarks ul { max-width: 42rem; margin: 0 0 1.65rem; padding-left: 1.25rem; }
+    .prepared-remarks li { margin: .5rem 0; padding-left: .25rem; }
+    .aside { position: sticky; top: 1.5rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: .75rem; background: var(--bg-secondary); }
+    .aside h2 { margin: 0; font-size: .875rem; }
+    .aside p { margin: .65rem 0 0; color: var(--text-secondary); font-size: .9375rem; line-height: 1.65; }
+    .aside a { display: inline-block; margin-top: 1rem; font-size: .9375rem; font-weight: 700; }
+    footer { padding: 2rem 0 3rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .875rem; }
+    footer p { margin: 0; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: .2rem; }
+    @media (max-width: 720px) {
+      .record, .content-grid { grid-template-columns: 1fr; }
+      .aside { position: static; }
+    }
+  </style>
+  <script>
+    (function () {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    }());
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell">
+      <a class="wordmark" href="../" aria-label="Antreas Antoniou home">Antreas<span>.</span></a>
+      <a class="back-link" href="../">Back to home</a>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">European Expert Forum on Frontier AI · 2026</p>
+      <h1 id="page-title">Intelligence Beyond Scale</h1>
+      <p class="hero-copy">My contribution to the European Expert Forum on Frontier AI: Europe should compete by pioneering more efficient architectures, not merely by reproducing the largest existing systems.</p>
+    </section>
+
+    <section class="record" aria-labelledby="forum-record-heading">
+      <div>
+        <h2 id="forum-record-heading">Forum record</h2>
+        <p>This page brings together my written proposal and prepared remarks for the Forum, alongside the Commission's published materials.</p>
+        <p>I participated in a personal capacity. This page documents my contribution and does not constitute an endorsement by, or on behalf of, the European Commission.</p>
+      </div>
+      <div>
+        <h3>Sources and documents</h3>
+        <ul class="resource-list">
+          <li><a href="https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security" target="_blank" rel="noopener noreferrer">AI Office findings <small>EUROPEAN COMMISSION ↗</small></a></li>
+          <li><a href="https://ec.europa.eu/newsroom/dae/redirection/document/131082" target="_blank" rel="noopener noreferrer">Official expert list <small>PDF ↗</small></a></li>
+          <li><a href="../documents/frontier-ai/intelligence-beyond-scale-eu-frontier-ai-proposal.pdf" target="_blank" rel="noopener noreferrer">Written proposal <small>PDF · 5 PAGES</small></a></li>
+          <li><a href="../documents/frontier-ai/eu-frontier-ai-prepared-remarks.pdf" target="_blank" rel="noopener noreferrer">Prepared remarks <small>PDF · 2 PAGES</small></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <article class="remarks" aria-labelledby="prepared-remarks-heading">
+        <h2 class="section-heading" id="prepared-remarks-heading">Prepared remarks</h2>
+        <p class="section-intro">Lightly proofread for readability. The original prepared-remarks PDF is preserved above.</p>
+        <div class="prepared-remarks">
+          <p>Friends, thank you for having me. I am honoured to be here among you and to be allowed to voice my thoughts.</p>
+          <ul>
+            <li>Stop trying to copy the brute-force path.</li>
+            <li>Fund it on the timescale real science needs.</li>
+            <li>Make intelligence per watt a European principle.</li>
+            <li>Treat talent retention as core infrastructure.</li>
+            <li>Make paradigm diversity an explicit policy goal.</li>
+          </ul>
+          <p>Today I will make the case that one of the highest-value directions for both the European AI Frontier Strategy and frontier AI science meets at the idea that structure is the missing ingredient. Not scale of computation. Structure of computation.</p>
+          <p>I want to start somewhere that can feel rather unfashionable nowadays. That is, in optimism.</p>
+          <p>Europe has the talent. Europe has always had the talent. If you visit the rooms where frontier AI is actually being built today—the rooms, not the press releases—you will see European faces. By birth, by training, by the universities that shaped them, roughly a quarter to a third of the people on the frontier are ours. The exact figure is contested. The order of magnitude is not.</p>
+          <p>We did not lose because we were absent. We lost because we had an abundance of riches that we have systematically failed to spend. The talent is here, or it was here last Tuesday, before somebody offered it a visa. What is missing is the structure around it: the patient architecture that turns a brilliant person into a brilliant team, and a brilliant team into a frontier.</p>
+          <p>And this, I want to say, is a beautiful problem to have. It means we do not need to invent an innovation talent base, like China. We have one. The job we must learn how to do well is setting up the structures for retaining, cultivating, and connecting that talent into frontier ecosystems.</p>
+          <p>Now, the harder truth. We are not going to win this decade on compute. There is no European hyperscaler waiting in the wings. If our plan is to imitate the American strategy with a smaller wallet, we will lose slowly, and we will lose expensively. Let us not do that.</p>
+          <p>The interesting frontier, the one the labs themselves are quietly worried about, is no longer brute force. The next multiplier is increasingly not another order of magnitude of GPUs, but a better idea of what to do with the computation you already have.</p>
+          <p>A beyond-scaling research agenda should focus on more than ever-larger static parameter banks. The next generation of systems is likely to allocate computation dynamically, preserve useful state over time, reason compositionally, model the world causally and multimodally, learn through richer and more biologically grounded dynamics, and improve in sustained feedback loops. In other words, the frontier is shifting from more scale to better organised intelligence. I believe Europe should lean into the resource constraints we have and our abundance of innovative and creative talent: what kind of AI can only be built by people who cannot afford to be wasteful?</p>
+          <p>Our current predicament puts European frontier AI strategy in a situation very similar to the one nature had to follow to evolve life. That is why constraint is not merely a weakness. Constraint is often where the next architecture comes from.</p>
+          <p>And this is not only about software. What comes after today’s AI is physical AI: robots that can clean your home, cook your food, care for the elderly, build your cities, and repair the systems around you. But the arc runs inward as well as outward. The same logic that gives you a home robot eventually gives you medical robots, then nanobots capable of microsurgery, precise repair, and interventions that start to look like an artificial immune system. And once you are there, you are not far from prompting matter itself.</p>
+          <p>That is the scale of what is coming. And if Europe is not a leader in that wave, it will not merely miss a market. It will miss the chance to help shape the operating system of the physical world. This is not only an industrial question, or even a technological one. It is a civilisational one. Europe must help author that future, or accept that its values will be authored for it by the United States and China.</p>
+        </div>
+      </article>
+
+      <aside class="aside" aria-labelledby="document-note-heading">
+        <h2 id="document-note-heading">Document note</h2>
+        <p>The written proposal and the PDF of these prepared remarks are the source documents. The HTML text is provided so the argument can be read, linked, and searched on the public web.</p>
+        <a href="../documents/frontier-ai/eu-frontier-ai-prepared-remarks.pdf" target="_blank" rel="noopener noreferrer">Read the original PDF →</a>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="page-shell"><p>© Antreas Antoniou</p></div>
+  </footer>
+</body>
+</html>
