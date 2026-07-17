@@ -74,6 +74,33 @@ test('labels the source document as the final proposal record', () => {
   assert.match(html, /programme targets, not achieved results/i);
 });
 
+test('records the SPRIND evaluation and funded cohort without hiding the outcome', () => {
+  assert.match(visibleText, /came close to the Challenge’s up-to-ten-team funded cohort/i);
+  assert.match(visibleText, /not selected to advance to the jury pitches/i);
+  assert.match(visibleText, /“We were highly impressed by your work\.”/i);
+  assert.match(visibleText, /“stood out during our evaluation process”/i);
+  assert.match(visibleText, /different funding programmes, its investor network, and future opportunities/i);
+  assert.match(visibleText, /up to 10 teams/i);
+  assert.match(visibleText, /€3 million/);
+  assert.match(visibleText, /up to 6 teams/i);
+  assert.match(visibleText, /€8 million/);
+  assert.match(visibleText, /up to 3 teams/i);
+  assert.match(visibleText, /€15\.5 million/);
+  assert.match(html, /sprind\.org\/en\/actions\/challenges\/next-frontier-ai/);
+  assert.doesNotMatch(visibleText, /€9 million/);
+});
+
+test('inherits the main site light default and honours the saved theme', () => {
+  assert.match(html, /:root\s*\{[\s\S]*?--void:\s*var\(--bg\)/);
+  assert.match(html, /:root\s*\{[\s\S]*?color-scheme:\s*light/);
+  assert.match(html, /\[data-theme="dark"\]\s*\{[\s\S]*?color-scheme:\s*dark/);
+  assert.match(html, /localStorage\.getItem\('theme'\)/);
+  assert.match(html, /localStorage\.setItem\('theme', nextTheme\)/);
+  assert.match(html, /class="theme-toggle"/);
+  assert.match(html, /aria-label="Toggle theme"/);
+  assert.doesNotMatch(html, /--bg:\s*var\(--void\)/);
+});
+
 test('keeps the page accessible and responsive', () => {
   assert.equal(count(/<h1\b/g), 1);
   assert.match(html, /@media \(max-width: 720px\)/);
