@@ -1,6 +1,6 @@
 # DAEDALUS pillar-first page redesign
 
-Date: 2026-07-17  
+Date: 2026-07-17
 Status: approved direction; implementation pending
 
 ## Objective
@@ -192,4 +192,3 @@ Out of scope:
 7. All internal and external links resolve.
 8. Desktop/mobile, light/dark, keyboard, reduced-motion, and overflow checks pass.
 9. The live PDF remains byte-identical to the approved public source.
-
