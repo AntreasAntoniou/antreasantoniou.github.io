@@ -64,6 +64,13 @@ test('lists AI Memory as an Antreas-authored external article without inventing 
   assert.doesNotMatch(blogIndex, /href="\/blog\/types-of-ai-memory\/?"/);
 });
 
+test('lists the LinkedIn LLM-ranking article with honest co-authorship', () => {
+  assert.match(blogIndex, /There is no universal ranking: How 6 major LLM systems actually find your content/i);
+  assert.match(blogIndex, /https:\/\/www\.linkedin\.com\/pulse\/universal-ranking-how-6-major-llm-systems-actually-find-stechenko-mepfe\//);
+  assert.match(blogIndex, /Written by Hanna Stechenko &amp; Antreas Antoniou/);
+  assert.match(blogIndex, /May 2026/);
+});
+
 test('published essay layout is light-first, responsive, and figure-safe', () => {
   const css = readFileSync(new URL('blog/research-notes.css', root), 'utf8');
   assert.match(css, /\.published-essay-figure/);
