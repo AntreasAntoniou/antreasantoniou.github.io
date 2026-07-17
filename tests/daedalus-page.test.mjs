@@ -24,6 +24,7 @@ test('encodes the composition model semantically', () => {
   assert.match(html, /<ol class="architecture-circuit"/);
   assert.equal(count(/class="architecture-node/g), 7);
   assert.match(html, /Conceptual architecture, not a literal tensor graph\./);
+  assert.match(html, /\.node-c4::before \{ content: "↑"; \}/);
 });
 
 test('states evidence and readiness without inflating claims', () => {
