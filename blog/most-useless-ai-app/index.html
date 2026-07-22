@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Most Useless AI App I Could Build | Antreas Antoniou</title>
+  <meta name="description" content="What a tea-leaf procrastination prototype reveals about ritual, friction, projection, latency, and honest AI products.">
+  <link rel="canonical" href="https://antreas.io/blog/most-useless-ai-app/">
+  <meta property="og:title" content="The Most Useless AI App I Could Build | Antreas Antoniou">
+  <meta property="og:description" content="What a tea-leaf procrastination prototype reveals about ritual, friction, projection, latency, and honest AI products.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/most-useless-ai-app/">
+  <meta property="article:section" content="Playful AI prototypes">
+  <meta name="reading-time" content="8 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · Playful prototype note</p>
+      <h1>The Most Useless AI App I Could Build</h1>
+      <p class="research-note-deck">A machine reads tea leaves it generated itself, consults the stars, and concludes that reorganising your bookmarks is urgent.</p>
+      <p class="research-note-maturity">Maturity: Prototype</p>
+      <p class="research-note-provenance">Synthesised from an Archivum ideation record and prototype project note created for a “most useless AI app” hackathon prompt. Project and pipeline scaffolding existed; the end-to-end experience and any behaviour-change or wellbeing effect were not validated.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Joke</dt><dd>Use an absurd amount of AI machinery to recommend a gloriously low-value task.</dd></div>
+      <div><dt>Mechanism</dt><dd>Turn a serious intention into synthetic omens, personalised temptation, and prophetic delay.</dd></div>
+      <div><dt>Boundary</dt><dd>This is a playful prototype, not productivity coaching, therapy, or evidence of changed behaviour.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>I wanted to build an AI system powerful enough to look at a synthetic cup of tea leaves, interpret the invented pattern as fate, consult a fictional market index, inspect a person’s history for their favourite forms of avoidance, and finally say: “Do not write the methods section. Today is auspicious for re-tagging old experiment logs.”</p>
+
+      <p>The project was called the Tea Leaf Procrastination Oracle. Its purpose was not hidden behind an ambitious mission statement. It was designed to help you avoid the thing you had decided to do. The prototype work included a project and code scaffold, examples for text and vision calls, and modules for the proposed pipeline. The complete web spectacle, live personal-memory integration, and extra modes remained unfinished. More importantly, I have no result showing that it changes behaviour, improves mental health, or even makes somebody procrastinate more elegantly. That incompleteness does not spoil the joke. It sharpens the useful question inside it: what can a deliberately useless product reveal that a respectable assistant would rather keep ambiguous?</p>
+
+      <h2>A cup that does far too much</h2>
+
+      <p>The pipeline begins with a serious task. “Finish the experiments section” will do. The system invents a tea-leaf pattern related to the task, renders or selects an image, then asks a vision model to read the image as though it were an ancient divination object.</p>
+
+      <p>This is already a closed epistemic circle: the machine manufactures the evidence and then congratulates itself for interpreting it.</p>
+
+      <p>Next come corroborating signals. A dice roll becomes a Procrastination Index. Pseudo-astrology reports that the House of Deferred Intent is strengthening. A mock Task Avoidance Composite Index moves sideways with troubling volatility. In the most personalised version, a memory system would search recent notes and unfinished fragments for replacement activities that are highly appealing and minimally consequential: tweak the editor configuration, polish an unused dashboard, reread a favourite paper “from a new angle.”</p>
+
+      <p>The final composer turns this pile of noise into one solemn recommendation. A dark, over-instrumented interface would show modules lighting up in sequence—tea vision, memory mining, cosmic bus, market omens—while status messages narrate the unnecessary labour. The stack is not merely delivering the joke. The stack is the joke.</p>
+
+      <h2>Ritual makes delay feel earned</h2>
+
+      <p>Ordinary software treats friction as an enemy. The Oracle needs friction because a ceremony converts delay into an event. You do not simply avoid the task; you enter the task, watch the apparatus warm up, wait for the leaves to be read, and receive permission from a ridiculous authority. The setup itself becomes a premium procrastination activity.</p>
+
+      <p>This is why the idea is more interesting than a random button labelled “work on something else.” Ritual changes the subjective texture of the pause. A small wait can create anticipation. A sequence of stages can create the feeling that deliberation occurred. Personal detail can make a generic diversion feel chosen. None of that means the advice is better. It means interfaces can manufacture legitimacy before they manufacture value. Many serious AI products do something adjacent while denying the theatre: they animate a cursor, announce that agents are “analysing,” display a procession of sub-tasks, or delay a trivial answer behind a grand research narrative. Sometimes real work is happening. Sometimes the performance mainly reassures the user that the price and latency must be justified. The Oracle removes the alibi: its ceremony openly exists to make a bad recommendation feel ordained.</p>
+
+      <h2>Projection is the active ingredient</h2>
+
+      <p>Tea leaves are useful to the prototype precisely because they are not useful evidence. An ambiguous shape invites projection. The user supplies recognition: that blob does look like a folder; yes, I have been meaning to clean those notes. The model then supplies fluent connective tissue, binding unrelated signals into a story that sounds uncannily specific.</p>
+
+      <p>Personal memory would intensify the effect. If the system mentions the exact comfort project a user reaches for when difficult writing begins, the recommendation can feel insightful even though the selection rule is anti-useful by design. Relevance and wisdom are not the same thing. A system can know somebody well enough to tempt them and still know nothing about what they should do.</p>
+
+      <p>That distinction matters beyond comedy. Personalisation is often evaluated by recognition: did the output mention the right project, vocabulary, or habit? The harder test is whether using that information serves the user’s declared objective. The Oracle deliberately optimises the opposite quantity. It maximises appeal minus usefulness, then dresses the result as destiny. By making misalignment explicit, it shows how easily “it understands me” can be confused with “it is helping me.”</p>
+
+      <h2>Latency can be content</h2>
+
+      <p>A direct implementation could sample a replacement task in milliseconds. The proposed prototype instead routes intent through image generation, vision, memory retrieval, mock markets, random omens, and dialogue. Computationally, this is indefensible. Dramaturgically, each unnecessary step gives the waiting time a role.</p>
+
+      <p>This makes the app a small probe of latency tolerance. Will people enjoy waiting when the delay is legible and playful? Does a visible procession create more delight than an instant punchline, or does it kill the joke after one use?</p>
+
+      <p>Would a deliberately degraded relay—rendering text as a difficult image so another model must recover it—feel like comic escalation or merely waste?</p>
+
+      <p>Those are product hypotheses, not findings. The prototype did not establish an optimal delay, retention curve, or willingness to repeat the ritual. A credible test would compare an instant oracle with staged versions of different length, then measure completion, abandonment, voluntary replay, and whether users can accurately describe what the system actually did. If more machinery produces only impatience, the Rube-Goldberg premise belongs in a short demo, not a product.</p>
+
+      <h2>Uselessness is a form of honesty</h2>
+
+      <p>The cleanest part of the concept is its non-goals. It is not meant to increase productivity. It is not coaching, therapy, time-management advice, or a rational recommendation system. It should not quietly acquire those claims because somebody found the interface charming. A playful prototype can touch real feelings around avoidance without becoming a mental-health intervention.</p>
+
+      <p>Personal history remains sensitive even when used for a joke. A memory-aware version would need explicit scope, local or otherwise clearly disclosed processing, deletion, and a way to run without personal data.</p>
+
+      <p>It should avoid exposing painful or confidential material for comic effect. The safest replacement-task pool may be user-curated rather than mined from everything the system can reach.</p>
+
+      <p>The humour also fails if the product becomes covertly judgmental. Procrastination is sometimes avoidance, sometimes recovery, sometimes a signal that the task is wrong. The Oracle must remain an accomplice in a knowingly absurd ritual, not diagnose the user or shame them into work. Its claim to honesty depends on never pretending that generated omens reveal a hidden psychological truth.</p>
+
+      <h2>Keep the punchline load-bearing</h2>
+
+      <p>It would be easy to rescue the project from uselessness. Add calendars. Recommend “healthy breaks.” Optimise task completion. Sell a serious dashboard to managers. In doing so, the interesting object would disappear. We already have enough productivity systems that turn a person’s uncertainty into a funnel of reminders and scores.</p>
+
+      <p>The Tea Leaf Procrastination Oracle is better left as a prototype with an indecent amount of machinery and a modest research agenda. It can test whether ritual changes the experience of waiting, whether personal relevance creates unjustified authority, and whether users understand an AI product more clearly when its uselessness is declared in advance.</p>
+
+      <p>If a continent of computation ends by advising me to adjust my dotfiles, the machine has at least told the truth about the value it created. That may be more product honesty than many useful apps manage.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

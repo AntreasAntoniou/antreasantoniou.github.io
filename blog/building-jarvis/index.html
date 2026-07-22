@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Jarvis | Antreas Antoniou</title>
+  <meta name="description" content="The engineering path from stateless
+chatbots to personal AI with durable, private context.">
+  <link rel="canonical" href="https://antreas.io/blog/building-jarvis/">
+  <meta property="og:title" content="Building
+Jarvis | Antreas Antoniou">
+  <meta property="og:description" content="The engineering path from
+stateless chatbots to personal AI with durable, private context.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/building-jarvis/">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · January 2025 conversation</p>
+      <h1>Building Jarvis</h1>
+      <p class="research-note-deck">The engineering path from stateless
+chatbots to personal AI with durable, private context.</p>
+      <p class="research-note-provenance">Developed from a January 2025 long-form research conversation and expanded in the Research Archivum. Edited for clarity and factual precision.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Idea</dt><dd>Without memory, an AI assistant is a clever
+stranger at the start of every conversation.</dd></div>
+      <div><dt>Mechanism</dt><dd>Capture, structure, retrieve,
+synthesise, then earn the right to become proactive.</dd></div>
+      <div><dt>Implication</dt><dd>Persistent context turns isolated
+prompts into collaboration—but only if the memory remains under user
+control.</dd></div>
+    </dl>
+
+    <article class="essay-body">
+<p><em>What it would actually mean to have an AI that knows you</em></p>
+<hr />
+<p>When people ask what kind of personal AI I want to build, I can give the technical answer: small models, long-term memory pipelines, and local inference.</p>
+<p>The simpler answer is: Jarvis.</p>
+<p>Not literally the Marvel character. But the concept—an AI assistant
+that actually knows you, remembers your context, and helps in ways that
+generic chatbots never could.</p>
+<h2 id="the-dream-query">The Dream Query</h2>
+<p>Here's the kind of interaction I want to have:</p>
+<p>"Hey, remember that thing we discussed last Tuesday? I was talking to
+John, and there was that paper he mentioned. I think we were at the
+coffee shop. What was it called?"</p>
+<p>A useful AI assistant should handle this. It has the context—it was
+there (metaphorically) when the conversation happened. It should be able
+to answer: "You mean the attention mechanism paper? John recommended
+'Attention Is All You Need' during your 3pm coffee meeting. He said it
+was foundational for understanding transformer architectures."</p>
+<p>Most current assistants cannot do this reliably across the full context of a person’s life. Product memory is improving, but durable, inspectable, user-controlled recall across devices and years remains unsolved.</p>
+<h2 id="why-memory-is-the-killer-feature">Why Memory Is The Killer
+Feature</h2>
+<p>Without memory, AI assistants are essentially clever strangers. Every
+conversation starts from zero. You have to re-explain context,
+re-establish who you are, re-describe what you're working on.</p>
+<p>This limits AI assistance to tasks that can be fully specified in a
+single prompt. Need help editing a document? Fine—paste the document.
+Need help with a project that spans months, involves dozens of people,
+and has accumulated context across hundreds of conversations? You're on
+your own, because the AI can't see any of that.</p>
+<p>Memory changes everything:</p>
+<p><strong>Contextual understanding</strong>: The AI knows what projects
+you're working on, who your collaborators are, what decisions you've
+made, what problems you've encountered.</p>
+<p><strong>Accumulated knowledge</strong>: Instead of asking "what's the
+status?" you ask "what changed since yesterday?" The AI tracks the
+delta.</p>
+<p><strong>Personalization</strong>: The AI learns your preferences,
+your writing style, your workflow. Suggestions become increasingly
+relevant.</p>
+<p><strong>Proactive assistance</strong>: With enough context, the AI
+can anticipate needs rather than just respond to requests.</p>
+<h2 id="the-automatic-documentation-dream">The Automatic Documentation
+Dream</h2>
+<p>One thing I deeply want: documentation that writes itself.</p>
+<p>Every time I build something, there's a moment at the end where I
+think: "I should document how this works." And then I don't, because
+documentation is tedious and I've already moved on mentally.</p>
+<p>An AI that's been watching my process should be able to generate that
+documentation automatically. It saw what I did. It can write down the
+steps, the decisions, the gotchas. Not a perfect document, but a first
+draft that captures 80% of what matters.</p>
+<p>The same applies to:</p>
+<ul>
+<li><strong>Standup reports</strong>: "What did I do yesterday?" should
+be automatically answerable.</li>
+<li><strong>Meeting summaries</strong>: The AI was present (via screen
+and audio capture). It knows what was discussed.</li>
+<li><strong>Time tracking</strong>: Where did the hours actually go? The
+AI knows.</li>
+<li><strong>Handoff documents</strong>: Bringing someone else up to
+speed on a project becomes trivial if the AI has full context.</li>
+</ul>
+<h2 id="the-gap-between-vision-and-reality">The Gap Between Vision and
+Reality</h2>
+<p>We're not there yet. Current "AI assistants" are mostly chatbots with
+delusions of helpfulness.</p>
+<p>The technical challenges are real:</p>
+<p><strong>The memory problem</strong>: Storing and retrieving relevant
+context from potentially millions of events is hard. This is the
+needle-in-haystack challenge—current architectures aren't great at
+it.</p>
+<p><strong>Privacy constraints</strong>: For an AI to have this level of
+context, it needs to observe your life. That's a massive privacy
+surface. The implementation needs to be trustworthy.</p>
+<p><strong>Compute requirements</strong>: Running inference
+continuously, processing screen content, managing embeddings for
+retrieval—this takes resources. It needs to run locally to preserve
+privacy, which limits what's feasible.</p>
+<p><strong>UX design</strong>: How do you interact with an AI that knows
+this much about you? The conversational interfaces we have now feel
+inadequate.</p>
+<h2 id="the-incremental-path">The Incremental Path</h2>
+<p>We are not going to wake up one day with Jarvis. The engineering path is incremental.</p>
+<p>Step 1 is memory. Can we capture what you're doing and make it
+retrievable? LTM (Long-Term Memory) systems are this foundation.</p>
+<p>Step 2 is understanding. Can we process that raw capture into
+meaningful narratives? OCR, activity classification, context
+extraction.</p>
+<p>Step 3 is retrieval. Can we find the right information when you need
+it? Embedding-based search, structured queries, relevance ranking.</p>
+<p>Step 4 is synthesis. Can we combine retrieved context with reasoning
+to actually help? This is where the LLM component matters.</p>
+<p>Step 5 is proactivity. Can we anticipate needs rather than just
+responding? Pattern recognition over historical behavior, prediction of
+routine tasks.</p>
+<p>Each step unlocks new capabilities. Each step is hard.</p>
+<h2 id="why-local-matters">Why Local Matters</h2>
+<p>All of this needs to run locally—or at least, the memory and
+sensitive processing parts do.</p>
+<p>I've wanted a "follow me around and remember everything" tool for
+years. The reason I never used the cloud-based ones that exist: I don't
+trust them with that level of access to my life.</p>
+<p><p>The controversy around always-on screen capture showed that this concern is not abstract. Personal memory systems concentrate sensitive data, so local processing, encryption, deletion, and access control are core requirements.</p>
+<p>For Jarvis to work, it needs to be <em>your</em> Jarvis. Running on
+your hardware, storing data on your devices, sending nothing to the
+cloud unless you explicitly choose to. The moment it phones home, trust
+evaporates.</p>
+<h2 id="the-10-year-vision">The 10-Year Vision</h2>
+<p>If you ask me what AI looks like in 10 years, this is the core of my
+answer: truly personal AI assistants that have earned the right to know
+everything about you because they've proven they can be trusted.</p>
+<p>Not just chatbots you talk to. Persistent entities that accumulate
+context over years. That remember not just what you said, but what you
+saw, heard, read, wrote, built.</p>
+<p>Some of this might be embodied. Imagine a small device—something
+unobtrusive, maybe wearable—that's always with you, always listening
+(locally), always building your external memory.</p>
+<p>Some of it might be ambient. AI embedded in your environment, in your
+tools, in the software you use daily.</p>
+<p>The key shift: from AI as a tool you use occasionally to AI as a
+partner that's always present, always accumulating context, always ready
+to help.</p>
+<p>We're building toward that. Every distilled micro model, every memory
+optimization, every privacy feature—it's all in service of that
+vision.</p>
+<p>Jarvis isn't science fiction. It's just engineering we haven't
+finished yet.</p>
+<hr />
+<p><em>This post grew from a long-form research conversation about distilled micro models, transformers, and long-term memory AI.</em></p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Return to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

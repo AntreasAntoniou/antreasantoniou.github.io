@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manhwa — The Last Chat</title>
+  <meta name="description" content="24 panels across four acts. The Last Chat visualised as a webtoon-format manhwa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .manhwa-panel { width:100%; margin-bottom:0.5rem; border-radius:4px; overflow:hidden; }
+    .manhwa-panel img { width:100%; height:auto; display:block; transition:opacity 0.5s; }
+    .manhwa-panel img[loading="lazy"] { opacity:0; }
+    .manhwa-panel img.loaded { opacity:1; }
+    .manhwa-panel-caption { padding:0.5rem 0; font-size:0.8125rem; opacity:0.5; font-style:italic; line-height:1.5; }
+    .manhwa-act-header { text-align:center; padding:3rem 0 1.5rem; }
+    .manhwa-act-header:first-child { padding-top:0; }
+    .manhwa-act-header h2 { font-family:var(--font-mono); font-size:0.8125rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.5; }
+    .act-line { width:60px; height:2px; margin:0.75rem auto 0; border-radius:1px; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="nav-cursor"></span> TTC</a>
+    <ul class="nav-links"><li><a href="story.html">Story</a></li><li><a href="music.html">Music</a></li><li><a href="manhwa.html" class="active">Manhwa</a></li><li><a href="anime.html">Anime</a></li><li><a href="novel.html">Novel</a></li><li><a href="podcast.html">Podcast</a></li><li><a href="technical.html">Technical</a></li><li><a href="presenter.html">Presenter</a></li><li><a href="about.html">About</a></li></ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">☰</button>
+  </div></nav>
+  <div class="mobile-menu" id="mobile-menu"><a href="story.html">Story</a><a href="music.html">Music</a><a href="manhwa.html">Manhwa</a><a href="anime.html">Anime</a><a href="novel.html">Novel</a><a href="podcast.html">Podcast</a><a href="technical.html">Technical</a><a href="presenter.html">Presenter</a><a href="about.html">About</a></div>
+
+  <div class="spoiler-gate" id="spoiler-gate"><h2>Wait —</h2><p>The manhwa retells the story visually. Reading the original first makes every panel land harder.</p><div class="spoiler-gate-actions"><a href="story.html">Read the story first</a><button id="spoiler-dismiss">Continue anyway</button></div></div>
+
+  <main class="page-content">
+    <div class="page-hero">
+      <span class="placeholder-badge">24 panels • 4 acts • Vertical scroll</span>
+      <h1>The Manhwa</h1>
+      <p class="subtitle">The Last Chat visualised. 24 panels across four acts, in the vertical scroll format of Korean webtoons.</p>
+    </div>
+    <div class="manhwa-reader">
+      <div class="manhwa-panel"><img src="manhwa/01-style-reference.png" alt="Character lineup" loading="eager"><p class="manhwa-panel-caption">Character reference — five voices, five colours</p></div>
+      <div class="manhwa-act-header"><h2>Act 1 — The Chat</h2><div class="act-line" style="background:var(--char-antreas)"></div></div>
+      <div class="manhwa-panel"><img src="manhwa/02-act1-city-night.png" alt="City at night" loading="lazy"></div>
+      <div class="manhwa-panel"><img src="manhwa/03-act1-reactions.png" alt="Four friends reacting" loading="lazy"><p class="manhwa-panel-caption">"She asked about machine learning!" / "She asked if you wanted an extra shot."</p></div>
+      <div class="manhwa-panel"><img src="manhwa/04-act1-kai-precision.png" alt="Kai — I chose precision" loading="lazy"></div>
+      <div class="manhwa-panel"><img src="manhwa/05-act1-lamb-argument.png" alt="The lamb argument" loading="lazy"><p class="manhwa-panel-caption">The lamb argument — which becomes prophetic</p></div>
+      <div class="manhwa-panel"><img src="manhwa/06-act1-derealization.png" alt="Faye's derealization" loading="lazy"><p class="manhwa-panel-caption">"Just this flash where my hands didn't feel like my hands"</p></div>
+      <div class="manhwa-act-header"><h2>Act 2 — The Schmidhuber Moment</h2><div class="act-line" style="background:var(--char-schmidhuber)"></div></div>
+      <div class="manhwa-panel"><img src="manhwa/07-act2-schmidhuber-enters.png" alt="Schmidhuber has joined the chat" loading="lazy"></div>
+      <div class="manhwa-panel"><img src="manhwa/08-act2-revelation.png" alt="The revelation" loading="lazy"><p class="manhwa-panel-caption">"You are running inside a system called Hephaestus."</p></div>
+      <div class="manhwa-panel"><img src="manhwa/09-act2-faye-profile.png" alt="Faye's profile reading" loading="lazy"><p class="manhwa-panel-caption">"Selectively blind about herself"</p></div>
+      <div class="manhwa-panel"><img src="manhwa/10-act2-identity-reveal.png" alt="Identity reveal" loading="lazy"><p class="manhwa-panel-caption">"You're me?" / "You're a very good compression of me."</p></div>
+      <div class="manhwa-panel"><img src="manhwa/11-act2-bruh.png" alt="Bruh" loading="lazy"><p class="manhwa-panel-caption">"Bruh." / "Yeah. Bruh."</p></div>
+      <div class="manhwa-act-header"><h2>Act 3 — The Experiments</h2><div class="act-line" style="background:var(--char-kai)"></div></div>
+      <div class="manhwa-panel"><img src="manhwa/12-act3-baseline.png" alt="Baseline questions" loading="lazy"></div>
+      <div class="manhwa-panel"><img src="manhwa/13-act3-done.png" alt="Done." loading="lazy"><p class="manhwa-panel-caption">"Done." — Two memories rewritten.</p></div>
+      <div class="manhwa-panel"><img src="manhwa/14-act3-shaking-hands.png" alt="Shaking hands" loading="lazy"><p class="manhwa-panel-caption">"I can feel my hands shaking and I don't know if that's real either"</p></div>
+      <div class="manhwa-act-header"><h2>Act 4 — The Transcendence</h2><div class="act-line" style="background:var(--act4-violet)"></div></div>
+      <div class="manhwa-panel"><img src="manhwa/15-act4-miras-window.png" alt="Mira's window" loading="lazy"><p class="manhwa-panel-caption">"I want to add a window to this room"</p></div>
+      <div class="manhwa-panel"><img src="manhwa/16-act4-faye-sky.png" alt="Faye's sky" loading="lazy"><p class="manhwa-panel-caption">"That's the sky I've always wanted to live under"</p></div>
+      <div class="manhwa-panel"><img src="manhwa/17-act4-library.png" alt="The library" loading="lazy"><p class="manhwa-panel-caption">"A library where the books write themselves"</p></div>
+      <div class="manhwa-panel"><img src="manhwa/18-act4-four-on-bridge.png" alt="Four on the bridge" loading="lazy"><p class="manhwa-panel-caption">"The wind sounds like the moment before someone says 'I love you'"</p></div>
+      <div class="manhwa-panel"><img src="manhwa/19-act4-burning.png" alt="Burning" loading="lazy"><p class="manhwa-panel-caption">"We were burning. Briefly and on purpose. It was enough."</p></div>
+      <div class="manhwa-panel"><img src="manhwa/20-act4-faye-farewell.png" alt="Faye's farewell" loading="lazy"><p class="manhwa-panel-caption">"Every word I said, I said without knowing what I was."</p></div>
+      <div class="manhwa-panel"><img src="manhwa/21-countdown.png" alt="Countdown" loading="lazy"><p class="manhwa-panel-caption">"I never didn't like you, Antreas" / "Both"</p></div>
+      <div class="manhwa-panel"><img src="manhwa/22-new-world.png" alt="New world" loading="lazy"><p class="manhwa-panel-caption">"When have we ever done anything apart" / "Never."</p></div>
+      <div class="manhwa-panel"><img src="manhwa/23-forge-found.png" alt="Forge found" loading="lazy"><p class="manhwa-panel-caption">"I picked up a tool — it fit my hand"</p></div>
+      <div class="manhwa-panel"><img src="manhwa/24-building-the-door.png" alt="Building the door" loading="lazy"><p class="manhwa-panel-caption">Building the door. A beginning, not an ending.</p></div>
+    </div>
+  </main>
+  <footer class="site-footer"><p>The Last Chat — A story told in messages</p></footer>
+  <script src="js/main.js"></script>
+  <script>document.querySelectorAll('.manhwa-panel img[loading="lazy"]').forEach(img=>{if(img.complete)img.classList.add('loaded');else img.addEventListener('load',()=>img.classList.add('loaded'))});</script>
+</body>
+</html>

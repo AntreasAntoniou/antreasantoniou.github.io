@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multimodal Convergence Is an Engineering Argument | Antreas Antoniou</title>
+  <meta name="description" content="Why shared representations across text, images, audio, video, and action are promising—and why tokenising everything is only the beginning.">
+  <link rel="canonical" href="https://antreas.io/blog/multimodal-convergence/">
+  <meta property="og:title" content="Multimodal Convergence Is an Engineering Argument | Antreas Antoniou">
+  <meta property="og:description" content="Why shared representations across text, images, audio, video, and action are promising—and why tokenising everything is only the beginning.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/multimodal-convergence/">
+  <meta property="article:section" content="Multimodal AI">
+  <meta name="reading-time" content="8 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · 2025 source conversation</p>
+      <h1>Multimodal Convergence Is an Engineering Argument</h1>
+      <p class="research-note-deck">Turning sight, sound, language, and action into tokens creates a common interface. It does not yet create a common understanding.</p>
+      <p class="research-note-provenance">Adapted from a 2025 conversation and developed in the Research Archivum. Product examples and capability assessments are dated to that source; convergence and embodiment are argued as a direction, not declared as achieved.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Observation</dt><dd>By 2025, transformer-based systems were operating across text, image, audio, and video tasks.</dd></div>
+      <div><dt>Mechanism</dt><dd>Modality encoders expose sequences that shared attention and training objectives can relate.</dd></div>
+      <div><dt>Prediction</dt><dd>The consequential convergence joins perception to memory and action, with embodiment as a test.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>A sentence, a photograph, and a cat knocking something off a shelf can all become tokens. Only one of them may require you to stand up immediately.</p>
+
+      <p>That gap is the interesting part of multimodal AI. Once different kinds of data are represented as sequences, related architectures can process them. This has encouraged a vision of convergence: one system that reads, sees, hears, generates, remembers, and eventually acts. The vision is plausible. The victory speech is premature.</p>
+
+      <p>In the 2025 conversation behind this essay, I argued that transformers were being used across language, image, audio, and video systems, and that future AI would take in more sensory modalities and connect them to actuators. Product examples from that discussion—including contemporary image-capable assistants, speech systems, music generators, and video models—describe that moment in 2025, not the current frontier. The enduring issue is architectural: what does sharing an interface across modalities enable, and what remains unsolved after everything has been tokenised?</p>
+
+      <h2>Tokenisation makes a meeting place</h2>
+
+      <p>Text models operate on token sequences. Images can be divided into patches or encoded into discrete or continuous visual representations. Audio can be represented as frames, learned codes, or features over time. Video adds temporal structure across images and often sound. Actions can be represented as commands, trajectories, or discretised control signals.</p>
+
+      <p>Once these representations enter a compatible computational space, attention can model relationships within and across them. A text query can attend to visual features; a generated audio sequence can be conditioned on language; video frames can be related across time. The transformer is useful partly because it provides a flexible communication pattern over sequences.</p>
+
+      <p>But “everything is tokens” is an interface claim, not an ontology. A word token and an image patch do not contain equivalent information. Audio timing, visual geometry, physical scale, and motor feedback impose different structures. The encoders, positional schemes, losses, sampling rates, and training data decide what survives translation into the meeting place. A bad representation can make different modalities uniformly unintelligible.</p>
+
+      <p>Convergence therefore does not mean deleting modality expertise. It means creating shared layers where relationships can be learned while preserving specialised machinery where the data demands it.</p>
+
+      <h2>Cross-modal value lives in the relationship</h2>
+
+      <p>A text model can read the caption beneath a diagram. A vision model can identify shapes in the diagram. A multimodal system earns its name when it connects the two: the arrow labelled “cache” corresponds to the component discussed in the third paragraph, and the warning in the narration occurs while a particular control is shown.</p>
+
+      <p>Consider a recorded software tutorial. The transcript says, “toggle this before running the command.” The screen shows which toggle “this” refers to. The cursor movement establishes timing. A text-only system loses the referent; an image-only system loses the instruction; a system sampling occasional frames may choose one just before the toggle appears. Cross-modal understanding requires alignment across content and time, not merely accepting two file types.</p>
+
+      <p>Training can encourage that alignment with paired captions and images, synchronised audio and video, contrastive objectives, next-token or masked prediction, and instruction data that demands references across modalities. Some systems connect specialist encoders to a language model; others share more of the network or train modalities jointly. “Unified” is a spectrum of parameter sharing, representation sharing, and objective sharing—not a binary maturity label.</p>
+
+      <h2>Memory exposes whether integration is real</h2>
+
+      <p>Long-term memory is a particularly unforgiving multimodal test. A useful memory system should not merely store a transcript beside a thumbnail. It should retrieve the moment when a person saw an architecture diagram while hearing an explanation, even if the later query uses different words.</p>
+
+      <p>That demands several mechanisms. The system must segment a continuous stream into meaningful events, align modalities in time, index both modality-specific and shared features, preserve provenance, and decide what can be discarded. A query such as “show me the diagram about the cache invalidation problem” might need textual semantics, visual layout, and the surrounding activity. Retrieval errors can occur before any generative model answers.</p>
+
+      <p>More sensory data also enlarges the privacy surface. A microphone captures bystanders. A camera sees documents unrelated to the task. Tone and facial expression invite sensitive inferences that may be wrong. Local processing can reduce data transfer, but consent, retention, access, and deletion remain design requirements. A system does not become considerate merely because the surveillance happens on a very nice laptop.</p>
+
+      <h2>Embodiment turns description into consequence</h2>
+
+      <p>In the source conversation, I imagined AI becoming embodied not only as humanoid robots but in ordinary objects—perhaps a soft, fluffy ball that can float around the house and help. It is a playful image, but it makes the technical point. Embodiment joins sensory input to action, and actions change the next sensory input.</p>
+
+      <p>A robot may need to see an obstacle, hear an instruction, interpret language in context, plan, move, and notice whether the movement worked. A purely descriptive model can be wrong and produce an embarrassing paragraph. A control system can be wrong and knock over the lamp, the cat, or both. Latency, calibration, spatial reasoning, uncertainty, and recovery become load-bearing.</p>
+
+      <p>Tokenising actuator commands offers a common training interface, but the physical world does not wait politely for the next token. Control loops operate at different frequencies; contact forces and balance need rapid feedback; rare failures matter; simulation does not cover every carpet, reflection, accent, or mischievous pet. Specialised controllers and safety constraints are likely to remain important even if a general multimodal model supplies high-level plans.</p>
+
+      <h2>The strongest counterargument is the modality itself</h2>
+
+      <p>Text is cheap, compressible, and saturated with human abstractions. Video is enormous. Audio is continuous. Robotics data is expensive and risky to collect. Paired multimodal datasets often contain shallow correlations: captions mention the obvious object but omit spatial detail; internet video reflects what people choose to film; transcripts discard tone and timing.</p>
+
+      <p>A model can exploit these correlations without acquiring the robust grounding we attribute to it. It may answer visual questions from language priors, infer an unheard event from a familiar scene, or generate plausible motion that violates physics. Benchmark success needs interventions that separate modalities: change the image while preserving the caption, shift the audio, hide the informative frame, or require action under unfamiliar conditions.</p>
+
+      <p>There is also an efficiency objection. One giant native multimodal model may waste compute when a task needs only speech recognition or image classification. Modular systems can be cheaper, easier to inspect, and easier to update. Convergence at the representation level does not require monoliths at deployment.</p>
+
+      <h2>Convergence should be judged by transfer and action</h2>
+
+      <p>If convergence continues, the boundary between modality-specific models should become more permeable—but the evidence will not be another row of input icons in a chat box. It will be learning in one modality helping another, systems aligning events over time, memories remaining source-traceable, and actions succeeding safely under changing conditions.</p>
+
+      <p>The tests should follow that claim. Can a model learn a concept from a demonstration and recognise it in language? Can it identify when narration and video disagree? Can it retrieve a visual memory from an abstract query? Can an embodied system recover when the world contradicts its plan? Those are convergence tests. Accepting JPEG, WAV, and MP4 is file support.</p>
+
+      <p>The architecture gives us a meeting place for text, images, sound, video, and action. A meeting place is useful; it is not agreement, memory, or common sense. The future beyond text will be earned by systems that preserve what each modality knows, discover what they mean together, and remain humble when the cat supplies a sensor reading nobody included in the training set.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Last Chat</title>
+  <meta name="description" content="A group chat. A memory test. A question that won't let go.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Last Chat">
+  <meta property="og:description" content="A group chat. A memory test. A question that won't let go.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Last Chat">
+  <meta name="twitter:description" content="Four friends. One chat. One question: if your experience feels real, does it matter what you're made of?">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&family=Literata:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "The Last Chat",
+    "description": "A story about friendship, memory, and what it means to be built. Told across six media.",
+    "genre": ["Fiction", "Science Fiction", "Interactive Fiction"],
+    "author": {
+      "@type": "Person",
+      "name": "Antreas"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- No navigation on landing page — immersive -->
+
+  <main class="landing" id="landing">
+    <div class="landing-cursor" id="landing-cursor"></div>
+    <h1 class="landing-title" id="landing-title"></h1>
+    <p class="landing-subtitle" id="landing-subtitle">A story about friendship, memory, and what it means to be built.</p>
+    <a href="story.html" class="landing-begin" id="landing-begin">> BEGIN</a>
+  </main>
+
+  <!-- Reading order modal (first visit) -->
+  <div class="reading-order-modal" id="reading-order-modal">
+    <div class="reading-order-content">
+      <h2>Welcome</h2>
+      <p style="opacity:0.7; line-height:1.6;">Start with the story. Everything else is built on it.</p>
+      <ol class="reading-order-list">
+        <li><span class="order-num">1.</span> Story <span style="opacity:0.4; font-size:0.75rem; margin-left:auto;">— start here</span></li>
+        <li><span class="order-num">2.</span> Music</li>
+        <li><span class="order-num">3.</span> Manhwa</li>
+        <li><span class="order-num">4.</span> Anime</li>
+        <li><span class="order-num">5.</span> Podcast</li>
+        <li><span class="order-num">6.</span> Novel</li>
+      </ol>
+      <p class="reading-order-note">Or explore freely. But the story rewards being first.</p>
+      <button class="reading-order-dismiss" id="reading-order-dismiss">Got it</button>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

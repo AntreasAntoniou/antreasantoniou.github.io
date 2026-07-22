@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Laboratory Is Part of the Research | Antreas Antoniou</title>
+  <meta name="description" content="Lessons from building the Edinburgh LeRobot node: apparatus, logistics, documentation, and teaching are epistemic infrastructure.">
+  <link rel="canonical" href="https://antreas.io/blog/laboratory-is-part-of-the-research/">
+  <meta property="og:title" content="The Laboratory Is Part of the Research | Antreas Antoniou">
+  <meta property="og:description" content="Lessons from building the Edinburgh LeRobot node: apparatus, logistics, documentation, and teaching are epistemic infrastructure.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/laboratory-is-part-of-the-research/">
+  <meta property="article:section" content="Embodied AI practice">
+  <meta name="reading-time" content="9 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · Embodied AI field note</p>
+      <h1>The Laboratory Is Part of the Research</h1>
+      <p class="research-note-deck">A robot experiment begins long before a policy runs. It begins with a table, a power plan, an assembled arm, and somebody who can teach the first failure.</p>
+      <p class="research-note-maturity">Maturity: Built work</p>
+      <p class="research-note-provenance">Drawn from public-facing event documentation and organising records for the Edinburgh node of the June 2025 worldwide LeRobot hackathon. Antreas initiated and co-organised the node, provided and assembled robots and compute infrastructure, and taught during the event.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Claim</dt><dd>Apparatus and organisation shape which embodied-AI questions can be asked and trusted.</dd></div>
+      <div><dt>Built work</dt><dd>An Edinburgh hackathon node with assembled robots and compute, teaching, and public event infrastructure.</dd></div>
+      <div><dt>Boundary</dt><dd>Organising records document planned safety controls, not verified post-event execution of each control.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>Before anyone could train a robot at the Edinburgh LeRobot hackathon, there had to be a robot that moved for the right reasons. Arms had to be assembled and compute had to be available. The organising plan also called for electrical checks, emergency stops, supervised robot areas, and safety briefings. The records document those intended controls; they do not by themselves verify that every control was executed during the event.</p>
+
+      <p>I initiated and co-organised the Edinburgh node of the worldwide LeRobot hackathon in June 2025. I provided and assembled robots and compute infrastructure, and I taught. Those verbs can sound like event logistics attached to the “real” technical work. Living through the build made the opposite view hard to sustain. Apparatus, documentation, safety, scheduling, and teaching decide which experiments become possible, which failures become legible, and who gets to participate in producing knowledge.</p>
+
+      <p>This is built work, not a proposal for an imaginary laboratory. It is also not a claim that one weekend validated a general theory of research infrastructure. The event is a grounded case: a place where the backstage tasks moved to the front because without them there was no stage.</p>
+
+      <h2>The experiment starts at the workbench</h2>
+
+      <p>In software, identical source code encourages the fantasy that the experimental object begins at execution. Embodied AI resists that fantasy.</p>
+
+      <p>Two nominally identical robot kits can differ after assembly through cable routing, joint alignment, mechanical play, camera position, calibration, or the small decisions made while tightening parts. The apparatus has a history before the dataset does.</p>
+
+      <p>Assembling the robots was therefore not equivalent to unpacking keyboards. It established the physical system on which every later observation depended. A policy that appears unstable may be responding to a mechanical asymmetry. Demonstration data may encode the operator compensating for friction. A failure that looks like learning may begin in a connector or a coordinate convention.</p>
+
+      <p>The practical response is not to demand perfect hardware. It is to make the hardware state inspectable. Record assembly choices that affect motion. Establish a known starting configuration. Test joints and controls before introducing learned behaviour. When something drifts, ask whether the model changed, the data changed, or the machine changed. The workbench is where those hypotheses first become separable.</p>
+
+      <h2>Compute defines the questions people can ask</h2>
+
+      <p>Providing compute sounds like capacity planning: count participants, estimate workloads, avoid queues. Yet capacity changes the intellectual shape of an event. If training a baseline consumes the available session, teams cannot compare alternatives. If environments are inconsistent, a result may reflect dependency archaeology rather than a modelling decision. If only the person with a powerful personal machine can iterate, access to the research question has already been rationed.</p>
+
+      <p>The Edinburgh node combined robot hardware with on-site compute so participants could work on the coupled system. The important unit was not “a GPU” or “an arm” in isolation. It was a path from demonstration to data, from data to training, and from a trained policy back to observable motion. Every break in that path changed what could be learned during the event. Good infrastructure makes the first comparison cheap: can a team reproduce the reference behaviour, alter one factor and run again, or inspect the same failure without inheriting an afternoon of setup? Expensive machinery is not automatically good epistemic infrastructure. A smaller, stable path that supports repeated contrasts may produce more understanding than impressive hardware that only one person can operate.</p>
+
+      <h2>Safety creates an experimental envelope</h2>
+
+      <p>Risk assessment is often written as though it sits outside inquiry: paperwork required before the interesting work begins. With robots, safety controls define the region in which exploration is permitted. A reachable emergency stop, checked electrical equipment, supervised robot areas, clear briefings, and sensible limits on motion make it possible to try uncertain policies without pretending uncertainty has disappeared.</p>
+
+      <p>For Edinburgh, the organising records planned equipment checks, emergency stops, venue and power coordination, supervised robot areas, and safety briefings. These were specified as controls to put in place, not recorded afterwards as a completed checklist. The assigned source set therefore supports the plan and its rationale, but not a claim that each measure was executed or effective on the day.</p>
+
+      <p>The intended function of those controls was not decorative compliance. If carried through, they would help turn an open room full of moving mechanisms and unfamiliar participants into a bounded environment where mistakes had a response. That is the general mechanism; the planning documents are not post-event evidence that the transformation occurred exactly as intended.</p>
+
+      <p>A weak safety layer also corrupts evidence. If participants are afraid to test a behaviour, the experiment never reaches the condition it claims to study. If a robot can move unpredictably without a reliable stop, observers may intervene early and inconsistently. If cables, furniture, or room access continually change the setup, the environment becomes an uncontrolled variable. Safety and experimental control are not identical, but in embodied work they are frequently allies.</p>
+
+      <h2>Teaching is part of the instrument</h2>
+
+      <p>A laboratory is not usable merely because the equipment is present. Somebody must transmit the operational distinctions that documentation rarely carries: this noise is normal; that twitch means stop; this calibration error will poison the demonstration; this graph looks healthy but reflects the wrong camera frame.</p>
+
+      <p>Teaching during the event was not a broadcast layer added after setup. It was part of how the apparatus became available to other minds. A good workshop compresses the path to a meaningful first failure. It gives participants enough of the system’s causal structure to ask whether the problem sits in hardware, data collection, training, or deployment. Without that map, debugging becomes ritual: restart, retrain, change three things, hope.</p>
+
+      <p>The effect also runs backwards. Questions from a room expose assumptions hidden from the person who assembled the stack. If several teams misread the same instruction, the documentation is wrong in practice even if every sentence is technically accurate. If only experts can recover from a routine fault, the apparatus is not yet a shared research platform. Teaching measures the laboratory’s legibility.</p>
+
+      <h2>Logistics determine the sample</h2>
+
+      <p>The event needed a venue, a schedule, registration, participant information, equipment access, and a public website that explained how to join. These can appear administratively distant from robot learning. They determine who arrives, how long they can work, what they bring, when they receive help, and whether a team gets enough uninterrupted time to run a comparison.</p>
+
+      <p>A thirty-hour competition distributed across venue opening hours is not the same research environment as an always-open laboratory. A limited number of robots creates turn-taking and encourages some tasks over others. A two-step registration process can protect capacity but add friction. Food arrangements, accessibility, travel, and team formation affect who can remain present. The observed projects are downstream of all these filters. This does not make a hackathon invalid; it makes its conditions part of the record. “Participants built X” is incomplete without the apparatus, time, support, and selection process that made X feasible. Logistics are the sampling procedure of an event. Ignoring them produces a polished account of innovation with its causal context removed.</p>
+
+      <h2>Documentation is memory with consequences</h2>
+
+      <p>The public event site had to carry dates, schedule, registration steps, equipment information, participation constraints, and frequently asked questions. It was revised as facts changed: the duration was corrected, venue hours clarified, and promises about food removed. That revision history is a mundane example of scientific honesty. A document is useful when it tracks the world, not when it preserves the first confident plan.</p>
+
+      <p>Operational records serve a second function. They expose dependencies before they become incidents: equipment arrival, safety responsibilities, room preparation, testing, communication, and contingency.</p>
+
+      <p>A planned dependency and a completed task are different states. The Edinburgh records make the intended work visible, but the document does not perform that work or certify afterwards that it happened. Its value is narrower and still important: it makes the system’s incompleteness visible enough that people can act.</p>
+
+      <p>Research documentation should do the same. It should not merely narrate the final run. It should preserve changes to apparatus, failed setup assumptions, teaching interventions, and environmental constraints that shaped the result. Otherwise reproducibility becomes a request to repeat the visible code while reconstructing the invisible laboratory by luck.</p>
+
+      <h2>What this case does not prove</h2>
+
+      <p>Building and running an event node does not show that more infrastructure always improves research. Apparatus can become spectacle. Documentation can become bureaucracy. Workshops can over-standardise exploration, and generous compute can encourage teams to substitute scale for a sharper question. A tightly organised weekend may produce smooth demos while suppressing slow, confusing lines of inquiry that need more time.</p>
+
+      <p>The stronger hypothesis is testable. Compare where teams lose time, which faults recur, who can recover without organiser intervention, whether independent teams reproduce a baseline, and how often a documented setup matches the physical one. Change one layer—assembly guidance, environment packaging, safety briefing, or teaching sequence—and inspect whether failures become easier to localise. If richer infrastructure merely produces more ceremony and no cleaner contrasts, it has not earned its cost.</p>
+
+      <p>Research is often illustrated with the final curve or the robot completing its task. The Edinburgh record begins earlier: components on a table, machines being made ready, a room being taught how to see failure. The laboratory was not where the research happened. Building the laboratory was one of the research acts.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Small Models Are a Systems Decision | Antreas Antoniou</title>
+  <meta name="description" content="The enduring small-model thesis: curate the data, narrow the job, and optimise capability at the point of deployment.">
+  <link rel="canonical" href="https://antreas.io/blog/small-model-revolution/">
+  <meta property="og:title" content="Small Models Are a Systems Decision | Antreas Antoniou">
+  <meta property="og:description" content="The enduring small-model thesis: curate the data, narrow the job, and optimise capability at the point of deployment.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/small-model-revolution/">
+  <meta property="article:section" content="Efficient machine learning">
+  <meta name="reading-time" content="8 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · 2025 source conversation</p>
+      <h1>Small Models Are a Systems Decision</h1>
+      <p class="research-note-deck">Parameter count is not a product requirement. The right question is how much model a particular task needs, on the machine where it must run.</p>
+      <p class="research-note-provenance">Adapted from a 2025 conversation and developed in the Research Archivum. Phi-4 and laptop comparisons are presented as 2025 observations; they are not current rankings or universal performance guarantees.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Observation</dt><dd>In 2025, capable smaller models were making useful local inference increasingly practical.</dd></div>
+      <div><dt>Mechanism</dt><dd>Data quality, distillation, task boundaries, and deployment optimisation trade breadth for efficiency.</dd></div>
+      <div><dt>Implication</dt><dd>Compose a capability hierarchy instead of sending every job to the largest model.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>You can use an aircraft carrier to go fishing. It is still a boat. You can stand on the deck with a fishing rod and, with sufficient paperwork, probably catch something. The fish will not be more impressed.</p>
+
+      <p>That image from a 2025 conversation remains my favourite way to explain the small-model thesis. A very large language model is valuable because it can perform a wide range of tasks. But breadth has a cost: memory, energy, latency, infrastructure, and often a network round trip. If the job is narrow and repeated, generality can become ballast.</p>
+
+      <p>The headline at the time was Microsoft's Phi-4. In that 2025 source, the 14-billion-parameter model was discussed as competitive with substantially larger models on selected benchmarks, and I described running models of that size relatively quickly on a MacBook. Those comparisons belong to 2025. Model families, runtimes, and leaderboards move too quickly for them to function as a current buying guide. The durable question is why a smaller model can sometimes be the better component even when a larger model remains more capable overall.</p>
+
+      <h2>Parameters buy capacity, not entitlement</h2>
+
+      <p>Parameter count is one axis of model capacity. Holding many other choices roughly constant, more parameters can help a model absorb broader patterns and capabilities. But comparisons rarely hold everything else constant. Architecture, tokenizer, training compute, data mixture, objective, post-training, context length, quantisation, and evaluation protocol all change.</p>
+
+      <p>A smaller model outperforming a larger one on a benchmark does not repeal scaling laws. It may have received more useful data for that task, been trained longer, benefited from stronger supervision, or sacrificed performance elsewhere. “14B beats 70B” is not a scientific conclusion until the verb “beats” names the tasks, metrics, conditions, and uncertainty.</p>
+
+      <p>This is precisely why the result can still matter. Products do not deploy parameter counts; they deploy behaviour under constraints. If a compact model reaches the required accuracy for classification while fitting in memory and responding within the latency budget, the larger model's unused breadth has no automatic value. Capability above the requirement may be welcome, but it is not free.</p>
+
+      <h2>Data quality changes what the model spends itself on</h2>
+
+      <p>The Phi discussion highlighted curated and synthetic “textbook-quality” data. The mechanism-level idea is that training examples allocate finite model capacity. Duplicated, contradictory, badly formatted, or irrelevant samples ask the model to represent noise. Clear explanations, well-selected coverage, and examples aligned with the target behaviours can make each update more useful.</p>
+
+      <p>Synthetic data can help by generating targeted explanations or difficult examples, often under the guidance of a stronger teacher. Distillation then trains a smaller student to reproduce selected behaviour. But synthetic is not synonymous with clean. A teacher's blind spots can be copied at industrial speed; templated data can reduce diversity; benchmark-shaped generation can teach the test. Curation needs adversarial filtering, held-out evaluation, and real examples from the intended distribution.</p>
+
+      <p>Data quality is also task-relative. A beautiful corpus of mathematical reasoning may not provide broad factual coverage or excellent dialogue. “The best data” means the best allocation for an explicit objective, including enough variation to survive the messy cases the model will encounter. Small models leave less spare capacity for ambiguity in the specification.</p>
+
+      <h2>Specialisation turns one vague task into several testable ones</h2>
+
+      <p>The most important step is often not training. It is decomposition. “Understand what the user is doing” is a fog bank. Detect whether text contains a time reference, classify an event into a known taxonomy, correct common OCR confusions, or route a query to one of several tools: these are narrower contracts with datasets and failure criteria.</p>
+
+      <p>A specialist can spend its parameters on the distinctions that matter for one contract. It can emit a constrained label rather than composing an essay, run continuously, and be evaluated exhaustively on edge cases. A general model may still provide training signals, handle uncertain examples, or cover the tail. The architecture becomes a hierarchy: cheap specialists for frequent known work, a local reasoning model for broader cases, and a remote large model only when its additional breadth justifies the cost and data boundary.</p>
+
+      <p>This is not merely model routing. The application must know when the specialist is outside its competence. Confidence calibration, abstention, drift detection, and escalation are part of the model's usefulness. A tiny classifier that is fast and confidently wrong is not efficient; it has simply moved the bill into downstream errors.</p>
+
+      <h2>Deployment is part of capability</h2>
+
+      <p>A model that runs on the user's device changes more than latency. It can operate without a network, keep routine data local, avoid a per-call API charge, and remain available when a provider changes limits. Repeated pipeline stages can also avoid serial network waits: five individually tolerable calls become a conspicuous pause when chained.</p>
+
+      <p>Yet “local” is not automatically fast, free, or private. Weights occupy storage and memory. Sustained inference consumes battery and competes with the user's applications. Packaging, warm-up, hardware acceleration, and quantisation affect performance. Data can still leak through logs or later cloud stages. The relevant benchmark is end-to-end behaviour on target devices, including cold starts, tail latency, energy, and fallback frequency.</p>
+
+      <p>This is where small models become a systems decision. The model, runtime, hardware, scheduling policy, and escalation path determine the experience together. A modest model that remains resident for frequent millisecond-scale work may feel more capable than a brilliant endpoint reached through several network calls. For a rare, high-stakes question, the ranking can reverse.</p>
+
+      <h2>The floor is real, even if we have not found it</h2>
+
+      <p>The 2025 source looked toward models around one hundred million parameters performing highly specific tasks and predicted deployments made of many distilled micro models, one or two local reasoning models, and cloud models for difficult edge cases. That was a prediction, not a report that arbitrary LLM capability had been compressed into a hundred million parameters.</p>
+
+      <p>There are hard limits. A small model cannot preserve unlimited world knowledge, broad reasoning, every language, long context, and robust behaviour across unknown tasks. Distillation cannot reliably create knowledge the teacher never supplied, and a student's errors may be hard to anticipate. Maintaining a fleet of specialists introduces versioning, routing, monitoring, and dataset costs. Sometimes one larger model is operationally simpler and better.</p>
+
+      <p>The test that could change my view is straightforward: if specialist stacks consistently cost more to build and maintain than they save, while larger models become cheap, private, and fast enough on target devices, consolidation wins. Smallness has no intrinsic virtue. It is valuable only when it improves the whole system.</p>
+
+      <h2>Build the smallest boat that survives the sea</h2>
+
+      <p>The small-model case is not that each year's compact model “changes everything”. That phrase expires before the browser tab does. The case is that data and task design can exchange unnecessary breadth for operational advantages, and that deployment constraints should shape the model from the beginning.</p>
+
+      <p>The deployment shape I expect is heterogeneous: not one tiny model replacing every frontier system, but layers of models with explicit jobs. Large models will remain important as broad reasoners, teachers, and handlers of unfamiliar cases. Small models will occupy the frequent pathways where privacy, latency, energy, and control matter more than answering any question ever written.</p>
+
+      <p>The aircraft carrier is an extraordinary machine. Keep it for oceans that need one. For the repeated trip to the nearby fishing spot, build a small boat, test it in bad weather, teach it the route, and give it a radio for the moment the sea becomes larger than its design.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

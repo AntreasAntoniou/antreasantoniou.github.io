@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aircraft Carriers and Fishing Boats | Antreas Antoniou</title>
+  <meta name="description" content="General-purpose models are
+extraordinary. Deploying one for every tiny decision is still like
+taking an aircraft carrier fishing.">
+  <link rel="canonical" href="https://antreas.io/blog/distilled-micro-models/">
+  <meta property="og:title" content="Aircraft Carriers and Fishing
+Boats | Antreas Antoniou">
+  <meta property="og:description" content="General-purpose models are
+extraordinary. Deploying one for every tiny decision is still like
+taking an aircraft carrier fishing.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/distilled-micro-models/">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · January 2025 conversation</p>
+      <h1>Aircraft Carriers and Fishing Boats</h1>
+      <p class="research-note-deck">General-purpose models are
+extraordinary. Deploying one for every tiny decision is still like
+taking an aircraft carrier fishing.</p>
+      <p class="research-note-provenance">Developed from a January 2025 long-form research conversation and expanded in the Research Archivum. Edited for clarity and factual precision.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Idea</dt><dd>Most production tasks need surgical
+precision, not general intelligence.</dd></div>
+      <div><dt>Mechanism</dt><dd>Distil a broad teacher into local
+specialists with sharply defined jobs.</dd></div>
+      <div><dt>Implication</dt><dd>Optimise the system for latency,
+privacy, reliability, and energy—not parameter count.</dd></div>
+    </dl>
+
+    <article class="essay-body">
+<p><em>Why smaller, specialized models are the future of practical
+AI</em></p>
+<hr />
+<p>You can use an aircraft carrier to go fishing. Grab a rod, stand on
+the deck, cast your line. It'll work. But the fuel costs alone would
+bankrupt you before lunch.</p>
+<p>This is essentially what we are doing when we deploy a frontier-scale generalist to classify a timestamp or extract a tag from text. It works, but it spends general-purpose capacity on a narrow decision.</p>
+<h2 id="the-scale-obsession">The Scale Obsession</h2>
+<p>The AI industry has developed a curious fixation with scale. Bigger
+models, more parameters, longer context windows. The implicit
+assumption: more is always better.</p>
+<p>And for general-purpose reasoning, this holds some truth. GPT-4,
+Claude, Gemini—these models can write poetry, debug code, and explain
+quantum mechanics in the same conversation. That generality requires
+massive parameter counts.</p>
+<p>But here's what's often overlooked: <strong>most real-world AI tasks
+don't need general intelligence. They need surgical
+precision.</strong></p>
+<h2 id="the-fishing-boat-approach">The Fishing Boat Approach</h2>
+<p>In deployment work discussed publicly, I used models below 100 million parameters, each trained for a sharply bounded task.</p>
+<p>On tightly specified tasks, a specialist can match or exceed much larger generalist baselines. That is a conditional empirical claim, not a law: the result depends on the data, teacher, task definition, and acceptance test.</p>
+<h2 id="the-numbers-that-matter">The Numbers That Matter</h2>
+<p>No latency or cost figure is universal: hardware, batching, model size, provider load, and network path all matter. The durable comparison is architectural:</p>
+<table><thead><tr><th>Metric</th><th>Remote generalist</th><th>Local specialist</th></tr></thead><tbody>
+<tr><td>Latency</td><td>Network and serving dependent</td><td>Hardware and task dependent</td></tr>
+<tr><td>Marginal cost</td><td>Usually usage-priced</td><td>No per-call API fee</td></tr>
+<tr><td>Privacy</td><td>Input crosses a service boundary</td><td>Input can remain on-device</td></tr>
+<tr><td>Offline operation</td><td>Usually unavailable</td><td>Architecturally possible</td></tr>
+</tbody></table>
+<p>Local inference removes network transit and service queues, but the actual gain must be measured end to end on the target device.</p>
+<h2 id="the-warm-up-effect">The Warm-Up Effect</h2>
+<p>Small local models can exhibit a warm-up effect as weights, kernels, and working memory become resident. The size of that effect is runtime- and hardware-dependent, so cold-start and steady-state latency should be reported separately.</p>
+<h2 id="when-to-use-what">When to Use What</h2>
+<p>This isn't an argument against LLMs. They have their place:</p>
+<p><strong>Use LLMs when you need:</strong></p>
+<ul>
+<li>General reasoning across domains</li>
+<li>Complex multi-step problem solving</li>
+<li>Creative generation with broad knowledge</li>
+<li>Tasks where you can't define the problem precisely</li>
+</ul>
+<p><strong>Use distilled micro models when you need:</strong></p>
+<ul>
+<li>High-throughput classification</li>
+<li>Real-time processing pipelines</li>
+<li>Privacy-preserving local inference</li>
+<li>Specific, well-defined tasks</li>
+<li>Edge deployment (phones, laptops, IoT)</li>
+</ul>
+<p>The key insight: most production AI systems are pipelines of
+well-defined subtasks. Each subtask is a candidate for a distilled micro model.</p>
+<h2 id="the-distillation-process">The Distillation Process</h2>
+<p>How do you train a 50-million parameter model to approximate a frontier-scale one on a narrow task?</p>
+<p>The answer is distillation. You use the large model as a teacher:</p>
+<ol type="1">
+<li>Define your specific task precisely</li>
+<li>Generate training data using the teacher model</li>
+<li>Train the student on the teacher's outputs</li>
+<li>Iterate until the student matches performance</li>
+</ol>
+<p>The student learns to mimic the teacher's behavior on that specific
+task. It doesn't learn general reasoning—it learns the exact skill you
+need.</p>
+<p>The teacher supplies a target distribution, not ground truth. A student can sometimes outperform its teacher on a held-out metric through regularisation, better task data, or evaluation against independent labels. The result has to be measured, not assumed.</p>
+<h2 id="the-future-is-small">The Future is Small</h2>
+<p>I believe we're entering an era of AI specialization. The generalist
+models will continue to exist—they're essential for research,
+exploration, and tasks we can't yet define. But the production
+workhorses will increasingly be small, fast, and specialized.</p>
+<p>The companies that figure out how to efficiently distill large model
+capabilities into deployable distilled micro models will have a significant
+advantage. Not in benchmarks or parameter counts, but in the metrics
+that actually matter: latency, cost, privacy, and reliability.</p>
+<p>The aircraft carrier is impressive. But sometimes you just need to
+catch fish.</p>
+<hr />
+<p><em>This post grew from a long-form research conversation about distilled micro models, transformers, and long-term memory AI.</em></p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Return to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

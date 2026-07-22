@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCR on Two Clocks | Antreas Antoniou</title>
+  <meta name="description" content="A concrete two-pass OCR pipeline: capture cheaply, reconcile periodically, and preserve enough evidence to correct the story later.">
+  <link rel="canonical" href="https://antreas.io/blog/ocr-two-pass-pipeline/">
+  <meta property="og:title" content="OCR on Two Clocks | Antreas Antoniou">
+  <meta property="og:description" content="A concrete two-pass OCR pipeline: capture cheaply, reconcile periodically, and preserve enough evidence to correct the story later.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/ocr-two-pass-pipeline/">
+  <meta property="article:section" content="Local AI systems">
+  <meta name="reading-time" content="8 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · 2025 source conversation</p>
+      <h1>OCR on Two Clocks</h1>
+      <p class="research-note-deck">The useful unit is not the perfect screenshot. It is a recoverable story assembled from fast observations and slower reconciliation.</p>
+      <p class="research-note-provenance">Adapted from a 2025 conversation and developed in the Research Archivum. The pipeline timings are dated design observations from that conversation, not claims about a current product configuration.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Observation</dt><dd>A screen changes faster than a heavy vision model can inspect every state politely.</dd></div>
+      <div><dt>Mechanism</dt><dd>A cheap pass records evidence; a slower pass deduplicates, repairs, and reconstructs sequence.</dd></div>
+      <div><dt>Implication</dt><dd>Design the hand-off between passes as carefully as either model.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>A laptop becomes a surprisingly effective space heater if you ask an expensive vision model to admire the same paragraph sixty times in a row.</p>
+
+      <p>That is the practical absurdity at the centre of continuous OCR. A screen may change several times while someone scrolls, switches windows, or types. A system that wants a faithful record must look often. Yet most of those looks contain little new information, and the most accurate interpretation is too expensive to run at capture speed. The engineering problem is therefore not simply “which OCR model is best?” It is “what must be known now, what can be repaired later, and what evidence must survive between the two?”</p>
+
+      <p>I have described cheap-then-clean elsewhere as a general pipeline pattern. This source-derived version is deliberately narrower and more concrete. It is about OCR operating on two clocks: a fast observational clock that is allowed to be untidy, and a slower reconciliation clock that turns overlapping fragments into a usable account of what happened. The interesting component is not merely two models in a row. It is the state carried across time.</p>
+
+      <h2>The first pass is a witness, not an author</h2>
+
+      <p>In the 2025 conversation behind this essay, the first pass was described as very cheap OCR, followed at roughly twenty-second intervals by a beefier cleanup model. That interval was a dated description of one system design, not a magic constant. A code editor, a video, a static PDF, and a battery-constrained laptop deserve different capture policies.</p>
+
+      <p>The first pass has a modest job: notice text quickly enough that transient content is not lost. Its output may confuse a zero with an “O”, flatten a two-column page into soup, repeat a menu across several captures, or cut a sentence at the viewport boundary. It should also attach the evidence that makes later repair possible: timestamp, source window, spatial order, and a relationship to neighbouring captures. Without that scaffolding, the second model receives a bag of misspelled sentences and is invited to become a novelist.</p>
+
+      <p>Consider someone scrolling through documentation. Capture A ends with “Authentication tokens are rotated…”. Capture B begins with the same line and continues “…after the configured interval.” A fast OCR pass may render one copy correctly and the other as “Authenticat1on”. The useful raw object is not either transcription in isolation. It is an overlap between two observations, with enough timing and layout information to infer that both refer to one sentence.</p>
+
+      <p>This changes how we judge the cheap model. Character accuracy still matters, but recall of distinctive fragments, stable coordinates, and predictable errors may matter more. A slightly garbled witness that consistently preserves the important region can be more valuable than a polished witness that occasionally misses the page entirely.</p>
+
+      <h2>The second pass reconciles a sequence</h2>
+
+      <p>The slower pass should not simply spell-check each capture. It receives a short history and asks what changed. It can align repeated fragments, select the clearest instance, reconstruct reading order, and separate persistent interface chrome from content that appeared once. Only after that does narrative extraction become sensible.</p>
+
+      <p>A concrete reconciliation window might contain eight OCR observations from one document. Six include the same heading. Three include a code sample, each clipped differently. Two contain the sentence below it. The cleanup stage can cluster text by approximate location and similarity, merge complementary fragments, retain one heading, and mark uncertain characters rather than silently inventing them. Its output is a compact event: the user moved through a section about authentication, encountered a code example, and then switched away.</p>
+
+      <p>There are really three operations hiding under “cleanup”. <strong>Correction</strong> repairs likely recognition errors. <strong>Compression</strong> removes duplicate observations that add no information. <strong>Interpretation</strong> proposes a coherent activity or narrative. These operations have different error costs. Correcting “l0cal” to “local” is relatively constrained. Claiming that the user implemented the feature because documentation was visible is not. A trustworthy pipeline keeps those confidence levels separate.</p>
+
+      <h2>The hand-off is the architecture</h2>
+
+      <p>Two-pass systems fail when the first stage throws away exactly what the second stage needs. If it emits only plain text, layout reconstruction becomes guesswork. If it retains every full image forever, the system avoids information loss by creating a storage, privacy, and processing problem. The intermediate representation is therefore a design decision, not plumbing.</p>
+
+      <p>I would want the hand-off to preserve bounded evidence: recognised spans, confidence, boxes or reading order, timestamps, source identity where permitted, and hashes or similarity signals for deduplication. Raw imagery may be retained briefly when policy allows, then discarded after reconciliation. The exact choice depends on the product's privacy model and the user's control; “local” is valuable, but it does not make indiscriminate collection ethically invisible.</p>
+
+      <p>The cadence can also be adaptive. A cheap visual-change detector can avoid OCR when the screen is static. A burst of scrolling can delay expensive cleanup until motion settles. A window switch can trigger reconciliation because it closes a natural episode. Periodic processing remains a useful fallback, but event boundaries often spend compute more intelligently than a metronome.</p>
+
+      <p>This is where pipeline thinking beats model shopping. Buying a marginally better OCR model does not solve duplicated frames, episode boundaries, provenance, or uncertainty. Those are system properties. The best model cannot recover context that the hand-off deleted.</p>
+
+      <h2>Two passes do not guarantee one truth</h2>
+
+      <p>The obvious counterargument is that a language-aware cleanup model can turn OCR noise into fluent falsehood. It may “repair” an unfamiliar identifier into a common word, reorder columns incorrectly, or infer a narrative that feels plausible but never occurred. Fluency makes these errors harder to spot than raw garble.</p>
+
+      <p>So the clean output must remain traceable to evidence. Preserve uncertain spans. Allow the later system to retrieve the underlying observations. Test on adversarial layouts: terminals, source code, tables, mixed languages, tiny fonts, rapidly changing chat, and windows partly covering one another. Measure not only character error rate but event recall, duplicate suppression, ordering, and unsupported additions. A cleanup model that produces beautiful prose while dropping a command-line flag has failed.</p>
+
+      <p>There is also a latency boundary. If the application must react immediately—reading a one-time verification code, for example—the slow pass arriving twenty seconds later is useless. Some events require an accurate fast path or an explicit user action. Conversely, if the task is archival search, a delay may be entirely acceptable. “Real time” is not one requirement; it is a collection of deadlines.</p>
+
+      <h2>The durable pattern is deferred certainty</h2>
+
+      <p>This architecture generalises because many streams contain frequent cheap evidence and occasional need for expensive understanding. Audio can use voice activity detection before transcription. Video can detect scene changes before semantic analysis. Code tools can parse immediately and perform deeper reasoning after a pause. In each case the first stage should preserve enough structure for the second, and the second should admit where reconstruction remains uncertain.</p>
+
+      <p>What I expect to persist is not exactly two neural models, but the separation of observation cadence from interpretation cadence. Some pipelines will have three passes; some will route only anomalies; some will learn when to spend their budget. The enduring idea is asynchronous certainty: capture what would otherwise disappear, then earn a stronger interpretation when time and compute permit.</p>
+
+      <p>The screen does not owe us a neat document. It flickers through partial states, duplicated states, and states the user never intended to preserve. A useful OCR system should not pretend each frame is a page awaiting perfect transcription. It should behave more like a careful field researcher: take quick notes, compare them later, keep the evidence, and resist improving the story beyond what was actually seen.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

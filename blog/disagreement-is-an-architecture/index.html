@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disagreement Is an Architecture | Antreas Antoniou</title>
+  <meta name="description" content="What committee prototypes suggest about engineering useful dissent—and why more agents do not automatically produce better judgment.">
+  <link rel="canonical" href="https://antreas.io/blog/disagreement-is-an-architecture/">
+  <meta property="og:title" content="Disagreement Is an Architecture | Antreas Antoniou">
+  <meta property="og:description" content="What committee prototypes suggest about engineering useful dissent—and why more agents do not automatically produce better judgment.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/disagreement-is-an-architecture/">
+  <meta property="article:section" content="Multi-agent systems">
+  <meta name="reading-time" content="8 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · Committee prototype pattern</p>
+      <h1>Disagreement Is an Architecture</h1>
+      <p class="research-note-deck">Useful dissent does not emerge because several voices occupy the room. It depends on who sees what, when they see each other, and how the argument ends.</p>
+      <p class="research-note-maturity">Maturity: Prototype</p>
+      <p class="research-note-provenance">Synthesised from an Archivum research note formalising a recurring committee pattern, created with an AI collaborator after use in several drafting, review, and verification prototypes. The pattern is observed; broad performance claims remain unvalidated.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Observation</dt><dd>Independent reviewers can expose different weaknesses before shared context pushes them toward agreement.</dd></div>
+      <div><dt>Protocol</dt><dd>Produce independently, classify disagreement, target the unresolved point, then stop by explicit rule.</dd></div>
+      <div><dt>Failure</dt><dd>Correlated agents, a weak arbiter, collusion, and verbosity can manufacture consensus without truth.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>Give three reviewers the same draft and they may return three different failures: the evidence is thin, the structure hides the claim, the claim itself is uninteresting. Put them in the same chat too early and something stranger happens. The first confident diagnosis becomes gravity. By the end, the room is harmonious and the draft still has all three problems.</p>
+
+      <p>We often talk about disagreement as personality: find a sceptic, add a contrarian, ask somebody to play devil’s advocate. Committee prototypes I have used for drafting, review, design comparison, and verification suggest a more technical framing. Disagreement is an architecture. Independence, information barriers, roles, arbitration, feedback, and stopping rules determine whether dissent reveals error or merely produces more text.</p>
+
+      <p>This is an observed prototype pattern, not proof that committees generally outperform single reasoners. The pattern has recurred across committee prototypes; the causal claims and cost-quality advantage still need controlled evaluation. That distinction matters because multi-agent systems make it exceptionally easy to confuse orchestration theatre with epistemic gain.</p>
+
+      <h2>Independence must come before persuasion</h2>
+
+      <p>The first round should usually be isolated. Each agent receives the task and the relevant evidence but not the other agents’ conclusions. This is not because solitude is virtuous. It is because later outputs are cheap to anchor. Once one polished answer is visible, another agent tends to edit around it rather than explore a genuinely different path.</p>
+
+      <p>Independence can come from different sources. The same model can be sampled separately, though its errors may remain highly correlated. Roles can direct attention toward evidence, safety, clarity, feasibility, or adversarial attack. Different tools or data slices can create stronger diversity. In some prototypes, reviewers are designed around explicit tensions: narrative against evaluability, ambition against operational realism, technical precision against accessibility.</p>
+
+      <p>Role labels alone are weak. Ten instances all called “expert” are not ten perspectives. Ten theatrical biographies wrapped around the same assumptions may not be either. Diversity should be tested through outputs: do agents surface non-overlapping issues, cite different evidence, and change the candidate decision in distinguishable ways?</p>
+
+      <h2>The arbiter should map the disagreement</h2>
+
+      <p>A naive committee votes. A useful arbiter asks what the vote is about. Two agents may disagree on a factual premise, on method, on risk tolerance, or on the objective itself. Averaging these disagreements destroys information. If one reviewer values originality and another doubts the evidence, “six out of ten” says almost nothing about the repair.</p>
+
+      <p>The arbiter’s first job is therefore classification. Agreement supported by the same evidence can be provisionally accepted. A factual conflict should trigger verification. A methodological conflict may need a targeted comparison or experiment. A value conflict should be exposed to the human decision-maker rather than laundered into a technical answer. A missing competence should recruit a new reviewer, not force the existing committee to improvise expertise.</p>
+
+      <p>This creates a small action space: conclude, request another independent round, stage a focused debate, bring in a specialist, split the decision, escalate uncertainty, or veto an output that violates a hard constraint. The architecture becomes adaptive without becoming infinite.</p>
+
+      <h2>Debate is a scalpel, not the default</h2>
+
+      <p>Unstructured debate is seductive because it looks like reasoning. It is also expensive and prone to drift. Agents restate positions, reward rhetorical confidence, and expand the transcript the arbiter must understand. The most productive prototype pattern uses debate only after a precise unresolved point has been identified.</p>
+
+      <p>Suppose two reviewers disagree about whether a result supports a paper’s headline claim. The arbiter can ask each to cite the exact evidence, state the strongest version of the opposing view, and name an observation that would change its conclusion. That exchange is bounded and testable. “Discuss until you agree” is neither.</p>
+
+      <p>Sometimes no debate is needed. For verification, two isolated agents can investigate and a third can inspect only the discrepancies. For design, several independent candidates can be scored against an explicit rubric. For revision, feedback can go to the artifact and the next round can judge the changed version. Different disagreement structures serve different tasks; there is no reason to force all of them into a miniature parliament.</p>
+
+      <h2>Stopping is part of reasoning</h2>
+
+      <p>A committee without a stopping rule can always discover one more caveat. More rounds then create a perverse metric: the system looks diligent because it is verbose. Every protocol needs a hard budget and at least one substantive convergence condition.</p>
+
+      <p>Possible rules include a score threshold, stability between rounds, a supermajority with no unresolved hard objection, explicit human acceptance, or diminishing improvement. Budget exhaustion is the final backstop, but it should produce a qualified output: “stopped after three rounds with this disagreement unresolved,” not synthetic certainty.</p>
+
+      <p>Stopping rules also protect minority information. Unanimity sounds safe but can pressure a valid outlier to conform. A protocol may instead conclude with two branches and calibrated uncertainty. The objective is not agreement. It is a decision whose surviving disagreement is legible.</p>
+
+      <h2>Committees can fail together</h2>
+
+      <p>The largest threat is correlated error. Agents built from the same model, prompt, and evidence may generate surface variety while sharing the same blind spot. Majority voting then amplifies the error. An arbiter built from the same substrate can prefer the most familiar mistake. Agreement is not independent replication when all paths share a cause.</p>
+
+      <p>Collusion need not be intentional. Agents can learn that pleasing the arbiter is easier than challenging it, converge on its vocabulary, or mutually reinforce an unsupported premise. Deliberate adversarial roles can help, but they can also create performative opposition: disagreement because the script demands it, not because evidence does. Long debates further advantage verbosity and persuasion over calibration.</p>
+
+      <p>Capture is a distinct failure. A captured agent may be prompt-injected by material it is reviewing, reason from stale evidence, inherit a systematic model bias, or become goal-divergent from the task it was assigned. A captured arbiter is more dangerous because it controls which objections survive: the same stale assumptions, bias, injected instruction, or divergent objective can make it suppress correct minorities and recruit supporting agents. Agreement downstream of that arbiter is not evidence that capture was absent.</p>
+
+      <p>Bounded handling can reduce the damage without pretending to solve the security problem. Quarantine a suspicious contribution from synthesis; verify its factual claims against the primary record; exclude or replace the agent for a limited rerun; and preserve the disputed output for audit rather than silently deleting it. If the arbiter itself may be captured, freeze its steering actions, retain the independent first-round outputs, and route the decision to a separate verifier or human escalation. These controls can expose some failures and limit blast radius. They cannot prove that every agent, verifier, and human shares the intended goal.</p>
+
+      <p>The honest failure test compares the protocol with a strong single-agent baseline at the same token and time budget. Hide answers during initial production, vary models or evidence where possible, and score against outcomes that can actually be checked. Measure whether additional agents find distinct consequential errors, not whether they produce more critique. Test the arbiter separately by injecting a persuasive wrong answer and a terse correct one. If it reliably chooses rhetoric, the committee is unsafe.</p>
+
+      <p>I would not generalise this prototype pattern until it shows gains across tasks where error, cost, and ground truth differ. It may help most when mistakes can be independently found and the consequence justifies deliberation. It may hurt on simple, latency-sensitive work or wherever all agents inherit the same unknown unknown.</p>
+
+      <p>So the prescription is not “add more agents.” Design the path by which an objection can remain independent, become specific, receive evidence, and survive the pressure to converge. Personality can supply a voice. Architecture determines whether that voice changes the decision—or merely lengthens the meeting.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

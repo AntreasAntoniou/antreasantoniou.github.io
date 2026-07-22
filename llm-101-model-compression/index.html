@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLM-101: Model Compression Deep Dive — Antreas Antoniou</title>
+  <meta name="description" content="Website version of the LLM-101 Model Compression Deep Dive lecture slides, with PDF and PowerPoint downloads." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: rgba(15, 23, 42, 0.86);
+      --panel-strong: rgba(15, 23, 42, 0.96);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.22);
+      --accent: #38bdf8;
+      --accent-2: #a78bfa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(167, 139, 250, 0.16), transparent 34rem),
+        var(--bg);
+    }
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; padding: 2rem 0 3rem; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .back { color: var(--muted); text-decoration: none; font-weight: 600; }
+    .back:hover { color: var(--text); }
+    .badge { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .7rem; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); background: rgba(15,23,42,.6); font-size: .85rem; }
+    header { margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(2rem, 5vw, 4.5rem); line-height: .95; letter-spacing: -0.06em; margin: .8rem 0 1rem; }
+    .subtitle { color: var(--muted); font-size: clamp(1rem, 2vw, 1.2rem); max-width: 760px; line-height: 1.6; }
+    .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.5rem 0 2rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .8rem 1rem; border-radius: .9rem; text-decoration: none; font-weight: 700; border: 1px solid var(--border); background: rgba(15,23,42,.72); color: var(--text); }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #020617; border-color: transparent; }
+    .btn:hover { transform: translateY(-1px); }
+    .viewer { overflow: hidden; border: 1px solid var(--border); border-radius: 1.25rem; background: var(--panel-strong); box-shadow: 0 24px 80px rgba(0,0,0,.35); }
+    .viewer-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .9rem 1rem; border-bottom: 1px solid var(--border); color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: .85rem; }
+    iframe { display: block; width: 100%; height: min(74vh, 760px); border: 0; background: #111827; }
+    .fallback { padding: 1rem; color: var(--muted); font-size: .95rem; }
+    @media (max-width: 720px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      iframe { height: 62vh; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="topbar">
+      <a class="back" href="../#teaching"><i class="fas fa-arrow-left"></i> Back to teaching</a>
+      <span class="badge"><i class="fas fa-chalkboard"></i> Website slides · PDF · PPTX</span>
+    </nav>
+
+    <header>
+      <span class="badge">Machine Learning Systems · 2026</span>
+      <h1>LLM-101: Model Compression Deep Dive</h1>
+      <p class="subtitle">A lecture package on model compression, efficient language models, and the practical tradeoffs behind smaller systems. This is the website version; the original PDF and PowerPoint files are available below.</p>
+      <div class="actions">
+        <a class="btn primary" href="../documents/teaching/llm101/llm-101-model-compression-slides.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-expand"></i> Open full-screen PDF</a>
+        <a class="btn" href="../documents/teaching/llm101/llm-101-model-compression-slides.pdf" download><i class="fas fa-file-pdf"></i> Download PDF</a>
+        <a class="btn" href="../documents/teaching/llm101/llm-101-model-compression-slides.pptx" download><i class="fas fa-file-powerpoint"></i> Download PPTX</a>
+      </div>
+    </header>
+
+    <section class="viewer" aria-label="Embedded LLM-101 slide deck">
+      <div class="viewer-head">
+        <span>llm-101-model-compression-slides.pdf</span>
+        <span>embedded deck</span>
+      </div>
+      <iframe src="../documents/teaching/llm101/llm-101-model-compression-slides.pdf#view=FitH" title="LLM-101 Model Compression Deep Dive slides"></iframe>
+      <div class="fallback">If the embedded deck does not load in your browser, use the full-screen PDF, PDF download, or PPTX download buttons above.</div>
+    </section>
+  </main>
+</body>
+</html>

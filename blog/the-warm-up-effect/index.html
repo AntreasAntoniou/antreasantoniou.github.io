@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Warm-Up Effect | Antreas Antoniou</title>
+  <meta name="description" content="Why local inference latency changes after the first call—and how to benchmark cold, warm, and steady-state performance honestly.">
+  <link rel="canonical" href="https://antreas.io/blog/the-warm-up-effect/">
+  <meta property="og:title" content="The Warm-Up Effect | Antreas Antoniou">
+  <meta property="og:description" content="Why local inference latency changes after the first call—and how to benchmark cold, warm, and steady-state performance honestly.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/the-warm-up-effect/">
+  <meta property="article:section" content="Local AI performance">
+  <meta name="reading-time" content="6 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · 2025 source conversation</p>
+      <h1>The Warm-Up Effect</h1>
+      <p class="research-note-deck">A local model can become much faster after its first call—but “warm” is a bundle of mechanisms, not a free 150× speed-up.</p>
+      <p class="research-note-provenance">Adapted from a 2025 conversation and developed in the Research Archivum. Specific latency figures from that conversation are treated as dated benchmark observations, not universal hardware guarantees.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Observation</dt><dd>First-call latency and repeated-call latency can differ substantially.</dd></div>
+      <div><dt>Mechanism</dt><dd>Loading, allocation, compilation, caches, and device state settle at different times.</dd></div>
+      <div><dt>Implication</dt><dd>Measure the latency distribution that matches the product's real duty cycle.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>The first time you ask a local model to do something, it may lumber into the room carrying boxes. Ask again and it answers from its chair. By the tenth call it appears to have been waiting for you all morning.</p>
+
+      <p>That change is real, but it is easy to tell the wrong story about it. In a 2025 conversation, I described small-model latency falling from roughly 150 milliseconds on an occasional first call to below 50 milliseconds under repeated use, and in a particular narrow configuration reaching below a millisecond on an M1 laptop. Those were observations from a specific benchmark and packaging stack. They were not a promise that any model, task, runtime, or Apple machine becomes 150 times faster if you politely keep clicking.</p>
+
+      <p>The useful idea survives the caveat: latency is stateful. “How fast is this model?” is incomplete unless we say what is already loaded, what the runtime has prepared, how frequently requests arrive, what hardware executes them, and which part of the pipeline the timer includes.</p>
+
+      <h2>Cold, warm, and hot are different experiments</h2>
+
+      <p>A genuinely cold measurement can include opening files, reading weights from storage, mapping pages into memory, creating a model object, allocating buffers, selecting kernels, compiling or tracing a graph, moving data to an accelerator, and only then performing inference. The first user request may pay most of these costs at once.</p>
+
+      <p>A warm measurement normally means the process and model remain resident. Weights are available in memory, reusable buffers exist, and the runtime has already discovered or compiled an execution path. A hot or steady-state measurement repeats the same shape and operation frequently enough that caches, device power state, and scheduling are favourable.</p>
+
+      <p>These labels are conventions, not physical constants. One benchmark may call a model warm after a single untimed run. Another may exclude tokenisation and post-processing. A third may report throughput for a batch while the product cares about latency for one event. The number can be honest and still answer the wrong question.</p>
+
+      <p>For an application that performs classification on every keystroke, steady-state latency matters enormously. For a tool invoked twice per day, cold or idle-resume latency may dominate. Neither measurement is more “real.” Reality is the request pattern.</p>
+
+      <h2>What is actually warming up?</h2>
+
+      <p>Several mechanisms can overlap. First is model residency. Reading weights from storage is slower than reusing weights already mapped into main memory. Initial page faults can make the first pass pay costs that later passes avoid. Keeping the model alive removes repeated construction and teardown.</p>
+
+      <p>Second is runtime preparation. Frameworks may allocate workspaces, choose among kernels, trace an operation, compile a graph, or specialise code for the observed tensor shapes. The first invocation performs setup; subsequent invocations reuse the result. Change the input shape or execution path and part of the warm-up may happen again.</p>
+
+      <p>Third is the memory hierarchy. CPUs and accelerators move data through layers of cache much faster than they fetch everything from farther away. Repeated operations can improve locality for instructions and frequently accessed data. But “the whole model sits in cache” is usually a poor explanation for anything but very small models; weights may be far larger than the fastest caches. The gain can come from a mixture of resident pages, cached code, reusable intermediate buffers, predictable access, and lower software overhead.</p>
+
+      <p>Fourth is device state. Processors alter clock speeds and power states. A device waking from idle may behave differently from one already doing work. At the other extreme, sustained inference can heat the system and trigger throttling, making later calls slower rather than faster. Warm-up curves are not obliged to point down forever.</p>
+
+      <h2>Apple Silicon helps, but does not repeal measurement</h2>
+
+      <p>Apple Silicon is attractive for local machine learning because CPU and GPU can use a unified memory architecture. In workflows designed for it, a shared memory pool can reduce explicit copies between separate CPU and discrete-GPU memory. Frameworks such as MLX are built around that architecture.</p>
+
+      <p>It does not follow that every model runs below a millisecond, that data never moves within the hierarchy, or that unified memory removes model-loading and runtime overhead. Model size, quantisation, batch size, input length, operator support, framework, chip generation, memory pressure, and thermal conditions all matter. A sub-millisecond classifier and a generative model producing a long response are not comparable just because both contain neural-network weights.</p>
+
+      <p>The under-one-millisecond observation in the original conversation referred to distilled micro models under a specific test, not an end-to-end conversational assistant. It should be read the way any benchmark should be read: as evidence that a particular workload can be extremely fast, followed immediately by a request for the protocol.</p>
+
+      <h2>How to benchmark the product you have</h2>
+
+      <p>I would record at least four distributions. Measure process start to first result. Measure the first inference after the model is loaded. Measure intermittent calls separated by the idle period the product expects. Then measure sustained steady-state calls at the expected input shapes and rate. Report medians and tail latency, not only the fastest run.</p>
+
+      <p>Include the boundaries users feel: preprocessing, tokenisation, inference, post-processing, and any queueing. Record model and weight format, runtime version, hardware, operating-system state, power mode, batch size, input length, output length, and sample count. If you pre-warm, say so and include the launch cost somewhere else in the product budget. Time does not disappear because it happens behind a splash screen.</p>
+
+      <p>A concrete test for a real-time event classifier might look like this: launch the application; time the first classified event; send one event every five minutes for an hour; restart; send twenty events per second for ten minutes; monitor latency, throughput, memory, energy, and temperature. The resulting curves tell you whether keeping the model resident is worthwhile and whether sustained use causes contention or throttling.</p>
+
+      <p>Warm benchmarks can also hide product failures. An operating system may evict the model under memory pressure. A laptop may sleep. Two local models may compete for the same accelerator. Keeping everything hot can waste battery and deny resources to the user's actual work. The optimal policy may unload after an idle threshold, accept a later cold start, or maintain a smaller always-resident model that routes difficult cases elsewhere.</p>
+
+      <h2>Optimise the duty cycle, not the screenshot</h2>
+
+      <p>The practical advantage of small local models is not one heroic latency number. It is the possibility of designing a system around repeated, private, low-overhead work: classifying events, correcting text, routing requests, or extracting narrow signals without paying network latency for each step. When calls are frequent, model residency and amortised setup can make that architecture feel instantaneous.</p>
+
+      <p>The counterargument is equally important. If the model is rarely used, too large for the device, or harmful to battery life when resident, the cloud—or a different local model—may be the better engineering choice. Warm-up is not a moral victory for local AI. It is one term in a system budget.</p>
+
+      <p>So when someone says a local model is slow, I still want to ask how they measured it. I now also ask the reverse when someone says it is astonishingly fast. Was the model already loaded? Was compilation excluded? Was the input representative? Did the timer stop before the rest of the pipeline? What happened at the ninety-ninth percentile and after ten minutes of heat?</p>
+
+      <p>The warm-up effect teaches a broader lesson: performance belongs to a running system, not to a model file. Benchmark the life the model will actually live. Then make the cold path tolerable, the warm path efficient, and the transition between them explicit enough that nobody has to mistake a chair already pulled out for magic.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

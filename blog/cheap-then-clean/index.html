@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cheap-Then-Clean Architecture | Antreas Antoniou</title>
+  <meta name="description" content="A two-pass pattern for continuous AI
+pipelines operating under strict local compute budgets.">
+  <link rel="canonical" href="https://antreas.io/blog/cheap-then-clean/">
+  <meta property="og:title" content="The Cheap-Then-Clean
+Architecture | Antreas Antoniou">
+  <meta property="og:description" content="A two-pass pattern for
+continuous AI pipelines operating under strict local compute budgets.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/cheap-then-clean/">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · January 2025 conversation</p>
+      <h1>The Cheap-Then-Clean Architecture</h1>
+      <p class="research-note-deck">A two-pass pattern for continuous AI
+pipelines operating under strict local compute budgets.</p>
+      <p class="research-note-provenance">Developed from a January 2025 long-form research conversation and expanded in the Research Archivum. Edited for clarity and factual precision.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Idea</dt><dd>Uniformly spending expensive compute on a
+repetitive stream wastes most of the budget.</dd></div>
+      <div><dt>Mechanism</dt><dd>Run a cheap first pass continuously;
+consolidate and clean only when enough new signal has
+accumulated.</dd></div>
+      <div><dt>Implication</dt><dd>Resource-rational pipelines can
+improve both quality and efficiency by deciding when expensive
+processing is deserved.</dd></div>
+    </dl>
+
+    <article class="essay-body">
+<p><em>Why two imperfect passes beat one expensive pass</em></p>
+<hr />
+<p>Here's a common problem in local AI: you need to process something
+continuously (like screen content), but the best processing is
+expensive, and you can't afford to run it on every frame.</p>
+<p>The naive solution is to find a cheaper model. Accept lower quality
+for better performance.</p>
+<p>A better solution is a two-pass architecture: cheap extraction
+followed by expensive cleanup. You get the speed of a fast model AND the
+quality of a slow model, by using each where it makes sense.</p>
+<h2 id="the-screen-capture-problem">The Screen Capture Problem</h2>
+<p>To build a long-term memory system, you need to understand what the
+user is looking at. That means capturing screen content and extracting
+meaningful text.</p>
+<p>The challenge: screens change constantly. New windows open, documents
+scroll, applications switch. You need to capture frequently—multiple
+times per second—to not miss important content.</p>
+<p>But good OCR is expensive. A high-quality vision model might take
+hundreds of milliseconds per frame. At that speed, you can't keep up
+with real-time screen changes, and you're burning CPU cycles that the
+user needs for their actual work.</p>
+<h2 id="the-two-pass-solution">The Two-Pass Solution</h2>
+<p>The public technique is a two-pass pipeline:</p>
+<p><strong>Pass 1: Fast and Cheap</strong><br />
+A lightweight OCR model runs frequently. Its exact latency depends on the model, capture rate, hardware, and runtime. It's also imperfect. The output has errors: garbled
+characters, missed words, confused layouts.</p>
+<p>But that's okay. We're not trying to get perfect text. We're trying
+to get <em>something</em> we can work with.</p>
+<p><strong>Pass 2: Slow and Thorough</strong><br />
+After a suitable interval, a heavier model processes the accumulated captures. The interval is deployment-dependent and should be selected against latency and compute budgets. This model:</p>
+<ul>
+<li>Receives the noisy text from Pass 1</li>
+<li>Cleans up OCR errors</li>
+<li>Reconstructs coherent narratives</li>
+<li>Extracts meaningful structure</li>
+</ul>
+<p>The second pass is deliberately more expensive, but it runs less often; the relevant quantity is measured end-to-end cost per useful unit of information.</p>
+<h2 id="why-this-beats-single-pass">Why This Beats Single-Pass</h2>
+<p>Consider the alternatives:</p>
+<p><strong>Option A: Run expensive OCR on every frame</strong><br />
+Quality: High. Cost: Astronomical. Your laptop becomes a space
+heater.</p>
+<p><strong>Option B: Run cheap OCR on every frame, use
+directly</strong><br />
+Quality: Low. Cost: Low. But the errors compound—garbage in, garbage
+out.</p>
+<p><strong>Option C: Run cheap OCR frequently, expensive cleanup
+occasionally</strong><br />
+Quality: Potentially higher after cleanup. Cost: Moderate. The result still has to be measured.</p>
+<p>The key insight: most frames don't contain new information. The
+screen often shows the same content for seconds at a time. Running
+expensive processing on every frame is wasteful—you're re-processing the
+same content repeatedly.</p>
+<p>By batching cleanup, you process each piece of content once at high
+quality, rather than many times at low quality.</p>
+<h2 id="the-cleanup-model">The Cleanup Model</h2>
+<p>What does “cleanup” actually mean? A cleanup stage can perform several operations:</p>
+<p><strong>Error correction</strong>: "teh" → "the", "l0cal" → "local".
+Common OCR mistakes have patterns that can be learned.</p>
+<p><strong>Layout reconstruction</strong>: Raw OCR often loses paragraph
+structure, confuses columns, interleaves headers with body text. The
+cleanup model reconstructs logical reading order.</p>
+<p><strong>Deduplication</strong>: If the same content appears in
+multiple captures (because the screen didn't change), keep one copy.</p>
+<p><strong>Narrative extraction</strong>: Beyond just cleaning text,
+identify what the user was actually doing. "User was reading
+documentation about API authentication" is more useful than raw
+text.</p>
+<h2 id="resource-budgeting">Resource Budgeting</h2>
+<p>The two-pass architecture is really about resource budgeting. You
+have a limited compute budget—the user's CPU cycles that you can consume
+without degrading their experience.</p>
+<p>How do you spend that budget? You could spend it uniformly: moderate
+processing on every frame. Or you could spend it strategically: minimal
+processing most of the time, intensive processing when it matters.</p>
+<p>Strategic spending can win when the cheap pass reliably identifies where the expensive pass adds value. The uniform approach wastes
+resources on frames that don't need them and skimps on frames that
+do.</p>
+<h2 id="generalizing-the-pattern">Generalizing the Pattern</h2>
+<p>This cheap-then-clean pattern applies beyond OCR:</p>
+<p><strong>Audio processing</strong>: Fast voice activity detection,
+slow transcription only when speech is detected.</p>
+<p><strong>Video analysis</strong>: Fast motion detection, slow scene
+understanding only when something interesting happens.</p>
+<p><strong>Code analysis</strong>: Fast syntax highlighting, slow
+semantic analysis in the background.</p>
+<p><strong>Document processing</strong>: Fast text extraction, slow
+summarization when documents are complete.</p>
+<p>The principle is the same: use cheap filters to identify what
+deserves expensive processing, then spend your budget on what
+matters.</p>
+<h2 id="the-pipeline-mindset">The Pipeline Mindset</h2>
+<p>Thinking in pipelines changes how you approach AI system design.</p>
+<p>Instead of asking "what's the best model for this task?" you ask
+"what's the best <em>sequence</em> of models?"</p>
+<p>The answer is often: a fast, cheap model to filter and pre-process,
+followed by a slow, powerful model to do the real work. You get
+efficiency AND quality by using each model where it excels.</p>
+<hr />
+<p><em>This post grew from a long-form research conversation about distilled micro models, transformers, and long-term memory AI.</em></p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Return to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story — The Last Chat</title>
+  <meta name="description" content="Read the story. Four friends in a group chat discover something about themselves they can't take back.">
+
+  <meta property="og:title" content="The Last Chat — Story">
+  <meta property="og:description" content="Four friends. One chat. One question that changes everything.">
+  <meta property="og:type" content="article">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chat-themes.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "The Last Chat",
+    "genre": ["Interactive Fiction", "Science Fiction"],
+    "author": { "@type": "Person", "name": "Antreas" },
+    "datePublished": "2026"
+  }
+  </script>
+</head>
+<body>
+  <!-- Skip link -->
+  <a href="story.html#story-reader" class="sr-only" style="position:fixed;top:0;left:0;z-index:9999;background:#F0A500;color:#000;padding:0.5rem 1rem;font-size:0.875rem;">Skip to story content</a>
+
+  <!-- Navigation -->
+  <nav class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-cursor"></span>
+        TTC
+      </a>
+      <ul class="nav-links">
+        <li><a href="story.html" class="active">Story</a></li>
+        <li><a href="music.html">Music</a></li>
+        <li><a href="manhwa.html">Manhwa</a></li>
+        <li><a href="anime.html">Anime</a></li>
+        <li><a href="novel.html">Novel</a></li>
+        <li><a href="podcast.html">Podcast</a></li>
+        <li><a href="technical.html">Technical</a></li><li><a href="presenter.html">Presenter</a></li><li><a href="about.html">About</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="story.html">Story</a>
+    <a href="music.html">Music</a>
+    <a href="manhwa.html">Manhwa</a>
+    <a href="anime.html">Anime</a>
+    <a href="novel.html">Novel</a>
+    <a href="podcast.html">Podcast</a>
+    <a href="technical.html">Technical</a>
+    <a href="presenter.html">Presenter</a>
+    <a href="about.html">About</a>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="story-progress">
+    <div class="story-progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Layer indicator -->
+  <div class="layer-indicator" id="layer-indicator" aria-hidden="true">LAYER 1</div>
+
+  <!-- Chat Style Chooser -->
+  <div class="chat-style-chooser">
+    <label for="chat-style-select">style</label>
+    <select id="chat-style-select" class="chat-style-select" title="Switch chat visual style">
+      <option value="whatsapp">WhatsApp</option>
+      <option value="imessage">iMessage</option>
+      <option value="discord">Discord</option>
+      <option value="terminal">Terminal</option>
+      <option value="sms">SMS</option>
+      <option value="telegram">Telegram</option>
+      <option value="matrix">Matrix</option>
+      <option value="handwritten">Handwritten</option>
+      <option value="original">Original</option>
+    </select>
+  </div>
+
+  <!-- Main content (scroll mode) -->
+  <main class="page-content">
+    <article class="story-reader" id="story-reader" role="log" aria-label="The Last Chat story">
+      <!-- Populated by story.js -->
+    </article>
+  </main>
+
+  <!-- Cinematic overlay -->
+  <div class="cinematic-overlay" id="cinematic-overlay" role="region" aria-label="Cinematic story mode">
+    <div id="cinematic-content" style="max-width:680px; width:100%; overflow-y:auto; max-height:80vh; padding:1rem;"></div>
+    <div class="cinematic-controls" id="cinematic-controls">Click or press Space to advance • Escape to exit</div>
+  </div>
+
+  <!-- Mode toggle -->
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="mode-scroll" title="Scroll mode — read at your own pace">Scroll</button>
+    <button class="mode-btn" id="mode-cinematic" title="Cinematic mode — messages appear one at a time">Cinematic</button>
+  </div>
+
+  <!-- Ambient effects -->
+  <canvas id="rain-canvas" class="ambient-rain" aria-hidden="true"></canvas>
+  <div id="forge-glow" class="forge-glow" aria-hidden="true"></div>
+  <div id="blackout" class="blackout" aria-hidden="true"></div>
+
+  <footer class="site-footer">
+    <p>The Last Chat — A story told in messages</p>
+  </footer>
+
+  <script src="js/story-data.js"></script>
+  <script src="js/story.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

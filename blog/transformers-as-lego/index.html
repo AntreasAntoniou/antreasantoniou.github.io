@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transformers as Lego | Antreas Antoniou</title>
+  <meta name="description" content="A practical mental model for transformers: architecture, attention, and the cost of a general-purpose building block.">
+  <link rel="canonical" href="https://antreas.io/blog/transformers-as-lego/">
+  <meta property="og:title" content="Transformers as Lego | Antreas Antoniou">
+  <meta property="og:description" content="A practical mental model for transformers: architecture, attention, and the cost of a general-purpose building block.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/transformers-as-lego/">
+  <meta property="article:section" content="Neural network architecture">
+  <meta name="reading-time" content="6 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · 2025 source conversation</p>
+      <h1>Transformers as Lego</h1>
+      <p class="research-note-deck">The same family of parts can build language models, vision systems, and robots—but the instructions and materials still matter.</p>
+      <p class="research-note-provenance">Adapted from a 2025 conversation and developed in the Research Archivum. Technical metaphors have been tightened so that “learning its wiring” does not imply that a model rewrites its trained weights for every input.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Idea</dt><dd>Capability depends on how simple computational parts are connected.</dd></div>
+      <div><dt>Mechanism</dt><dd>Attention computes input-dependent routes for mixing information.</dd></div>
+      <div><dt>Implication</dt><dd>A general building block is powerful, but never free of assumptions or costs.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>When I teach transformers, I begin with three pictures: an electrical transformer, which changes voltage; Optimus Prime, who changes into a truck; and a neural network architecture, which mostly changes the expression on the face of the person seeing the slide.</p>
+
+      <p>The name is not especially helpful. The mental model is. I think of neural networks as Lego: the individual components are simple, while the way we connect them determines what can be built. Standard bricks make excellent walls. Technic parts give you gears and axles. Bionicle parts are suspiciously good at producing dramatic elbows. The material is similar; the arrangement changes the capability.</p>
+
+      <p>A transformer is a particularly reusable family of components. It became central to modern AI not because it is identical to intelligence, nor because attention is literally all anyone will ever need, but because it offers a flexible way for information in one part of an input to interact with information elsewhere—and because that computation trains efficiently on modern hardware.</p>
+
+      <h2>Architecture is the part you cannot see</h2>
+
+      <p>A neuron in the textbook sense performs a small calculation: combine inputs using learned weights, add a bias, pass the result through a nonlinearity. Stare at one neuron long enough and you will not find a language model hiding inside it. Interesting behaviour emerges from many such operations arranged into an architecture and trained on an objective with data.</p>
+
+      <p>That last sentence is important. The architecture is only one member of a trio. Take a transformer, train it to predict text tokens over a large corpus, and you obtain a language model. Use image patches and an appropriate objective, and you can build a vision system. Combine text, images, audio, actions, or other representations and the resulting model can learn relationships across modalities. Transformer does not mean LLM any more than mammal means cat. An LLM is one conspicuous animal in a larger family.</p>
+
+      <p>Before transformers, researchers selected more specialised connectivity patterns. Convolutional networks encoded locality: a filter inspected nearby pixels and reused the same operation across an image. Recurrent networks processed sequences through a changing hidden state. These were not primitive mistakes waiting to be deleted. They were strong, useful assumptions about images and time, and variants remain useful.</p>
+
+      <h2>The Lego that chooses who talks</h2>
+
+      <p>The transformer's defining trick is attention. For each input element, the model produces a query, a key, and a value. A query is compared with keys to generate scores; the scores determine how values are mixed. In a sentence, the representation of a pronoun can pull information from a likely antecedent several words away. In an image model, one patch can combine information from another patch across the frame.</p>
+
+      <p>This is why I sometimes say the network “learns its own wiring.” It is a metaphor, and it needs a safety rail. The trained parameter matrices do not physically reconnect themselves whenever a sentence arrives. Rather, those fixed learned parameters compute a different pattern of influence for each input. The effective communication graph is conditional: these words should talk strongly in this sentence; those patches should talk strongly in that image.</p>
+
+      <p>Imagine the sentence, “The animal did not cross the road because it was tired.” To interpret “it,” the model benefits from connecting it with “animal,” not “road.” Attention provides a short information path even when related tokens are separated. Multiple attention heads can learn different projections, allowing the block to mix several kinds of relationship before a feed-forward transformation processes the result.</p>
+
+      <p>The original transformer also includes residual connections, normalisation, positional information, and repeated blocks. Calling the whole thing “attention” is like describing a Technic car as “gears.” The gears matter; so do the axles, chassis, steering, and the patient person looking for the tiny black pin that rolled under the sofa.</p>
+
+      <h2>Why one block travelled so far</h2>
+
+      <p>The flexibility of attention helped the architecture travel across domains. Researchers can represent words, image patches, audio segments, or actions as sequences of vectors and reuse much of the same training machinery. The blocks are modular. The computation across positions can be parallelised during training more readily than classic recurrence. Large accelerators are very good at the matrix operations involved.</p>
+
+      <p>In the 2025 source conversation, transformer-based systems were prominent across text, image, audio, video, code, and multimodal modelling. That is a dated observation, not a claim that every leading system is a pure transformer or that the architecture has permanently conquered every domain. Production systems are often hybrids. Diffusion describes a generative process, not one mandatory backbone. Robotics includes perception, control, planning, hardware, and data constraints that no single block erases.</p>
+
+      <p>The Lego analogy explains both portability and confusion. If two models share transformer blocks, they need not share skills. Data determines what examples the model encounters. The objective determines what pressure training applies. Scale, tokenisation, positional scheme, and fine-tuning all matter. You cannot train on text and demand motor control merely because the architecture could, in principle, be used for both.</p>
+
+      <h2>Generality sends an invoice</h2>
+
+      <p>Letting every position compare itself with every other position is flexible, but standard full attention grows quadratically in work and attention-memory with sequence length. Double the sequence and the number of pairwise scores grows by roughly four. Implementations can reduce memory use, cache previous states during generation, or use sparse and local patterns, but the basic trade-off remains a design concern.</p>
+
+      <p>Transformers also need a representation of order because attention alone does not know whether a token came first or fiftieth. They can be data-hungry. Their learned attention patterns are not guaranteed to be sensible, causal, or interpretable. Long input capacity does not ensure uniform use of every position. A general architecture can spend computation rediscovering structure that a specialised model receives as a useful prior.</p>
+
+      <p>This is the counterargument to “one architecture to rule them all.” Sometimes the right tool is a convolution, a state-space model, a retrieval system, a tiny classifier, or a hybrid. If you need to identify one narrow event on a laptop many times per second, an aircraft carrier is an awkward fishing boat, no matter how impressive the carrier.</p>
+
+      <h2>The lesson is not loyalty to a block</h2>
+
+      <p>The transformer changed the default question in architecture design. Instead of specifying all communication paths in advance, we could learn a substantial part of the routing from data. That shift was powerful enough to unify research programmes that had previously used very different machinery.</p>
+
+      <p>But the useful lesson is not “put a transformer everywhere.” It is to examine where structure should be fixed, where it should be learned, and what the workload can afford. A good builder does not become emotionally attached to a 2×4 brick. They understand what it enables, where it bends, and when the strange hinge piece is exactly what the machine needs.</p>
+
+      <p>The next important architecture may retain attention, surround it with memory, make routing sparse, revive recurrence, or look unlike today's blocks. I expect the Lego box to get larger. Understanding transformers properly means being ready to build with what comes next—not insisting every future machine must be Optimus Prime.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

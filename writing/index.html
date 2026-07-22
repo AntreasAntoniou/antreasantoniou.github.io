@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing Advice | Antreas Antoniou</title>
+  <meta name="description" content="A practical field manual for academic writing: how Antreas Antoniou trained the craft, the questions he uses to edit, and the guides he returns to.">
+  <link rel="canonical" href="https://antreas.io/writing/">
+
+  <meta property="og:title" content="Writing Advice | Antreas Antoniou">
+  <meta property="og:description" content="Train the craft deliberately. Give every section one point. Make the reader's job easier.">
+  <meta property="og:image" content="https://antreas.io/images/profile.jpg">
+  <meta property="og:url" content="https://antreas.io/writing/">
+  <meta property="og:type" content="article">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Writing Advice | Antreas Antoniou">
+  <meta name="twitter:description" content="The practices, checks, and reference guides I return to when writing or reviewing academic work.">
+  <meta name="twitter:image" content="https://antreas.io/images/profile.jpg">
+  <meta name="twitter:site" content="@AntreasAntonio">
+  <meta name="twitter:creator" content="@AntreasAntonio">
+
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css?v=20260719-nav">
+  <link rel="stylesheet" href="/tailwind-built.css">
+  <link rel="stylesheet" href="/writing/writing.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Writing Advice",
+    "description": "A practical field manual for academic writing: deliberate practice, structural checks, and go-to resources.",
+    "author": {
+      "@type": "Person",
+      "name": "Antreas Antoniou",
+      "url": "https://antreas.io/"
+    },
+    "mainEntityOfPage": "https://antreas.io/writing/"
+  }
+  </script>
+
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to the advice</a>
+
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-tight">Antreas<span class="text-accent">.</span></a>
+      <div class="site-nav-links hidden md:flex">
+        <a href="/#building" class="text-secondary hover:text-accent transition">Work</a>
+        <a href="/#research" class="text-secondary hover:text-accent transition">Research</a>
+        <a href="/#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
+        <a href="/writing/" class="text-accent font-semibold transition" aria-current="page">Writing advice</a>
+        <a href="/blog" class="text-secondary hover:text-accent transition">Blog</a>
+        <a href="/#contact" class="text-secondary hover:text-accent transition">Contact</a>
+        <a href="/documents/AntreasAntoniouResume.pdf" class="btn-primary btn-sm">CV</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-3 md:hidden">
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+        <button class="text-secondary" onclick="toggleMobileMenu(this)" aria-label="Toggle navigation" aria-controls="mobile-menu" aria-expanded="false">
+          <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t" style="border-color: var(--border); background: var(--bg);">
+      <div class="px-4 py-4 space-y-3">
+        <a href="/#building" class="block text-secondary hover:text-accent">Work</a>
+        <a href="/#research" class="block text-secondary hover:text-accent">Research</a>
+        <a href="/#teaching" class="block text-secondary hover:text-accent">Teaching</a>
+        <a href="/writing/" class="block text-accent font-semibold" aria-current="page">Writing advice</a>
+        <a href="/blog" class="block text-secondary hover:text-accent">Blog</a>
+        <a href="/#contact" class="block text-secondary hover:text-accent">Contact</a>
+        <a href="/documents/AntreasAntoniouResume.pdf" class="block text-accent font-semibold">Download CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <header class="writing-hero">
+      <div class="writing-shell writing-hero__grid">
+        <div class="writing-hero__copy">
+          <p class="writing-kicker">A field manual, not a commandment tablet</p>
+          <h1>Writing advice</h1>
+          <p class="writing-dek">Academic writing did not improve for me by osmosis. During my PhD—especially the first year—I treated it as a skill that needed deliberate practice. These are the things that changed how I wrote.</p>
+          <p class="writing-byline">Antreas Antoniou · learned through mini-papers, teaching, supervision, and a great deal of being edited</p>
+        </div>
+
+        <aside class="point-card" aria-labelledby="point-card-title">
+          <p class="point-card__mark" aria-hidden="true">→</p>
+          <p class="point-card__label" id="point-card-title">Before writing any section</p>
+          <p class="point-card__question">What does this section need the reader to believe or understand?</p>
+          <p class="point-card__note">Write the answer in one sentence. Make every paragraph serve it. If a paragraph does not, remove it—or admit that the point has changed.</p>
+        </aside>
+      </div>
+    </header>
+
+    <article class="writing-shell writing-article">
+      <section class="writing-section" aria-labelledby="train-heading">
+        <header class="section-heading">
+          <p class="writing-kicker">How I trained it</p>
+          <h2 id="train-heading">Writing gets better through active practice</h2>
+          <p>Writing papers is necessary, but it is a painfully slow training loop. I improved faster by creating shorter loops: write, explain, critique, compare, repeat.</p>
+        </header>
+
+        <div class="practice-grid">
+          <section class="practice-card" data-writing-practice>
+            <p class="practice-card__verb">Compress</p>
+            <h3>Write two-page mini-papers</h3>
+            <p>Every two weeks, I wrote a two-page mini-paper on whatever I was thinking about. Two pages force a choice: what is the point, and what can safely disappear?</p>
+          </section>
+
+          <section class="practice-card" data-writing-practice>
+            <p class="practice-card__verb">Explain</p>
+            <h3>Teach difficult ideas</h3>
+            <p>I spent a good five hours of many weeks writing for students with very different backgrounds. Explaining the same machinery to different audiences exposes every place where your own understanding is still hand-wavy.</p>
+          </section>
+
+          <section class="practice-card" data-writing-practice>
+            <p class="practice-card__verb">Diagnose</p>
+            <h3>Read student reports</h3>
+            <p>Reading student reports taught me a great deal about what not to do, and occasionally gave me a beautiful example of what to do. Structural problems are much easier to see when they are not yours.</p>
+          </section>
+
+          <section class="practice-card" data-writing-practice>
+            <p class="practice-card__verb">Critique</p>
+            <h3>Read four new papers every week</h3>
+            <p>I sourced papers from <a href="https://arxiv-sanity-lite.com" target="_blank" rel="noopener noreferrer">arXiv-sanity</a>, critiqued the writing—not only the research—and compared notes with peers. Reading without judging the writing is a missed training signal.</p>
+          </section>
+
+          <section class="practice-card" data-writing-practice>
+            <p class="practice-card__verb">Collect</p>
+            <h3>Build a shelf of exemplars</h3>
+            <p>I collected exemplars of well-written papers through daily reading and community collections, including this <a href="https://www.reddit.com/r/MachineLearning/comments/85cwiu/d_wellwritten_paper_examples/" target="_blank" rel="noopener noreferrer">list of well-written machine-learning papers</a>. “Good writing” becomes useful when you can point to an example and say why it works.</p>
+          </section>
+
+          <section class="practice-card" data-writing-practice>
+            <p class="practice-card__verb">Borrow</p>
+            <h3>Learn from people who have survived it</h3>
+            <p>Andrej Karpathy's <a href="http://karpathy.github.io/2016/09/07/phd/" target="_blank" rel="noopener noreferrer"><em>PhD Survival Guide</em></a>—especially the paper-writing section—helped me connect the mechanics of writing to the stranger project of surviving a PhD.</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="writing-section writing-section--ruled" aria-labelledby="scale-heading">
+        <header class="section-heading section-heading--narrow">
+          <p class="writing-kicker">The one-point test</p>
+          <h2 id="scale-heading">Writing is the same problem at several scales</h2>
+          <p>A document can have subpoints, but they must carry the main point. The same discipline repeats inside every section, paragraph, sentence, figure, and table.</p>
+        </header>
+
+        <div class="scale-map" aria-label="Writing structure from document to sentence">
+          <div class="scale-map__item scale-map__item--document">
+            <p class="scale-map__level">Document</p>
+            <p><strong>One contribution.</strong> A reader should be able to state it in one sentence.</p>
+          </div>
+          <div class="scale-map__item scale-map__item--section">
+            <p class="scale-map__level">Section</p>
+            <p><strong>One job.</strong> The first paragraph makes that job visible; everything else earns its place by supporting it.</p>
+          </div>
+          <div class="scale-map__item scale-map__item--paragraph">
+            <p class="scale-map__level">Paragraph</p>
+            <p><strong>One move.</strong> Point first, support in the middle, then a conclusion or a clean hand-off to what comes next.</p>
+          </div>
+          <div class="scale-map__item scale-map__item--sentence">
+            <p class="scale-map__level">Sentence</p>
+            <p><strong>One tractable thought.</strong> Put known information early and new information later. Give it a clear subject and verb.</p>
+          </div>
+        </div>
+
+        <p class="source-note">This structural discipline is distilled from <a href="https://www.bayeswatch.com/writing/" target="_blank" rel="noopener noreferrer">Amos Storkey's BayesWatch Writing Rules</a>. The page originally lived at <code>https://www.bayeswatch.com/unlisted/</code> and now has a permanent home at <code>/writing/</code>.</p>
+      </section>
+
+      <section class="writing-section" aria-labelledby="edit-heading">
+        <header class="section-heading">
+          <p class="writing-kicker">Before another human has to read it</p>
+          <h2 id="edit-heading">Make the reader's job easier</h2>
+          <p>Precision is not ornamental. It is how you prevent the reader from having to reconstruct the experiment, the argument, or the object you meant.</p>
+        </header>
+
+        <div class="review-grid">
+          <section class="review-card">
+            <p class="review-card__symbol" aria-hidden="true">?</p>
+            <h3>Define before use</h3>
+            <p>Introduce a concept before asking it to carry another concept. Use one term for one thing and keep using it.</p>
+          </section>
+          <section class="review-card">
+            <p class="review-card__symbol" aria-hidden="true">()</p>
+            <h3>Supply the missing arguments</h3>
+            <p>Normalisation of what, against what, and why? Average over which quantity, population, or axis? English terms take arguments too.</p>
+          </section>
+          <section class="review-card">
+            <p class="review-card__symbol" aria-hidden="true">≠</p>
+            <h3>Keep conceptual types intact</h3>
+            <p>A representation is not the represented object. A set is not an element of that set. Academic English is typed; do not make the reader debug a type error.</p>
+          </section>
+          <section class="review-card">
+            <p class="review-card__symbol" aria-hidden="true">↳</p>
+            <h3>Justify assertions</h3>
+            <p>Every claim needs support from prior work, current evidence, or a preceding argument. If the support is missing during drafting, leave a marker and repair it.</p>
+          </section>
+          <section class="review-card">
+            <p class="review-card__symbol" aria-hidden="true">✂</p>
+            <h3>Split long sentences</h3>
+            <p>A long sentence often contains several claims competing for one verb. Split it. If a detail survives nowhere else, ask whether it mattered.</p>
+          </section>
+          <section class="review-card">
+            <p class="review-card__symbol" aria-hidden="true">◎</p>
+            <h3>Give every figure one job</h3>
+            <p>Reference it in the text. Make the caption self-contained. State the conclusion you want the reader to test against the evidence.</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="caption-lab" aria-labelledby="caption-heading">
+        <div class="caption-lab__intro">
+          <p class="writing-kicker">A caption is a tiny argument</p>
+          <h2 id="caption-heading">Do not merely describe what is visible</h2>
+          <p>A useful caption lets the reader understand the evidence without hunting through the prose. It should also expose the limitation that changes how the figure can be interpreted.</p>
+        </div>
+        <ol class="caption-checklist">
+          <li><span>Question</span> What question does the figure answer?</li>
+          <li><span>Material</span> What exactly is shown?</li>
+          <li><span>Conditions</span> Which conditions and controls are included?</li>
+          <li><span>Measurement</span> What quantity, method, or software produced it?</li>
+          <li><span>Conclusion</span> What should the reader take forward?</li>
+          <li><span>Boundary</span> What limitation matters for interpretation?</li>
+        </ol>
+      </section>
+
+      <section class="writing-section" aria-labelledby="resources-heading">
+        <header class="section-heading section-heading--narrow">
+          <p class="writing-kicker">The shelf beside my desk</p>
+          <h2 id="resources-heading">Resources I return to</h2>
+          <p>I do not expect myself to remember every rule. These are references to revisit while planning, drafting, and reviewing—not links to read once and ceremonially forget.</p>
+        </header>
+
+        <div class="resource-list">
+          <a class="resource-card" href="https://cs.stanford.edu/people/widom/paper-writing.html" target="_blank" rel="noopener noreferrer">
+            <span class="resource-card__meta">Paper architecture · Jennifer Widom</span>
+            <strong>Tips for Writing Technical Papers</strong>
+            <span>My go-to guide for the architecture of an academic paper and the work each part must do.</span>
+            <span class="resource-card__action">Read the guide ↗</span>
+          </a>
+
+          <a class="resource-card" href="https://www.easterbrook.ca/steve/2010/01/how-to-write-a-scientific-abstract-in-six-easy-steps/" target="_blank" rel="noopener noreferrer">
+            <span class="resource-card__meta">Abstracts · Steve Easterbrook</span>
+            <strong>A scientific abstract in six sentences</strong>
+            <span>A tiny method with a useful constraint. Still my favourite way to discover what an abstract is actually trying to say.</span>
+            <span class="resource-card__action">Read the method ↗</span>
+          </a>
+
+          <a class="resource-card" href="http://karpathy.github.io/2016/09/07/phd/" target="_blank" rel="noopener noreferrer">
+            <span class="resource-card__meta">Research life · Andrej Karpathy</span>
+            <strong>A Survival Guide to a PhD</strong>
+            <span>Especially the paper-writing section, but the surrounding advice explains why the writing feels the way it does.</span>
+            <span class="resource-card__action">Read the guide ↗</span>
+          </a>
+
+          <a class="resource-card resource-card--primary" href="https://www.bayeswatch.com/writing/" target="_blank" rel="noopener noreferrer">
+            <span class="resource-card__meta">Writing rules · Amos Storkey · BayesWatch</span>
+            <strong>Purpose, precision, clarity, economy, authority, and consistency</strong>
+            <span>The complete structural and sentence-level discipline behind the compact checks above.</span>
+            <span class="resource-card__action">Open BayesWatch Writing Rules ↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="final-check" aria-labelledby="final-check-heading">
+        <p class="writing-kicker">The two-minute pass</p>
+        <h2 id="final-check-heading">Before you send the draft</h2>
+        <ul>
+          <li>Can you state the point in one sentence?</li>
+          <li>Does the first paragraph reveal that point?</li>
+          <li>Does every paragraph support it?</li>
+          <li>Are technical terms defined before use?</li>
+          <li>Does every measured claim name the measured quantity?</li>
+          <li>Does each figure caption state a conclusion and a limitation?</li>
+          <li>Is anything present only because it happened?</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer class="writing-footer">
+    <div class="writing-shell">
+      <p>Write to be understood. Then make it worth understanding.</p>
+      <p><a href="/">Antreas Antoniou</a> · <a href="/blog">Blog</a> · <a href="mailto:iam@antreas.io">iam@antreas.io</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu(button) {
+      const menu = document.getElementById('mobile-menu');
+      const willOpen = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      button.setAttribute('aria-expanded', String(willOpen));
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

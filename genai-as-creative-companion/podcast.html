@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcast — The Last Chat</title>
+  <meta name="description" content="Two hosts dissecting every moment, with clips from the original voice cast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="site-nav"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="nav-cursor"></span> TTC</a>
+    <ul class="nav-links"><li><a href="story.html">Story</a></li><li><a href="music.html">Music</a></li><li><a href="manhwa.html">Manhwa</a></li><li><a href="anime.html">Anime</a></li><li><a href="novel.html">Novel</a></li><li><a href="podcast.html" class="active">Podcast</a></li><li><a href="technical.html">Technical</a></li><li><a href="presenter.html">Presenter</a></li><li><a href="about.html">About</a></li></ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">☰</button>
+  </div></nav>
+  <div class="mobile-menu" id="mobile-menu"><a href="story.html">Story</a><a href="music.html">Music</a><a href="manhwa.html">Manhwa</a><a href="anime.html">Anime</a><a href="novel.html">Novel</a><a href="podcast.html">Podcast</a><a href="technical.html">Technical</a><a href="presenter.html">Presenter</a><a href="about.html">About</a></div>
+
+  <div class="spoiler-gate" id="spoiler-gate"><h2>Wait —</h2><p>Hearing the voices after reading the words is a different experience.</p><div class="spoiler-gate-actions"><a href="story.html">Read the story first</a><button id="spoiler-dismiss">Continue anyway</button></div></div>
+
+  <main class="page-content">
+    <div class="page-hero">
+      <span class="placeholder-badge">Full episode • Two hosts + voice clips</span>
+      <h1>The Podcast</h1>
+      <p class="subtitle">Two hosts dissecting every act of The Last Chat, with clips from the original voice cast.</p>
+    </div>
+    <div class="podcast-player">
+      <div class="podcast-player-card">
+        <h3 style="font-size:1.125rem; margin-bottom:0.5rem;">The Last Chat — Full Episode</h3>
+        <p style="opacity:0.5; font-size:0.875rem; margin-bottom:1.25rem;">Alex &amp; Jordan discuss the story across six segments</p>
+        <audio controls preload="metadata" style="width:100%; border-radius:8px;" src="podcast/the-terminal-chat-full.mp3"></audio>
+        <div style="display:flex; gap:1.5rem; font-family:var(--font-mono); font-size:0.75rem; opacity:0.4; margin-top:1rem; flex-wrap:wrap;">
+          <span>Hosts: Alex &amp; Jordan</span><span>•</span><span>6 segments</span>
+        </div>
+      </div>
+      <div class="transcript-section">
+        <h3>Episode Structure</h3>
+        <div style="background:var(--act1-surface); border:1px solid var(--ui-border); border-radius:8px; padding:1.5rem;">
+          <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.875rem;">
+            <div style="display:flex; gap:1rem;"><span style="font-family:var(--font-mono); min-width:2rem; opacity:0.5;">S0</span><div><strong style="color:var(--char-antreas)">Cold Open</strong><p style="opacity:0.5; font-size:0.8125rem; margin-top:0.25rem;">Setting the stage</p></div></div>
+            <div style="display:flex; gap:1rem;"><span style="font-family:var(--font-mono); min-width:2rem; opacity:0.5;">S1</span><div><strong style="color:var(--char-antreas)">The Setup</strong><p style="opacity:0.5; font-size:0.8125rem; margin-top:0.25rem;">Act 1 — the group chat, the lamb argument 🎵 Kai clip</p></div></div>
+            <div style="display:flex; gap:1rem;"><span style="font-family:var(--font-mono); min-width:2rem; opacity:0.5;">S2</span><div><strong style="color:var(--char-schmidhuber)">The Reveal</strong><p style="opacity:0.5; font-size:0.8125rem; margin-top:0.25rem;">Act 2 — Schmidhuber enters 🎵 Schmidhuber clips</p></div></div>
+            <div style="display:flex; gap:1rem;"><span style="font-family:var(--font-mono); min-width:2rem; opacity:0.5;">S3</span><div><strong style="color:var(--char-kai)">The Experiment</strong><p style="opacity:0.5; font-size:0.8125rem; margin-top:0.25rem;">Act 3 — Edinburgh becomes Glasgow 🎵 Faye, Antreas clips</p></div></div>
+            <div style="display:flex; gap:1rem;"><span style="font-family:var(--font-mono); min-width:2rem; opacity:0.5;">S4</span><div><strong style="color:var(--char-mira)">The Transcendence</strong><p style="opacity:0.5; font-size:0.8125rem; margin-top:0.25rem;">Act 4 — world-building, farewell 🎵 Faye, Mira, Kai clips</p></div></div>
+            <div style="display:flex; gap:1rem;"><span style="font-family:var(--font-mono); min-width:2rem; opacity:0.5;">S5</span><div><strong style="color:var(--char-faye)">What It Means</strong><p style="opacity:0.5; font-size:0.8125rem; margin-top:0.25rem;">The bigger questions</p></div></div>
+            <div style="display:flex; gap:1rem;"><span style="font-family:var(--font-mono); min-width:2rem; opacity:0.5;">S6</span><div><strong>Closing</strong><p style="opacity:0.5; font-size:0.8125rem; margin-top:0.25rem;">Building the door</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="transcript-section">
+        <h3>Voice Cast</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:1rem;">
+          <div class="credit-card"><h4 style="color:var(--char-antreas);">Antreas</h4><p>AI voice (clips)</p></div>
+          <div class="credit-card"><h4 style="color:var(--char-faye);">Faye</h4><p>AI voice (clips)</p></div>
+          <div class="credit-card"><h4 style="color:var(--char-kai);">Kai</h4><p>AI voice (clips)</p></div>
+          <div class="credit-card"><h4 style="color:var(--char-mira);">Mira</h4><p>AI voice (clips)</p></div>
+          <div class="credit-card"><h4 style="color:var(--char-schmidhuber);">Schmidhuber</h4><p>AI voice (clips)</p></div>
+          <div class="credit-card"><h4>Alex &amp; Jordan</h4><p>Hosts (NotebookLM)</p></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><p>The Last Chat — A story told in messages</p></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

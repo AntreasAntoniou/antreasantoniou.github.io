@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Antreas Antoniou</title>
+  <meta name="description" content="Writing on AI, machine learning, efficiency, and the future of intelligence — by Antreas Antoniou.">
+  <link rel="canonical" href="https://antreas.io/blog">
+  <meta property="og:title" content="Blog | Antreas Antoniou">
+  <meta property="og:description" content="Writing on AI, machine learning, efficiency, and the future of intelligence.">
+  <meta property="og:url" content="https://antreas.io/blog">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css?v=20260719-nav">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } };</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .writing-shell { width: min(100% - 2rem, 64rem); margin-inline: auto; }
+    .writing-intro { max-width: 72ch; }
+    .archivum-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, .7fr); gap: 2rem; align-items: end; margin: 5rem 0 1.5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+    .archivum-heading h2 { margin: .25rem 0 0; font-size: clamp(2rem, 5vw, 3.25rem); }
+    .archivum-heading p { margin: 0; color: var(--text-secondary); line-height: 1.75; }
+    .archivum-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .archivum-card { position: relative; display: flex; min-height: 18rem; flex-direction: column; padding: 1.6rem; overflow: hidden; }
+    .archivum-card::after { content: ""; position: absolute; inset: auto 1.6rem 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+    .archivum-card:hover::after { transform: scaleX(1); }
+    .archivum-card__meta { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.25rem; color: var(--text-muted); font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .archivum-card h3 { margin: 0 0 .8rem; font-size: 1.35rem; }
+    .archivum-card h3 a { color: var(--text); }
+    .archivum-card p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+    .archivum-card__read { margin-top: auto; padding-top: 1.25rem; font-size: .9rem; font-weight: 700; }
+    .published-heading { margin: 5rem 0 1.5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+    .published-heading h2 { margin: .25rem 0 0; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    .published-heading p { max-width: 42rem; margin: .75rem 0 0; color: var(--text-secondary); line-height: 1.7; }
+    .published-card__byline { margin-bottom: .75rem !important; color: var(--text-muted) !important; font-size: .8rem !important; }
+    .published-card__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .55rem; flex-shrink: 0; }
+    .archivum-source-note a { text-decoration: underline; text-underline-offset: .18em; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    @media (max-width: 720px) {
+      .archivum-heading, .archivum-grid { grid-template-columns: 1fr; }
+      .archivum-heading { gap: .8rem; margin-top: 3.5rem; }
+      .archivum-card { min-height: auto; }
+      .published-card__layout { flex-direction: column; }
+      .published-card__actions { justify-content: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) { .archivum-card::after { transition: none; } }
+  </style>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body class="font-sans">
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-tight">
+        Antreas<span class="text-accent">.</span>
+      </a>
+      <div class="site-nav-links hidden md:flex">
+        <a href="/#building" class="text-secondary hover:text-accent transition">Work</a>
+        <a href="/#research" class="text-secondary hover:text-accent transition">Research</a>
+        <a href="/#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
+        <a href="/writing/" class="text-secondary hover:text-accent transition">Writing advice</a>
+        <a href="/blog" class="text-accent font-semibold transition" aria-current="page">Blog</a>
+        <a href="/#contact" class="text-secondary hover:text-accent transition">Contact</a>
+        <a href="/documents/AntreasAntoniouResume.pdf" class="btn-primary btn-sm">CV</a>
+        <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-3 md:hidden">
+        <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+        <button class="text-secondary" onclick="toggleMobileMenu(this)" aria-label="Toggle navigation" aria-controls="mobile-menu" aria-expanded="false">
+          <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t" style="border-color: var(--border); background: var(--bg);">
+      <div class="px-4 py-4 space-y-3">
+        <a href="/#building" class="block text-secondary hover:text-accent">Work</a>
+        <a href="/#research" class="block text-secondary hover:text-accent">Research</a>
+        <a href="/#teaching" class="block text-secondary hover:text-accent">Teaching</a>
+        <a href="/writing/" class="block text-secondary hover:text-accent">Writing advice</a>
+        <a href="/blog" class="block text-accent font-semibold" aria-current="page">Blog</a>
+        <a href="/#contact" class="block text-secondary hover:text-accent">Contact</a>
+        <a href="/documents/AntreasAntoniouResume.pdf" class="block text-accent font-semibold">Download CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-20">
+    <div class="writing-shell">
+
+      <!-- Header -->
+      <div class="mb-12">
+        <h1 class="text-4xl font-bold mb-3">Writing</h1>
+        <p class="writing-intro text-secondary text-lg">Thoughts on AI, machine learning, efficiency, and what it means to build intelligence that doesn't need a skyscraper to run.</p>
+      </div>
+
+      <section aria-labelledby="archivum-heading">
+        <header class="archivum-heading">
+          <div>
+            <span class="eyebrow">Collection I · ten field notes · one research trajectory</span>
+            <h2 id="archivum-heading">From the Research Archivum</h2>
+          </div>
+          <p>Podcast-born essays on efficient models, memory, attention, learning, and the systems we might build when intelligence is treated as a resource budget rather than a parameter count.</p>
+        </header>
+
+        <div class="archivum-grid">
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Efficiency</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/distilled-micro-models/">Aircraft Carriers and Fishing Boats</a></h3>
+            <p>Why production AI often needs a narrow, local specialist rather than a general-purpose model with a datacentre behind it.</p>
+            <a class="archivum-card__read" href="/blog/distilled-micro-models/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Local-first AI</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/fortress-mode/">Fortress Mode</a></h3>
+            <p>The most useful personal AI is also the most invasive. Trust has to be enforced by architecture, not promised by policy.</p>
+            <a class="archivum-card__read" href="/blog/fortress-mode/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Cognition</span><span>·</span><span>9 min</span></div>
+            <h3><a href="/blog/ai-memory-and-cognition/">If You Don’t Use It, You Lose It</a></h3>
+            <p>AI changes our portfolio of skills: less mechanical production, more decomposition and judgment. The trade remains unsettled.</p>
+            <a class="archivum-card__read" href="/blog/ai-memory-and-cognition/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Model compression</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/distillation/">Distillation: Teaching Small Models Big Tricks</a></h3>
+            <p>How broad frontier capability can become a small, task-specific model—and where the teacher–student metaphor breaks down.</p>
+            <a class="archivum-card__read" href="/blog/distillation/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Education</span><span>·</span><span>9 min</span></div>
+            <h3><a href="/blog/ai-education/">The Gamification Hypothesis</a></h3>
+            <p>Personal tutoring is only half the problem. The harder question is whether an AI can make deep learning more rewarding than shortcuts.</p>
+            <a class="archivum-card__read" href="/blog/ai-education/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Persistent memory</span><span>·</span><span>9 min</span></div>
+            <h3><a href="/blog/building-jarvis/">Building Jarvis</a></h3>
+            <p>A personal assistant without memory is a clever stranger. What changes when context can accumulate safely over years?</p>
+            <a class="archivum-card__read" href="/blog/building-jarvis/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Systems design</span><span>·</span><span>7 min</span></div>
+            <h3><a href="/blog/cheap-then-clean/">The Cheap-Then-Clean Architecture</a></h3>
+            <p>Spend little compute continuously, then spend heavily only where signal accumulates: a reusable pattern for resource-rational pipelines.</p>
+            <a class="archivum-card__read" href="/blog/cheap-then-clean/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Architecture</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/attention-learns-its-wiring/">Attention Learns Its Own Wiring</a></h3>
+            <p>Attention’s central move was not merely focus. It made connectivity conditional on the input—and therefore learnable.</p>
+            <a class="archivum-card__read" href="/blog/attention-learns-its-wiring/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Research craft</span><span>·</span><span>7 min</span></div>
+            <h3><a href="/blog/failing-optimally/">Failing Optimally</a></h3>
+            <p>Failure is not judgment; it is information. The research skill is designing failures that collapse the search space quickly.</p>
+            <a class="archivum-card__read" href="/blog/failing-optimally/">Read the field note →</a>
+          </article>
+
+          <article class="card archivum-card" data-archivum-post>
+            <div class="archivum-card__meta"><span>Embodied AI</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/embodied-ai/">Embodied AI: Fluffy Balls That Float</a></h3>
+            <p>Useful physical intelligence may look less like a metal person and more like soft, local, ambient objects with forms fitted to function.</p>
+            <a class="archivum-card__read" href="/blog/embodied-ai/">Read the field note →</a>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="collection-two-heading">
+        <header class="archivum-heading">
+          <div>
+            <span class="eyebrow">Collection II · completed essays</span>
+            <h2 id="collection-two-heading">A conversation, made accountable</h2>
+          </div>
+          <p>These ten complete essays were adapted from a 2025 conversation and developed in the Research Archivum: ideas about models, careers, and systems worked through until their boundaries matter as much as their claims.</p>
+        </header>
+
+        <div class="archivum-grid">
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>AI systems and memory</span><span>·</span><span>6 min</span></div>
+            <h3><a href="/blog/needle-in-the-haystack/">The Needle in the Haystack Is Not a Context Window</a></h3>
+            <p>A long prompt can hold a history without making its crucial detail retrievable. Durable memory needs addresses, retrieval, and verification.</p>
+            <a class="archivum-card__read" href="/blog/needle-in-the-haystack/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>Neural network architecture</span><span>·</span><span>6 min</span></div>
+            <h3><a href="/blog/transformers-as-lego/">Transformers as Lego</a></h3>
+            <p>Attention gives simple computational parts input-dependent routes for mixing information—powerful, reusable, and never assumption-free.</p>
+            <a class="archivum-card__read" href="/blog/transformers-as-lego/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>Research craft and career</span><span>·</span><span>6 min</span></div>
+            <h3><a href="/blog/why-i-dont-regret-my-phd/">Why I Don’t Regret My PhD</a></h3>
+            <p>For one researcher, doctoral study was protected time to tinker, fail, teach, and build judgement—not a universally sound bargain.</p>
+            <a class="archivum-card__read" href="/blog/why-i-dont-regret-my-phd/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>Deep learning history</span><span>·</span><span>6 min</span></div>
+            <h3><a href="/blog/the-imagenet-moment/">The ImageNet Moment</a></h3>
+            <p>AlexNet did not invent neural networks; its benchmark result made learned visual representations impossible for the field to ignore.</p>
+            <a class="archivum-card__read" href="/blog/the-imagenet-moment/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>Local AI performance</span><span>·</span><span>6 min</span></div>
+            <h3><a href="/blog/the-warm-up-effect/">The Warm-Up Effect</a></h3>
+            <p>First-call latency and steady-state performance are different measurements; honest benchmarks must match the product’s actual duty cycle.</p>
+            <a class="archivum-card__read" href="/blog/the-warm-up-effect/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>Local AI systems</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/ocr-two-pass-pipeline/">OCR on Two Clocks</a></h3>
+            <p>Capture a changing screen cheaply, then reconcile it slowly: a two-pass OCR system designed to preserve a recoverable story.</p>
+            <a class="archivum-card__read" href="/blog/ocr-two-pass-pipeline/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>Language model reliability</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/context-window-is-lying/">The Context Window Is Three Different Numbers</a></h3>
+            <p>What fits in a prompt, what can be retrieved, and what it costs to ask are separate budgets—and should be measured separately.</p>
+            <a class="archivum-card__read" href="/blog/context-window-is-lying/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>Research career</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/from-drones-to-deep-learning/">From Drones to Deep Learning</a></h3>
+            <p>A personal pivot after ImageNet, and a method for revisiting commitments when evidence changes their opportunity cost.</p>
+            <a class="archivum-card__read" href="/blog/from-drones-to-deep-learning/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>Efficient machine learning</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/small-model-revolution/">Small Models Are a Systems Decision</a></h3>
+            <p>Parameter count is not a product requirement: curate the data, narrow the job, and optimise capability where it must run.</p>
+            <a class="archivum-card__read" href="/blog/small-model-revolution/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-two>
+            <div class="archivum-card__meta"><span>Multimodal AI</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/multimodal-convergence/">Multimodal Convergence Is an Engineering Argument</a></h3>
+            <p>A common token interface can connect sight, sound, language, and action; common understanding still has to be engineered.</p>
+            <a class="archivum-card__read" href="/blog/multimodal-convergence/">Read the essay →</a>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="collection-three-heading">
+        <header class="archivum-heading">
+          <div>
+            <span class="eyebrow">Collection III · ideas at different stages</span>
+            <h2 id="collection-three-heading">The work, with its maturity attached</h2>
+          </div>
+          <p>These essays mix built work, prototypes, design proposals, and speculative research. Their labels are part of the argument: they distinguish what was made from what is being tested, designed, or deliberately left open.</p>
+        </header>
+
+        <div class="archivum-grid">
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Organisational intelligence</span><span>·</span><span>Maturity: Design proposal</span><span>·</span><span>7 min</span></div>
+            <h3><a href="/blog/organisational-nervous-system/">The Organisational Nervous System</a></h3>
+            <p>Turn permitted team communication into bounded organisational state without mistaking collective memory for permission to surveil.</p>
+            <a class="archivum-card__read" href="/blog/organisational-nervous-system/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Tools for thought</span><span>·</span><span>Maturity: Design proposal</span><span>·</span><span>7 min</span></div>
+            <h3><a href="/blog/context-reentry-problem/">The Context Re-entry Problem</a></h3>
+            <p>Resuming serious work means rebuilding goals, evidence, and uncertainty; test a context packet by the next correct action, not its fluency.</p>
+            <a class="archivum-card__read" href="/blog/context-reentry-problem/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Speculative machine memory</span><span>·</span><span>Maturity: Speculative research</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/market-in-lived-intelligence/">A Market in Lived Intelligence</a></h3>
+            <p>If persistent machine memory gains value by being lived with someone, consent, ownership, provenance, and deletion decide whether it survives.</p>
+            <a class="archivum-card__read" href="/blog/market-in-lived-intelligence/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Multi-agent systems</span><span>·</span><span>Maturity: Prototype</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/disagreement-is-an-architecture/">Disagreement Is an Architecture</a></h3>
+            <p>Useful dissent needs independent views, a protocol for classifying conflict, and a stopping rule—not simply more agents in the room.</p>
+            <a class="archivum-card__read" href="/blog/disagreement-is-an-architecture/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Creative governance</span><span>·</span><span>Maturity: Design proposal</span><span>·</span><span>7 min</span></div>
+            <h3><a href="/blog/build-the-kill-switch-first/">Build the Kill Switch First</a></h3>
+            <p>Reversibility requires kill criteria, a bounded blast radius, and rehearsed rollback before enthusiasm and sunk cost acquire voting rights.</p>
+            <a class="archivum-card__read" href="/blog/build-the-kill-switch-first/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Playful AI prototypes</span><span>·</span><span>Maturity: Prototype</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/most-useless-ai-app/">The Most Useless AI App I Could Build</a></h3>
+            <p>A tea-leaf procrastination machine exposes what ritual, friction, projection, and latency can reveal when an AI product refuses usefulness.</p>
+            <a class="archivum-card__read" href="/blog/most-useless-ai-app/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Embodied interaction</span><span>·</span><span>Maturity: Design proposal</span><span>·</span><span>8 min</span></div>
+            <h3><a href="/blog/ai-for-a-user-who-cannot-read/">AI for a User Who Cannot Read</a></h3>
+            <p>A camera-guided cat toy makes action, withdrawal, welfare, and unreportable failure first-class interface constraints.</p>
+            <a class="archivum-card__read" href="/blog/ai-for-a-user-who-cannot-read/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Embodied AI practice</span><span>·</span><span>Maturity: Built work</span><span>·</span><span>9 min</span></div>
+            <h3><a href="/blog/laboratory-is-part-of-the-research/">The Laboratory Is Part of the Research</a></h3>
+            <p>Assembled robots, compute, teaching, and event logistics are not backstage chores; they are the infrastructure that makes embodied research trustworthy.</p>
+            <a class="archivum-card__read" href="/blog/laboratory-is-part-of-the-research/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Search systems</span><span>·</span><span>Maturity: Design proposal</span><span>·</span><span>9 min</span></div>
+            <h3><a href="/blog/fast-answer-or-deep-research/">Fast Answer or Deep Research?</a></h3>
+            <p>Search should choose and expose an evidence budget, then escalate when a fast path cannot support the answer it wants to give.</p>
+            <a class="archivum-card__read" href="/blog/fast-answer-or-deep-research/">Read the essay →</a>
+          </article>
+
+          <article class="card archivum-card" data-collection-three>
+            <div class="archivum-card__meta"><span>Personal memory systems</span><span>·</span><span>Maturity: Speculative research</span><span>·</span><span>9 min</span></div>
+            <h3><a href="/blog/memory-that-quizzes-you-back/">What If Your Memory Quizzed You Back?</a></h3>
+            <p>A personal archive that asks questions must ground every prompt in evidence and earn its place by improving recall without manufacturing memory.</p>
+            <a class="archivum-card__read" href="/blog/memory-that-quizzes-you-back/">Read the essay →</a>
+          </article>
+        </div>
+      </section>
+
+      <header class="published-heading">
+        <span class="eyebrow">Selected published work</span>
+        <h2>Essays and technical writing</h2>
+        <p>Long-form articles written by Antreas. Where an essay first appeared with another publisher, the original venue remains linked alongside the local reading copy.</p>
+      </header>
+
+      <!-- Articles -->
+      <div class="space-y-6">
+
+        <!-- LinkedIn: LLM Retrieval Architectures -->
+        <article class="card p-6 hover:shadow-md transition-shadow">
+          <div class="published-card__layout flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">LinkedIn Article</span>
+                <span class="text-sm text-muted">May 2026</span>
+              </div>
+              <h2 class="text-xl font-semibold mb-2 leading-snug">
+                <a href="https://www.linkedin.com/pulse/universal-ranking-how-6-major-llm-systems-actually-find-stechenko-mepfe/" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition">
+                  There Is No Universal Ranking: How 6 Major LLM Systems Actually Find Your Content
+                </a>
+              </h2>
+              <p class="published-card__byline">Written by Hanna Stechenko &amp; Antreas Antoniou</p>
+              <p class="text-secondary text-sm leading-relaxed">Why “AI search” is really six different retrieval architectures—and why visibility depends on understanding each system’s sources, freshness, and ranking logic.</p>
+            </div>
+            <div class="published-card__actions">
+              <a href="https://www.linkedin.com/pulse/universal-ranking-how-6-major-llm-systems-actually-find-stechenko-mepfe/" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                <i class="fas fa-external-link-alt"></i> Read on LinkedIn
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pieces: Beyond the Cloud -->
+        <article class="card p-6 hover:shadow-md transition-shadow" data-pieces-local>
+          <div class="published-card__layout flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">Pieces Blog</span>
+                <span class="text-sm text-muted">August 2025</span>
+              </div>
+              <h2 class="text-xl font-semibold mb-2 leading-snug">
+                <a href="/blog/beyond-the-cloud/" class="hover:text-accent transition">
+                  Beyond the Cloud: SLMs, Local AI, and Agentic Constellations
+                </a>
+              </h2>
+              <p class="published-card__byline">Written by Antreas Antoniou · originally published by Pieces</p>
+              <p class="text-secondary text-sm leading-relaxed">A vision for local-first AI built on biology-inspired architectures. Intelligence doesn't need to live in a data centre.</p>
+            </div>
+            <div class="published-card__actions">
+              <a href="/blog/beyond-the-cloud/" class="btn-primary btn-sm whitespace-nowrap">Read here</a>
+              <a href="https://pieces.app/blog/direction-of-ai-progress" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                <i class="fas fa-external-link-alt"></i> Original on Pieces
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pieces: Scaling -->
+        <article class="card p-6 hover:shadow-md transition-shadow" data-pieces-local>
+          <div class="published-card__layout flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">Pieces Blog</span>
+                <span class="text-sm text-muted">July 2025</span>
+              </div>
+              <h2 class="text-xl font-semibold mb-2 leading-snug">
+                <a href="/blog/the-cost-of-ai-scaling/" class="hover:text-accent transition">
+                  Too Much of a Good Thing: How Chasing Scale is Stifling AI Innovation
+                </a>
+              </h2>
+              <p class="published-card__byline">Written by Antreas Antoniou · originally published by Pieces</p>
+              <p class="text-secondary text-sm leading-relaxed">The "Great Amnesia" of AI's scaling monoculture — why optimising for GPT-N+1 is the wrong race to run.</p>
+            </div>
+            <div class="published-card__actions">
+              <a href="/blog/the-cost-of-ai-scaling/" class="btn-primary btn-sm whitespace-nowrap">Read here</a>
+              <a href="https://pieces.app/blog/the-cost-of-ai-scaling" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                <i class="fas fa-external-link-alt"></i> Original on Pieces
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pieces: AI Memory Explained -->
+        <article class="card p-6 hover:shadow-md transition-shadow">
+          <div class="published-card__layout flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">Pieces Blog</span>
+                <span class="text-sm text-muted">September 2025</span>
+              </div>
+              <h2 class="text-xl font-semibold mb-2 leading-snug">
+                <a href="https://pieces.app/blog/types-of-ai-memory" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition">
+                  AI Memory Explained: What Perplexity, ChatGPT, Pieces, and Claude Remember (and Forget)
+                </a>
+              </h2>
+              <p class="published-card__byline">Written by Antreas Antoniou · published by Pieces</p>
+              <p class="text-secondary text-sm leading-relaxed">A practical comparison of what leading AI systems retain, what they lose, and how different memory architectures shape the user experience.</p>
+            </div>
+            <div class="published-card__actions">
+              <a href="https://pieces.app/blog/types-of-ai-memory" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap">
+                <i class="fas fa-external-link-alt"></i> Read on Pieces
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- BayesWatch: How to Train Your MAML -->
+        <article class="card p-6 hover:shadow-md transition-shadow">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:var(--accent-light);color:var(--accent)">BayesWatch</span>
+                <span class="text-sm text-muted">November 2018</span>
+              </div>
+              <h2 class="text-xl font-semibold mb-2 leading-snug">
+                <a href="https://www.bayeswatch.com/2018/11/30/HTYM/" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition">
+                  How to Train Your MAML
+                </a>
+              </h2>
+              <p class="text-secondary text-sm leading-relaxed">A practical guide to training Model-Agnostic Meta-Learning — tricks, pitfalls, and lessons learned from making few-shot learning actually work in PyTorch.</p>
+            </div>
+            <a href="https://www.bayeswatch.com/2018/11/30/HTYM/" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm whitespace-nowrap flex-shrink-0">
+              <i class="fas fa-external-link-alt"></i> Read
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Divider + note -->
+      <div class="mt-12 pt-8 border-t" style="border-color:var(--border)">
+        <p class="archivum-source-note text-muted text-sm">These essays were developed in <a href="/archivum/">Archivum</a>, the Git-backed system I use to make research and long-horizon work accumulate across conversations. Follow <a href="https://x.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">@AntreasAntoniou</a> on X or <a href="https://www.reddit.com/user/AntreasAntoniou/submitted/?screen_view_count=1&amp;sort=top&amp;t=all" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">u/AntreasAntoniou</a> on Reddit for new work, or reach out at <a href="mailto:antreas@axiotic.ai" class="text-accent hover:underline">antreas@axiotic.ai</a>.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function toggleMobileMenu(button) {
+      const menu = document.getElementById('mobile-menu');
+      const willOpen = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      button.setAttribute('aria-expanded', String(willOpen));
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

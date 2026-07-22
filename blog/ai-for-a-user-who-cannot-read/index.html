@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI for a User Who Cannot Read | Antreas Antoniou</title>
+  <meta name="description" content="A planning-stage cat robot reframes AI interface design around action, withdrawal, welfare, and failures no user can report in words.">
+  <link rel="canonical" href="https://antreas.io/blog/ai-for-a-user-who-cannot-read/">
+  <meta property="og:title" content="AI for a User Who Cannot Read | Antreas Antoniou">
+  <meta property="og:description" content="A planning-stage cat robot reframes AI interface design around action, withdrawal, welfare, and failures no user can report in words.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/ai-for-a-user-who-cannot-read/">
+  <meta property="article:section" content="Embodied interaction">
+  <meta name="reading-time" content="8 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · Embodied-interface proposal</p>
+      <h1>AI for a User Who Cannot Read</h1>
+      <p class="research-note-deck">A cat cannot follow onboarding, forgive a bad inference, or write a bug report. That makes it a brutally useful design constraint.</p>
+      <p class="research-note-maturity">Maturity: Design proposal</p>
+      <p class="research-note-provenance">Developed from an Archivum planning note for an open-source, camera-guided robotic cat toy. The source contains an initial concept and possible components only; no robot deployment, animal-welfare benefit, or user-study result is claimed.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>User</dt><dd>An animal who cannot read, type, consent conventionally, or explain why an interaction failed.</dd></div>
+      <div><dt>Mechanism</dt><dd>Perceive behaviour, choose bounded motion, expose uncertainty, and make withdrawal easy.</dd></div>
+      <div><dt>Test</dt><dd>Welfare and failure signals outrank engagement; the proposal should be rejected if they cannot be read reliably.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>The user walks into frame, stares at the product, and knocks it under the sofa. There will be no support ticket. No onboarding tooltip can explain that the small moving object is safe. No satisfaction survey can distinguish fascination from fear. The user is a cat.</p>
+
+      <p>An Archivum project note proposed an AI-driven “mousey” robot: a small camera-equipped toy that could detect a cat and generate movement intended to invite play. It listed possible hardware, vision models, controllers, and a public build process.</p>
+
+      <p>The note did not record a completed build or a single session with an animal. This essay is therefore about the design constraint, not a deployed cat entertainment system.</p>
+
+      <p>The cat makes an extreme version of a familiar interface problem. Most AI products assume the user can repair the machine’s mistakes with language. They can restate a request, reject an answer, explain a preference, or leave a review. Remove those channels and the system must treat behaviour, uncertainty, and the right to disengage as first-class interface elements.</p>
+
+      <h2>The interface is a moving body</h2>
+
+      <p>For a cat, motion is the output vocabulary. Speed, direction, distance, pauses, sound, and proximity communicate everything the product can say. A sudden approach is not a notification with poor wording; it is a physical event. A camera error is not an irrelevant search result; it may send hardware toward an animal, a bowl, a cable, or a flight of stairs.</p>
+
+      <p>A plausible architecture would separate perception, behaviour choice, and motor control. The perception layer estimates whether a cat is present, where it is, and coarse behavioural cues such as orientation, approach, pursuit, freezing, or retreat. A behaviour policy chooses from a deliberately small repertoire—move away slowly, pause, make a short lateral dart, return to a safe zone—rather than generating arbitrary motor commands. A final safety controller enforces speed, acceleration, distance, runtime, temperature, and collision limits regardless of what the “intelligent” layer requests.</p>
+
+      <p>That separation matters. An expressive model might propose surprising play patterns, but it should not own the motors. Generativity belongs inside a cage of physical invariants. The smallest credible first version may use rules rather than a language model or learned policy. If a few legible behaviours are sufficient, adding a more fashionable model would increase uncertainty without improving the interaction.</p>
+
+      <h2>Consent becomes a stream, not a checkbox</h2>
+
+      <p>A human guardian can consent to buying the object, placing a camera in a room, and storing or processing footage. They cannot consent on the cat’s behalf to every moment of interaction in the ordinary product sense.</p>
+
+      <p>The animal cannot accept terms, but it can approach, pursue, ignore, hide, freeze, strike, or leave. Those signals are imperfect; they are nevertheless the only live negotiation the system has.</p>
+
+      <p>The design should make refusal cheap. The robot must not chase into hiding places, block exits, follow after repeated withdrawal, or restart immediately when the cat disengages. A neutral home position gives the animal control over distance. Sessions should be short, separated by rest, and easy for a human to stop physically. Absence of engagement is a valid outcome, not a conversion failure to be optimised away.</p>
+
+      <p>Nor can “the cat kept playing” settle consent or welfare. Repetitive pursuit may reflect arousal without a healthy endpoint. A system tuned only for minutes of interaction could learn to provoke rather than enrich. Engagement is an observation. It is not permission, pleasure, or benefit.</p>
+
+      <h2>The user cannot explain the bug</h2>
+
+      <p>When a conventional interface fails, language supplies labels: confusing, slow, inaccurate, creepy. An animal interaction requires an observation protocol before any adaptation is attempted. The system needs candidate indicators and an explicit admission that they are ambiguous.</p>
+
+      <p>Approach after a pause may suggest renewed interest. Relaxed pursuit, batting, and voluntary re-engagement may be compatible with play. Repeated retreat, prolonged hiding, freezing, flattened posture, defensive vocalisation, avoidance of the room, or persistent vigilance may indicate that the session should stop. Those interpretations require animal-behaviour expertise; a computer-vision confidence score does not turn them into welfare facts.</p>
+
+      <p>Failure logging should join machine state to the observable episode: what movement occurred, what the perception system believed, what limits fired, and how the animal responded. Video, if retained at all, should be minimised, secured, and reviewable by the guardian. The useful bug report is not “reward went down.” It is a short, inspectable sequence showing the robot approached while the cat withdrew and the stop policy reacted too slowly.</p>
+
+      <h2>Welfare has to outrank engagement</h2>
+
+      <p>A cat toy can fail physically. Parts can detach, batteries can be bitten, wheels can catch fur, motors can heat, and a robot can become trapped or collide. It can also fail behaviourally: move with no attainable “capture,” produce frustration, disturb rest, monopolise attention, or habituate the animal until ever more extreme motion is required.</p>
+
+      <p>These hazards imply boring but load-bearing tests. Inspect enclosures and materials. Bound force and surface temperature. Test obstacle and edge detection with no animal present. Verify that the emergency stop works when perception is wrong. Run the motion repertoire in a controlled space and look for entanglement, inaccessible corners, or trajectories that pin rather than invite. Human supervision should remain mandatory during early trials; autonomy is not a reason to leave the device alone with the user.</p>
+
+      <p>The behavioural hypothesis also needs a stopping rule. If independent welfare review cannot define observable stop signals with acceptable agreement, the adaptive system should not proceed. If cats avoid the room after sessions, show repeated distress-associated behaviour, or cannot disengage without pursuit, stop. If a passive toy produces comparable voluntary play with less uncertainty, the AI layer has failed its comparison.</p>
+
+      <p>Suppose the policy receives a reward whenever the cat remains near the robot. It may learn smooth, delightful play. It may also learn to hover near food, obstruct a route, or produce unpredictable movements that hold attention through vigilance. The metric cannot tell those stories apart. A camera sees geometry more easily than experience.</p>
+
+      <p>A safer evaluation would treat several outcomes separately: voluntary approaches, voluntary returns after pauses, disengagement respected, stress-associated observations, intervention frequency, collisions, and mechanical faults. There should be hard vetoes rather than one blended engagement score. No amount of pursuit time compensates for a serious safety event.</p>
+
+      <p>Adaptation should be conservative. The policy can lower intensity after withdrawal, retire patterns associated with stops, and ask the guardian to review uncertain episodes. It should not escalate speed or novelty merely because yesterday’s movement no longer attracts attention. Curiosity is not a resource the machine is entitled to extract.</p>
+
+      <h2>The cat is not a metaphor</h2>
+
+      <p>It is tempting to turn this proposal into a cute lesson about “designing for nonverbal users.” That would flatten the animal back into a prop. A cat has species-specific needs, individual temperament, and welfare interests that require expertise beyond interface design. The concept should advance only with appropriate behavioural and veterinary input, careful guardian consent, and tests designed to discover harm rather than produce an entertaining video.</p>
+
+      <p>Still, the constraint travels. Infants, people with limited speech, overwhelmed users, and humans operating machinery may also be unable to explain a system’s failure at the moment it occurs. Good interfaces cannot depend entirely on eloquent correction after harm. They need bounded action, visible uncertainty, reversible interaction, and exits that work without an argument.</p>
+
+      <p>The planning note began with a fun robot. Its harder demand is that the machine learn when not to perform. For a user who cannot read, the most respectful piece of interface may be the empty floor left behind when they walk away.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

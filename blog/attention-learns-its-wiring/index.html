@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attention Learns Its Own Wiring | Antreas Antoniou</title>
+  <meta name="description" content="Attention as dynamic connectivity: a
+model choosing which relationships matter for this input.">
+  <link rel="canonical" href="https://antreas.io/blog/attention-learns-its-wiring/">
+  <meta property="og:title" content="Attention Learns Its Own
+Wiring | Antreas Antoniou">
+  <meta property="og:description" content="Attention as dynamic
+connectivity: a model choosing which relationships matter for this
+input.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/attention-learns-its-wiring/">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · January 2025 conversation</p>
+      <h1>Attention Learns Its Own Wiring</h1>
+      <p class="research-note-deck">Attention as dynamic connectivity: a
+model choosing which relationships matter for this input.</p>
+      <p class="research-note-provenance">Developed from a January 2025 long-form research conversation and expanded in the Research Archivum. Edited for clarity and factual precision.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Idea</dt><dd>Architecture is a communication graph, and
+fixed graphs bake assumptions into what a network can compute
+efficiently.</dd></div>
+      <div><dt>Mechanism</dt><dd>Queries and keys make the effective
+connectivity pattern conditional on the input.</dd></div>
+      <div><dt>Implication</dt><dd>Topology becomes a learnable
+computational resource—and therefore a candidate scaling
+axis.</dd></div>
+    </dl>
+
+    <article class="essay-body">
+<p><em>How transformers learn to focus on what matters</em></p>
+<hr />
+<p>The 2017 paper "Attention Is All You Need" made a bold claim in its
+title. You don't need convolutions. You don't need recurrence. Just
+attention.</p>
+<p>But what is attention, actually? And why does it work so well that
+it's now a foundation of the dominant family of large AI models?</p>
+<h2 id="the-connectivity-problem">The Connectivity Problem</h2>
+<p>Neural networks are, at their core, connection patterns between
+neurons. How you wire them up determines what they can learn.</p>
+<p>Before transformers, different tasks required different wiring:</p>
+<p><strong>Convolutional Neural Networks</strong> used local
+connections. Each neuron only looked at a small patch of its input—a 3×3
+region of an image, for example. This encodes the assumption that nearby
+pixels are related, which is true for images.</p>
+<p><strong>Recurrent Neural Networks</strong> used sequential
+connections. Each neuron received input from the previous time step,
+plus the current input. This encodes the assumption that sequences have
+temporal dependencies, which is true for language.</p>
+<p>Both approaches bake assumptions into the architecture. The
+connectivity pattern is fixed at design time based on human intuitions
+about the data.</p>
+<h2 id="what-if-the-network-could-choose">What If the Network Could
+Choose?</h2>
+<p>Attention asks a different question: what if we let the network
+decide which connections matter?</p>
+<p>Instead of fixing connectivity patterns, attention computes them
+dynamically based on the input. Every element can potentially attend to
+every other element. The network learns which relationships are
+important.</p>
+<p>Here's the key formula, simplified:</p>
+<pre><code>Attention(Q, K, V) = softmax(Q × K^T) × V</code></pre>
+<p>In plain English:</p>
+<ol type="1">
+<li>For each element, compute how much it should attend to every other
+element (the Q×K^T part)</li>
+<li>Normalize these attention scores (the softmax)</li>
+<li>Use the scores to weight a combination of values (× V)</li>
+</ol>
+<p>The Q (query), K (key), and V (value) are all learned transformations
+of the input. The network learns what to look for (queries), how to be
+found (keys), and what information to contribute (values).</p>
+<h2 id="why-this-is-revolutionary">Why This Is Revolutionary</h2>
+<p>Consider a sentence: "The animal didn't cross the road because it was
+too tired."</p>
+<p>What does "it" refer to? The animal, obviously. But this requires
+understanding that "tired" applies to animate things, and the animal is
+the only animate thing in the sentence.</p>
+<p>In an RNN, information flows sequentially. By the time you reach
+"it", you've processed "animal" many steps ago. The connection is
+indirect.</p>
+<p>In an attention-based model, "it" can directly attend to "animal".
+The model learns that pronouns should attend strongly to their
+antecedents. The connection is immediate, regardless of position.</p>
+<p>This directness is why attention handles long-range dependencies
+better than RNNs. Information doesn't have to flow through a chain of
+sequential steps—it can jump directly to where it's needed.</p>
+<h2 id="self-attention-attending-to-yourself">Self-Attention: Attending
+to Yourself</h2>
+<p>The "self" in self-attention means the input attends to itself. Every
+position in the input can look at every other position.</p>
+<p>This is computationally expensive—O(n²) in sequence length—but
+extraordinarily flexible. The network can learn dense, input-dependent connectivity patterns within its parameterisation: long-range, short-range, and mixtures of both.</p>
+<p>Convolutions privilege locality and recurrence privileges sequential state. Self-attention offers a broader communication pattern, but it is not a universal learner and still carries architectural assumptions.</p>
+<h2 id="multi-head-attention">Multi-Head Attention</h2>
+<p>One attention pattern might not be enough. Maybe you want to attend
+to both syntactic and semantic relationships. Or both local and global
+context.</p>
+<p>Multi-head attention runs several attention computations in parallel,
+each with different learned parameters. The outputs are concatenated and
+combined.</p>
+<p>This lets the model capture multiple types of relationships
+simultaneously. One head might learn to track subjects and verbs.
+Another might track sentiment words. Another might track document
+structure.</p>
+<h2 id="the-trade-offs">The Trade-offs</h2>
+<p>Attention isn't free:</p>
+<p><strong>Quadratic complexity</strong>: O(n²) means long sequences are
+expensive. This is why context windows exist.</p>
+<p><strong>Position agnosticism</strong>: Pure attention has no notion
+of order. You need to add positional encodings separately.</p>
+<p><strong>Memory-intensive</strong>: Storing attention matrices for
+long sequences uses significant memory.</p>
+<p>These trade-offs explain ongoing research into sparse attention,
+linear attention, and hybrid architectures. The core attention insight
+is powerful, but the specific implementation has room for
+improvement.</p>
+<h2 id="why-it-won">Why It Won</h2>
+<p>Despite the trade-offs, attention has become the dominant paradigm
+because of one key property: it learns.</p>
+<p>Fixed architectures encode human assumptions. Those assumptions might
+be wrong, or incomplete, or only applicable to certain data.</p>
+<p>Attention learns connectivity from the data, reducing the amount fixed by the designer. Positional schemes, tokenisation, depth, and other human choices still matter.</p>
+<p>This flexibility helps explain why related attention architectures work across text, images, audio, and video.</p>
+<p>The wiring that matters emerges from training. That's the real
+revolution.</p>
+<hr />
+<p><em>This post grew from a long-form research conversation about distilled micro models, transformers, and long-term memory AI.</em></p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Return to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

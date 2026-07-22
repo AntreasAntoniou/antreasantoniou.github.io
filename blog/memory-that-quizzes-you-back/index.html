@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What If Your Memory Quizzed You Back? | Antreas Antoniou</title>
+  <meta name="description" content="A speculative design for source-grounded personal trivia—and an experiment that could reject its claims about recall and spacing.">
+  <link rel="canonical" href="https://antreas.io/blog/memory-that-quizzes-you-back/">
+  <meta property="og:title" content="What If Your Memory Quizzed You Back? | Antreas Antoniou">
+  <meta property="og:description" content="A speculative design for source-grounded personal trivia—and an experiment that could reject its claims about recall and spacing.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/memory-that-quizzes-you-back/">
+  <meta property="article:section" content="Personal memory systems">
+  <meta name="reading-time" content="9 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · Speculative memory mechanism</p>
+      <h1>What If Your Memory Quizzed You Back?</h1>
+      <p class="research-note-deck">A personal archive usually waits to be searched. A stranger possibility is that it chooses what you are about to forget and asks first.</p>
+      <p class="research-note-maturity">Maturity: Speculative research</p>
+      <p class="research-note-provenance">Developed from a nascent Archivum idea note about generating trivia from personal notes and other user-selected material. It proposes a mechanism and experiments; no memory-training, educational, therapeutic, or engagement benefit has been demonstrated.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Hypothesis</dt><dd>Source-grounded questions may make selected personal material easier and more interesting to retrieve later.</dd></div>
+      <div><dt>Mechanism</dt><dd>Generate verifiable prompts, schedule attempts, reveal evidence, and adapt without rewarding confident error.</dd></div>
+      <div><dt>Kill test</dt><dd>Reject or narrow the idea if it adds false memories, fatigue, or surveillance without improving delayed source recall.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>A personal archive contains facts once considered important enough to save and not important enough to remember. They wait behind search boxes: experiment details, names of papers, design decisions, fragments of code, the reason an apparently good idea was rejected. Retrieval begins only after the user knows what to ask.</p>
+
+      <p>A nascent Archivum note proposed reversing that relationship. Select fragments of personal material, generate trivia or small challenges from them, and let the archive ask questions back.</p>
+
+      <p>Add spacing, scoring, and perhaps streaks. The hypothesis is that active attempts make useful material easier to retrieve than passive storage alone.</p>
+
+      <p>That is a hypothesis, not an efficacy claim. No such system was evaluated in the source note. Retrieval practice and spacing provide reasons to run an experiment; they do not guarantee that automatically generated questions about a messy personal archive will teach the right thing. The mechanism could just as easily train people to remember the model’s inventions.</p>
+
+      <h2>The archive must choose a learning object</h2>
+
+      <p>“Personal data” is not a curriculum.</p>
+
+      <p>A code snippet, calendar entry, meeting note, photograph, copied quotation, and half-formed thought have different ownership, stability, and value. Turning all of them into questions would create a relentless game of remembering debris.</p>
+
+      <p>The user should first choose an eligible collection and a purpose. Perhaps I want to retain the decisions in a research project, the conceptual claims in papers I annotated, or commands I repeatedly look up. The system can propose candidate facts, but every candidate needs a source span, a timestamp, a sensitivity label, and a reason it may be worth retrieving later.</p>
+
+      <p>This distinction separates personal memory from personal surveillance. The objective is not to prove that the archive knows where I was or whom I met. It is to rehearse material I deliberately place inside a learning boundary. Calendar entries about other people, messages they did not contribute for this purpose, and incidental behavioural traces should be excluded by default rather than converted into surprise trivia.</p>
+
+      <h2>A question is a lossy transformation</h2>
+
+      <p>Suppose a note says: “Use the smaller evaluation set first because annotation quality is uncertain; expand only after checking agreement.” A weak generator asks, “Which evaluation set should be used?” and marks “the smaller set” correct. It has removed the reason, condition, and possibility of later revision. The quiz teaches a slogan where the source recorded a decision under uncertainty.</p>
+
+      <p>A stronger pipeline extracts a candidate claim, links it to exact evidence, identifies qualifiers, generates a prompt and answer, then verifies that the answer is entailed by the cited passage. Question types should fit the material. Factual recall may use a short answer. A design decision may ask for both choice and reason. A code fragment may present a failure and ask which operation resolves it. Some notes should produce no question at all. After an attempt, the interface should reveal the source—not merely a generated explanation. If the answer has changed because the note was superseded, the card should be invalidated or rewritten. The user must be able to dispute a question, correct the source interpretation, and remove the item from future scheduling. Fluency cannot be the final judge of correctness.</p>
+
+      <h2>Remembering the source is not learning generated trivia</h2>
+
+      <p>This is the central validity problem. A user may become excellent at recognising the phrasing of the generated cards while remaining unable to use the underlying material. Multiple-choice distractors can teach false associations. Repeated wording can cue an answer that disappears in the real task. A synthetic explanation can become more memorable than the note it misrepresents.</p>
+
+      <p>The evaluation must therefore transfer beyond the game.</p>
+
+      <p>If I practise the reason for an evaluation choice, can I later explain it in my own words when reopening the project? Can I identify the source and distinguish the original claim from a generated elaboration? Can I apply the idea to a new case without seeing the familiar prompt?</p>
+
+      <p>Novel trivia should be treated as a different product. A model might generate related facts to make the session interesting, but remembering those facts would not show improved memory for personal material. Generated enrichment needs its own provenance and verification, clearly separated from questions whose answers come from the archive. Otherwise the system can raise a quiz score by quietly changing what counts as the lesson.</p>
+
+      <h2>Spacing needs a theory of forgetting and importance</h2>
+
+      <p>A scheduler could revisit difficult items after shorter intervals and stable items after longer ones. That familiar shape is only a starting point. Personal knowledge changes. A project decision can expire; a command can become obsolete; a once-important name can cease to matter. Scheduling by recall difficulty alone may spend the most attention on facts the user is sensibly forgetting.</p>
+
+      <p>Each item needs at least two independent estimates: how retrievable it appears and how valuable it remains. The user should be able to lower importance, pause a collection, or mark an item as superseded. An unresolved or surprising card may warrant a different prompt, but novelty should not acquire an automatic claim on attention.</p>
+
+      <p>The scheduler also needs uncertainty. A wrong answer may reflect forgetting, an ambiguous question, a stale source, or a valid alternative interpretation. Automatically shortening the interval treats every failure as a defect in the learner. Sometimes the card is what needs retraining.</p>
+
+      <h2>Games can corrupt the learning objective</h2>
+
+      <p>Points, streaks, leaderboards, and rewards were possible mechanics in the original idea. They may prompt return.</p>
+
+      <p>They may also reward speed over thought, easy cards over useful ones, and daily compliance over rest. A streak can turn one missed day into abandonment; a leaderboard can turn private learning into social performance.</p>
+
+      <p>The safest first design is probably private and low-drama: progress against one’s own selected goals, no global ranking, no penalty for pausing, and no reward for guessing rapidly.</p>
+
+      <p>Confidence could be recorded before revealing the answer so that a confident error receives special attention. “I do not know” should preserve information and avoid punishment.</p>
+
+      <p>Fatigue is not a minor interface issue. Repeated questions can make the archive aversive, especially when they surface work a person is trying to leave behind. Session length, dismissal, snoozing, topic boundaries, and quiet periods should be user-controlled. If the game wins engagement by making incompletion uncomfortable, it has built a compulsion loop around somebody’s memory.</p>
+
+      <h2>Hallucination and privacy interact</h2>
+
+      <p>A fabricated question does more than display an error. Repetition can lend it familiarity. If the system asks three times which colleague approved a decision that nobody approved, it may seed a false autobiographical belief. Personal context gives hallucination an especially dangerous costume: the output feels plausible because it uses real names, projects, and dates around an invented relation.</p>
+
+      <p>Every answer should therefore be traceable to user-visible evidence, with unsupported cards blocked before scheduling. Sensitive entities can be redacted during generation or kept entirely local where feasible. Raw material, generated cards, performance history, and inferred weaknesses each need retention and deletion rules. A profile of what somebody repeatedly forgets may be more sensitive than the notes themselves. Privacy also limits evaluation: uploading a personal archive to measure a memory tool may expose more than the experiment is worth. A first study can use participant-selected, non-sensitive collections and local processing where possible. The system should learn the minimum required to schedule cards, not convert recall performance into a general cognitive score.</p>
+
+      <h2>An experiment that can say no</h2>
+
+      <p>A credible pilot would begin with material each participant explicitly wants to retain. After a baseline test, items could be divided among three conditions: ordinary review of the source, source-grounded retrieval questions with spacing, and generated trivia related to the topic but not drawn from the source. Keep time-on-task comparable. Test immediately, then again after delays, using new wording and practical application rather than the training cards alone.</p>
+
+      <p>Measure delayed recall of source claims, ability to cite or locate the source, transfer to a new example, false acceptance of generated statements, confidence calibration, time spent, fatigue, and voluntary continuation. Audit question quality independently. The generated-trivia condition is important because it reveals whether the product teaches the archive or merely creates memorable adjacent content.</p>
+
+      <p>I would reject or sharply narrow the idea if spaced questions do not outperform equal-time source review on delayed, source-faithful recall; if they increase false confidence or false autobiographical beliefs; if useful cards require constant manual repair; or if fatigue and privacy costs outweigh any gain. A positive quiz score alone would not rescue it.</p>
+
+      <p>An archive that quizzes back should not demand that every saved fragment live forever. Its best question may be one that returns me to the evidence, lets me decide the fact no longer matters, and then accepts being forgotten.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

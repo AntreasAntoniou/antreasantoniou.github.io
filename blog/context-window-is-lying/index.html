@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Context Window Is Three Different Numbers | Antreas Antoniou</title>
+  <meta name="description" content="Why advertised context capacity, effective retrieval, and the runtime cost of long prompts must be measured separately.">
+  <link rel="canonical" href="https://antreas.io/blog/context-window-is-lying/">
+  <meta property="og:title" content="The Context Window Is Three Different Numbers | Antreas Antoniou">
+  <meta property="og:description" content="Why advertised context capacity, effective retrieval, and the runtime cost of long prompts must be measured separately.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/context-window-is-lying/">
+  <meta property="article:section" content="Language model reliability">
+  <meta name="reading-time" content="8 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · 2025 source conversation</p>
+      <h1>The Context Window Is Three Different Numbers</h1>
+      <p class="research-note-deck">Capacity tells you what fits. Retrieval tells you what can be found. Runtime tells you whether you can afford to ask.</p>
+      <p class="research-note-provenance">Adapted from a 2025 conversation and developed in the Research Archivum. References to million-token model claims describe the 2025 source context; model capabilities and prices change, so the enduring argument is about measurement.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Observation</dt><dd>A prompt may be accepted in full without every relevant detail being used reliably.</dd></div>
+      <div><dt>Mechanism</dt><dd>Position, distractors, training, attention design, and query shape alter retrieval.</dd></div>
+      <div><dt>Implication</dt><dd>Publish and test capacity, effective retrieval, and runtime as separate budgets.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>A venue can be licensed for ten thousand people and still have one narrow door, dreadful acoustics, and a queue for the only toilet. “Capacity: 10,000” is true. It is also an eccentric way to answer whether you will hear the violin.</p>
+
+      <p>Context-window numbers have been asked to perform the same trick. A model accepts a very large prompt, therefore the model is said to “remember” that prompt. In the 2025 conversation behind this essay, million-token and even ten-million-token claims were the examples in circulation. Those product numbers are dated. The conceptual mistake is not: input capacity, effective retrieval, and runtime cost are different properties, and one integer cannot describe all three.</p>
+
+      <p>This is also a different problem from searching an external memory. Retrieval systems decide which records enter the prompt. Here I am concerned with what happens after the material is already inside: whether the model uses the right part, how behaviour changes as irrelevant material grows, and what the request costs to execute.</p>
+
+      <h2>Number one: advertised capacity</h2>
+
+      <p>The advertised window is principally an interface limit. Up to some number of tokens, the service or runtime accepts the input under specified conditions. That is useful information. It tells an engineer whether a document can be submitted without explicit chunking and how much room remains for instructions and output.</p>
+
+      <p>It does not, by itself, promise equal access to every position, constant answer quality, a particular latency, or a particular price. It may also hide operational qualifications: supported model variant, maximum output length, caching policy, rate limits, or hardware. None of this makes the capacity fake. It makes “supports” a much smaller verb than “understands”.</p>
+
+      <p>Suppose a codebase snapshot fits in one request. The capacity claim has been satisfied if the API accepts it. If the model overlooks the configuration file that changes the meaning of a function, that is a retrieval or reasoning failure. If the request takes too long for an editor interaction, that is a runtime failure. Collapsing all three into “the context works” prevents useful diagnosis.</p>
+
+      <h2>Number two: effective retrieval</h2>
+
+      <p>Effective context is task-dependent. Put one distinctive sentence in a long prompt and ask for it verbatim: that is one test. Scatter evidence across five sections, include plausible distractors, and ask for an inference: that is another. A model can succeed at the first and fail at the second without contradiction.</p>
+
+      <p>The “lost in the middle” pattern described in the source conversation is an observation that many long-context models showed position-sensitive retrieval, often doing better near boundaries than in the middle. It is not a law that every architecture, prompt, and model must follow the same U-shaped curve forever. Position is one variable among several: training distribution, positional encoding, attention pattern, fine-tuning, query wording, document structure, and the number of competing candidates all matter.</p>
+
+      <p>Attention is not a little torch with a fixed quantity of light that literally becomes dimmer every time a token is added. That metaphor is tempting but too crude. The mechanism is learned computation over representations. As sequences grow, the model must distinguish relevant relationships among more candidates, while its training may not have rewarded robust use of all positions and lengths. Distractors can attract similar scores; weakly represented details can be overwhelmed; multi-step questions can fail even when a direct lookup succeeds.</p>
+
+      <p>An honest effective-context result therefore needs a curve, not a badge. Measure accuracy across lengths, positions, query types, numbers of needles, distractor similarity, and required reasoning depth. Use material shaped like the application rather than only synthetic strings. A legal assistant, code tool, and personal archive do not share one “useful context” number.</p>
+
+      <h2>Number three: runtime and cost</h2>
+
+      <p>Long input has a computational bill even when retrieval is perfect. In standard dense self-attention, computing interactions across an input sequence has quadratic scaling in sequence length for the prefill operation. Practical systems use optimised kernels, caching, sparsity, compression, parallel hardware, and sometimes different architectures, so a schoolbook cost table should not be mistaken for the invoice of every modern service.</p>
+
+      <p>The distinction between prefill and generation matters. Reading a huge prompt can dominate time to first token. During autoregressive generation, a key-value cache avoids recomputing the entire past in the naive way, but the cache itself consumes memory and each new token still interacts with stored state according to the model's design. Providers can hide much of this complexity behind an API; they cannot make the physical work cease to exist.</p>
+
+      <p>Runtime must be measured at the system boundary that matters: end-to-end latency, time to first token, output rate, memory, energy, and monetary cost. A ten-minute research query may tolerate a large prefill. Autocomplete cannot. A context length that is affordable once per day may be absurd at every keystroke. The useful limit is partly a property of the model and partly a property of the product's duty cycle.</p>
+
+      <h2>A better long-context experiment</h2>
+
+      <p>Imagine evaluating an assistant over a repository. Start with a real change request and identify the files a careful engineer actually needs. Create prompt variants at increasing lengths by adding realistic, topically similar files—not random padding. Move one crucial configuration fact through the beginning, middle, and end. Ask direct retrieval questions, then ask for a patch plan that requires combining several facts.</p>
+
+      <p>For every condition, record whether the prompt was accepted, whether the answer cited the right evidence, whether unsupported claims appeared, and how long and expensive the run was. Compare the full dump against retrieval-selected contexts and hierarchical summaries. Repeat across several tasks. That experiment exposes three curves: admission, quality, and cost.</p>
+
+      <p>It may reveal that the full repository works well for exploratory questions but focused retrieval wins on precise edits. It may reveal that summaries omit a rare but decisive detail. It may even show that a particular model genuinely uses the whole long prompt well enough to justify the bill. The point is not to force RAG to win. The point is to stop treating architecture as theology and measure the application.</p>
+
+      <h2>Long context is still valuable</h2>
+
+      <p>The counterargument to context-window scepticism is strong: explicit retrieval can discard information before the model sees it, chunking breaks dependencies, and summarisation is lossy. Larger windows reduce some of that engineering burden and allow global structure to remain available. Improvements in training and architecture can move the quality curve substantially.</p>
+
+      <p>I agree. “Do not dump everything into context” is not a universal commandment either. Sometimes the complete document is the right input. Sometimes caching makes repeated use economical. Sometimes a broad prompt lets the model notice a relationship the retriever would never have selected. The failure lies in assuming that fitting is equivalent to finding, or that finding is equivalent to being affordable.</p>
+
+      <p>The next honest context-window label will look more like a systems benchmark than a capacity badge. Serious users will ask for retrieval curves, prefill latency, memory use, cache behaviour, and performance on messy multi-evidence tasks. I expect applications to mix long windows with retrieval, summaries, structured state, and verification rather than choosing one technique as the winner of AI.</p>
+
+      <p>The context window is not exactly lying. We handed one number three jobs and then acted betrayed when it completed only the first. Capacity is the size of the venue. Effective retrieval is whether you can hear the violin. Runtime is whether you can afford the ticket. Put all three on the programme.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

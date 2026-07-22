@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build the Kill Switch First | Antreas Antoniou</title>
+  <meta name="description" content="A design proposal for making reversibility a creator-governance principle through kill criteria, bounded blast radius, and rehearsed rollback.">
+  <link rel="canonical" href="https://antreas.io/blog/build-the-kill-switch-first/">
+  <meta property="og:title" content="Build the Kill Switch First | Antreas Antoniou">
+  <meta property="og:description" content="A design proposal for making reversibility a creator-governance principle through kill criteria, bounded blast radius, and rehearsed rollback.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/build-the-kill-switch-first/">
+  <meta property="article:section" content="Creative governance">
+  <meta name="reading-time" content="7 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · Strategy note</p>
+      <h1>Build the Kill Switch First</h1>
+      <p class="research-note-deck">A reversible bet is not a timid bet. It is an agreement, made before enthusiasm and sunk cost acquire voting rights.</p>
+      <p class="research-note-maturity">Maturity: Design proposal</p>
+      <p class="research-note-provenance">Developed from an Archivum strategy note on creator-led decisions, reversible bets, and pre-committed stop conditions. It is an operating proposal, not a universally validated management framework.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Principle</dt><dd>Give experimental freedom a bounded surface and a pre-agreed way to stop.</dd></div>
+      <div><dt>Mechanism</dt><dd>Define kill criteria, limit blast radius, prepare rollback, and assign decision authority before launch.</dd></div>
+      <div><dt>Failure</dt><dd>A switch that is ambiguous, politically unusable, or technically untested is theatre.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>The most important line in an experiment plan is usually written last: “Rollback: restore the previous version.” By then the launch date is announced, the team has spent six weeks on the feature, and the person who can perform the rollback is asleep in another time zone. The kill switch exists in the document and nowhere else.</p>
+
+      <p>Now reverse the order. Before building the feature, decide what evidence would stop it, which users can be exposed, how the old state will be restored, who has authority to act, and what happens to data created during the trial. Suddenly the proposal becomes sharper. Some experiments shrink. Some reveal that they are not experiments at all, because nobody is willing to accept the result “stop.”</p>
+
+      <p>The central thesis is that reversibility is a form of creator governance. It protects room for unusual work by making exploration affordable and extraction interruptible. This is a design proposal and operating principle, not evidence that one template governs every creative or technical organisation.</p>
+
+      <h2>Reversibility creates permission to be strange</h2>
+
+      <p>Creative work is often trapped between two bad modes. In the first, managers demand certainty before anything unfamiliar can begin. The result is safe imitation because only familiar ideas can produce credible forecasts. In the second, ambitious ideas receive grand commitments and become too expensive—politically or technically—to question. The result is not freedom but momentum.</p>
+
+      <p>A small reversible bet offers a third mode. It gives a creator enough authority to test the part of an idea that makes it distinct, while limiting the cost of being wrong. The point is not to reduce every project to an optimisation exercise. It is to keep uncertainty from being used either as a reason to forbid exploration or as an excuse to avoid accountability.</p>
+
+      <p>This only works when governance has teeth. The people responsible for the creative core need a documented domain of decision authority: perhaps the work’s central mechanic, research question, voice, or integrity constraints. Financial and operational stewards need equally clear constraints around solvency, safety, and commitments to others. An escalation path must say who decides when these domains conflict. “Creator-led” without an allocation of authority is branding.</p>
+
+      <h2>A kill criterion is an observation, not a mood</h2>
+
+      <p>“Stop if it goes badly” is not a kill criterion. It postpones the decision until the moment when everyone is least capable of making it cleanly. A usable criterion names an observable condition, a measurement window, and the action it triggers.</p>
+
+      <p>For a software experiment, that could mean: disable the feature if a defined class of safety or privacy incident occurs; if task completion deteriorates beyond a chosen bound; if support burden rises without corresponding benefit; or if a short-term engagement gain is paired with a sustained trust signal moving in the wrong direction. For a research direction, it might be: stop if the core phenomenon is not measurable in the smallest credible experiment, or if a simpler baseline recovers the claimed benefit.</p>
+
+      <p>The numbers are local. A one-percent budget cap or two-sprint timebox can be a useful prompt, but it is not a law. A medical workflow, a game mechanic, and an internal tool have different acceptable evidence and consequences. What transfers is pre-commitment: write down the observation that would change the decision while both success and failure remain emotionally available.</p>
+
+      <h2>Blast radius is part of the hypothesis</h2>
+
+      <p>Teams often treat rollout mechanics as implementation detail. They are actually part of experimental reasoning. If a change can only be tested by exposing everyone at once, then many bad outcomes become irreversible before they can be interpreted. The experiment is not merely larger; it answers a different and riskier question.</p>
+
+      <p>Bounding the blast radius may mean a feature flag, a canary group, a single region, a copy of the data, a limited audience, a capped budget, or a time-boxed prototype that cannot make external commitments. The boundary should follow the harm, not only the deployment topology. Ten test users can still be too many if the experiment handles sensitive material. A financially cheap trial can be culturally expensive if it teaches a community not to trust the creator.</p>
+
+      <p>Small scope also improves interpretation. When fewer things change, a failure is easier to attribute. Reversibility and learning reinforce each other: the same constraints that make an experiment safer often make its evidence cleaner.</p>
+
+      <h2>Rollback must restore a coherent world</h2>
+
+      <p>A button that stops new traffic is not necessarily a rollback. The experiment may have changed schemas, user expectations, permissions, prices, generated content, or dependencies. Returning code to version N−1 while leaving the world in version N is a partial retreat.</p>
+
+      <p>The rollback plan should answer four questions. What exact state are we returning to? What new state must be migrated, quarantined, or deleted? How long does restoration take under realistic load? Who can initiate it without convening a meeting? The procedure needs rehearsal before launch, because an untested emergency path is merely another hypothesis.</p>
+
+      <p>Automation helps only for crisp signals. A circuit breaker can react to an error-rate threshold; it cannot decide whether a work has lost its character. Some switches should be technical and immediate. Others require a creator or steward with explicit authority to judge a qualitative boundary. The design should not pretend that every value can be compiled into a metric.</p>
+
+      <h2>Sunk cost is a governance attack</h2>
+
+      <p>Once a project accumulates labour, status, and public promises, evidence must compete with identity. Teams reinterpret failure as “early signal,” move thresholds, add one more round, or declare that stopping would waste the investment. None of this requires bad faith. Sunk cost attacks governance by changing who the decision-makers feel they are: no longer evaluators of a bet, but defenders of their past selves.</p>
+
+      <p>Pre-committed criteria are a defence, not an autopilot. New evidence may legitimately reveal that the original threshold was wrong. But changing it should require an explicit record: what new fact appeared, who authorised the exception, and whether the experiment’s scope remains bounded. Quietly moving the line destroys the only advantage of having drawn it early.</p>
+
+      <p>Incentives matter too. If careers reward launches and punish shutdowns, no kill-switch template will be used. Decision logs should treat a well-executed stop as an outcome, especially when it prevents larger harm or releases resources for a better path. The organisation has to make stopping survivable.</p>
+
+      <h2>When the switch is theatre</h2>
+
+      <p>This operating principle fails if the kill condition is too vague to trigger, the relevant signal arrives too late, rollback loses data, nobody has unilateral authority, or commercial commitments make reversal impossible. It also fails if constant reversibility prevents the sustained commitment some work needs. A film, a research programme, or a community cannot be reduced to endless disposable trials without damaging the craft the method was supposed to protect.</p>
+
+      <p>The test is practical. Before launch, run the rollback. Ask an uninvolved person to interpret the kill criteria. Simulate an ambiguous case and observe whether authority is clear. After the experiment, compare the promised blast radius with the actual one. If the system cannot stop under calm rehearsal, it will not stop cleanly under pressure.</p>
+
+      <p>Not every decision should remain reversible forever. Some of the best work requires crossing a point of no return. The responsibility is to know when that point occurs and what evidence justifies crossing it. Build the kill switch first so that commitment, when it comes, is chosen by the work—not smuggled in by momentum.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

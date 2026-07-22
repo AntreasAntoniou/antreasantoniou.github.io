@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distillation: Teaching Small Models Big
+Tricks | Antreas Antoniou</title>
+  <meta name="description" content="How task-specific students turn
+broad model capability into fast, local inference—and what gets lost.">
+  <link rel="canonical" href="https://antreas.io/blog/distillation/">
+  <meta property="og:title" content="Distillation: Teaching Small Models
+Big Tricks | Antreas Antoniou">
+  <meta property="og:description" content="How task-specific students
+turn broad model capability into fast, local inference—and what gets
+lost.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/distillation/">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · January 2025 conversation</p>
+      <h1>Distillation: Teaching Small Models Big Tricks</h1>
+      <p class="research-note-deck">How task-specific students turn
+broad model capability into fast, local inference—and what gets
+lost.</p>
+      <p class="research-note-provenance">Developed from a January 2025 long-form research conversation and expanded in the Research Archivum. Edited for clarity and factual precision.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Idea</dt><dd>A large model can be a capability frontier
+without being the model that ships.</dd></div>
+      <div><dt>Mechanism</dt><dd>Generate and curate task-specific
+supervision, then train the smallest student that clears the real
+acceptance tests.</dd></div>
+      <div><dt>Implication</dt><dd>Frontier research and efficient
+deployment become complementary layers of one system.</dd></div>
+    </dl>
+
+    <article class="essay-body">
+<p><em>How to compress frontier-scale capabilities into models that run on your laptop</em></p>
+<hr />
+<p>Here's a puzzle: we have frontier-scale language models with remarkably broad capabilities. But they require data centers to
+run, cost money per query, and can't work offline.</p>
+<p>Meanwhile, we have small models that run locally in milliseconds. But
+they're not smart enough for most useful tasks.</p>
+<p>What if you could transfer the intelligence from the big model to the
+small one?</p>
+<p>This is knowledge distillation. And it's the key technique behind
+practical AI deployment.</p>
+<h2 id="the-teacher-student-paradigm">The Teacher-Student Paradigm</h2>
+<p>The concept is simple. You have two models:</p>
+<p><strong>The Teacher</strong>: A massive, powerful model. It might
+have hundreds of billions of parameters. It runs in the cloud, costs
+real money, and takes seconds to respond. But it's extremely
+capable.</p>
+<p><strong>The Student</strong>: A tiny model. Maybe 50-100 million
+parameters. It runs locally in milliseconds. But it needs to be
+trained.</p>
+<p>The distillation process: use the teacher to generate training data
+for the student.</p>
+<h2 id="why-this-works">Why This Works</h2>
+<p>Traditional machine learning requires labeled data. If you want a
+model that classifies sentiment, you need millions of examples labeled
+"positive" or "negative" by humans.</p>
+<p>But labeling is expensive. Humans are slow, inconsistent, and don't
+scale.</p>
+<p><p>Large language models changed this equation by making synthetic annotation cheap and scalable. Their labels are not automatically correct or more consistent than human labels: they require validation, disagreement analysis, and targeted human review.</p>
+<p>The teacher becomes one source of supervision, not an oracle.</p>
+<h2 id="the-training-loop">The Training Loop</h2>
+<p>Here's how distillation typically works:</p>
+<ol type="1">
+<li><p><strong>Define your task precisely.</strong> Not "general
+language understanding" but something specific: "Given a user query,
+classify the time reference as past/present/future."</p></li>
+<li><p><strong>Generate diverse inputs.</strong> This might be real data
+from your application, or synthetic data designed to cover edge
+cases.</p></li>
+<li><p><strong>Run inputs through the teacher.</strong> Get the
+teacher's outputs for each input. These become your labels.</p></li>
+<li><p><strong>Train the student on teacher outputs.</strong> The
+student learns to mimic the teacher's behavior on this specific
+task.</p></li>
+<li><p><strong>Iterate.</strong> Find cases where the student fails, add
+them to training data, retrain.</p></li>
+</ol>
+<p>The result: a small model that performs like the teacher—but only on
+this specific task.</p>
+<h2 id="the-teacher-is-not-ground-truth">The Teacher Is Not Ground Truth</h2>
+<p>A student trained only to imitate teacher outputs inherits teacher errors. But “cannot exceed the teacher” is too strong: with independent ground-truth labels, regularisation, better task data, or a narrower evaluation distribution, a student can outperform its teacher on the measured task.</p>
+<p>The honest procedure is to evaluate both against an external acceptance set. Teacher agreement is a training signal; it is not the definition of correctness.</p>
+<h2 id="what-you-lose-and-what-you-keep">What You Lose and What You
+Keep</h2>
+<p>Distillation preserves task-specific behavior. It does not preserve
+general capabilities.</p>
+<p>A frontier-scale generalist can:</p>
+<ul>
+<li>Answer questions about history</li>
+<li>Write poetry</li>
+<li>Debug code</li>
+<li>Explain quantum mechanics</li>
+<li>And do your specific task</li>
+</ul>
+<p>A distilled 100-million-parameter model can:</p>
+<ul>
+<li>Do your specific task</li>
+</ul>
+<p>That's the trade-off. The student becomes a specialist. It loses the
+generalist capabilities of the teacher.</p>
+<p>This is actually desirable for deployment. You don't <em>want</em>
+your timestamp classifier to have opinions about poetry. You want it to
+classify timestamps—fast, cheap, and accurately.</p>
+<h2 id="practical-considerations">Practical Considerations</h2>
+<p><strong>Data quality matters more than data quantity.</strong> A
+smaller dataset with high-quality teacher labels often beats a massive
+dataset with noise. Curate your inputs carefully.</p>
+<p><strong>Task definition is critical.</strong> Fuzzy tasks produce
+fuzzy models. The more precisely you can specify what you want, the
+better the student will learn it.</p>
+<p><strong>Multiple teachers can help.</strong> For some tasks, labels from multiple strong models can be reconciled or ensembled. This can
+smooth out individual model quirks.</p>
+<p><strong>Iteration is key.</strong> First distillation attempts
+usually reveal gaps. Find the failure modes, add targeted training data,
+repeat.</p>
+<h2 id="the-compression-ratio">The Compression Ratio</h2>
+<p>How much can you compress? It depends on the task.</p>
+<p>For narrow, well-defined tasks, compression can be substantial. The ratio is not meaningful without the task, dataset, baseline, hardware, and acceptance threshold, so those belong beside any reported number.</p>
+<p>For broader tasks, compression is more limited. There's a minimum
+complexity required to capture the behavior you want.</p>
+<p>The art is finding where your task falls on this spectrum and sizing
+your student model appropriately.</p>
+<h2 id="the-deployment-advantage">The Deployment Advantage</h2>
+<p>Once you have a distilled model, deployment is transformed:</p>
+<table><thead><tr><th>Metric</th><th>Remote teacher</th><th>Local student</th></tr></thead><tbody>
+<tr><td>Latency</td><td>Network and serving dependent</td><td>Device and task dependent</td></tr>
+<tr><td>Marginal cost</td><td>Typically usage-priced</td><td>No per-call API charge</td></tr>
+<tr><td>Privacy</td><td>Input crosses a service boundary</td><td>Input can remain local</td></tr>
+<tr><td>Throughput</td><td>Service limits</td><td>Hardware limits</td></tr>
+</tbody></table>
+<p>For high-volume systems, distillation can shift cost from repeated remote inference toward training, validation, and local operation. It does not make inference free.</p>
+<h2 id="the-path-forward">The Path Forward</h2>
+<p>Distillation is one route by which AI becomes practical. The massive models are
+research tools and capability frontiers. The distilled models are what
+actually runs in products.</p>
+<p>Every time a new capability emerges in large models, the question
+becomes: can we distill this? If yes, it may be deployable locally; if no, the capability may still require a larger model or a different system design.</p>
+<p>This is why both tracks of development matter. We need the frontier
+models to push capabilities. And we need the distillation techniques to
+make those capabilities deployable.</p>
+<p>The teacher learns new tricks. The student brings them to the real
+world.</p>
+<hr />
+<p><em>This post grew from a long-form research conversation about distilled micro models, transformers, and long-term memory AI.</em></p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Return to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Answer or Deep Research? | Antreas Antoniou</title>
+  <meta name="description" content="A July 2025 design proposal for routing search by uncertainty, evidence scope, budget, escalation, and observable progress.">
+  <link rel="canonical" href="https://antreas.io/blog/fast-answer-or-deep-research/">
+  <meta property="og:title" content="Fast Answer or Deep Research? | Antreas Antoniou">
+  <meta property="og:description" content="A July 2025 design proposal for routing search by uncertainty, evidence scope, budget, escalation, and observable progress.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/fast-answer-or-deep-research/">
+  <meta property="article:section" content="Search systems">
+  <meta name="reading-time" content="9 min">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell">
+    <header class="research-note-header">
+      <p class="research-note-kicker">Research Archivum · July 2025 search proposal</p>
+      <h1>Fast Answer or Deep Research?</h1>
+      <p class="research-note-deck">Speed is not a personality setting. It is a claim about how much evidence the answer needed.</p>
+      <p class="research-note-maturity">Maturity: Design proposal</p>
+      <p class="research-note-provenance">Developed from a July 2025 Archivum product-idea note proposing fast and deep search modes for a personal-context assistant. Its latency, quality, abandonment, and adoption figures are design targets; no implementation or measured result is reported.</p>
+    </header>
+
+    <dl class="field-note-rail" aria-label="Field note summary">
+      <div><dt>Decision</dt><dd>Choose evidence scope and search effort from the query’s risk, recency, and uncertainty.</dd></div>
+      <div><dt>Mechanism</dt><dd>Begin with a bounded fast path, expose progress, and escalate when evidence is insufficient.</dd></div>
+      <div><dt>Failure</dt><dd>A fast confident miss and a deep theatrical wait are both routing errors.</dd></div>
+    </dl>
+
+    <article class="essay-body research-note-article">
+      <p>“What was I just working on?” and “What have I learned about temporal models across every project I touched in the last three years?” look similar inside a chat box. They are not the same retrieval problem. One probably needs a narrow slice of recent context. The other may require a long search, cross-project reconciliation, and evidence strong enough to survive forgotten contradictions.</p>
+
+      <p>In July 2025, I wrote a design note proposing two explicit modes for this distinction: Fast Answer and Deep Research. The immediate motivation was an interface that could feel slow and silent, with no progress, estimate, or useful partial result. The note proposed a fast default for common recent queries and an interruptible deep mode for broad historical search. Nothing in that note demonstrates sub-two-second retrieval, a reduction in abandonment, or improved answer quality; those were goals for a system still to be researched and prototyped. The durable idea is not a pair of buttons. It is that search should route uncertainty and budget deliberately, then show the user what commitment it made.</p>
+
+      <h2>The query should carry a search contract</h2>
+
+      <p>A router needs more than “simple” versus “complex.” It should estimate the evidence contract of the query.</p>
+
+      <p>How recent is the likely answer? How broad is the requested scope? Does the user ask for one remembered artifact or a synthesis? What is the cost of omission? Can a plausible answer be checked quickly? Has the user named a time range, application, file type, or source?</p>
+
+      <p>“Where is the code snippet I copied this morning?” has a narrow temporal prior and a concrete success condition. Search recent context and caches first. “When did I change my mind about this architecture?” asks for chronology and competing evidence. A recent match may be actively misleading because the answer depends on older states and the transition between them.</p>
+
+      <p>The router can represent this as a provisional budget: sources, time window, retrieval depth, latency ceiling, and evidence threshold. It also records why it chose them. This is not certainty about where the answer lives. It is a hypothesis that can be revised when the first retrieval round disagrees.</p>
+
+      <h2>Fast should be bounded, not shallow by accident</h2>
+
+      <p>The proposed Fast Answer path would privilege recent context, cached results, and precomputed representations. The original target was for common queries to return in under two seconds, with ninety percent meeting that bound. Those numbers were aspirations, not benchmark results, and they should be adjusted by actual workload and hardware rather than repeated as universal product requirements.</p>
+
+      <p>A fast answer must disclose its scope. “Searched recent context from the last two days and found…” is honest. “Here is the answer” quietly converts a budget choice into a knowledge claim. If no strong candidate appears, the path should return a useful negative—what it searched and what it did not find—then offer or trigger escalation. Fast mode also needs a refusal condition: low similarity between top results, conflicting recent records, a query asking for “all,” “ever,” or “across projects,” and high-consequence language should raise the evidence threshold. The fastest correct action may be to say that the narrow search is inadequate.</p>
+
+      <h2>Deep search is progressive, not merely slower</h2>
+
+      <p>Deep Research should change the search strategy, not just increase a timeout. The proposal imagined progressive deepening through history, parallel source searches, result merging, and stage-level feedback. A query might begin with the last week, move to the last month, branch into relevant projects, and reconcile duplicates or contradictions as it goes.</p>
+
+      <p>Each stage should produce an inspectable partial state: sources searched, candidate evidence, unresolved conflicts, and the next planned expansion.</p>
+
+      <p>The user can stop and use current results, skip to a known period, or narrow the scope. Interruptibility turns latency from captivity into a choice.</p>
+
+      <p>Progressive results need restraint. Showing the first plausible passage as though it were the emerging answer can anchor the user before the broader search finds a correction. The interface should distinguish “candidate evidence” from “supported synthesis.” Progress is evidence of work performed, not evidence that the answer is becoming true.</p>
+
+      <h2>Escalation is the centre of the design</h2>
+
+      <p>Two manual modes are useful because they expose the trade-off. A mature system would also know when to move between them. Start bounded when the query permits it. Escalate if retrieval confidence is low, evidence conflicts, the answer requires a wider chronology, or the user challenges the result. Conversely, a deep search should contract when an exact artifact with strong provenance settles the request.</p>
+
+      <p>This is different from generic model routing. A model router often chooses among systems based on predicted task difficulty, cost, or capability. Here the central decision is epistemic: which parts of the user’s record must be examined, how far the search should expand, and what evidence warrants stopping. The same model could serve both paths; different models could serve one path. Model choice is subordinate to search coverage.</p>
+
+      <p>Escalation should preserve state. The deep path should receive the fast query, the sources already examined, candidate results, and the reason the threshold was missed. Starting over wastes latency and makes the route hard to audit. A visible handoff—“recent context was inconclusive; expanding to the full project history”—also teaches the user what the system believes remains uncertain.</p>
+
+      <p>Every search spends at least four currencies: time, compute, user attention, and privacy exposure. Broad retrieval may inspect more sensitive material. Progressive previews can demand attention that the user wanted to spend elsewhere. Caching reduces latency but creates retention and invalidation obligations. A route that is cheap in compute may be expensive in trust.</p>
+
+      <p>The interface should let users set or infer a practical budget: answer quickly, search until a confidence condition is met, search a named period, or spend no more than a given amount of time. Estimates must be calibrated. A false countdown that repeatedly expands is worse than an honest elapsed timer and a list of remaining stages.</p>
+
+      <h2>Evaluate the route, not just the answer</h2>
+
+      <p>The July note proposed animated source views, result counts, and time remaining. These are useful only when they correspond to real work. “Searching 50,000 memories” is informative if it describes a genuine corpus and current operation. If it is theatre placed over an opaque wait, observability has been replaced with animation.</p>
+
+      <p>Answer quality alone cannot diagnose routing. A deep search may eventually be correct while wasting a minute on a fact available in recent context. A fast response may look correct on an easy benchmark while systematically missing older counterevidence. Evaluation needs queries with known scope and evidence histories.</p>
+
+      <p>Measure latency to first useful evidence, latency to supported answer, source recall, unsupported claims, contradictions surfaced, abandonment, user interruption, and compute cost. Compare manual mode choice with automatic routing. Inspect high-cost errors separately: fast answers that should have escalated, and deep searches that continued after decisive evidence was found. The original note’s goal of reducing search abandonment by half was a target to test, not an observed improvement.</p>
+
+      <p>Disconfirmation should be allowed. If users cannot predict what the modes mean, explicit buttons may create choice anxiety. If automatic escalation is accurate and legible, the two-mode interface may be unnecessary. If progress displays distract more than they reassure, a concise stage label and stop control may be enough. If broad search does not improve supported answers on genuinely historical questions, the retrieval architecture—not the interface—needs repair.</p>
+
+      <h2>A waiting screen is an epistemic surface</h2>
+
+      <p>Silence during search hides every important decision: what was searched, what was skipped, whether the system is stuck, and whether stopping now would preserve anything useful. Filling the silence with a spinner hides those decisions more attractively. A good fast path says where it looked. A good deep path shows how the evidence frontier is expanding. A good router spends more only when the unanswered uncertainty warrants it. None can promise that latency buys truth, but each can make the exchange inspectable.</p>
+
+      <p>The choice is not finally between fast and deep. It is between an answer whose evidence budget is visible and one whose confidence floats free of the search that produced it.</p>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Back to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>
