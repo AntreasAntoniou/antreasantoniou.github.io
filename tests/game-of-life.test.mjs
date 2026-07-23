@@ -36,6 +36,10 @@ test('reveals EMERGE five seconds after the visit begins without activity resets
   assert.doesNotMatch(script, /registerActivity/);
 });
 
+test('versions the Game of Life script so returning visitors cannot keep stale reveal logic', () => {
+  assert.match(home, /<script src="game-of-life\.js\?v=20260724-5s"><\/script>/);
+});
+
 test('uses one non-blocking canvas across the whole viewport', () => {
   assert.match(css, /#gol-canvas\s*\{[\s\S]*?position:\s*fixed/);
   assert.match(css, /#gol-canvas\s*\{[\s\S]*?pointer-events:\s*none/);
