@@ -13,7 +13,7 @@
     dwellRadius: 3,
     fadeSteps: 10,
     spawnPatterns: true,
-    discoveryDelay: 12000,
+    discoveryDelay: 5000,
   };
 
   const PATTERNS = {
@@ -94,7 +94,6 @@
       this.loopTimer = null;
       this.dwellTimer = null;
       this.lastDwellPos = null;
-      this.lastActivityPointer = null;
       this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
       this.resize();
@@ -221,22 +220,6 @@
       this.control.setAttribute('aria-hidden', 'true');
       this.control.tabIndex = -1;
       this.setStartInvitation();
-    }
-
-    registerActivity(event) {
-      if (this.controlRevealed || this.reducedMotion.matches) return;
-
-      if (event?.type === 'pointermove') {
-        const previous = this.lastActivityPointer;
-        this.lastActivityPointer = { x: event.clientX, y: event.clientY };
-        if (previous) {
-          const dx = event.clientX - previous.x;
-          const dy = event.clientY - previous.y;
-          if ((dx * dx) + (dy * dy) < 64) return;
-        }
-      }
-
-      this.scheduleDiscovery();
     }
 
     spawnPattern(centerX, centerY, patternName, rotationOverride) {
@@ -374,14 +357,12 @@
         this.control.addEventListener('click', () => this.toggle());
       }
       document.addEventListener('click', (event) => {
-        this.registerActivity(event);
         const target = event.target instanceof Element ? event.target : null;
         if (target?.closest(interactiveSelector)) return;
         this.spawnAtClientPoint(event.clientX, event.clientY);
       });
 
       document.addEventListener('pointermove', (event) => {
-        this.registerActivity(event);
         if (!this.activated || this.reducedMotion.matches) return;
         if (!this.running) return;
         const x = Math.floor(event.clientX / CONFIG.cellSize);
@@ -402,9 +383,6 @@
         clearTimeout(this.dwellTimer);
         this.lastDwellPos = null;
       });
-
-      document.addEventListener('keydown', (event) => this.registerActivity(event));
-      window.addEventListener('scroll', (event) => this.registerActivity(event), { passive: true });
 
       let resizeTimer;
       window.addEventListener('resize', () => {

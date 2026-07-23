@@ -30,6 +30,12 @@ test('keeps the rising nature introduction fixed wherever the reader is', () => 
   assert.doesNotMatch(script, /PRESENTATIONS|presentationSelect|applyPresentation/);
 });
 
+test('reveals EMERGE five seconds after the visit begins without activity resets', () => {
+  assert.match(script, /discoveryDelay:\s*5000/);
+  assert.match(script, /setTimeout\(\(\) => this\.revealControl\(\), CONFIG\.discoveryDelay\)/);
+  assert.doesNotMatch(script, /registerActivity/);
+});
+
 test('uses one non-blocking canvas across the whole viewport', () => {
   assert.match(css, /#gol-canvas\s*\{[\s\S]*?position:\s*fixed/);
   assert.match(css, /#gol-canvas\s*\{[\s\S]*?pointer-events:\s*none/);
