@@ -11,6 +11,7 @@ const pages = [
 const styles = readFileSync(new URL('styles.css', root), 'utf8');
 
 const expectedDesktopLinks = [
+  ['/daedalus/', 'DAEDALUS'],
   ['/#building', 'Work'],
   ['/#research', 'Research'],
   ['/#teaching', 'Teaching'],

@@ -265,6 +265,16 @@ a:hover {
   white-space: nowrap;
 }
 
+.nav-daedalus {
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 0.045em;
+}
+
+.nav-daedalus:hover {
+  color: var(--accent-hover);
+}
+
 [data-theme="dark"] .nav {
   background: rgba(3, 7, 18, 0.9);
 }
@@ -313,6 +323,91 @@ html {
 
 .profile-evolve-control:hover #hero-profile {
   transform: scale(1.04);
+}
+
+.hero-daedalus {
+  display: grid;
+  width: min(100%, 46rem);
+  margin-inline: auto;
+  padding: 0.9rem 1rem 0.95rem;
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+  background:
+    linear-gradient(90deg, var(--accent-light), transparent 62%),
+    var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0.85rem;
+  box-shadow: 0 10px 30px -24px rgba(15, 23, 42, 0.45);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-daedalus:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px -25px rgba(30, 58, 95, 0.6);
+}
+
+.hero-daedalus:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.hero-daedalus__meta {
+  margin-bottom: 0.32rem;
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.hero-daedalus__row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.85rem;
+}
+
+.hero-daedalus__row strong {
+  font-size: 1.05rem;
+  letter-spacing: 0.055em;
+}
+
+.hero-daedalus__mechanisms {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.hero-daedalus__action {
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .hero-daedalus {
+  box-shadow: 0 14px 34px -24px rgba(0, 0, 0, 0.85);
+}
+
+@media (max-width: 640px) {
+  .hero-daedalus {
+    padding: 0.9rem 1rem;
+  }
+
+  .hero-daedalus__row {
+    grid-template-columns: 1fr auto;
+    gap: 0.35rem 0.75rem;
+  }
+
+  .hero-daedalus__mechanisms {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
 }
 
 .profile-evolve-control:focus-visible {
