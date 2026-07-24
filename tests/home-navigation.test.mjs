@@ -33,6 +33,8 @@ test('makes DAEDALUS prominent inside current work without crowding the hero', (
   assert.match(home, /class="programme-feature"/);
   assert.match(home, /DAEDALUS is where that thesis becomes a learning system/);
   assert.match(home, /Seven capabilities\. One programme\./);
+  assert.match(home, /href="\/daedalus\/" class="btn-primary btn-sm programme-feature__cta"/);
+  assert.match(home, /Explore DAEDALUS/);
   assert.ok(
     home.indexOf('id="building"') < home.indexOf('href="/daedalus/"'),
     'DAEDALUS should live inside the current-work section',

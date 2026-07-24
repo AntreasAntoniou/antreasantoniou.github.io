@@ -344,36 +344,22 @@ html {
   letter-spacing: 0.025em;
 }
 
-.programme-feature h4 a {
-  color: var(--text);
-  text-decoration: none;
-  text-underline-offset: 0.2em;
+.programme-feature__body {
+  color: var(--text-secondary);
+  line-height: 1.7;
 }
 
-.programme-feature h4 a span {
+.programme-feature__cta {
+  margin-top: 1rem;
+}
+
+.programme-feature__cta span {
   display: inline-block;
-  color: var(--accent);
   transition: transform 0.2s ease;
 }
 
-.programme-feature h4 a:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}
-
-.programme-feature h4 a:hover span {
+.programme-feature__cta:hover span {
   transform: translateX(0.2rem);
-}
-
-.programme-feature h4 a:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-  border-radius: 0.15rem;
-}
-
-.programme-feature p:last-child {
-  color: var(--text-secondary);
-  line-height: 1.7;
 }
 
 .profile-hint {
