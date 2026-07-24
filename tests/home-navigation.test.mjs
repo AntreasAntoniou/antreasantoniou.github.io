@@ -7,7 +7,6 @@ const nav = home.match(/<!-- Navigation -->\s*<nav class="nav">([\s\S]*?)<\/nav>
 
 test('keeps the homepage navigation focused on work, research, teaching, and writing', () => {
   for (const [href, label] of [
-    ['/daedalus/', 'DAEDALUS'],
     ['/#building', 'Work'],
     ['/#research', 'Research'],
     ['/#teaching', 'Teaching'],
@@ -25,14 +24,18 @@ test('keeps the homepage navigation focused on work, research, teaching, and wri
   assert.doesNotMatch(nav, /href="#about"[^>]*>About<\/a>/);
   assert.doesNotMatch(nav, /href="#publications"[^>]*>Papers<\/a>/);
   assert.doesNotMatch(nav, /href="#experience"[^>]*>Experience<\/a>/);
+  assert.doesNotMatch(nav, /href="\/daedalus\/"/);
 });
 
-test('puts the DAEDALUS research programme in the homepage hero', () => {
-  assert.match(home, /<a href="\/daedalus\/" class="hero-daedalus-link"/);
-  assert.match(home, /DAEDALUS · my research programme for intelligence beyond scale/);
+test('makes DAEDALUS prominent inside current work without crowding the hero', () => {
+  assert.doesNotMatch(home, /hero-daedalus/);
+  assert.match(home, /<section id="building"/);
+  assert.match(home, /class="programme-feature"/);
+  assert.match(home, /DAEDALUS is where that thesis becomes a learning system/);
+  assert.match(home, /Seven capabilities\. One programme\./);
   assert.ok(
-    home.indexOf('class="hero-daedalus-link"') < home.indexOf('id="building"'),
-    'DAEDALUS should be visible before the current-work section',
+    home.indexOf('id="building"') < home.indexOf('href="/daedalus/"'),
+    'DAEDALUS should live inside the current-work section',
   );
 });
 
