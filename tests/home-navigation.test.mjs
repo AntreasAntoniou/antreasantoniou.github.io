@@ -28,11 +28,10 @@ test('keeps the homepage navigation focused on work, research, teaching, and wri
 });
 
 test('puts the DAEDALUS research programme in the homepage hero', () => {
-  assert.match(home, /<a href="\/daedalus\/" class="hero-daedalus"/);
-  assert.match(home, /Flagship research programme/);
-  assert.match(home, /Persistent memory · world models · temporal learning · adaptive compute/);
+  assert.match(home, /<a href="\/daedalus\/" class="hero-daedalus-link"/);
+  assert.match(home, /DAEDALUS · my research programme for intelligence beyond scale/);
   assert.ok(
-    home.indexOf('class="hero-daedalus"') < home.indexOf('id="building"'),
+    home.indexOf('class="hero-daedalus-link"') < home.indexOf('id="building"'),
     'DAEDALUS should be visible before the current-work section',
   );
 });
