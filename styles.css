@@ -269,6 +269,49 @@ a:hover {
   background: rgba(3, 7, 18, 0.9);
 }
 
+/* Early, visible route for browser-based agents that do not inspect page metadata. */
+.agent-entrypoint {
+  position: absolute;
+  top: 4.75rem;
+  right: max(1rem, calc((100vw - 64rem) / 2));
+  z-index: 20;
+}
+
+.agent-entrypoint a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 24px -20px rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.agent-entrypoint a:hover {
+  border-color: var(--border-hover);
+  color: var(--accent);
+}
+
+.agent-entrypoint__dot {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .agent-entrypoint {
+    top: 4.4rem;
+    right: 0.75rem;
+  }
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;

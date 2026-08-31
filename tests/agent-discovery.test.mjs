@@ -20,6 +20,30 @@ test('advertises the machine-readable guide from homepage metadata', () => {
   assert.match(guide, /^# AGENTS\.md\b/m);
 });
 
+test('puts a visible agent entrypoint before the first homepage section', () => {
+  const body = homepage.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? '';
+  const firstSectionIndex = body.search(/<section\b/i);
+  const earlyBody = firstSectionIndex === -1 ? body : body.slice(0, firstSectionIndex);
+  const entrypoint = earlyBody.match(
+    /<aside\b(?=[^>]*\baria-label=["'][^"']*agent[^"']*["'])[^>]*>([\s\S]*?)<\/aside>/i,
+  );
+
+  assert.ok(entrypoint, 'an agent-labelled entrypoint should appear before the hero section');
+
+  const agentLink = entrypoint[1].match(
+    /<a\b(?=[^>]*\bhref=["']\/AGENTS\.md["'])(?=[^>]*\btype=["']text\/markdown["'])[^>]*>([\s\S]*?)<\/a>/i,
+  );
+  assert.ok(agentLink, 'the early entrypoint should link to the canonical Markdown guide');
+  assert.match(
+    agentLink[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+    /^AI agents: start here\b/i,
+  );
+  assert.doesNotMatch(
+    entrypoint[0],
+    /\bclass=["'][^"']*\b(?:hidden|sr-only)\b[^"']*["']|\bstyle=["'][^"']*display\s*:\s*none/i,
+  );
+});
+
 test('offers the agent guide as a quiet footer destination, not primary navigation', () => {
   const footer = homepage.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/i)?.[1] ?? '';
   const footerLinks = [...footer.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)];
