@@ -20,6 +20,7 @@ test('publishes the complete GitHub-verified standalone skill inventory', () => 
     'local-uis',
     'gcp-keyless',
     'bitwarden-lease',
+    'mailbutler-agent-skill',
   ];
 
   assert.deepEqual(catalogue.skills.map((skill) => skill.slug), expected);
@@ -37,6 +38,8 @@ test('states important host and safety boundaries without overstating the tools'
   assert.match(page, /reduces repeated prompts without writing <code>BW_SESSION<\/code>/);
   assert.match(page, /Remote pushes remain opt-in/);
   assert.match(page, /instead of recurring browser OAuth and long-lived service-account key files/);
+  assert.match(page, /keeps drafting and sending behind separate per-message approvals/);
+  assert.match(page, /prompt-injection boundary/);
   assert.match(page, /Each repository is public, MIT-licensed, and ships a root <code>SKILL\.md<\/code>/);
 });
 

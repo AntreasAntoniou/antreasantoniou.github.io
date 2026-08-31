@@ -324,6 +324,10 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.skill-group__cards--one {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .skill-card {
   position: relative;
   min-width: 0;

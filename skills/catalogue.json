@@ -85,6 +85,13 @@
       "group": "Security",
       "description": "An owner-only, in-memory Bitwarden CLI lease for local macOS agents.",
       "url": "https://github.com/AntreasAntoniou/bitwarden-lease"
+    },
+    {
+      "slug": "mailbutler-agent-skill",
+      "name": "Mailbutler",
+      "group": "Attention",
+      "description": "Narrative-aware, read-only inbox triage with prompt-injection defenses and separate approvals for drafting and sending.",
+      "url": "https://github.com/AntreasAntoniou/mailbutler-agent-skill"
     }
   ]
 }
