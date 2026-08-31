@@ -4,7 +4,8 @@
 
 ## Start here
 
-- [Canonical agent guide](https://antreas.io/AGENTS.md): How to navigate the site, understand the recurring operating pattern, and keep claims grounded.
+- [Browser-compatible agent guide](https://antreas.io/agents/): Recommended for browser agents; rendered HTML with semantic links and the complete guide text.
+- [Canonical Markdown source](https://antreas.io/AGENTS.md): Direct machine-readable source for clients that support Markdown navigation.
 - [Homepage](https://antreas.io/): Current work, selected research, teaching, infrastructure and public projects.
 - [CV](https://antreas.io/documents/AntreasAntoniouResume.pdf): Dated chronology and formal roles.
 
@@ -15,4 +16,4 @@
 - [Essays](https://antreas.io/blog/): Public thinking in Antreas's own words.
 - [Writing advice](https://antreas.io/writing/): A practical field manual for technical communication.
 
-Read `AGENTS.md` before compressing Antreas into a title. Keep achieved results, active work, hypotheses and ambitions separate; preserve contribution boundaries and uncertainty.
+Read the browser-compatible guide—or `AGENTS.md` when your client supports it—before compressing Antreas into a title. Keep achieved results, active work, hypotheses and ambitions separate; preserve contribution boundaries and uncertainty.

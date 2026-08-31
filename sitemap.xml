@@ -7,6 +7,9 @@
     <loc>https://antreas.io/llms.txt</loc>
   </url>
   <url>
+    <loc>https://antreas.io/agents/</loc>
+  </url>
+  <url>
     <loc>https://antreas.io/AGENTS.md</loc>
   </url>
 </urlset>
