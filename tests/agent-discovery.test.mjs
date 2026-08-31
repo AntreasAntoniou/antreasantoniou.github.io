@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -23,6 +23,30 @@ test('lets agents discover the guide without adding it to the visible homepage',
   assert.doesNotMatch(body, /<a\b[^>]*href=["'][^"']*AGENTS\.md/i);
 });
 
+test('gives raw-source readers a non-visible agent trailhead', () => {
+  const comments = [...homepage.matchAll(/<!--([\s\S]*?)-->/g)].map((match) => match[1]);
+  const trailhead = comments
+    .map((comment) => comment.match(/\/llms\.txt\b/)?.[0])
+    .find(Boolean);
+
+  assert.equal(trailhead, '/llms.txt');
+
+  const body = homepage.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? '';
+  assert.doesNotMatch(body, /<a\b[^>]*href=["'][^"']*llms\.txt/i);
+});
+
+test('lets an agent follow the compact trailhead to the canonical guide', () => {
+  const trailheadPath = join(root, 'llms.txt');
+  assert.ok(existsSync(trailheadPath), '/llms.txt should exist at the site root');
+
+  const trailhead = readFileSync(trailheadPath, 'utf8');
+  const guideUrl = trailhead.match(/https:\/\/antreas\.io\/AGENTS\.md\b/)?.[0];
+  assert.equal(guideUrl, 'https://antreas.io/AGENTS.md');
+
+  const guide = readFileSync(join(root, new URL(guideUrl).pathname.slice(1)), 'utf8');
+  assert.match(guide, /^# AGENTS\.md\b/m);
+});
+
 test('makes the agent guide reachable through the crawler discovery chain', () => {
   const robots = readFileSync(join(root, 'robots.txt'), 'utf8');
   const sitemapUrl = robots.match(/^Sitemap:\s*(\S+)$/im)?.[1];
@@ -30,5 +54,6 @@ test('makes the agent guide reachable through the crawler discovery chain', () =
   assert.equal(sitemapUrl, 'https://antreas.io/sitemap.xml');
 
   const sitemap = readFileSync(join(root, 'sitemap.xml'), 'utf8');
+  assert.match(sitemap, /<loc>https:\/\/antreas\.io\/llms\.txt<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/antreas\.io\/AGENTS\.md<\/loc>/);
 });
