@@ -420,12 +420,12 @@ html {
 
 .home-skills__rail {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-left: 1px solid var(--border);
 }
 
 .home-skills__rail a {
-  min-height: 10.5rem;
+  min-height: 9.5rem;
   display: grid;
   align-content: space-between;
   gap: 1rem;
@@ -502,6 +502,12 @@ html {
   .home-skills__footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+  .home-skills__rail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

@@ -10,6 +10,20 @@
       "url": "https://github.com/AntreasAntoniou/agent-orchestra"
     },
     {
+      "slug": "agent-collaboration-control",
+      "name": "Agent Collaboration Control",
+      "group": "Orchestration",
+      "description": "Authority, evidence, liveness, and transition control for consequential multi-agent work.",
+      "url": "https://github.com/AntreasAntoniou/agent-collaboration-control"
+    },
+    {
+      "slug": "grade-a-pipeline",
+      "name": "Grade-A Pipeline",
+      "group": "Orchestration",
+      "description": "A test-sandwiched software pipeline with isolated worktrees and opt-in remote mutation.",
+      "url": "https://github.com/AntreasAntoniou/grade-a-pipeline"
+    },
+    {
       "slug": "plus-ultra",
       "name": "Plus Ultra",
       "group": "Verification",
@@ -31,11 +45,39 @@
       "url": "https://github.com/AntreasAntoniou/cross-agent-sync"
     },
     {
+      "slug": "argus-skill",
+      "name": "Argus",
+      "group": "Continuity",
+      "description": "Durable context routing and backlink validation for Git-backed knowledge systems.",
+      "url": "https://github.com/AntreasAntoniou/argus-skill"
+    },
+    {
       "slug": "doppel",
       "name": "Doppel",
       "group": "Authorship",
       "description": "A consent-first digital twin of your own writing voice, with local provenance and human publication authority.",
       "url": "https://github.com/AntreasAntoniou/doppel"
+    },
+    {
+      "slug": "beautiful-pdf",
+      "name": "Beautiful PDF",
+      "group": "Output",
+      "description": "Print-ready PDF design with reusable CSS and a rendered-page visual review loop.",
+      "url": "https://github.com/AntreasAntoniou/beautiful-pdf"
+    },
+    {
+      "slug": "local-uis",
+      "name": "Local UIs",
+      "group": "Operations",
+      "description": "Discover locally running HTTP interfaces and open them from one private launcher.",
+      "url": "https://github.com/AntreasAntoniou/local-uis"
+    },
+    {
+      "slug": "gcp-keyless",
+      "name": "GCP Keyless",
+      "group": "Security",
+      "description": "Short-lived Google Cloud access through managed identity and GitHub OIDC federation.",
+      "url": "https://github.com/AntreasAntoniou/gcp-keyless"
     },
     {
       "slug": "bitwarden-lease",

@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agent Skills | Antreas Antoniou</title>
-  <meta name="description" content="Open-source agent skills for orchestration, verification, continuity, authorship, visual QA, and local credential safety.">
+  <title>Open Agent Toolkit | Antreas Antoniou</title>
+  <meta name="description" content="Open-source tools for agent orchestration, verification, continuity, document design, local interfaces, cloud identity, and credential safety.">
   <link rel="canonical" href="https://antreas.io/skills/">
 
-  <meta property="og:title" content="Agent Skills | Antreas Antoniou">
+  <meta property="og:title" content="Open Agent Toolkit | Antreas Antoniou">
   <meta property="og:description" content="Small, inspectable tools for making agent work more trustworthy, continuous, and useful.">
   <meta property="og:image" content="https://antreas.io/images/profile.jpg">
   <meta property="og:url" content="https://antreas.io/skills/">
   <meta property="og:type" content="website">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Agent Skills | Antreas Antoniou">
+  <meta name="twitter:title" content="Open Agent Toolkit | Antreas Antoniou">
   <meta name="twitter:description" content="Open-source skills for orchestration, verification, continuity, authorship, visual QA, and credential safety.">
   <meta name="twitter:image" content="https://antreas.io/images/profile.jpg">
   <meta name="twitter:site" content="@AntreasAntonio">
@@ -22,9 +22,9 @@
 
   <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
   <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
-  <link rel="stylesheet" href="/styles.css?v=20260831-skills">
+  <link rel="stylesheet" href="/styles.css?v=20260831-agent-toolkit">
   <link rel="stylesheet" href="/tailwind-built.css">
-  <link rel="stylesheet" href="/skills/skills.css?v=20260831-1">
+  <link rel="stylesheet" href="/skills/skills.css?v=20260831-2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Open-source Agent Skills by Antreas Antoniou",
+    "name": "Open Agent Toolkit by Antreas Antoniou",
     "url": "https://antreas.io/skills/",
     "description": "A catalogue of open-source skills for agent orchestration, verification, continuity, authorship, visual QA, and local credential safety.",
     "author": {"@type": "Person", "name": "Antreas Antoniou", "url": "https://antreas.io/"}
@@ -59,7 +59,7 @@
         <a href="/#building" class="text-secondary hover:text-accent transition">Work</a>
         <a href="/#research" class="text-secondary hover:text-accent transition">Research</a>
         <a href="/#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
-        <a href="/skills/" class="text-accent font-semibold transition" aria-current="page">Skills</a>
+        <a href="/skills/" class="text-accent font-semibold transition" aria-current="page">Agent Toolkit</a>
         <a href="/writing/" class="text-secondary hover:text-accent transition">Writing advice</a>
         <a href="/blog" class="text-secondary hover:text-accent transition">Blog</a>
         <a href="/#contact" class="text-secondary hover:text-accent transition">Contact</a>
@@ -78,7 +78,7 @@
         <a href="/#building" class="block text-secondary hover:text-accent">Work</a>
         <a href="/#research" class="block text-secondary hover:text-accent">Research</a>
         <a href="/#teaching" class="block text-secondary hover:text-accent">Teaching</a>
-        <a href="/skills/" class="block text-accent font-semibold" aria-current="page">Skills</a>
+        <a href="/skills/" class="block text-accent font-semibold" aria-current="page">Agent Toolkit</a>
         <a href="/writing/" class="block text-secondary hover:text-accent">Writing advice</a>
         <a href="/blog" class="block text-secondary hover:text-accent">Blog</a>
         <a href="/#contact" class="block text-secondary hover:text-accent">Contact</a>
@@ -98,17 +98,18 @@
             <a class="btn-primary" href="https://github.com/AntreasAntoniou?tab=repositories&q=&type=public&language=&sort=" target="_blank" rel="noopener noreferrer">
               <i class="fab fa-github" aria-hidden="true"></i> Browse on GitHub
             </a>
-            <a class="skills-text-link" href="#catalogue">Explore all six <span aria-hidden="true">↓</span></a>
+            <a class="skills-text-link" href="#catalogue">Explore all twelve <span aria-hidden="true">↓</span></a>
           </div>
         </div>
 
         <aside class="skills-map" aria-label="Capability map for the public skill collection">
-          <div class="skills-map__header"><span>PUBLIC TOOLBOX</span><span>06 MODULES</span></div>
+          <div class="skills-map__header"><span>PUBLIC TOOLKIT</span><span>12 MODULES</span></div>
           <ol class="skills-map__path">
             <li><span>01</span><strong>Coordinate</strong><small>shape the agent graph</small></li>
             <li><span>02</span><strong>Verify</strong><small>challenge plans and pixels</small></li>
             <li><span>03</span><strong>Continue</strong><small>carry evidence across hosts</small></li>
             <li><span>04</span><strong>Protect</strong><small>preserve voice and secrets</small></li>
+            <li><span>05</span><strong>Operate</strong><small>inspect local and cloud surfaces</small></li>
           </ol>
           <p class="skills-map__note">Each repository is public, MIT-licensed, and ships a root <code>SKILL.md</code>.</p>
         </aside>
@@ -130,14 +131,15 @@
         <header class="skills-section-heading">
           <div>
             <p class="skills-kicker">The public collection</p>
-            <h2 id="catalogue-heading">Six skills. Four failure surfaces.</h2>
+            <h2 id="catalogue-heading">Twelve tools. Five operating surfaces.</h2>
           </div>
           <p>Install any repository directly with the Agent Skills CLI, or inspect the skill contract before adding it to your host.</p>
         </header>
 
         <div class="skill-group" data-skill-group="orchestration">
           <div class="skill-group__label"><span>01</span><h3>Orchestration</h3><p>Who sees what, who challenges whom, and who is allowed to integrate.</p></div>
-          <article class="skill-card skill-card--wide" data-skill="agent-orchestra">
+          <div class="skill-group__cards skill-group__cards--three">
+          <article class="skill-card" data-skill="agent-orchestra">
             <div class="skill-card__topline"><span class="skill-card__index">AO</span><span class="skill-card__status">public · MIT</span></div>
             <h4>Agent Orchestra</h4>
             <p>Design composable multi-agent topologies with isolation, adversarial review, and receipt-driven integration. The graph follows the uncertainty and stakes—not a fashionable agent count.</p>
@@ -145,6 +147,23 @@
             <div class="skill-card__install"><code>npx skills add AntreasAntoniou/agent-orchestra</code><button type="button" data-copy="npx skills add AntreasAntoniou/agent-orchestra" aria-label="Copy Agent Orchestra install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
             <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/agent-orchestra" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
           </article>
+          <article class="skill-card" data-skill="agent-collaboration-control">
+            <div class="skill-card__topline"><span class="skill-card__index">AC</span><span class="skill-card__status">public · MIT</span></div>
+            <h4>Agent Collaboration Control</h4>
+            <p>Bind human authority, one writer per mutable surface, append-only transitions, independent review, liveness evidence, and bounded succession for consequential multi-agent work.</p>
+            <ul class="skill-card__tags" aria-label="Agent Collaboration Control capabilities"><li>authority</li><li>transition journals</li><li>liveness</li></ul>
+            <div class="skill-card__install"><code>npx skills add AntreasAntoniou/agent-collaboration-control</code><button type="button" data-copy="npx skills add AntreasAntoniou/agent-collaboration-control" aria-label="Copy Agent Collaboration Control install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+            <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/agent-collaboration-control" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="skill-card" data-skill="grade-a-pipeline">
+            <div class="skill-card__topline"><span class="skill-card__index">GA</span><span class="skill-card__status">public · MIT</span></div>
+            <h4>Grade-A Pipeline</h4>
+            <p>Map a codebase, plan a dependency graph, isolate implementers in worktrees, and test every integration wave. Remote pushes remain opt-in.</p>
+            <ul class="skill-card__tags" aria-label="Grade-A Pipeline capabilities"><li>codebase map</li><li>worktrees</li><li>regression gates</li></ul>
+            <div class="skill-card__install"><code>npx skills add AntreasAntoniou/grade-a-pipeline</code><button type="button" data-copy="npx skills add AntreasAntoniou/grade-a-pipeline" aria-label="Copy Grade-A Pipeline install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+            <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/grade-a-pipeline" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+          </article>
+          </div>
         </div>
 
         <div class="skill-group" data-skill-group="verification">
@@ -171,7 +190,8 @@
 
         <div class="skill-group" data-skill-group="continuity">
           <div class="skill-group__label"><span>03</span><h3>Continuity</h3><p>Move verified context between harnesses without turning private transcripts into project authority.</p></div>
-          <article class="skill-card skill-card--wide" data-skill="cross-agent-sync">
+          <div class="skill-group__cards">
+          <article class="skill-card" data-skill="cross-agent-sync">
             <div class="skill-card__topline"><span class="skill-card__index">CS</span><span class="skill-card__status">public · MIT</span></div>
             <h4>Cross-Agent Sync</h4>
             <p>Local-first, deterministic handoff between Claude Code, Codex, and shared workspaces. Raw logs remain ignored evidence; only a small curated delta becomes durable project state.</p>
@@ -179,10 +199,19 @@
             <div class="skill-card__install"><code>npx skills add AntreasAntoniou/cross-agent-sync</code><button type="button" data-copy="npx skills add AntreasAntoniou/cross-agent-sync" aria-label="Copy Cross-Agent Sync install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
             <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/cross-agent-sync" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
           </article>
+          <article class="skill-card" data-skill="argus-skill">
+            <div class="skill-card__topline"><span class="skill-card__index">AR</span><span class="skill-card__status">public · MIT</span></div>
+            <h4>Argus</h4>
+            <p>Preserve only the durable delta from agent work, route each fact to one canonical Git-backed record, and validate logical backlinks without publishing private context.</p>
+            <ul class="skill-card__tags" aria-label="Argus capabilities"><li>durable deltas</li><li>routing</li><li>backlinks</li></ul>
+            <div class="skill-card__install"><code>npx skills add AntreasAntoniou/argus-skill</code><button type="button" data-copy="npx skills add AntreasAntoniou/argus-skill" aria-label="Copy Argus install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+            <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/argus-skill" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+          </article>
+          </div>
         </div>
 
-        <div class="skill-group" data-skill-group="protection">
-          <div class="skill-group__label"><span>04</span><h3>Identity &amp; secrets</h3><p>Keep a human in charge of their voice, and reusable credentials out of the transcript.</p></div>
+        <div class="skill-group" data-skill-group="output">
+          <div class="skill-group__label"><span>04</span><h3>Authorship &amp; output</h3><p>Keep a human in charge of their voice and make the final document worthy of the ideas.</p></div>
           <div class="skill-group__cards">
             <article class="skill-card" data-skill="doppel">
               <div class="skill-card__topline"><span class="skill-card__index">DP</span><span class="skill-card__status">public · MIT</span></div>
@@ -191,6 +220,36 @@
               <ul class="skill-card__tags" aria-label="Doppel capabilities"><li>consent</li><li>local provenance</li><li>human ratification</li></ul>
               <div class="skill-card__install"><code>npx skills add AntreasAntoniou/doppel</code><button type="button" data-copy="npx skills add AntreasAntoniou/doppel" aria-label="Copy Doppel install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
               <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/doppel" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="skill-card" data-skill="beautiful-pdf">
+              <div class="skill-card__topline"><span class="skill-card__index">BP</span><span class="skill-card__status">public · MIT</span></div>
+              <h4>Beautiful PDF</h4>
+              <p>Design print-ready reports, proposals, briefs, CVs, and dossiers with HTML/CSS and WeasyPrint—then inspect every rendered page before delivery.</p>
+              <ul class="skill-card__tags" aria-label="Beautiful PDF capabilities"><li>print CSS</li><li>document patterns</li><li>page review</li></ul>
+              <div class="skill-card__install"><code>npx skills add AntreasAntoniou/beautiful-pdf</code><button type="button" data-copy="npx skills add AntreasAntoniou/beautiful-pdf" aria-label="Copy Beautiful PDF install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+              <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/beautiful-pdf" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+        </div>
+
+        <div class="skill-group" data-skill-group="operations">
+          <div class="skill-group__label"><span>05</span><h3>Operations &amp; access</h3><p>See what is running, use short-lived cloud identity, and keep reusable credentials out of the transcript.</p></div>
+          <div class="skill-group__cards skill-group__cards--three">
+            <article class="skill-card" data-skill="local-uis">
+              <div class="skill-card__topline"><span class="skill-card__index">LU</span><span class="skill-card__status">public · MIT</span></div>
+              <h4>Local UIs</h4>
+              <p>Discover HTTP interfaces actually listening on loopback and build one private launcher with ports, titles, response states, and owning processes.</p>
+              <ul class="skill-card__tags" aria-label="Local UIs capabilities"><li>live discovery</li><li>loopback only</li><li>launcher</li></ul>
+              <div class="skill-card__install"><code>npx skills add AntreasAntoniou/local-uis</code><button type="button" data-copy="npx skills add AntreasAntoniou/local-uis" aria-label="Copy Local UIs install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+              <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/local-uis" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="skill-card" data-skill="gcp-keyless">
+              <div class="skill-card__topline"><span class="skill-card__index">GK</span><span class="skill-card__status">public · MIT</span></div>
+              <h4>GCP Keyless</h4>
+              <p>Use attached Google Cloud identities or GitHub OIDC federation instead of recurring browser OAuth and long-lived service-account key files.</p>
+              <ul class="skill-card__tags" aria-label="GCP Keyless capabilities"><li>OIDC</li><li>managed identity</li><li>typed workflows</li></ul>
+              <div class="skill-card__install"><code>npx skills add AntreasAntoniou/gcp-keyless</code><button type="button" data-copy="npx skills add AntreasAntoniou/gcp-keyless" aria-label="Copy GCP Keyless install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+              <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/gcp-keyless" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
             </article>
             <article class="skill-card" data-skill="bitwarden-lease">
               <div class="skill-card__topline"><span class="skill-card__index">BW</span><span class="skill-card__status">public · MIT</span></div>
