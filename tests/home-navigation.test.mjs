@@ -5,11 +5,12 @@ import { readFileSync } from 'node:fs';
 const home = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const nav = home.match(/<!-- Navigation -->\s*<nav class="nav">([\s\S]*?)<\/nav>/)?.[1] ?? '';
 
-test('keeps the homepage navigation focused on work, research, teaching, and writing', () => {
+test('keeps the homepage navigation focused on work, research, teaching, skills, and writing', () => {
   for (const [href, label] of [
     ['/#building', 'Work'],
     ['/#research', 'Research'],
     ['/#teaching', 'Teaching'],
+    ['/skills/', 'Skills'],
     ['/writing/', 'Writing advice'],
     ['/blog', 'Blog'],
     ['/#contact', 'Contact'],

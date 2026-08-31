@@ -1,0 +1,48 @@
+{
+  "updated": "2026-08-31",
+  "owner": "AntreasAntoniou",
+  "skills": [
+    {
+      "slug": "agent-orchestra",
+      "name": "Agent Orchestra",
+      "group": "Orchestration",
+      "description": "Design composable multi-agent topologies with isolation, adversarial review, and receipt-driven integration.",
+      "url": "https://github.com/AntreasAntoniou/agent-orchestra"
+    },
+    {
+      "slug": "plus-ultra",
+      "name": "Plus Ultra",
+      "group": "Verification",
+      "description": "A proposer-arbiter-reality-verifier discipline for consequential agent work.",
+      "url": "https://github.com/AntreasAntoniou/plus-ultra"
+    },
+    {
+      "slug": "visual-qa",
+      "name": "Visual QA",
+      "group": "Verification",
+      "description": "Screenshot-first multi-agent review for defects text-only QA misses.",
+      "url": "https://github.com/AntreasAntoniou/visual-qa"
+    },
+    {
+      "slug": "cross-agent-sync",
+      "name": "Cross-Agent Sync",
+      "group": "Continuity",
+      "description": "Local-first deterministic context handoff between Claude Code, Codex, and shared agent workspaces.",
+      "url": "https://github.com/AntreasAntoniou/cross-agent-sync"
+    },
+    {
+      "slug": "doppel",
+      "name": "Doppel",
+      "group": "Authorship",
+      "description": "A consent-first digital twin of your own writing voice, with local provenance and human publication authority.",
+      "url": "https://github.com/AntreasAntoniou/doppel"
+    },
+    {
+      "slug": "bitwarden-lease",
+      "name": "Bitwarden Lease",
+      "group": "Security",
+      "description": "An owner-only, in-memory Bitwarden CLI lease for local macOS agents.",
+      "url": "https://github.com/AntreasAntoniou/bitwarden-lease"
+    }
+  ]
+}

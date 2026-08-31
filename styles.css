@@ -386,6 +386,135 @@ html {
   transform: translateY(-1px);
 }
 
+/* Public agent skills */
+.home-skills {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 92% 12%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 24rem),
+    var(--bg);
+}
+
+.home-skills__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.58fr);
+  align-items: end;
+  gap: 2rem 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--text);
+}
+
+.home-skills__header h2 {
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(2.35rem, 5vw, 4.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.home-skills__header > p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.home-skills__rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-left: 1px solid var(--border);
+}
+
+.home-skills__rail a {
+  min-height: 10.5rem;
+  display: grid;
+  align-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.home-skills__rail a:hover,
+.home-skills__rail a:focus-visible {
+  position: relative;
+  z-index: 1;
+  background: var(--accent);
+  color: white;
+  transform: translateY(-3px);
+}
+
+.home-skills__rail span,
+.home-skills__rail small,
+.home-skills__footer code {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.home-skills__rail span {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.home-skills__rail a:hover span,
+.home-skills__rail a:focus-visible span,
+.home-skills__rail a:hover small,
+.home-skills__rail a:focus-visible small {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.home-skills__rail strong {
+  align-self: end;
+  font-size: 1.15rem;
+  line-height: 1.15;
+}
+
+.home-skills__rail small {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-skills__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-top: 2rem;
+}
+
+.home-skills__footer p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 760px) {
+  .home-skills__header {
+    grid-template-columns: 1fr;
+  }
+
+  .home-skills__rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-skills__footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-skills__rail {
+    grid-template-columns: 1fr;
+  }
+
+  .home-skills__rail a {
+    min-height: 8rem;
+  }
+}
+
 /* Email dropdown */
 .email-dropdown {
   position: relative;

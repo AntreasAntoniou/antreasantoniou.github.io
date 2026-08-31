@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Skills | Antreas Antoniou</title>
+  <meta name="description" content="Open-source agent skills for orchestration, verification, continuity, authorship, visual QA, and local credential safety.">
+  <link rel="canonical" href="https://antreas.io/skills/">
+
+  <meta property="og:title" content="Agent Skills | Antreas Antoniou">
+  <meta property="og:description" content="Small, inspectable tools for making agent work more trustworthy, continuous, and useful.">
+  <meta property="og:image" content="https://antreas.io/images/profile.jpg">
+  <meta property="og:url" content="https://antreas.io/skills/">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Agent Skills | Antreas Antoniou">
+  <meta name="twitter:description" content="Open-source skills for orchestration, verification, continuity, authorship, visual QA, and credential safety.">
+  <meta name="twitter:image" content="https://antreas.io/images/profile.jpg">
+  <meta name="twitter:site" content="@AntreasAntonio">
+  <meta name="twitter:creator" content="@AntreasAntonio">
+
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css?v=20260831-skills">
+  <link rel="stylesheet" href="/tailwind-built.css">
+  <link rel="stylesheet" href="/skills/skills.css?v=20260831-1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Open-source Agent Skills by Antreas Antoniou",
+    "url": "https://antreas.io/skills/",
+    "description": "A catalogue of open-source skills for agent orchestration, verification, continuity, authorship, visual QA, and local credential safety.",
+    "author": {"@type": "Person", "name": "Antreas Antoniou", "url": "https://antreas.io/"}
+  }
+  </script>
+
+  <script>
+    (function() {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head>
+<body class="skills-page">
+  <a class="skills-skip" href="#skills-catalogue">Skip to the skill catalogue</a>
+
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-tight">Antreas<span class="text-accent">.</span></a>
+      <div class="site-nav-links hidden md:flex">
+        <a href="/#building" class="text-secondary hover:text-accent transition">Work</a>
+        <a href="/#research" class="text-secondary hover:text-accent transition">Research</a>
+        <a href="/#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
+        <a href="/skills/" class="text-accent font-semibold transition" aria-current="page">Skills</a>
+        <a href="/writing/" class="text-secondary hover:text-accent transition">Writing advice</a>
+        <a href="/blog" class="text-secondary hover:text-accent transition">Blog</a>
+        <a href="/#contact" class="text-secondary hover:text-accent transition">Contact</a>
+        <a href="/documents/AntreasAntoniouResume.pdf" class="btn-primary btn-sm">CV</a>
+        <button type="button" onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme"><span aria-hidden="true">◐</span></button>
+      </div>
+      <div class="flex items-center gap-3 md:hidden">
+        <button type="button" onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme"><span aria-hidden="true">◐</span></button>
+        <button type="button" class="text-secondary" onclick="toggleMobileMenu(this)" aria-label="Toggle navigation menu" aria-controls="mobile-menu" aria-expanded="false">
+          <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t" style="border-color: var(--border); background: var(--bg);">
+      <div class="px-4 py-4 space-y-3">
+        <a href="/#building" class="block text-secondary hover:text-accent">Work</a>
+        <a href="/#research" class="block text-secondary hover:text-accent">Research</a>
+        <a href="/#teaching" class="block text-secondary hover:text-accent">Teaching</a>
+        <a href="/skills/" class="block text-accent font-semibold" aria-current="page">Skills</a>
+        <a href="/writing/" class="block text-secondary hover:text-accent">Writing advice</a>
+        <a href="/blog" class="block text-secondary hover:text-accent">Blog</a>
+        <a href="/#contact" class="block text-secondary hover:text-accent">Contact</a>
+        <a href="/documents/AntreasAntoniouResume.pdf" class="block text-accent font-semibold">Download CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="skills-catalogue">
+    <header class="skills-hero">
+      <div class="skills-shell skills-hero__grid">
+        <div class="skills-hero__copy">
+          <p class="skills-kicker"><span aria-hidden="true">//</span> Open-source agent infrastructure</p>
+          <h1>Skills for agents that have to survive <em>real work.</em></h1>
+          <p class="skills-dek">Small, inspectable packages for the parts between a prompt and a trustworthy outcome: how agents coordinate, challenge one another, preserve context, inspect interfaces, respect authorship, and handle secrets.</p>
+          <div class="skills-hero__actions">
+            <a class="btn-primary" href="https://github.com/AntreasAntoniou?tab=repositories&q=&type=public&language=&sort=" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github" aria-hidden="true"></i> Browse on GitHub
+            </a>
+            <a class="skills-text-link" href="#catalogue">Explore all six <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <aside class="skills-map" aria-label="Capability map for the public skill collection">
+          <div class="skills-map__header"><span>PUBLIC TOOLBOX</span><span>06 MODULES</span></div>
+          <ol class="skills-map__path">
+            <li><span>01</span><strong>Coordinate</strong><small>shape the agent graph</small></li>
+            <li><span>02</span><strong>Verify</strong><small>challenge plans and pixels</small></li>
+            <li><span>03</span><strong>Continue</strong><small>carry evidence across hosts</small></li>
+            <li><span>04</span><strong>Protect</strong><small>preserve voice and secrets</small></li>
+          </ol>
+          <p class="skills-map__note">Each repository is public, MIT-licensed, and ships a root <code>SKILL.md</code>.</p>
+        </aside>
+      </div>
+    </header>
+
+    <section class="skills-principle" aria-labelledby="principle-heading">
+      <div class="skills-shell skills-principle__grid">
+        <p class="skills-kicker">The design principle</p>
+        <div>
+          <h2 id="principle-heading">The useful part is usually the boundary.</h2>
+          <p>These skills do not pretend one more prompt will solve reliability. They make the handoff visible: between independent reviewers, between a plan and the world, between private evidence and public prose, or between a secret and the smallest process allowed to use it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalogue" class="skills-catalogue" aria-labelledby="catalogue-heading">
+      <div class="skills-shell">
+        <header class="skills-section-heading">
+          <div>
+            <p class="skills-kicker">The public collection</p>
+            <h2 id="catalogue-heading">Six skills. Four failure surfaces.</h2>
+          </div>
+          <p>Install any repository directly with the Agent Skills CLI, or inspect the skill contract before adding it to your host.</p>
+        </header>
+
+        <div class="skill-group" data-skill-group="orchestration">
+          <div class="skill-group__label"><span>01</span><h3>Orchestration</h3><p>Who sees what, who challenges whom, and who is allowed to integrate.</p></div>
+          <article class="skill-card skill-card--wide" data-skill="agent-orchestra">
+            <div class="skill-card__topline"><span class="skill-card__index">AO</span><span class="skill-card__status">public · MIT</span></div>
+            <h4>Agent Orchestra</h4>
+            <p>Design composable multi-agent topologies with isolation, adversarial review, and receipt-driven integration. The graph follows the uncertainty and stakes—not a fashionable agent count.</p>
+            <ul class="skill-card__tags" aria-label="Agent Orchestra capabilities"><li>isolated proposers</li><li>arbiters</li><li>adversarial review</li></ul>
+            <div class="skill-card__install"><code>npx skills add AntreasAntoniou/agent-orchestra</code><button type="button" data-copy="npx skills add AntreasAntoniou/agent-orchestra" aria-label="Copy Agent Orchestra install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+            <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/agent-orchestra" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+
+        <div class="skill-group" data-skill-group="verification">
+          <div class="skill-group__label"><span>02</span><h3>Verification</h3><p>Test the reasoning against an adversary—and the interface against its pixels.</p></div>
+          <div class="skill-group__cards">
+            <article class="skill-card" data-skill="plus-ultra">
+              <div class="skill-card__topline"><span class="skill-card__index">PU</span><span class="skill-card__status">public · MIT</span></div>
+              <h4>Plus Ultra</h4>
+              <p>A proposer–arbiter–reality-verifier discipline for consequential work. On Claude Code it can enforce the sequence through hooks; on Codex it is explicitly convention-only.</p>
+              <ul class="skill-card__tags" aria-label="Plus Ultra capabilities"><li>blind proposals</li><li>plan arbitration</li><li>reality check</li></ul>
+              <div class="skill-card__install"><code>npx skills add AntreasAntoniou/plus-ultra</code><button type="button" data-copy="npx skills add AntreasAntoniou/plus-ultra" aria-label="Copy Plus Ultra install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+              <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/plus-ultra" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="skill-card" data-skill="visual-qa">
+              <div class="skill-card__topline"><span class="skill-card__index">VQ</span><span class="skill-card__status">public · MIT</span></div>
+              <h4>Visual QA</h4>
+              <p>Screenshot-first review through isolated expert lenses, followed by adversarial refutation. It catches layout, accessibility, trust, and privacy failures that text-only QA cannot see.</p>
+              <ul class="skill-card__tags" aria-label="Visual QA capabilities"><li>capture matrix</li><li>orthogonal lenses</li><li>recapture</li></ul>
+              <div class="skill-card__install"><code>npx skills add AntreasAntoniou/visual-qa</code><button type="button" data-copy="npx skills add AntreasAntoniou/visual-qa" aria-label="Copy Visual QA install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+              <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/visual-qa" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+        </div>
+
+        <div class="skill-group" data-skill-group="continuity">
+          <div class="skill-group__label"><span>03</span><h3>Continuity</h3><p>Move verified context between harnesses without turning private transcripts into project authority.</p></div>
+          <article class="skill-card skill-card--wide" data-skill="cross-agent-sync">
+            <div class="skill-card__topline"><span class="skill-card__index">CS</span><span class="skill-card__status">public · MIT</span></div>
+            <h4>Cross-Agent Sync</h4>
+            <p>Local-first, deterministic handoff between Claude Code, Codex, and shared workspaces. Raw logs remain ignored evidence; only a small curated delta becomes durable project state.</p>
+            <ul class="skill-card__tags" aria-label="Cross-Agent Sync capabilities"><li>local-only imports</li><li>append-only deltas</li><li>deterministic views</li></ul>
+            <div class="skill-card__install"><code>npx skills add AntreasAntoniou/cross-agent-sync</code><button type="button" data-copy="npx skills add AntreasAntoniou/cross-agent-sync" aria-label="Copy Cross-Agent Sync install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+            <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/cross-agent-sync" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+
+        <div class="skill-group" data-skill-group="protection">
+          <div class="skill-group__label"><span>04</span><h3>Identity &amp; secrets</h3><p>Keep a human in charge of their voice, and reusable credentials out of the transcript.</p></div>
+          <div class="skill-group__cards">
+            <article class="skill-card" data-skill="doppel">
+              <div class="skill-card__topline"><span class="skill-card__index">DP</span><span class="skill-card__status">public · MIT</span></div>
+              <h4>Doppel</h4>
+              <p>A consent-first digital twin of your own writing voice. It separates voice evidence, fact authority, and publication authority so editorial assistance does not become impersonation.</p>
+              <ul class="skill-card__tags" aria-label="Doppel capabilities"><li>consent</li><li>local provenance</li><li>human ratification</li></ul>
+              <div class="skill-card__install"><code>npx skills add AntreasAntoniou/doppel</code><button type="button" data-copy="npx skills add AntreasAntoniou/doppel" aria-label="Copy Doppel install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+              <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/doppel" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="skill-card" data-skill="bitwarden-lease">
+              <div class="skill-card__topline"><span class="skill-card__index">BW</span><span class="skill-card__status">public · MIT</span></div>
+              <h4>Bitwarden Lease</h4>
+              <p>An owner-only, in-memory Bitwarden CLI lease for local macOS agents. It reduces repeated prompts without writing <code>BW_SESSION</code> to files, profiles, or project environments.</p>
+              <ul class="skill-card__tags" aria-label="Bitwarden Lease capabilities"><li>macOS</li><li>local-only broker</li><li>allowlisted commands</li></ul>
+              <div class="skill-card__install"><code>npx skills add AntreasAntoniou/bitwarden-lease</code><button type="button" data-copy="npx skills add AntreasAntoniou/bitwarden-lease" aria-label="Copy Bitwarden Lease install command"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+              <a class="skill-card__repo" href="https://github.com/AntreasAntoniou/bitwarden-lease" target="_blank" rel="noopener noreferrer">Open repository <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills-compose" aria-labelledby="compose-heading">
+      <div class="skills-shell skills-compose__grid">
+        <div>
+          <p class="skills-kicker">Composability over monoculture</p>
+          <h2 id="compose-heading">Use the smallest graph that creates new evidence.</h2>
+        </div>
+        <div class="skills-compose__flow" aria-label="An example composition of four public skills">
+          <span>Agent Orchestra</span><i aria-hidden="true">→</i><span>Plus Ultra</span><i aria-hidden="true">→</i><span>Visual QA</span><i aria-hidden="true">→</i><span>Cross-Agent Sync</span>
+        </div>
+        <p>Orchestrate only when independent perspectives matter. Verify before making a consequential claim. Inspect the rendered interface when the outcome is visual. Preserve only the evidence the next agent actually needs.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="skills-footer">
+    <div class="skills-shell">
+      <p>Built in public by <a href="/">Antreas Antoniou</a>.</p>
+      <a href="https://github.com/AntreasAntoniou" target="_blank" rel="noopener noreferrer">github.com/AntreasAntoniou <span aria-hidden="true">↗</span></a>
+    </div>
+  </footer>
+
+  <div id="copy-status" class="skills-copy-status" role="status" aria-live="polite"></div>
+  <script>
+    function toggleMobileMenu(button) {
+      const menu = document.getElementById('mobile-menu');
+      const willOpen = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      button.setAttribute('aria-expanded', String(willOpen));
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        root.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const status = document.getElementById('copy-status');
+        try {
+          await navigator.clipboard.writeText(button.dataset.copy);
+          status.textContent = 'Install command copied.';
+          button.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
+          window.setTimeout(() => {
+            button.innerHTML = '<i class="far fa-copy" aria-hidden="true"></i>';
+            status.textContent = '';
+          }, 1800);
+        } catch (error) {
+          status.textContent = 'Copy was blocked. Select the command manually.';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

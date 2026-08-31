@@ -7,6 +7,7 @@ const pages = [
   ['Home', readFileSync(new URL('index.html', root), 'utf8')],
   ['Blog', readFileSync(new URL('blog/index.html', root), 'utf8')],
   ['Writing', readFileSync(new URL('writing/index.html', root), 'utf8')],
+  ['Skills', readFileSync(new URL('skills/index.html', root), 'utf8')],
 ];
 const styles = readFileSync(new URL('styles.css', root), 'utf8');
 
@@ -14,6 +15,7 @@ const expectedDesktopLinks = [
   ['/#building', 'Work'],
   ['/#research', 'Research'],
   ['/#teaching', 'Teaching'],
+  ['/skills/', 'Skills'],
   ['/writing/', 'Writing advice'],
   ['/blog', 'Blog'],
   ['/#contact', 'Contact'],
