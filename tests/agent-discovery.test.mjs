@@ -31,13 +31,12 @@ test('puts a visible agent entrypoint before the first homepage section', () => 
   assert.ok(entrypoint, 'an agent-labelled entrypoint should appear before the hero section');
 
   const agentLink = entrypoint[1].match(
-    /<a\b(?=[^>]*\bhref=["']\/AGENTS\.md["'])(?=[^>]*\btype=["']text\/markdown["'])[^>]*>([\s\S]*?)<\/a>/i,
+    /<a\b(?=[^>]*\bhref=["']\/AGENTS\.md["'])(?=[^>]*\btype=["']text\/markdown["'])(?=[^>]*\baria-label=["']AI agents: start here["'])(?=[^>]*\btitle=["']Machine-readable guide["'])[^>]*>([\s\S]*?)<\/a>/i,
   );
   assert.ok(agentLink, 'the early entrypoint should link to the canonical Markdown guide');
-  assert.match(
-    agentLink[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
-    /^AI agents: start here\b/i,
-  );
+  const visibleLabel = agentLink[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  assert.equal(visibleLabel, '⌁');
+  assert.doesNotMatch(visibleLabel, /\b(?:AI|agents?)\b/i);
   assert.doesNotMatch(
     entrypoint[0],
     /\bclass=["'][^"']*\b(?:hidden|sr-only)\b[^"']*["']|\bstyle=["'][^"']*display\s*:\s*none/i,

@@ -280,15 +280,13 @@ a:hover {
 .agent-entrypoint a {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.7rem;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
   border: 1px solid var(--border);
   border-radius: 9999px;
   background: color-mix(in srgb, var(--bg) 90%, transparent);
   color: var(--text-muted);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
   box-shadow: 0 8px 24px -20px rgba(15, 23, 42, 0.8);
   backdrop-filter: blur(10px);
 }
@@ -298,11 +296,10 @@ a:hover {
   color: var(--accent);
 }
 
-.agent-entrypoint__dot {
-  width: 0.35rem;
-  height: 0.35rem;
-  border-radius: 50%;
-  background: var(--accent);
+.agent-entrypoint__mark {
+  font-size: 1rem;
+  line-height: 1;
+  transform: translateY(-0.03em);
 }
 
 @media (max-width: 640px) {
