@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const homepage = readFileSync(join(root, 'index.html'), 'utf8');
 
-test('lets agents discover the guide without adding it to the visible homepage', () => {
+test('advertises the machine-readable guide from homepage metadata', () => {
   const head = homepage.match(/<head>([\s\S]*?)<\/head>/i)?.[1] ?? '';
   const agentLink = head.match(
     /<link\s+(?=[^>]*\brel=["']alternate["'])(?=[^>]*\btype=["']text\/markdown["'])[^>]*\bhref=["']([^"']+)["'][^>]*>/i,
@@ -18,9 +18,18 @@ test('lets agents discover the guide without adding it to the visible homepage',
 
   const guide = readFileSync(join(root, agentLink[1].slice(1)), 'utf8');
   assert.match(guide, /^# AGENTS\.md\b/m);
+});
 
-  const body = homepage.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? '';
-  assert.doesNotMatch(body, /<a\b[^>]*href=["'][^"']*AGENTS\.md/i);
+test('offers the agent guide as a quiet footer destination, not primary navigation', () => {
+  const footer = homepage.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/i)?.[1] ?? '';
+  const footerLinks = [...footer.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)];
+  const agentLink = footerLinks.find((match) => /\bhref=["']\/AGENTS\.md["']/i.test(match[1]));
+
+  assert.ok(agentLink, 'footer should link to the canonical agent guide');
+  assert.match(agentLink[2].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(), /^For agents\b/i);
+
+  const primaryNav = homepage.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/i)?.[1] ?? '';
+  assert.doesNotMatch(primaryNav, /<a\b[^>]*href=["']\/AGENTS\.md["']/i);
 });
 
 test('gives raw-source readers a non-visible agent trailhead', () => {
