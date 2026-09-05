@@ -176,6 +176,13 @@
       "group": "Attention",
       "description": "Keep commitments, waiting-on states and one next action in a readable Markdown ledger. A local cockpit adds capture and review without taking authority over messages or calendar changes.",
       "url": "https://github.com/AntreasAntoniou/questlog-agent-skill"
+    },
+    {
+      "slug": "reconnect",
+      "name": "Reconnect",
+      "group": "Attention",
+      "description": "Find relevant peers, collaborators and communities, explain why they fit, and track explicitly authorised connections. A private ledger preserves evidence and prevents duplicate batches.",
+      "url": "https://github.com/AntreasAntoniou/reconnect"
     }
   ]
 }

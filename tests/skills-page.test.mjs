@@ -33,6 +33,7 @@ test('publishes the complete GitHub-verified standalone skill inventory', () => 
     'propagate',
     'butler-agent-skill',
     'questlog-agent-skill',
+    'reconnect',
   ];
 
   assert.deepEqual(catalogue.skills.map((skill) => skill.slug), expected);
@@ -55,8 +56,8 @@ test('states important host and safety boundaries without overstating the tools'
   assert.match(page, /Each repository is public, MIT-licensed, and includes a <code>SKILL\.md<\/code> entry point/);
   assert.match(page, /Archivum keeps its skill in <code>skills\/archivum\/<\/code>/);
   assert.match(page, /npx skills add AntreasAntoniou\/archivum --skill archivum/);
-  assert.match(page, /25 MODULES/);
-  assert.match(page, /Twenty-five tools/);
+  assert.match(page, /26 MODULES/);
+  assert.match(page, /Twenty-six tools/);
 });
 
 test('provides metadata, accessible navigation, and a reduced-motion treatment', () => {
