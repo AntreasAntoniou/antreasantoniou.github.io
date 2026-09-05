@@ -371,7 +371,7 @@
 }
 
 .skill-card__status {
-  color: color-mix(in srgb, var(--skills-ink) 55%, transparent);
+  color: color-mix(in srgb, var(--skills-ink) 65%, transparent);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.65rem;
   letter-spacing: 0.06em;
@@ -458,7 +458,8 @@
 
 .skill-card__repo:hover,
 .skill-card__repo:focus-visible {
-  color: var(--skills-signal);
+  color: var(--skills-ink);
+  text-decoration: underline;
 }
 
 .skills-compose {

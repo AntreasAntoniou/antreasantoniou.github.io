@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31",
+  "updated": "2026-09-05",
   "owner": "AntreasAntoniou",
   "skills": [
     {
@@ -38,6 +38,13 @@
       "url": "https://github.com/AntreasAntoniou/visual-qa"
     },
     {
+      "slug": "heimdall",
+      "name": "Heimdall",
+      "group": "Verification",
+      "description": "Turn browser and API checks into executable plans with assertions, screenshots, and structured results. Choose Playwright or an isolated container; cases requiring a real logged-in browser remain visibly blocked until exercised.",
+      "url": "https://github.com/AntreasAntoniou/heimdall"
+    },
+    {
       "slug": "cross-agent-sync",
       "name": "Cross-Agent Sync",
       "group": "Continuity",
@@ -50,6 +57,13 @@
       "group": "Continuity",
       "description": "Durable context routing and backlink validation for Git-backed knowledge systems.",
       "url": "https://github.com/AntreasAntoniou/argus-skill"
+    },
+    {
+      "slug": "chronicle",
+      "name": "Chronicle",
+      "group": "Continuity",
+      "description": "Preserve observed work and the intent behind it, recover captured file versions, and explore the evidence in a local canvas. Capture coverage is explicit; model-inferred entries remain labelled.",
+      "url": "https://github.com/AntreasAntoniou/chronicle"
     },
     {
       "slug": "doppel",
