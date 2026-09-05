@@ -13,6 +13,7 @@
 
 - [DAEDALUS](https://antreas.io/daedalus/): Current research programme and mechanism-level ambitions.
 - [Archivum](https://antreas.io/archivum/): Durable knowledge, evidence and memory for long-horizon agent work.
+- [Agent Toolkit](https://antreas.io/skills/): Sixteen public agent skills, including Archivum; [machine-readable catalogue](https://antreas.io/skills/catalogue.json).
 - [Essays](https://antreas.io/blog/): Public thinking in Antreas's own words.
 - [Writing advice](https://antreas.io/writing/): A practical field manual for technical communication.
 

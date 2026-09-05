@@ -66,6 +66,13 @@
       "url": "https://github.com/AntreasAntoniou/chronicle"
     },
     {
+      "slug": "archivum",
+      "name": "Archivum",
+      "group": "Continuity",
+      "description": "Operate a Git-backed knowledge workspace that keeps projects, decisions, sources, and evidence usable across conversations. Search before creating, preserve provenance, and resume from canonical records rather than chat fragments.",
+      "url": "https://github.com/AntreasAntoniou/archivum"
+    },
+    {
       "slug": "doppel",
       "name": "Doppel",
       "group": "Authorship",
