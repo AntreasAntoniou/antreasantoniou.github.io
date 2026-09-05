@@ -113,6 +113,69 @@
       "group": "Attention",
       "description": "Narrative-aware, read-only inbox triage with prompt-injection defenses and separate approvals for drafting and sending.",
       "url": "https://github.com/AntreasAntoniou/mailbutler-agent-skill"
+    },
+    {
+      "slug": "threadseer-agent-skill",
+      "name": "Threadseer",
+      "group": "Continuity",
+      "description": "Turn approved transcripts into traceable decisions, unresolved disagreements and next actions. Source anchors keep institutional memory connected to what was actually said.",
+      "url": "https://github.com/AntreasAntoniou/threadseer-agent-skill"
+    },
+    {
+      "slug": "doppel-gang",
+      "name": "Doppel Gang",
+      "group": "Authorship",
+      "description": "Keep the author in charge while explicitly synthetic review lenses challenge the argument, evidence and wording. Optional Doppel-assisted drafting requires a separate request.",
+      "url": "https://github.com/AntreasAntoniou/doppel-gang"
+    },
+    {
+      "slug": "back-to-the-chronicle",
+      "name": "Back to the Chronicle",
+      "group": "Continuity",
+      "description": "Reconstruct project history from explicitly selected session logs, Git and surviving files. Keep witnessed events, inferred intent and gaps separate; reconstruction cannot recover uncaptured bytes.",
+      "url": "https://github.com/AntreasAntoniou/back-to-the-chronicle"
+    },
+    {
+      "slug": "nexus",
+      "name": "Nexus",
+      "group": "Development",
+      "description": "Map an unfamiliar repository, trace the parts relevant to the task and build a source-cited context pack. A bundled mapper makes the first pass portable.",
+      "url": "https://github.com/AntreasAntoniou/nexus"
+    },
+    {
+      "slug": "ml-research-skeptical-audit",
+      "name": "ML Research Skeptical Audit",
+      "group": "Research",
+      "description": "Challenge an ML result at the code and experiment level: leakage, unfair comparisons, missing controls and claims that outrun evidence. An audit is not a completed reproduction.",
+      "url": "https://github.com/AntreasAntoniou/ml-research-skeptical-audit"
+    },
+    {
+      "slug": "ml-run-provenance",
+      "name": "ML Run Provenance",
+      "group": "Research",
+      "description": "Make experiment records explain why a run exists and which code, data and settings produced it. Preserve run context at creation instead of reconstructing its meaning from a dashboard later.",
+      "url": "https://github.com/AntreasAntoniou/ml-run-provenance"
+    },
+    {
+      "slug": "propagate",
+      "name": "Propagate",
+      "group": "Operations",
+      "description": "Identify where a reusable improvement belongs and which consumers need it. Review the propagation plan, apply only approved changes and verify each destination independently.",
+      "url": "https://github.com/AntreasAntoniou/propagate"
+    },
+    {
+      "slug": "butler-agent-skill",
+      "name": "Butler",
+      "group": "Operations",
+      "description": "Give autonomous work a budget authority: inspect token estimates, account for GPU reservations and reconcile usage. The local cockpit starts empty; it is not a provider-enforced spending cap.",
+      "url": "https://github.com/AntreasAntoniou/butler-agent-skill"
+    },
+    {
+      "slug": "questlog-agent-skill",
+      "name": "Questlog",
+      "group": "Attention",
+      "description": "Keep commitments, waiting-on states and one next action in a readable Markdown ledger. A local cockpit adds capture and review without taking authority over messages or calendar changes.",
+      "url": "https://github.com/AntreasAntoniou/questlog-agent-skill"
     }
   ]
 }

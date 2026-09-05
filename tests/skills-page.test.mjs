@@ -24,6 +24,15 @@ test('publishes the complete GitHub-verified standalone skill inventory', () => 
     'gcp-keyless',
     'bitwarden-lease',
     'mailbutler-agent-skill',
+    'threadseer-agent-skill',
+    'doppel-gang',
+    'back-to-the-chronicle',
+    'nexus',
+    'ml-research-skeptical-audit',
+    'ml-run-provenance',
+    'propagate',
+    'butler-agent-skill',
+    'questlog-agent-skill',
   ];
 
   assert.deepEqual(catalogue.skills.map((skill) => skill.slug), expected);
@@ -46,8 +55,8 @@ test('states important host and safety boundaries without overstating the tools'
   assert.match(page, /Each repository is public, MIT-licensed, and includes a <code>SKILL\.md<\/code> entry point/);
   assert.match(page, /Archivum keeps its skill in <code>skills\/archivum\/<\/code>/);
   assert.match(page, /npx skills add AntreasAntoniou\/archivum --skill archivum/);
-  assert.match(page, /16 MODULES/);
-  assert.match(page, /Sixteen tools/);
+  assert.match(page, /25 MODULES/);
+  assert.match(page, /Twenty-five tools/);
 });
 
 test('provides metadata, accessible navigation, and a reduced-motion treatment', () => {
@@ -58,6 +67,7 @@ test('provides metadata, accessible navigation, and a reduced-motion treatment',
   const css = readFileSync(new URL('skills/skills.css', root), 'utf8');
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(css, /:focus-visible/);
+  assert.match(css, /\.skill-card__install code\s*\{[^}]*overflow-wrap:\s*anywhere;[^}]*white-space:\s*normal;/);
 });
 
 test('keeps the homepage skill preview complete and linked to the catalogue', () => {
