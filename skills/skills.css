@@ -1,3 +1,8 @@
+.skills-downloads { margin-block: 1.5rem; }
+.skills-downloads img { display: block; max-width: 100%; height: auto; }
+.skills-downloads p { margin-top: 0.6rem; max-width: 28rem; font-size: 0.8rem; line-height: 1.6; }
+.skills-downloads p a { text-decoration: underline; text-underline-offset: 3px; }
+
 .skills-page {
   --skills-ink: #0b1626;
   --skills-paper: #f3f5f4;
