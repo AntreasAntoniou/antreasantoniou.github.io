@@ -4,7 +4,7 @@
   "label": "ClawHub downloads",
   "total": 2261,
   "skillCount": 26,
-  "checkedAt": "2026-09-10T18:25:04.245Z",
+  "checkedAt": "2026-09-10T18:27:30.988Z",
   "definition": "Sum of ClawHub download counters for the public Agent Toolkit catalogue. Download events, not unique users. Excludes installs, Git clones and GitHub release assets.",
   "skills": [
     {
