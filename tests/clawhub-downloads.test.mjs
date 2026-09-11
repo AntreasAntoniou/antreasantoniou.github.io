@@ -45,11 +45,24 @@ test('partial collection leaves previous published files untouched', async () =>
 test('published real snapshot reconciles with the catalogue and SVG', async () => {
   const root = new URL('../', import.meta.url);
   const snapshot = JSON.parse(await readFile(new URL('data/clawhub-downloads.json', root)));
-  assert.deepEqual(snapshot.skills.map(s => s.slug), slugsFor(catalogue));
+  assert.deepEqual([...snapshot.skills.map(s => s.slug), ...(snapshot.pendingSkills ?? [])].sort(), slugsFor(catalogue));
   assert.equal(snapshot.total, snapshot.skills.reduce((n, s) => n + s.downloads, 0));
-  assert.equal(snapshot.skillCount, catalogue.skills.length);
+  assert.equal(snapshot.skillCount, snapshot.skills.length);
   assert.equal(await readFile(new URL('data/clawhub-downloads.svg', root), 'utf8'), badge(snapshot));
   const page = await readFile(new URL('skills/index.html', root), 'utf8');
   assert.match(page, /raw.githubusercontent.com\/AntreasAntoniou\/antreasantoniou.github.io\/main\/data\/clawhub-downloads.svg/);
   assert.match(page, /Download events, not unique users/);
+});
+
+test('pending first publication is distinct from zero, and disappearance fails closed', async () => {
+  const c = { owner: 'AntreasAntoniou', skills: [{ slug: 'new-skill', clawhubPending: true }] };
+  const missing = async () => ({ ok: false, status: 404 });
+  const s = await collect(c, missing);
+  assert.deepEqual(s.pendingSkills, ['new-skill']);
+  assert.equal(s.skillCount, 0);
+  await assert.rejects(collect(c, missing, { skills: [{ slug: 'new-skill', downloads: 0 }] }));
+  await assert.rejects(collect(c, async () => ({ ok: false, status: 503 })));
+  const listed = await collect(c, async url => response(url, 0));
+  assert.deepEqual(listed.pendingSkills, []);
+  assert.equal(listed.skillCount, 1);
 });

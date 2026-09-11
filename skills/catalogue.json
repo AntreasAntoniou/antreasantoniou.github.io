@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-05",
+  "updated": "2026-09-11",
   "owner": "AntreasAntoniou",
   "skills": [
     {
@@ -183,6 +183,54 @@
       "group": "Attention",
       "description": "Find relevant peers, collaborators and communities, explain why they fit, and track explicitly authorised connections. A private ledger preserves evidence and prevents duplicate batches.",
       "url": "https://github.com/AntreasAntoniou/reconnect"
+    },
+    {
+      "slug": "amber-agent-skill",
+      "name": "Amber",
+      "group": "Continuity",
+      "description": "Preserve Claude Code and Codex session files in private snapshots. The portable runtime supports local or mounted sources, rejects unsafe paths and reports incomplete backups; it does not redact secrets from transcripts.",
+      "url": "https://github.com/AntreasAntoniou/amber-agent-skill",
+      "clawhubPending": true
+    },
+    {
+      "slug": "session-atlas-agent-skill",
+      "name": "Session Atlas",
+      "group": "Continuity",
+      "description": "Turn selected session history into a compact causal map with source-linked evidence. Index and validate private history while keeping remembered context separate from current authority.",
+      "url": "https://github.com/AntreasAntoniou/session-atlas-agent-skill",
+      "clawhubPending": true
+    },
+    {
+      "slug": "pulse",
+      "name": "Pulse",
+      "group": "Operations",
+      "description": "Give recurring agent checks an exact target, notification rule, authority boundary and stopping condition. Includes Meta-Pulse for reviewing duplicate or obsolete watches; requires the host scheduler.",
+      "url": "https://github.com/AntreasAntoniou/pulse",
+      "clawhubPending": true
+    },
+    {
+      "slug": "davinci-mode",
+      "name": "Davinci Mode",
+      "group": "Design",
+      "description": "Explore straightforward, hybrid and creative approaches with concrete tradeoffs and a reasoned recommendation. Keeps alternatives viable and stops reopening the decision once you choose.",
+      "url": "https://github.com/AntreasAntoniou/davinci-mode",
+      "clawhubPending": true
+    },
+    {
+      "slug": "experiment-framework",
+      "name": "Experiment Framework",
+      "group": "Research",
+      "description": "Specify, plan and audit reproducible ML runs with source revisions, provenance and artifact links. Includes the runtime; remote execution needs configured providers, credentials and explicit budget authority.",
+      "url": "https://github.com/AntreasAntoniou/experiment-framework",
+      "clawhubPending": true
+    },
+    {
+      "slug": "transfer-consciousness",
+      "name": "Transfer Consciousness",
+      "group": "Continuity",
+      "description": "Prepare a source-linked continuation brief and verify a single-owner handoff across hosts. Separates readiness, quiescence and ownership; instructions are not live process migration or a distributed lock.",
+      "url": "https://github.com/AntreasAntoniou/transfer-consciousness",
+      "clawhubPending": true
     }
   ]
 }

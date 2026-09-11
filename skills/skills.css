@@ -384,6 +384,7 @@
 }
 
 .skill-card h4 {
+  overflow-wrap: anywhere;
   margin: 0 0 1rem;
   color: var(--skills-ink);
   font-size: clamp(1.55rem, 3vw, 2.25rem);

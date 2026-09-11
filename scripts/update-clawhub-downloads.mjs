@@ -14,23 +14,30 @@ export function slugsFor(catalogue) {
 
 export async function collect(catalogue, fetcher = fetch, previous = null, now = new Date()) {
   const skills = [];
+  const pendingSkills = [];
   for (const slug of slugsFor(catalogue)) {
     const source = `https://clawhub.ai/api/v1/skills/${slug}?ownerHandle=antreasantoniou`;
     const response = await fetcher(source, { signal: AbortSignal.timeout(15000) });
+    const old = previous?.skills?.find(s => s.slug === slug);
+    // Only explicitly awaiting first publication may be absent. A previously
+    // measured listing disappearing is an error, never a silently reduced total.
+    if (response.status === 404 && !old && catalogue.skills.find(s => s.slug === slug)?.clawhubPending === true) {
+      pendingSkills.push(slug);
+      continue;
+    }
     if (!response.ok) throw new Error(`ClawHub ${slug}: HTTP ${response.status}`);
     const data = await response.json();
     const downloads = data.skill?.stats?.downloads;
     if (data.skill?.slug !== slug || data.owner?.handle?.toLowerCase() !== 'antreasantoniou' ||
         data.moderation?.blocked || !integer(downloads)) throw new Error(`Invalid source: ${slug}`);
-    const old = previous?.skills?.find(s => s.slug === slug);
     if (old && downloads < old.downloads) throw new Error(`Download decrease requires review: ${slug}`);
     skills.push({ slug, downloads, source });
   }
   const total = skills.reduce((sum, s) => sum + s.downloads, 0);
   if (!integer(total)) throw new Error('Unsafe total');
   return { schemaVersion: 1, metric: 'clawhub-downloads', label: 'ClawHub downloads',
-    total, skillCount: skills.length, checkedAt: now.toISOString(),
-    definition: 'Sum of ClawHub download counters for the public Agent Toolkit catalogue. Download events, not unique users. Excludes installs, Git clones and GitHub release assets.', skills };
+    total, skillCount: skills.length, catalogueSize: catalogue.skills.length, pendingSkills, checkedAt: now.toISOString(),
+    definition: 'Sum of verified ClawHub download counters for listed Agent Toolkit skills. Pending first publications are enumerated separately, not treated as zero. Download events, not unique users. Excludes installs, Git clones and GitHub release assets.', skills };
 }
 
 export function badge(snapshot) {
@@ -39,13 +46,13 @@ export function badge(snapshot) {
   const value = snapshot.total.toLocaleString('en-US');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="104" viewBox="0 0 360 104" role="img" aria-labelledby="title desc">
   <title id="title">ClawHub downloads: ${value}</title>
-  <desc id="desc">Across ${snapshot.skillCount} skills. Last verified ${date} UTC. Download events, not unique users.</desc>
+  <desc id="desc">Across ${snapshot.skillCount} listed skills. Last verified ${date} UTC. Download events, not unique users.</desc>
   <rect width="360" height="104" rx="10" fill="#0b1626"/>
   <rect x="0" y="16" width="4" height="72" rx="2" fill="#ff7959"/>
   <g font-family="Verdana,Arial,sans-serif">
     <text x="20" y="27" fill="#eef3f1" font-size="13">ClawHub downloads</text>
     <text x="20" y="66" fill="#ffffff" font-size="32" font-weight="700">${value}</text>
-    <text x="20" y="89" fill="#bfcdcf" font-size="11">${snapshot.skillCount} skills · Verified ${date} UTC</text>
+    <text x="20" y="89" fill="#bfcdcf" font-size="11">${snapshot.skillCount} listed skills · Verified ${date} UTC</text>
   </g>
 </svg>\n`;
 }

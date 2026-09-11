@@ -1,8 +1,12 @@
 # Agent Toolkit download counter
 
-The public badge sums **ClawHub download events** for every unique skill in
+The public badge sums **ClawHub download events** for verified listed skills in
 [`skills/catalogue.json`](../skills/catalogue.json). It does not count unique
-people, tracked installs, Git clones, or GitHub release-asset downloads.
+people, tracked installs, Git clones, or GitHub release-asset downloads. Catalogue
+entries explicitly marked `clawhubPending` may return 404 while awaiting their
+first publication; they are listed in `pendingSkills`, not counted as zero.
+The next successful refresh includes them automatically once publicly listed.
+Any previously measured listing becoming unavailable fails the refresh.
 
 [`clawhub-downloads.json`](clawhub-downloads.json) contains the total, UTC check
 time, per-skill counts and exact public API sources. The SVG is generated from
