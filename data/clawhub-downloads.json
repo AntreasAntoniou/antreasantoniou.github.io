@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "metric": "clawhub-downloads",
   "label": "ClawHub downloads",
-  "total": 2546,
+  "total": 2549,
   "skillCount": 29,
   "catalogueSize": 32,
   "pendingSkills": [
@@ -10,7 +10,7 @@
     "experiment-framework",
     "session-atlas-agent-skill"
   ],
-  "checkedAt": "2026-09-11T18:50:02.481Z",
+  "checkedAt": "2026-09-11T18:52:03.475Z",
   "definition": "Sum of verified ClawHub download counters for listed Agent Toolkit skills. Pending first publications are enumerated separately, not treated as zero. Download events, not unique users. Excludes installs, Git clones and GitHub release assets.",
   "skills": [
     {
@@ -150,7 +150,7 @@
     },
     {
       "slug": "transfer-consciousness",
-      "downloads": 0,
+      "downloads": 3,
       "source": "https://clawhub.ai/api/v1/skills/transfer-consciousness?ownerHandle=antreasantoniou"
     },
     {
