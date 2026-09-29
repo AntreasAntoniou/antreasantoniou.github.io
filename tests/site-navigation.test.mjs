@@ -19,7 +19,7 @@ const expectedDesktopLinks = [
   ['/writing/', 'Writing advice'],
   ['/blog', 'Blog'],
   ['/#contact', 'Contact'],
-  ['/documents/AntreasAntoniouResume.pdf', 'CV'],
+  ['/cv/', 'CV'],
 ];
 
 function mainNav(html) {
