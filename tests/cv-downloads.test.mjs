@@ -9,15 +9,17 @@ const engineering = '/documents/Antreas-Antoniou-Engineering-CV.pdf';
 const academic = '/documents/Antreas-Antoniou-Academic-CV.pdf';
 const backup = '/documents/archive/AntreasAntoniouResume-before-2026-09-29.pdf';
 
-test('homepage and CV page offer both clearly labelled CVs', () => {
-  for (const path of ['index.html', 'cv/index.html']) {
-    const html = read(path).toString();
-    assert.ok(html.includes(`href="${engineering}"`), path);
-    assert.ok(html.includes(`href="${academic}"`), path);
-    assert.match(html, /Engineering CV/);
-    assert.match(html, /Academic CV/);
-  }
-  assert.ok(read('cv/index.html').toString().includes(`href="${backup}"`));
+test('homepage Resume button leads to the two clearly labelled CV choices', () => {
+  const home = read('index.html').toString();
+  assert.match(home, /<a href="\/cv\/" class="btn-secondary">\s*<i[^>]*><\/i> Resume\s*<\/a>/);
+  assert.ok(!home.includes(`href="${engineering}"`));
+  assert.ok(!home.includes(`href="${academic}"`));
+  const choices = read('cv/index.html').toString();
+  assert.ok(choices.includes(`href="${engineering}"`));
+  assert.ok(choices.includes(`href="${academic}"`));
+  assert.match(choices, /Engineering CV/);
+  assert.match(choices, /Academic CV/);
+  assert.ok(choices.includes(`href="${backup}"`));
 });
 
 test('download files are PDFs and the legacy URL serves the new academic version', () => {

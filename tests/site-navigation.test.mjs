@@ -19,7 +19,7 @@ const expectedDesktopLinks = [
   ['/writing/', 'Writing advice'],
   ['/blog', 'Blog'],
   ['/#contact', 'Contact'],
-  ['/cv/', 'CV'],
+  ['/cv/', 'Resume'],
 ];
 
 function mainNav(html) {
@@ -39,6 +39,7 @@ test('uses one compact navigation and destination order across main site pages',
     assert.deepEqual(desktopLinks(nav), expectedDesktopLinks, `${name} has a divergent desktop menu`);
     assert.match(nav, /id="mobile-menu"/);
     assert.match(nav, /aria-controls="mobile-menu"/);
+    assert.match(nav, /href="\/cv\/" class="block[^"]*">Resume<\/a>/);
   }
 });
 
