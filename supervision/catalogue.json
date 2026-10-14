@@ -1,0 +1,678 @@
+[
+  {
+    "id": "mlp-2018-learning-sentiment-from-word-sequences",
+    "title": "Learning sentiment from word sequences",
+    "years": "2018",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Language & multimodal learning",
+    "question": "How much of a sentiment model's behaviour comes from its embeddings, recurrent architecture and regularisation?",
+    "mechanism": "Movie-review classification compared learned and pretrained embeddings, LSTM variants, dropout and attention.",
+    "contribution": "Shared implementation guidance and substantive report review; individual sentence authorship in mixed notes is not independently resolved.",
+    "outcome": "Experiments were reviewed, but these exports do not establish a final numerical improvement.",
+    "discuss": [
+      "How much of a sentiment model's behaviour comes from its embeddings, recurrent architecture and regularisation?"
+    ],
+    "tags": [
+      "NLP",
+      "sequence modelling",
+      "representation learning",
+      "evaluation"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2018-what-actually-improves-an-image-classifier",
+    "title": "What actually improves an image classifier?",
+    "years": "2018",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Architecture & reasoning",
+    "question": "Which gains survive a properly trained baseline and controlled architectural comparisons?",
+    "mechanism": "CIFAR experiments compared VGG pooling, normalisation and dropout choices, followed by residual-network comparisons.",
+    "contribution": "Baseline and architecture guidance, with review distinguishing replication from original invention.",
+    "outcome": "Student notes report improved accuracy, but the runs were not reproduced in this recovery. Architectural novelty is not established.",
+    "discuss": [
+      "Which gains survive a properly trained baseline and controlled architectural comparisons?"
+    ],
+    "tags": [
+      "computer vision",
+      "architecture comparison",
+      "optimisation",
+      "reproducibility"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2018-attention-is-not-the-only-useful-change",
+    "title": "Attention is not the only useful change",
+    "years": "2018",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Language & multimodal learning",
+    "question": "When attention helps, is it doing more for the task than a simpler regularisation change?",
+    "mechanism": "Sentiment models combined dynamic-length inputs, embeddings, bidirectional recurrence, pooling, dropout and attention visualisation.",
+    "contribution": "Training/data-pipeline guidance and detailed technical review are retained in the shared project record.",
+    "outcome": "Attention reportedly exceeded the baseline but underperformed dropout. Combining all promising changes remained a recommendation, not a verified result.",
+    "discuss": [
+      "When attention helps, is it doing more for the task than a simpler regularisation change?"
+    ],
+    "tags": [
+      "sequence pipelines",
+      "regularisation",
+      "interpretability",
+      "controlled comparisons"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2018-choosing-what-the-network-learns-next",
+    "title": "Choosing what the network learns next",
+    "years": "2018",
+    "period": "phd",
+    "context": "MLP · research development",
+    "theme": "Learning & adaptation",
+    "question": "Should a classifier learn from easy examples, difficult examples, or a curriculum that changes with the model?",
+    "mechanism": "Curriculum, anti-curriculum and dynamic sampling were compared with random sampling in VGG-based image classification.",
+    "contribution": "Shared design notes cover example difficulty, data providers, comparison structure and repeated-run statistics.",
+    "outcome": "Training and small gains are reported, but a sufficiently specified statistical comparison is absent. Not every proposed extension was completed.",
+    "discuss": [
+      "Should a classifier learn from easy examples, difficult examples, or a curriculum that changes with the model?"
+    ],
+    "tags": [
+      "adaptive training",
+      "sample selection",
+      "curriculum learning",
+      "experimental statistics"
+    ],
+    "links": [],
+    "entryType": "research-note"
+  },
+  {
+    "id": "mlp-2018-a-drawing-is-both-an-image-and-a-sequence",
+    "title": "A drawing is both an image and a sequence",
+    "years": "2018",
+    "period": "phd",
+    "context": "MLP · research development",
+    "theme": "Language & multimodal learning",
+    "question": "What can a model learn from the order of the strokes that it misses in the finished image?",
+    "mechanism": "QuickDraw classification combined CNN image features with bidirectional-LSTM stroke features, feature fusion and three supervised heads.",
+    "contribution": "The shared notes document my tutorial support, design guidance and technical discussions. The execution logs document the students' work.",
+    "outcome": "The logs report a multitask benefit and document reruns after validation/test augmentation problems. No final aggregate metric was independently audited.",
+    "discuss": [
+      "What can a model learn from the order of the strokes that it misses in the finished image?"
+    ],
+    "tags": [
+      "multimodal fusion",
+      "sequence and vision integration",
+      "multitask learning",
+      "experiment management"
+    ],
+    "links": [],
+    "entryType": "research-note"
+  },
+  {
+    "id": "mlp-2019-making-a-small-visual-dataset-useful",
+    "title": "Making a small visual dataset useful",
+    "years": "2019",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Learning & adaptation",
+    "question": "How do we separate useful transfer and augmentation from an improvement that only reflects a weak baseline?",
+    "mechanism": "Low-data image classification was explored through augmentation, regularisation and transfer-learning choices.",
+    "contribution": "Interim technical review reframed the problem and requested explicit architectures and evaluation. Official allocation supports the tutoring relationship.",
+    "outcome": "The precise application and dataset are unresolved; no final performance result is established.",
+    "discuss": [
+      "How do we separate useful transfer and augmentation from an improvement that only reflects a weak baseline?"
+    ],
+    "tags": [
+      "low-data learning",
+      "transfer learning",
+      "evaluation design"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2019-when-the-baseline-will-not-reproduce",
+    "title": "When the baseline will not reproduce",
+    "years": "2019",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Learning & adaptation",
+    "question": "What can we conclude about a proposed change before we can reproduce the model it is meant to improve?",
+    "mechanism": "DenseNet experiments investigated minority-class behaviour and imbalance; the exact application and mentioned attack method remain unresolved.",
+    "contribution": "Technical review required baseline reproduction, per-class metrics and reproducible configurations.",
+    "outcome": "Interim results underperformed the reference baseline. The linked results spreadsheet was not reread in this pass.",
+    "discuss": [
+      "What can we conclude about a proposed change before we can reproduce the model it is meant to improve?"
+    ],
+    "tags": [
+      "imbalance analysis",
+      "diagnostic evaluation",
+      "baseline reproduction"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2019-recognising-individuals-in-an-imbalanced-dataset",
+    "title": "Recognising individuals in an imbalanced dataset",
+    "years": "2019",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Learning & adaptation",
+    "question": "How do we evaluate individual recognition when a few classes dominate the examples we have?",
+    "mechanism": "Whale-tail identification raised fine-grained recognition, class imbalance, transfer learning and overfitting questions.",
+    "contribution": "Review focused on transfer-versus-scratch ambiguity, held-out evaluation and the compute risk of proposed architecture tuning.",
+    "outcome": "Interim experiments suggested overfitting; no defensible final held-out result was recovered. RL-based architecture tuning remained a proposal.",
+    "discuss": [
+      "How do we evaluate individual recognition when a few classes dominate the examples we have?"
+    ],
+    "tags": [
+      "fine-grained recognition",
+      "class imbalance",
+      "transfer learning",
+      "resource-aware planning"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2019-does-a-defence-survive-a-different-attack",
+    "title": "Does a defence survive a different attack?",
+    "years": "2019",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Learning & adaptation",
+    "question": "Are we learning a robust model, or a defence that works against the attacks we happened to test?",
+    "mechanism": "Adversarial-robustness work examined whether defences generalise across different attacks.",
+    "contribution": "Interim and final technical reviews examined reproducibility, the evaluation questions and limitations.",
+    "outcome": "Completed experiments are described in the review, but exact attack implementations and numerical results are absent from the exports. Universal robustness is not established.",
+    "discuss": [
+      "Are we learning a robust model, or a defence that works against the attacks we happened to test?"
+    ],
+    "tags": [
+      "robustness evaluation",
+      "cross-condition generalisation",
+      "experimental limitations"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2019-what-has-a-sign-recognition-model-learned",
+    "title": "What has a sign-recognition model learned?",
+    "years": "2019",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Architecture & reasoning",
+    "question": "What does reconstructing an input tell us about the representation used to recognise it?",
+    "mechanism": "Sign recognition compared convolutional architectures and regularisation, with decoder-based reconstruction used to inspect fixed representations.",
+    "contribution": "Technical reviews challenged weak baselines, ambiguous data splits and overly strong interpretations of reconstruction experiments.",
+    "outcome": "Experimental and interpretability work was reviewed. Video translation and real-time classification were future directions, not completed systems.",
+    "discuss": [
+      "What does reconstructing an input tell us about the representation used to recognise it?"
+    ],
+    "tags": [
+      "accessibility-oriented vision",
+      "representation analysis",
+      "efficient baselines"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2019-curiosity-as-a-learning-signal",
+    "title": "Curiosity as a learning signal",
+    "years": "2019",
+    "period": "phd",
+    "context": "MLP · research development",
+    "theme": "Control & evolution",
+    "question": "When does seeking unfamiliar states improve the policy, and how should we measure that separately from exploration itself?",
+    "mechanism": "Reinforcement-learning experiments compared PPO with random-network-distillation exploration and later investigated world models.",
+    "contribution": "Repeated project discussions and reviews addressed metric reporting and the justification for changes in research direction.",
+    "outcome": "Experiments were reported without a clear comparative reward table in the export. The world-model addition is not established as Antreas's original suggestion.",
+    "discuss": [
+      "When does seeking unfamiliar states improve the policy, and how should we measure that separately from exploration itself?"
+    ],
+    "tags": [
+      "exploration",
+      "intrinsic motivation",
+      "RL evaluation",
+      "research development"
+    ],
+    "links": [],
+    "entryType": "research-note"
+  },
+  {
+    "id": "mlp-2019-learning-how-to-reason-from-few-examples",
+    "title": "Learning how to reason from few examples",
+    "years": "2019",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Architecture & reasoning",
+    "question": "Can a learner adapt to a new reasoning task, rather than merely recognise examples from familiar classes?",
+    "mechanism": "The project explored MAML-based few-shot relational reasoning and the construction of custom tasks and datasets.",
+    "contribution": "Technical review clarified meta-learning versus few-shot learning, the MAML procedure and valid benchmark comparisons.",
+    "outcome": "Interim work is documented; a final result is absent. Results from a different task setting cannot be treated as directly comparable.",
+    "discuss": [
+      "Can a learner adapt to a new reasoning task, rather than merely recognise examples from familiar classes?"
+    ],
+    "tags": [
+      "meta-learning",
+      "relational reasoning",
+      "task design",
+      "fair benchmarking"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2019-face-outpainting-review-evaluating-the-evaluator-through-face-outpainting",
+    "title": "Evaluating the evaluator through face outpainting",
+    "years": "2019",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Generative models",
+    "question": "How do we know whether an image-generation metric is measuring the quality we actually care about?",
+    "mechanism": "GAN evaluation was examined using face outpainting as a concrete generative task.",
+    "contribution": "A sent technical review reframed the research around whether the evaluation measures are useful, rather than merely whether a model can generate faces.",
+    "outcome": "Review contribution only. Exact metric names, numerical outcomes and group allocation are not established.",
+    "discuss": [
+      "How do we know whether an image-generation metric is measuring the quality we actually care about?"
+    ],
+    "tags": [
+      "generative-model evaluation",
+      "perceptual assessment",
+      "research framing"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2019-small-world-models-review-world-models-on-a-smaller-compute-budget",
+    "title": "World models on a smaller compute budget",
+    "years": "2019",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Control & evolution",
+    "question": "Which parts of a world-model pipeline still earn their cost when the compute budget becomes much smaller?",
+    "mechanism": "A scaled-down World Models study used CarRacing to investigate model-based reinforcement learning under limited compute.",
+    "contribution": "A sent review establishes substantive technical and manuscript feedback, separate from the other curiosity-driven RL project.",
+    "outcome": "Experiments were discussed, but exact scores were not independently recovered. This is review work, not ownership of the model or training runs.",
+    "discuss": [
+      "Which parts of a world-model pipeline still earn their cost when the compute budget becomes much smaller?"
+    ],
+    "tags": [
+      "model-based RL",
+      "compute-efficiency evaluation",
+      "technical communication"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2020-where-does-a-captioning-model-get-its-gains",
+    "title": "Where does a captioning model get its gains?",
+    "years": "2020",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Language & multimodal learning",
+    "question": "If a caption improves, how do we establish whether the encoder, decoder or training setup made the difference?",
+    "mechanism": "CNN–RNN image captioning explored encoder, decoder and attention choices, with later architectural alternatives considered.",
+    "contribution": "Technical review focused on research framing, reproducible experiments, model selection and unsupported encoder-versus-decoder conclusions.",
+    "outcome": "Experiments were reviewed without an independently verified final performance claim. Transformer and relational alternatives remained suggestions.",
+    "discuss": [
+      "If a caption improves, how do we establish whether the encoder, decoder or training setup made the difference?"
+    ],
+    "tags": [
+      "vision-language modelling",
+      "model selection",
+      "experimental inference"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2020-when-an-audio-classifier-will-not-fit",
+    "title": "When an audio classifier will not fit",
+    "years": "2020",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Language & multimodal learning",
+    "question": "Before changing the model, can we establish why the existing audio classifier is not fitting its training data?",
+    "mechanism": "Instrument classification on IRMAS brought together audio preprocessing, aggregation and training diagnostics.",
+    "contribution": "Technical review examined splits and repeated runs, and treated non-fitting training curves as possible optimisation, gradient or implementation problems.",
+    "outcome": "Baseline difficulties were documented. A diagnostic hypothesis is not a verified repair or performance improvement.",
+    "discuss": [
+      "Before changing the model, can we establish why the existing audio classifier is not fitting its training data?"
+    ],
+    "tags": [
+      "audio ML",
+      "training diagnostics",
+      "data pipelines",
+      "evaluation"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2020-translating-maps-across-visual-domains",
+    "title": "Translating maps across visual domains",
+    "years": "2020",
+    "period": "phd",
+    "context": "MLP · research development",
+    "theme": "Generative models",
+    "question": "Can an image translator change a map's style while retaining the relationships that make it a map?",
+    "mechanism": "Relational CycleGAN research explored modern-to-antique map translation, with follow-on research development.",
+    "contribution": "Contemporary correspondence corroborates the team relationship and an invitation to continue towards a paper. Specific code ownership is not isolated.",
+    "outcome": "A report and continued collaboration are documented; recovered planning notes do not establish a final gain or publication.",
+    "discuss": [
+      "Can an image translator change a map's style while retaining the relationships that make it a map?"
+    ],
+    "tags": [
+      "domain translation",
+      "generative research",
+      "research development"
+    ],
+    "links": [],
+    "entryType": "research-note"
+  },
+  {
+    "id": "mlp-2020-a-smaller-model-still-needs-the-right-test",
+    "title": "A smaller model still needs the right test",
+    "years": "2020",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Learning & adaptation",
+    "question": "What does an efficiency comparison mean if the benchmark and metric do not match the task we claim to solve?",
+    "mechanism": "An efficiency project evolved from distillation planning towards quantisation, heatmaps and bounding-box conversion in the reviewed report.",
+    "contribution": "Technical review challenged benchmark justification, annotation methods, task–metric mismatch and single-seed evaluation.",
+    "outcome": "The report was revised, but a compression benefit remains unverified.",
+    "discuss": [
+      "What does an efficiency comparison mean if the benchmark and metric do not match the task we claim to solve?"
+    ],
+    "tags": [
+      "model compression",
+      "task-metric alignment",
+      "annotation design",
+      "evaluation"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2020-captioning-reproduction-before-novelty",
+    "title": "Captioning: reproduction before novelty",
+    "years": "2020",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Language & multimodal learning",
+    "question": "What have we learned by changing the dataset, and what would justify claiming a new method?",
+    "mechanism": "Image-captioning work investigated recurrent alternatives and possible interpretability studies.",
+    "contribution": "Technical review clarified the baseline and task, and separated replication from an original methodological contribution.",
+    "outcome": "Reviewed experiments largely replicated existing methods on another dataset. Proposed attacks and autoencoder extensions were not completed work.",
+    "discuss": [
+      "What have we learned by changing the dataset, and what would justify claiming a new method?"
+    ],
+    "tags": [
+      "vision-language evaluation",
+      "reproducibility",
+      "research communication"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2020-learning-the-style-of-an-ink-wash-painting",
+    "title": "Learning the style of an ink-wash painting",
+    "years": "2020",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Generative models",
+    "question": "When a translation model fails, is the problem the objective, the data, or the implementation?",
+    "mechanism": "Photo-to-ink-wash CycleGAN work combined dataset collection, qualitative inspection and classifier-based evaluation.",
+    "contribution": "Technical review distinguished the GAN objective from the application, sharpened the research questions and explored possible implementation problems.",
+    "outcome": "Unsuccessful methods were documented. The record does not establish that the suspected problems were repaired or that translation ultimately succeeded.",
+    "discuss": [
+      "When a translation model fails, is the problem the objective, the data, or the implementation?"
+    ],
+    "tags": [
+      "style translation",
+      "generative evaluation",
+      "diagnostic review"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2020-what-a-few-shot-improvement-actually-tells-us",
+    "title": "What a few-shot improvement actually tells us",
+    "years": "2020",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Learning & adaptation",
+    "question": "Does better performance on a few-shot task establish the broader claim we want to make about generalisation?",
+    "mechanism": "MAML++-based few-shot work investigated character recognition and claims about bias and generalisation.",
+    "contribution": "Technical review corrected inner-/outer-loop data assumptions and challenged the inference from task improvement to reduced data bias.",
+    "outcome": "The report described task-specific improvements, but these do not establish a general bias-reduction result.",
+    "discuss": [
+      "Does better performance on a few-shot task establish the broader claim we want to make about generalisation?"
+    ],
+    "tags": [
+      "meta-learning",
+      "generalisation evaluation",
+      "benchmark validity"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2020-emotion-language-and-the-evaluation-pipeline",
+    "title": "Emotion, language and the evaluation pipeline",
+    "years": "2020",
+    "period": "phd",
+    "context": "MLP · technical review",
+    "theme": "Language & multimodal learning",
+    "question": "How much of the apparent improvement comes from the model, and how much from how we built and split the data?",
+    "mechanism": "The project developed emotion classification and explored emotion-conditioned reply generation, with dataset construction central to the comparison.",
+    "contribution": "Technical review examined oversampling, validation splits, model selection and fixed-budget comparison claims.",
+    "outcome": "Experiments were reported, but parts of the task remained ambiguous in the review. No general superiority claim is established.",
+    "discuss": [
+      "How much of the apparent improvement comes from the model, and how much from how we built and split the data?"
+    ],
+    "tags": [
+      "NLP pipelines",
+      "dataset design",
+      "model selection",
+      "evaluation"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2021-translating-musical-style",
+    "title": "Translating musical style",
+    "years": "2021",
+    "period": "phd",
+    "context": "MLP · transition year",
+    "theme": "Generative models",
+    "question": "Which aspects of a piece should change when we translate its style, and which should remain recognisably the same?",
+    "mechanism": "Symbolic-music style transfer combined CycleGAN-style translation with sequence modelling.",
+    "contribution": "Tutor evidence and technical review support task formalisation, motivation and calibration of research claims.",
+    "outcome": "A final report is catalogued, but the preliminary review supplies no verified performance or publication result.",
+    "discuss": [
+      "Which aspects of a piece should change when we translate its style, and which should remain recognisably the same?"
+    ],
+    "tags": [
+      "generative music",
+      "domain translation",
+      "sequence modelling"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2021-which-representations-transfer-to-a-new-world",
+    "title": "Which representations transfer to a new world?",
+    "years": "2021",
+    "period": "phd",
+    "context": "MLP · transition year",
+    "theme": "Control & evolution",
+    "question": "Does a representation help a policy transfer, or merely fit the world on which we trained it?",
+    "mechanism": "DARLA-style representation learning and beta-VAE ideas were investigated on CoinRun with DQN/PPO control.",
+    "contribution": "Tutoring and technical review supported benchmark feasibility, reproducing a baseline before extending it, and compute-aware research scope.",
+    "outcome": "Training and reproduction were still in progress in the notes. Evolutionary and meta-learning extensions were proposed, then deprioritised; final gains are not established here.",
+    "discuss": [
+      "Does a representation help a policy transfer, or merely fit the world on which we trained it?"
+    ],
+    "tags": [
+      "RL transfer",
+      "representation learning",
+      "reproducibility",
+      "compute-aware design"
+    ],
+    "links": [],
+    "entryType": "research-note"
+  },
+  {
+    "id": "mlp-2021-learning-interactions-between-sparse-features",
+    "title": "Learning interactions between sparse features",
+    "years": "2021",
+    "period": "phd",
+    "context": "MLP · transition year",
+    "theme": "Architecture & reasoning",
+    "question": "Which feature interactions are worth learning explicitly when most of the input is sparse and categorical?",
+    "mechanism": "Click-through prediction explored field-weighted factorisation models, compression and attention-style feature interactions on Criteo data.",
+    "contribution": "Technical review addressed the task, architecture and experimental configurations. Individual authorship of every design choice is not established.",
+    "outcome": "A report is catalogued; performance gains were not independently verified. The literature list is not an inventory of personally trained models.",
+    "discuss": [
+      "Which feature interactions are worth learning explicitly when most of the input is sparse and categorical?"
+    ],
+    "tags": [
+      "recommender systems",
+      "sparse feature learning",
+      "interaction modelling",
+      "evaluation"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2021-bringing-pretrained-vision-into-style-translation",
+    "title": "Bringing pretrained vision into style translation",
+    "years": "2021",
+    "period": "phd",
+    "context": "MLP · transition year",
+    "theme": "Generative models",
+    "question": "Where should a pretrained representation enter a generative system, and which parts should we allow to change?",
+    "mechanism": "Monet-style CycleGAN work considered how to integrate CLIP image representations into a translation pipeline.",
+    "contribution": "A joint technical call records code walkthroughs, generator/discriminator integration advice, frozen-versus-tuned comparisons and staged ablations.",
+    "outcome": "The assistance is documented, but the team's own planning document and final outcomes are missing. It is a separate project from the text-to-face work.",
+    "discuss": [
+      "Where should a pretrained representation enter a generative system, and which parts should we allow to change?"
+    ],
+    "tags": [
+      "pretrained generative vision",
+      "architecture decomposition",
+      "technical enablement"
+    ],
+    "links": [],
+    "entryType": "research-note"
+  },
+  {
+    "id": "mlp-2021-making-a-normalising-flow-smaller",
+    "title": "Making a normalising flow smaller",
+    "years": "2021",
+    "period": "phd",
+    "context": "MLP · transition year",
+    "theme": "Generative models",
+    "question": "How much of a generative model can we remove before the efficiency gain stops being worth the modelling loss?",
+    "mechanism": "Normalising-flow compression explored pruning, product quantisation and low-rank approaches to efficient generative modelling.",
+    "contribution": "Tutoring and technical review supported problem motivation, task definition and experiment design.",
+    "outcome": "Planning, review and the existence of a final report are established. Compression gains and personal implementation are not verified.",
+    "discuss": [
+      "How much of a generative model can we remove before the efficiency gain stops being worth the modelling loss?"
+    ],
+    "tags": [
+      "model compression",
+      "normalising flows",
+      "efficient generative modelling"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2021-recovering-detail-in-astronomical-images",
+    "title": "Recovering detail in astronomical images",
+    "years": "2021",
+    "period": "phd",
+    "context": "MLP · transition year",
+    "theme": "Generative models",
+    "question": "How do we tell restored astronomical structure from plausible detail invented by the model?",
+    "mechanism": "Astronomical image restoration explored denoising and frame enhancement, with CycleGAN and DnCNN comparisons in the recovered report catalogue.",
+    "contribution": "Technical review addressed degradation and task definitions, low-resolution prototyping, dataset construction and quantitative alongside qualitative evaluation.",
+    "outcome": "Data preparation and a selected frame-enhancement direction are documented. The final comparison was not reread in this pass and no numerical gain is claimed.",
+    "discuss": [
+      "How do we tell restored astronomical structure from plausible detail invented by the model?"
+    ],
+    "tags": [
+      "scientific imaging",
+      "image restoration",
+      "dataset design",
+      "evaluation"
+    ],
+    "links": [],
+    "entryType": "review"
+  },
+  {
+    "id": "mlp-2021-finding-the-bottleneck-in-an-audio-pipeline",
+    "title": "Finding the bottleneck in an audio pipeline",
+    "years": "2021",
+    "period": "phd",
+    "context": "MLP · transition year",
+    "theme": "Language & multimodal learning",
+    "question": "Is the slow part the architecture, the data pipeline, or a mismatch in how we are using the pretrained model?",
+    "mechanism": "Rainforest-audio work connected spectrogram classification, pretrained-model adaptation, CNN efficiency and data-loading diagnostics.",
+    "contribution": "Two help calls record architecture inspection, timing advice, HDF5 loading discussion, dependency debugging and a live PyTorch tensor-shape/head-dimension demonstration.",
+    "outcome": "Demonstration execution appears in the transcript but was not independently rerun. The student's training remained problematic; no final improvement is verified. Formal reassignment to Antreas is not confirmed.",
+    "discuss": [
+      "Is the slow part the architecture, the data pipeline, or a mismatch in how we are using the pretrained model?"
+    ],
+    "tags": [
+      "performance debugging",
+      "cross-modal transfer",
+      "PyTorch",
+      "technical enablement"
+    ],
+    "links": [],
+    "entryType": "research-note"
+  },
+  {
+    "id": "mlp-2021-learning-a-sequential-decision-policy",
+    "title": "Learning a sequential decision policy",
+    "years": "2021",
+    "period": "phd",
+    "context": "MLP · transition year",
+    "theme": "Control & evolution",
+    "question": "How do we tell whether a decision policy generalises rather than exploiting the period on which we tuned it?",
+    "mechanism": "RL trading research considered fitted-Q and double-DQN methods, recurrent attention and alternative reward definitions.",
+    "contribution": "Tutor evidence supports research guidance; shared technical planning is not proof of personal trading-system implementation.",
+    "outcome": "The notes warn that plans may differ from the final project. Some adaptations were reported and reproduction requested. No live-trading or profit claim is established.",
+    "discuss": [
+      "How do we tell whether a decision policy generalises rather than exploiting the period on which we tuned it?"
+    ],
+    "tags": [
+      "sequential decision-making",
+      "RL evaluation",
+      "generalisation",
+      "reward design"
+    ],
+    "links": [],
+    "entryType": "research-note"
+  }
+]
