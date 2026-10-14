@@ -95,7 +95,7 @@
             <h3>My part</h3><p>I mentored the project through regular meetings and technical guidance. The work developed from one of the MSc directions I was supervising; the student built and evaluated the method.</p>
             <h3>Where it got to</h3><p>An implemented method, classification experiments and an MSc dissertation. Evaluating more candidates adds forward-pass cost, so augmentation quality has to be considered alongside training throughput.</p>
             <h3>Worth discussing</h3><ul><li>The difference between an example being difficult and being useful to learn from.</li><li>When per-example policy selection earns its additional computation.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -113,7 +113,7 @@
             <h3>My part</h3><p>I provided weekly supervision and technical suggestions as the architecture and experiments developed. The student implemented and evaluated the translation systems; we were reusing pretrained components, not training those foundation models from scratch.</p>
             <h3>Where it got to</h3><p>Implemented architectures and an MSc dissertation. Some routes did not work, and numerical image-quality measures did not settle every question about whether the translated image preserved the right content.</p>
             <h3>Worth discussing</h3><ul><li>What a feature-space cycle loss preserves, and what it can let disappear.</li><li>Why freezing weights does not necessarily remove the cost of backpropagating through a model.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -131,7 +131,7 @@
             <h3>My part</h3><p>I proposed the direction and provided the main day-to-day supervision. I also supplied an existing augmentation-code resource and helped the student reason about the implementation and experiments.</p>
             <h3>Where it got to</h3><p>Implemented methods and image-classification experiments documented in a dissertation. The inner optimisation made training cost an important part of the comparison.</p>
             <h3>Worth discussing</h3><ul><li>How to make an augmentation difficult without destroying the information needed to label it.</li><li>Comparing robustness at equal wall-clock cost, not just equal numbers of epochs.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -149,7 +149,7 @@
             <h3>My part</h3><p>I supervised the dissertation and helped with technical direction and experimental design. That included thinking through baselines, data splits and the difference between selecting difficult examples and balancing classes.</p>
             <h3>Where it got to</h3><p>A completed dissertation with mixed findings. Training loss alone was not a dependable way to repair class imbalance; its usefulness depended on the setting.</p>
             <h3>Worth discussing</h3><ul><li>High loss can mean a useful learning opportunity, insufficient exposure, or an unhelpful outlier. How do we distinguish them?</li><li>Controlling the backward-pass budget when comparing a curriculum with class-balanced sampling.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -167,7 +167,7 @@
             <h3>My part</h3><p>I supervised the team and helped shape the evaluation: classifier comparisons, augmentation controls, repeated measurements and separating transfer-learning effects from the contribution of generated data.</p>
             <h3>Where it got to</h3><p>An implemented project and manuscript. The study did not establish a clear overall classification improvement. That left an important question: was missing data really the bottleneck, or was the classifier failing to use the surrounding scene?</p>
             <h3>Worth discussing</h3><ul><li>Why visually realistic samples can still be poor training data.</li><li>The circular difficulty of learning to generate a class for which we have very few real examples.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -185,7 +185,7 @@
             <h3>My part</h3><p>I helped refine the research questions and evaluation, then continued supervising development beyond the coursework. Follow-up discussions explored how to condition generation on individual customers.</p>
             <h3>Where it got to</h3><p>A completed coursework study, followed by proposals to test diversity and generalisation to unseen customers.</p>
             <h3>Worth discussing</h3><ul><li>A classifier recognising the intended category does not tell us whether the generator covers the distribution.</li><li>How to hold out customers, rather than adjacent time windows, when testing generalisation.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -203,7 +203,7 @@
             <h3>My part</h3><p>I implemented and supplied relational components for both the discriminator and generator, and helped the team integrate them and reason about tensor dimensions. The students integrated the components and ran the broader experiments.</p>
             <h3>Where it got to</h3><p>The relational components were integrated into the translation models and explored in experiments. Component-wise ablations remained a proposed next step.</p>
             <h3>Worth discussing</h3><ul><li>Whether relational structure is more useful in the generator, the discriminator, or both.</li><li>How to separate changes in visual quality from changes in semantic consistency.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -239,7 +239,7 @@
             <h3>My part</h3><p>I tutored the original group, continued supervising the research and contributed to the manuscript, architecture discussions and evaluation design.</p>
             <h3>Where it got to</h3><p>Completed comparisons and a co-authored manuscript draft. This was a research study, not a clinically deployed diagnostic system.</p>
             <h3>Worth discussing</h3><ul><li>When an auxiliary task helps a shared representation and when it causes negative transfer.</li><li>Whether the information gained from localisation justifies the additional annotation effort.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -257,7 +257,7 @@
             <h3>My part</h3><p>I provided tutoring and research guidance through the semester, reviewed the report and invited the team to continue developing the work afterwards.</p>
             <h3>Where it got to</h3><p>A completed coursework report with mixed findings. The hierarchical approach left useful avenues to explore, but was not sufficiently tuned to support a general performance claim.</p>
             <h3>Worth discussing</h3><ul><li>What should evolve: the policy weights, mutation scales, or the search procedure itself?</li><li>Making an evolutionary search and a policy-gradient method comparable under a fixed compute budget.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -275,7 +275,7 @@
             <h3>My part</h3><p>I guided the group and subsequently invited them to develop the project towards a paper. Our follow-up discussions considered other pretrained-model routes without treating those proposed extensions as completed work.</p>
             <h3>Where it got to</h3><p>A completed report described improvements over its baseline alongside grammatical errors and weaknesses in preserving meaning.</p>
             <h3>Worth discussing</h3><ul><li>Why lexical diversity can reward a paraphrase for becoming less faithful.</li><li>Which limitations come from the representation, the latent objective and the decoder.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -293,7 +293,7 @@
             <h3>My part</h3><p>I tutored the project and helped with framing and review as part of the MLP research-development work.</p>
             <h3>Where it got to</h3><p>An implemented coursework project. Working notes identified a training-schedule confound in an apparent embedding advantage, making matched training conditions important to the interpretation.</p>
             <h3>Worth discussing</h3><ul><li>When a representation rich in semantics is missing the information a phonetic task needs.</li><li>Matching training schedules and tuning budgets before attributing a gain to pretraining.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -311,7 +311,7 @@
             <h3>My part</h3><p>I advised on using CLIP text embeddings in the generator and image embeddings in the discriminator, tutored the group and later invited them to develop the work into a paper.</p>
             <h3>Where it got to</h3><p>Completed comparisons included unsuccessful variants, making the choice of where and how to use CLIP central to the interpretation. We discussed developing the work into a paper.</p>
             <h3>Worth discussing</h3><ul><li>Whether an improvement comes from better conditioning or a better learning signal.</li><li>A plausible face is not necessarily a face that matches the description.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -329,7 +329,7 @@
             <h3>My part</h3><p>I tutored the group and helped guide the project scope and the comparisons between image, text and joint encoders.</p>
             <h3>Where it got to</h3><p>Classifier training and a coursework report, with cross-dataset transfer left for follow-up.</p>
             <h3>Worth discussing</h3><ul><li>How to detect a unimodal shortcut in an apparently multimodal system.</li><li>What a within-dataset score leaves unresolved about transfer to a different collection of memes.</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -347,7 +347,7 @@
             <h3>My part</h3><p>Shared implementation guidance and substantive report review; individual sentence authorship in mixed notes is not independently resolved.</p>
             <h3>Where it got to</h3><p>Experiments were reviewed, but these exports do not establish a final numerical improvement.</p>
             <h3>Worth discussing</h3><ul><li>How much of a sentiment model&#39;s behaviour comes from its embeddings, recurrent architecture and regularisation?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -365,7 +365,7 @@
             <h3>My part</h3><p>Baseline and architecture guidance, with review distinguishing replication from original invention.</p>
             <h3>Where it got to</h3><p>Student notes report improved accuracy, but the runs were not reproduced in this recovery. Architectural novelty is not established.</p>
             <h3>Worth discussing</h3><ul><li>Which gains survive a properly trained baseline and controlled architectural comparisons?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -383,7 +383,7 @@
             <h3>My part</h3><p>Training/data-pipeline guidance and detailed technical review are retained in the shared project record.</p>
             <h3>Where it got to</h3><p>Attention reportedly exceeded the baseline but underperformed dropout. Combining all promising changes remained a recommendation, not a verified result.</p>
             <h3>Worth discussing</h3><ul><li>When attention helps, is it doing more for the task than a simpler regularisation change?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -401,7 +401,7 @@
             <h3>My part</h3><p>Shared design notes cover example difficulty, data providers, comparison structure and repeated-run statistics.</p>
             <h3>Where it got to</h3><p>Training and small gains are reported, but a sufficiently specified statistical comparison is absent. Not every proposed extension was completed.</p>
             <h3>Worth discussing</h3><ul><li>Should a classifier learn from easy examples, difficult examples, or a curriculum that changes with the model?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -419,7 +419,7 @@
             <h3>My part</h3><p>The shared notes document my tutorial support, design guidance and technical discussions. The execution logs document the students&#39; work.</p>
             <h3>Where it got to</h3><p>The logs report a multitask benefit and document reruns after validation/test augmentation problems. No final aggregate metric was independently audited.</p>
             <h3>Worth discussing</h3><ul><li>What can a model learn from the order of the strokes that it misses in the finished image?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -437,7 +437,7 @@
             <h3>My part</h3><p>Interim technical review reframed the problem and requested explicit architectures and evaluation. Official allocation supports the tutoring relationship.</p>
             <h3>Where it got to</h3><p>The precise application and dataset are unresolved; no final performance result is established.</p>
             <h3>Worth discussing</h3><ul><li>How do we separate useful transfer and augmentation from an improvement that only reflects a weak baseline?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -455,7 +455,7 @@
             <h3>My part</h3><p>Technical review required baseline reproduction, per-class metrics and reproducible configurations.</p>
             <h3>Where it got to</h3><p>Interim results underperformed the reference baseline. The linked results spreadsheet was not reread in this pass.</p>
             <h3>Worth discussing</h3><ul><li>What can we conclude about a proposed change before we can reproduce the model it is meant to improve?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -473,7 +473,7 @@
             <h3>My part</h3><p>Review focused on transfer-versus-scratch ambiguity, held-out evaluation and the compute risk of proposed architecture tuning.</p>
             <h3>Where it got to</h3><p>Interim experiments suggested overfitting; no defensible final held-out result was recovered. RL-based architecture tuning remained a proposal.</p>
             <h3>Worth discussing</h3><ul><li>How do we evaluate individual recognition when a few classes dominate the examples we have?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -491,7 +491,7 @@
             <h3>My part</h3><p>Interim and final technical reviews examined reproducibility, the evaluation questions and limitations.</p>
             <h3>Where it got to</h3><p>Completed experiments are described in the review, but exact attack implementations and numerical results are absent from the exports. Universal robustness is not established.</p>
             <h3>Worth discussing</h3><ul><li>Are we learning a robust model, or a defence that works against the attacks we happened to test?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -509,7 +509,7 @@
             <h3>My part</h3><p>Technical reviews challenged weak baselines, ambiguous data splits and overly strong interpretations of reconstruction experiments.</p>
             <h3>Where it got to</h3><p>Experimental and interpretability work was reviewed. Video translation and real-time classification were future directions, not completed systems.</p>
             <h3>Worth discussing</h3><ul><li>What does reconstructing an input tell us about the representation used to recognise it?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -527,7 +527,7 @@
             <h3>My part</h3><p>Repeated project discussions and reviews addressed metric reporting and the justification for changes in research direction.</p>
             <h3>Where it got to</h3><p>Experiments were reported without a clear comparative reward table in the export. The world-model addition is not established as Antreas&#39;s original suggestion.</p>
             <h3>Worth discussing</h3><ul><li>When does seeking unfamiliar states improve the policy, and how should we measure that separately from exploration itself?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -545,7 +545,7 @@
             <h3>My part</h3><p>Technical review clarified meta-learning versus few-shot learning, the MAML procedure and valid benchmark comparisons.</p>
             <h3>Where it got to</h3><p>Interim work is documented; a final result is absent. Results from a different task setting cannot be treated as directly comparable.</p>
             <h3>Worth discussing</h3><ul><li>Can a learner adapt to a new reasoning task, rather than merely recognise examples from familiar classes?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -563,7 +563,7 @@
             <h3>My part</h3><p>A sent technical review reframed the research around whether the evaluation measures are useful, rather than merely whether a model can generate faces.</p>
             <h3>Where it got to</h3><p>Review contribution only. Exact metric names, numerical outcomes and group allocation are not established.</p>
             <h3>Worth discussing</h3><ul><li>How do we know whether an image-generation metric is measuring the quality we actually care about?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -581,7 +581,7 @@
             <h3>My part</h3><p>A sent review establishes substantive technical and manuscript feedback, separate from the other curiosity-driven RL project.</p>
             <h3>Where it got to</h3><p>Experiments were discussed, but exact scores were not independently recovered. This is review work, not ownership of the model or training runs.</p>
             <h3>Worth discussing</h3><ul><li>Which parts of a world-model pipeline still earn their cost when the compute budget becomes much smaller?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -599,7 +599,7 @@
             <h3>My part</h3><p>Technical review focused on research framing, reproducible experiments, model selection and unsupported encoder-versus-decoder conclusions.</p>
             <h3>Where it got to</h3><p>Experiments were reviewed without an independently verified final performance claim. Transformer and relational alternatives remained suggestions.</p>
             <h3>Worth discussing</h3><ul><li>If a caption improves, how do we establish whether the encoder, decoder or training setup made the difference?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -617,7 +617,7 @@
             <h3>My part</h3><p>Technical review examined splits and repeated runs, and treated non-fitting training curves as possible optimisation, gradient or implementation problems.</p>
             <h3>Where it got to</h3><p>Baseline difficulties were documented. A diagnostic hypothesis is not a verified repair or performance improvement.</p>
             <h3>Worth discussing</h3><ul><li>Before changing the model, can we establish why the existing audio classifier is not fitting its training data?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -635,7 +635,7 @@
             <h3>My part</h3><p>Contemporary correspondence corroborates the team relationship and an invitation to continue towards a paper. Specific code ownership is not isolated.</p>
             <h3>Where it got to</h3><p>A report and continued collaboration are documented; recovered planning notes do not establish a final gain or publication.</p>
             <h3>Worth discussing</h3><ul><li>Can an image translator change a map&#39;s style while retaining the relationships that make it a map?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -653,7 +653,7 @@
             <h3>My part</h3><p>Technical review challenged benchmark justification, annotation methods, task–metric mismatch and single-seed evaluation.</p>
             <h3>Where it got to</h3><p>The report was revised, but a compression benefit remains unverified.</p>
             <h3>Worth discussing</h3><ul><li>What does an efficiency comparison mean if the benchmark and metric do not match the task we claim to solve?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -671,7 +671,7 @@
             <h3>My part</h3><p>Technical review clarified the baseline and task, and separated replication from an original methodological contribution.</p>
             <h3>Where it got to</h3><p>Reviewed experiments largely replicated existing methods on another dataset. Proposed attacks and autoencoder extensions were not completed work.</p>
             <h3>Worth discussing</h3><ul><li>What have we learned by changing the dataset, and what would justify claiming a new method?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -689,7 +689,7 @@
             <h3>My part</h3><p>Technical review distinguished the GAN objective from the application, sharpened the research questions and explored possible implementation problems.</p>
             <h3>Where it got to</h3><p>Unsuccessful methods were documented. The record does not establish that the suspected problems were repaired or that translation ultimately succeeded.</p>
             <h3>Worth discussing</h3><ul><li>When a translation model fails, is the problem the objective, the data, or the implementation?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -707,7 +707,7 @@
             <h3>My part</h3><p>Technical review corrected inner-/outer-loop data assumptions and challenged the inference from task improvement to reduced data bias.</p>
             <h3>Where it got to</h3><p>The report described task-specific improvements, but these do not establish a general bias-reduction result.</p>
             <h3>Worth discussing</h3><ul><li>Does better performance on a few-shot task establish the broader claim we want to make about generalisation?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -725,7 +725,7 @@
             <h3>My part</h3><p>Technical review examined oversampling, validation splits, model selection and fixed-budget comparison claims.</p>
             <h3>Where it got to</h3><p>Experiments were reported, but parts of the task remained ambiguous in the review. No general superiority claim is established.</p>
             <h3>Worth discussing</h3><ul><li>How much of the apparent improvement comes from the model, and how much from how we built and split the data?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -743,7 +743,7 @@
             <h3>My part</h3><p>Tutor evidence and technical review support task formalisation, motivation and calibration of research claims.</p>
             <h3>Where it got to</h3><p>A final report is catalogued, but the preliminary review supplies no verified performance or publication result.</p>
             <h3>Worth discussing</h3><ul><li>Which aspects of a piece should change when we translate its style, and which should remain recognisably the same?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -761,7 +761,7 @@
             <h3>My part</h3><p>Tutoring and technical review supported benchmark feasibility, reproducing a baseline before extending it, and compute-aware research scope.</p>
             <h3>Where it got to</h3><p>Training and reproduction were still in progress in the notes. Evolutionary and meta-learning extensions were proposed, then deprioritised; final gains are not established here.</p>
             <h3>Worth discussing</h3><ul><li>Does a representation help a policy transfer, or merely fit the world on which we trained it?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -779,7 +779,7 @@
             <h3>My part</h3><p>Technical review addressed the task, architecture and experimental configurations. Individual authorship of every design choice is not established.</p>
             <h3>Where it got to</h3><p>A report is catalogued; performance gains were not independently verified. The literature list is not an inventory of personally trained models.</p>
             <h3>Worth discussing</h3><ul><li>Which feature interactions are worth learning explicitly when most of the input is sparse and categorical?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -797,7 +797,7 @@
             <h3>My part</h3><p>A joint technical call records code walkthroughs, generator/discriminator integration advice, frozen-versus-tuned comparisons and staged ablations.</p>
             <h3>Where it got to</h3><p>The assistance is documented, but the team&#39;s own planning document and final outcomes are missing. It is a separate project from the text-to-face work.</p>
             <h3>Worth discussing</h3><ul><li>Where should a pretrained representation enter a generative system, and which parts should we allow to change?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -815,7 +815,7 @@
             <h3>My part</h3><p>Tutoring and technical review supported problem motivation, task definition and experiment design.</p>
             <h3>Where it got to</h3><p>Planning, review and the existence of a final report are established. Compression gains and personal implementation are not verified.</p>
             <h3>Worth discussing</h3><ul><li>How much of a generative model can we remove before the efficiency gain stops being worth the modelling loss?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -833,7 +833,7 @@
             <h3>My part</h3><p>Technical review addressed degradation and task definitions, low-resolution prototyping, dataset construction and quantitative alongside qualitative evaluation.</p>
             <h3>Where it got to</h3><p>Data preparation and a selected frame-enhancement direction are documented. The final comparison was not reread in this pass and no numerical gain is claimed.</p>
             <h3>Worth discussing</h3><ul><li>How do we tell restored astronomical structure from plausible detail invented by the model?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -851,7 +851,7 @@
             <h3>My part</h3><p>Two help calls record architecture inspection, timing advice, HDF5 loading discussion, dependency debugging and a live PyTorch tensor-shape/head-dimension demonstration.</p>
             <h3>Where it got to</h3><p>Demonstration execution appears in the transcript but was not independently rerun. The student&#39;s training remained problematic; no final improvement is verified. Formal reassignment to Antreas is not confirmed.</p>
             <h3>Worth discussing</h3><ul><li>Is the slow part the architecture, the data pipeline, or a mismatch in how we are using the pretrained model?</li></ul>
-            
+
           </div>
         </details>
       </article>
@@ -869,7 +869,7 @@
             <h3>My part</h3><p>Tutor evidence supports research guidance; shared technical planning is not proof of personal trading-system implementation.</p>
             <h3>Where it got to</h3><p>The notes warn that plans may differ from the final project. Some adaptations were reported and reproduction requested. No live-trading or profit claim is established.</p>
             <h3>Worth discussing</h3><ul><li>How do we tell whether a decision policy generalises rather than exploiting the period on which we tuned it?</li></ul>
-            
+
           </div>
         </details>
       </article>

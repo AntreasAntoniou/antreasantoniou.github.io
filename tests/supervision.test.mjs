@@ -35,6 +35,7 @@ test('catalogue scope, depth and originating cohort are explicit', () => {
 });
 
 test('the entire catalogue is available as static accessible HTML', () => {
+  assert.doesNotMatch(html, /[ \t]+$/m, 'generated HTML must not contain trailing whitespace');
   assert.equal((html.match(/data-project data-period/g) || []).length, data.length);
   assert.equal((html.match(/<details>/g) || []).length, data.length);
   assert.match(html, /<noscript>/);

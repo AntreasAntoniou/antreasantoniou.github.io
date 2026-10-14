@@ -97,5 +97,5 @@ const html = `<!DOCTYPE html>
 </html>
 `;
 mkdirSync(resolve(root, 'supervision'), { recursive: true });
-writeFileSync(resolve(root, 'supervision/index.html'), html);
+writeFileSync(resolve(root, 'supervision/index.html'), html.replace(/[ \t]+$/gm, ''));
 console.log(`Built supervision/index.html with ${projects.length} projects.`);
