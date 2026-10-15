@@ -2,9 +2,9 @@ export function normalize(text) {
   return String(text).normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().trim();
 }
 
-export function matchesProject(project, { query = '', period = 'all', theme = 'all', depth = 'all' } = {}) {
+export function matchesProject(project, { query = '', mentorship = 'all', theme = 'all', depth = 'all' } = {}) {
   const terms = normalize(query).split(/\s+/).filter(Boolean);
-  return (period === 'all' || project.period === period || project.cohort === period)
+  return (mentorship === 'all' || project.mentorship === mentorship)
     && (theme === 'all' || project.theme === theme)
     && (depth === 'all' || project.depth === depth)
     && terms.every(term => normalize(project.text).includes(term));
@@ -12,7 +12,7 @@ export function matchesProject(project, { query = '', period = 'all', theme = 'a
 
 if (typeof document !== 'undefined') {
   const search = document.getElementById('project-search');
-  const period = document.getElementById('project-period');
+  const mentorship = document.getElementById('project-mentorship');
   const theme = document.getElementById('project-theme');
   const depth = document.getElementById('project-depth');
   const expand = document.getElementById('expand-projects');
@@ -28,8 +28,8 @@ if (typeof document !== 'undefined') {
     expand.hidden = visible.length === 0;
   };
   const filter = () => {
-    const selection = { query: search.value, period: period.value, theme: theme.value, depth: depth.value };
-    for (const card of cards) card.hidden = !matchesProject({ period: card.dataset.period, cohort: card.dataset.cohort, depth: card.dataset.depth, theme: card.dataset.themeName, text: card.dataset.search }, selection);
+    const selection = { query: search.value, mentorship: mentorship.value, theme: theme.value, depth: depth.value };
+    for (const card of cards) card.hidden = !matchesProject({ mentorship: card.dataset.mentorship, depth: card.dataset.depth, theme: card.dataset.themeName, text: card.dataset.search }, selection);
     const count = cards.filter(card => !card.hidden).length;
     document.getElementById('project-count').textContent = `${count} of ${cards.length} research entries`;
     document.getElementById('project-empty').hidden = count !== 0;
@@ -37,7 +37,7 @@ if (typeof document !== 'undefined') {
     print.hidden = count === 0;
     updateExpand();
   };
-  const reset = () => { search.value = ''; period.value = 'all'; theme.value = 'all'; depth.value = 'all'; filter(); };
+  const reset = () => { search.value = ''; mentorship.value = 'all'; theme.value = 'all'; depth.value = 'all'; filter(); };
   const openHash = () => {
     let id;
     try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
@@ -50,7 +50,7 @@ if (typeof document !== 'undefined') {
   };
   document.getElementById('project-controls').addEventListener('submit', event => event.preventDefault());
   search.addEventListener('input', filter);
-  period.addEventListener('change', filter);
+  mentorship.addEventListener('change', filter);
   theme.addEventListener('change', filter);
   depth.addEventListener('change', filter);
   document.getElementById('reset-projects').addEventListener('click', reset);

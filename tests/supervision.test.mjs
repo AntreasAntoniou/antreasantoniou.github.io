@@ -25,18 +25,31 @@ test('every project has distinct, substantive mechanism, attribution and status'
   }
 });
 
-test('catalogue scope, depth and originating cohort are explicit', () => {
-  for (const project of catalogue) assert.ok(['research-note', 'review'].includes(project.entryType));
-  assert.match(html, /not a count of projects I personally implemented/);
+test('catalogue depth and mentorship are independent of career stage', () => {
+  for (const project of catalogue) assert.equal(project.entryType, 'research-note');
   assert.match(html, /id="project-depth"/);
-  assert.match(html, /2018 cohort/);
-  assert.equal(matchesProject({text:'distillation', period:'phd', cohort:'2020', depth:'research-note'}, {period:'2020',depth:'research-note'}), true);
-  assert.equal(matchesProject({text:'distillation', period:'phd', cohort:'2020', depth:'research-note'}, {period:'2020',depth:'case-study'}), false);
+  const project = {text:'distillation', period:'phd', mentorship:'taught', depth:'research-note'};
+  assert.equal(matchesProject(project, {mentorship:'taught',depth:'research-note'}), true);
+  assert.equal(matchesProject(project, {mentorship:'phd'}), false);
+  assert.equal(matchesProject(project, {mentorship:'postdoc'}), false);
+  assert.equal(matchesProject(project, {mentorship:'taught',depth:'case-study'}), false);
+});
+
+test('mentorship filters match the mentee type without borrowing career chronology', () => {
+  const projects = [
+    {text:'learning', period:'phd', mentorship:'taught'},
+    {text:'learning', period:'postdoc', mentorship:'phd'},
+    {text:'learning', period:'postdoc', mentorship:'postdoc'},
+  ];
+  for (const mentorship of ['taught', 'phd', 'postdoc']) {
+    assert.deepEqual(projects.filter(p => matchesProject(p, {mentorship})).map(p => p.mentorship), [mentorship]);
+  }
+  assert.equal(projects.filter(p => matchesProject(p)).length, 3);
 });
 
 test('the entire catalogue is available as static accessible HTML', () => {
   assert.doesNotMatch(html, /[ \t]+$/m, 'generated HTML must not contain trailing whitespace');
-  assert.equal((html.match(/data-project data-period/g) || []).length, data.length);
+  assert.equal((html.match(/data-project data-mentorship/g) || []).length, data.length);
   assert.equal((html.match(/<details>/g) || []).length, data.length);
   assert.match(html, /<noscript>/);
   assert.match(html, /role="status" aria-live="polite"/);
@@ -51,19 +64,18 @@ test('privacy boundaries exclude student identities and private source infrastru
 });
 
 test('phase boundaries and research outcomes are preserved', () => {
-  assert.match(html, /PhD-to-postdoc transition year/);
   assert.match(data.find(p => p.id === 'damagegan').outcome, /did not establish/);
   assert.match(data.find(p => p.id === 'dynamic-curriculum').outcome, /mixed findings/);
   assert.match(data.find(p => p.id === 'pneumonia-multitask').outcome, /manuscript draft/);
   assert.match(data.find(p => p.id === 'relational-image-translation').contribution, /implemented and supplied/);
 });
 
-test('search combines all terms with period and theme filters', () => {
-  const project = { text: 'CLIP StyleGAN2 low-data café', period: 'postdoc', theme: 'Generative models' };
+test('search combines all terms with mentorship and theme filters', () => {
+  const project = { text: 'CLIP StyleGAN2 low-data café', mentorship: 'taught', theme: 'Generative models' };
   assert.equal(matchesProject(project, { query: 'clip STYLEgan2' }), true);
   assert.equal(matchesProject(project, { query: 'clip pytorch' }), false);
-  assert.equal(matchesProject(project, { query: 'cafe', period: 'phd' }), false);
-  assert.equal(matchesProject(project, { query: 'café', period: 'postdoc', theme: 'Generative models' }), true);
+  assert.equal(matchesProject(project, { query: 'cafe', mentorship: 'phd' }), false);
+  assert.equal(matchesProject(project, { query: 'café', mentorship: 'taught', theme: 'Generative models' }), true);
   assert.equal(matchesProject(project, { theme: 'Control & evolution' }), false);
   assert.equal(matchesProject(project, { query: '   ' }), true);
   assert.equal(normalize('  Générative  '), 'generative');
