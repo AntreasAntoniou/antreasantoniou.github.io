@@ -22,18 +22,26 @@ test('presents all seven concepts as the primary programme ontology', () => {
   assert.equal(count(/class="pillar-ledger__item"/g), 7);
 });
 
-test('uses the approved diagram with the corrected APEX and SYMPHONIA definitions', () => {
-  const diagram = readFileSync(new URL('../daedalus/daedalus-seven-pillars-v4.png', import.meta.url));
-  assert.equal(createHash('sha256').update(diagram).digest('hex'), '9e67b58504bc21f390831aacf1ba990c5ef44d546c1bcbfbe362f7f8976abad3');
+test('uses the application diagram with fixed-architecture APEX and Agent Orchestra', () => {
+  const diagram = readFileSync(new URL('../daedalus/daedalus-seven-pillars-orchestra.png', import.meta.url));
+  assert.equal(createHash('sha256').update(diagram).digest('hex'), 'c171cdc450e317606d625e9a3df5aec4865dff8ab8502b2c5d642d4c52f78d95');
   assert.match(html, /<figure class="architecture-wrap">/);
-  assert.match(html, /src="\/daedalus\/daedalus-seven-pillars-v4\.png" width="1672" height="941"/);
+  assert.match(html, /src="\/daedalus\/daedalus-seven-pillars-orchestra\.png" width="1672" height="941"/);
   assert.match(html, /Open full-size diagram/);
   assert.match(html, /Conceptual research directions, not an achieved system/);
-  assert.match(html, /alt="DAEDALUS: C1 CHRONOS[^\"]*C5 SYMPHONIA[^\"]*C7 APEX/);
+  assert.match(html, /alt="DAEDALUS: C1 CHRONOS[^\"]*C5 Agent Orchestra[^\"]*C7 APEX/);
   assert.match(visibleText, /first-class optimiser/);
-  assert.match(visibleText, /compete with stochastic gradient descent \(SGD\) and reinforcement learning \(RL\)/);
+  assert.match(visibleText, /per-layer mutation distributions within a fixed architecture/);
+  assert.match(visibleText, /architecture search is a separate research direction/);
+  assert.match(visibleText, /AdamW and fixed-noise search/);
+  assert.match(visibleText, /evolutionary policy search with PPO/);
+  assert.match(visibleText, /every population rollout and unsuccessful candidate/);
+  assert.match(visibleText, /Fatal defects veto acceptance; unresolved cases are held or escalated/);
+  assert.match(visibleText, /majority-vote controls at equal total compute/);
+  assert.match(visibleText, /Start with selective memory/);
+  assert.match(visibleText, /temporal representations together with dynamic attention/);
   assert.match(visibleText, /Competitive performance is a research ambition, not a reported result/);
-  assert.doesNotMatch(html, /CONSENSUS|Learning beyond backprop|architecture-node/);
+  assert.doesNotMatch(html, /CONSENSUS|SYMPHONIA|teacher agreement|daedalus-seven-pillars-v4\.png|architecture-node/);
 });
 
 test('presents the research programme without company branding', () => {

@@ -1336,14 +1336,14 @@
           <p class="eyebrow">The composition</p>
           <h2 class="section-heading" id="architecture-heading">Seven capabilities. One learning system.</h2>
         </div>
-        <p class="section-intro">The pillars are not seven disconnected projects. Richer signals guide learning; world models support planning; memory carries state; attention routes compute; audited experience closes the loop; governance constrains it; and evolutionary methods compete or combine with gradient-based learning.</p>
+        <p class="section-intro"><strong>Start with selective memory: what should survive a change?</strong> Then study temporal representations together with dynamic attention, followed by evolutionary learning and audited experience. The seven capabilities form a wider research agenda; each addition must earn its place against simpler, compute-matched alternatives.</p>
       </header>
 
       <figure class="architecture-wrap">
-        <a class="architecture-image-link" href="/daedalus/daedalus-seven-pillars-v4.png" target="_blank" rel="noopener noreferrer" aria-label="Open the DAEDALUS seven-pillars diagram at full size (opens in a new tab)">
-          <img class="architecture-image" src="/daedalus/daedalus-seven-pillars-v4.png" width="1672" height="941" loading="lazy" decoding="async" alt="DAEDALUS: C1 CHRONOS, richer learning signals; C2 GESTALT, world modelling and planning; C3 MNEME + ANUBIS, memory and recursive reasoning; C4 SOMA, compute-aware attention; C5 SYMPHONIA, audited self-improvement; C6 TALOS, built-in governance; C7 APEX, evolutionary optimisation that competes with SGD and RL or combines with them.">
+        <a class="architecture-image-link" href="/daedalus/daedalus-seven-pillars-orchestra.png" target="_blank" rel="noopener noreferrer" aria-label="Open the DAEDALUS seven-pillars diagram at full size (opens in a new tab)">
+          <img class="architecture-image" src="/daedalus/daedalus-seven-pillars-orchestra.png" width="1672" height="941" loading="lazy" decoding="async" alt="DAEDALUS: C1 CHRONOS, richer learning signals; C2 GESTALT, world modelling and planning; C3 MNEME + ANUBIS, memory and recursive reasoning; C4 SOMA, compute-aware attention; C5 Agent Orchestra, isolated proposals, verification, refutation and evidence adjudication; C6 TALOS, built-in governance; C7 APEX, co-adapting weights and mutation rates within a fixed architecture through sampling, perturbation, forward evaluation and selection.">
         </a>
-        <figcaption class="architecture-caption"><strong>Conceptual research directions, not an achieved system. Each pillar is explained below.</strong><span><a href="/daedalus/daedalus-seven-pillars-v4.png" target="_blank" rel="noopener noreferrer">Open full-size diagram ↗</a></span></figcaption>
+        <figcaption class="architecture-caption"><strong>Conceptual research directions, not an achieved system. Memory (C3) comes first; integrated benefits remain hypotheses. Each pillar is explained below.</strong><span><a href="/daedalus/daedalus-seven-pillars-orchestra.png" target="_blank" rel="noopener noreferrer">Open full-size diagram ↗</a></span></figcaption>
       </figure>
     </section>
 
@@ -1484,19 +1484,19 @@
           <header class="pillar-title">
             <span class="component-id">C5 · Audited self-improvement</span>
             <h3>Experience must earn the right to teach.</h3>
-            <span class="handle">Secondary label · SYMPHONIA</span>
+            <span class="handle">Secondary label · Agent Orchestra</span>
           </header>
           <dl>
             <dt>Missing capability</dt>
             <dd>Self-generated data can compound errors as easily as competence; fluent experience is not necessarily useful experience.</dd>
             <dt>Mechanism</dt>
-            <dd>Generate candidate experience, subject it to independent checks or teacher agreement, and admit only audited examples back into learning.</dd>
+            <dd>Use isolated proposers, independent verification and attempts to refute each proposal, then an evidence arbiter. Fatal defects veto acceptance; unresolved cases are held or escalated. Log evidence and dissent, and admit only accepted experience into learning.</dd>
             <dt>Role in composition</dt>
             <dd>Close the experience loop between planning and learning without allowing one model’s unchecked mistakes to become its curriculum.</dd>
             <dt>Falsifiable test / current state</dt>
-            <dd>Measure downstream gain per generated token, contamination, and error amplification against unaudited self-training. The deployed curation technique is <strong>TRL 5</strong>; its use as an integrated training filter is <strong>TRL 3</strong>.</dd>
+            <dd>Compare accepted-label error, coverage and error accumulation over repeated learning rounds with single-agent and majority-vote controls at equal total compute. This integrated learning study is proposed; agreement alone is not evidence of correctness.</dd>
             <dt>Secondary implementation label</dt>
-            <dd>SYMPHONIA</dd>
+            <dd>Agent Orchestra</dd>
           </dl>
         </article>
 
@@ -1530,11 +1530,11 @@
             <dt>Missing capability</dt>
             <dd>Can evolutionary methods become competitive optimisers for learning, rather than being restricted to an outer search over a gradient-trained system?</dd>
             <dt>Mechanism</dt>
-            <dd>Evaluate candidate solutions, select useful variation, and repeat. Investigate how far evolutionary optimisation can compete with stochastic gradient descent (SGD) and reinforcement learning (RL), and where useful hybrids emerge.</dd>
+            <dd>Co-adapt populations of network weights and per-layer mutation distributions within a fixed architecture. Sample weight–mutation pairings, perturb the weights, evaluate forward losses, and select both populations. Repeat to adapt the learner and its mutation process together.</dd>
             <dt>Role in composition</dt>
-            <dd>Provide an alternative or complementary way to optimise the learner and its components, including their parameters, structures and interactions.</dd>
+            <dd>Test an alternative way to train the learner and its policies, including where rewards are sparse or gradients are unhelpful. APEX changes weights and mutation strategies; architecture search is a separate research direction.</dd>
             <dt>Falsifiable test / current state</dt>
-            <dd>Compare evolutionary, SGD, RL and hybrid methods under matched total evaluation and compute budgets, including unsuccessful candidates. Test held-out performance and robustness. Competitive performance is a research ambition, not a reported result. The programme’s previously reported readiness is <strong>TRL 4</strong>; this framing does not establish a new validation result.</dd>
+            <dd>First compare AdamW and fixed-noise search. Then compare evolutionary policy search with PPO on the same partially observed simulated tasks, matching policies, interaction budgets and total compute, including every population rollout and unsuccessful candidate. Competitive performance is a research ambition, not a reported result.</dd>
             <dt>Secondary implementation label</dt>
             <dd>APEX</dd>
           </dl>
