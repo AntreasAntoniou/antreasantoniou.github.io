@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 
 const html = readFileSync(new URL('../daedalus/index.html', import.meta.url), 'utf8');
 const count = (pattern) => (html.match(pattern) || []).length;
@@ -14,18 +15,31 @@ test('presents all seven concepts as the primary programme ontology', () => {
     'C4 · Compute-aware attention',
     'C5 · Audited self-improvement',
     'C6 · Governance and built-in norms',
-    'C7 · Learning beyond backprop',
+    'C7 · Evolutionary optimisation',
   ]) {
     assert.match(html, new RegExp(label.replace(/[+]/g, '\\+')));
   }
   assert.equal(count(/class="pillar-ledger__item"/g), 7);
 });
 
-test('encodes the composition model semantically', () => {
-  assert.match(html, /<ol class="architecture-circuit"/);
-  assert.equal(count(/class="architecture-node/g), 7);
-  assert.match(html, /Conceptual architecture, not a literal tensor graph\./);
-  assert.match(html, /\.node-c4::before \{ content: "↑"; \}/);
+test('uses the approved diagram with the corrected APEX and SYMPHONIA definitions', () => {
+  const diagram = readFileSync(new URL('../daedalus/daedalus-seven-pillars-v4.png', import.meta.url));
+  assert.equal(createHash('sha256').update(diagram).digest('hex'), '9e67b58504bc21f390831aacf1ba990c5ef44d546c1bcbfbe362f7f8976abad3');
+  assert.match(html, /<figure class="architecture-wrap">/);
+  assert.match(html, /src="\/daedalus\/daedalus-seven-pillars-v4\.png" width="1672" height="941"/);
+  assert.match(html, /Open full-size diagram/);
+  assert.match(html, /Conceptual research directions, not an achieved system/);
+  assert.match(html, /alt="DAEDALUS: C1 CHRONOS[^\"]*C5 SYMPHONIA[^\"]*C7 APEX/);
+  assert.match(visibleText, /first-class optimiser/);
+  assert.match(visibleText, /compete with stochastic gradient descent \(SGD\) and reinforcement learning \(RL\)/);
+  assert.match(visibleText, /Competitive performance is a research ambition, not a reported result/);
+  assert.doesNotMatch(html, /CONSENSUS|Learning beyond backprop|architecture-node/);
+});
+
+test('presents the research programme without company branding', () => {
+  assert.doesNotMatch(html, /axiotic/i);
+  assert.match(html, /Antreas Antoniou’s research programme/);
+  assert.match(html, /href="\/#publications"/);
 });
 
 test('keeps experimental results and negative results off the public page', () => {

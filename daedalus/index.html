@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DAEDALUS — Compositional Intelligence | Antreas Antoniou</title>
-  <meta name="description" content="DAEDALUS is Axiotic AI’s programme for compositional, resource-rational intelligence: seven testable capabilities designed to work as one system.">
+  <meta name="description" content="DAEDALUS is Antreas Antoniou’s research programme for adaptive, compositional intelligence: seven testable capabilities designed to work as one system.">
   <link rel="canonical" href="https://antreas.io/daedalus/">
   <link rel="icon" href="../images/favicon-bot.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -620,120 +620,24 @@
     }
 
     .architecture-wrap {
-      padding: clamp(1.5rem, 4vw, 3rem);
+      margin: 0;
+      padding: clamp(.7rem, 2vw, 1.5rem);
       border: 1px solid var(--line-strong);
       background: var(--slate);
     }
 
-    .architecture-circuit {
-      display: grid;
-      grid-template-columns: minmax(8rem, .85fr) minmax(10rem, 1.15fr) minmax(7rem, .72fr);
-      grid-template-areas:
-        "c6 c6 c6"
-        "c1 c2 action"
-        "c4 c3 empty"
-        "c7 c5 c5";
-      gap: 2.4rem 3rem;
-      align-items: stretch;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .architecture-node {
-      position: relative;
-      display: flex;
-      min-height: 6.2rem;
-      padding: 1.15rem;
-      border: 1px solid var(--line-strong);
-      background: var(--void);
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .architecture-node strong {
-      color: var(--paper);
-      font-size: .92rem;
-      line-height: 1.35;
-    }
-
-    .architecture-node small {
-      margin-top: .75rem;
-      color: var(--steel);
-      font-size: .72rem;
-      line-height: 1.5;
-    }
-
-    .architecture-node .component-id {
+    .architecture-image-link {
       display: block;
-      margin-bottom: .4rem;
-      color: var(--signal);
+      border-radius: .35rem;
+      overflow: hidden;
     }
 
-    .node-c1 { grid-area: c1; }
-    .node-c2 { grid-area: c2; border-color: var(--circuit); }
-    .node-c3 { grid-area: c3; border-color: var(--circuit); }
-    .node-c4 { grid-area: c4; }
-    .node-c5 { grid-area: c5; }
-    .node-c6 {
-      grid-area: c6;
-      min-height: 4.8rem;
-      border-color: var(--signal);
-      background: transparent;
+    .architecture-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #f5fbff;
     }
-    .node-c7 { grid-area: c7; }
-
-    .node-c1::after,
-    .node-c4::after,
-    .node-c7::after,
-    .node-c2::after,
-    .node-c1::before,
-    .node-c2::before,
-    .node-c4::before,
-    .node-c3::before {
-      position: absolute;
-      color: var(--circuit);
-      font-family: "Roboto Mono", monospace;
-      font-size: 1.15rem;
-      font-weight: 500;
-    }
-
-    .node-c1::after,
-    .node-c4::after,
-    .node-c7::after {
-      right: -2rem;
-      top: 50%;
-      transform: translate(50%, -50%);
-    }
-
-    .node-c1::after { content: "→"; }
-    .node-c4::after { content: "↔"; }
-    .node-c7::after { content: "←"; }
-
-    .node-c2::after {
-      content: "→ ACTION";
-      left: calc(100% + 1.15rem);
-      top: 50%;
-      width: 8rem;
-      transform: translateY(-50%);
-      color: var(--signal);
-      font-size: .72rem;
-      letter-spacing: .08em;
-    }
-
-    .node-c1::before,
-    .node-c2::before,
-    .node-c4::before,
-    .node-c3::before {
-      bottom: -2.05rem;
-      left: 50%;
-      transform: translate(-50%, 50%);
-    }
-
-    .node-c1::before { content: "↓"; }
-    .node-c2::before { content: "↕"; }
-    .node-c4::before { content: "↑"; }
-    .node-c3::before { content: "↓"; }
 
     .architecture-caption {
       display: flex;
@@ -1239,35 +1143,7 @@
       }
 
       .architecture-wrap {
-        padding: 1.2rem;
-      }
-
-      .architecture-circuit {
-        display: flex;
-        flex-direction: column;
-        gap: .75rem;
-      }
-
-      .architecture-node {
-        min-height: auto;
-        padding: 1rem;
-      }
-
-      .architecture-node::before,
-      .architecture-node::after {
-        content: none;
-      }
-
-      .architecture-node:not(:last-child)::after {
-        content: "↓";
-        position: absolute;
-        right: 1rem;
-        bottom: -.92rem;
-        z-index: 1;
-        color: var(--circuit);
-        font-family: "Roboto Mono", monospace;
-        font-size: .9rem;
-        transform: none;
+        padding: .6rem;
       }
 
       .architecture-caption {
@@ -1366,7 +1242,7 @@
   <main class="page-shell">
     <section class="hero" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">Axiotic AI research programme · submitted to SPRIND NFAI</p>
+        <p class="eyebrow">Research programme · adaptive, compositional intelligence</p>
         <h1 id="page-title">DAEDALUS <span>Compositional Intelligence</span></h1>
         <p class="hero-copy">Monkey brains didn’t need skyscraper-scale infrastructure and national power budgets. Something is architecturally broken.</p>
         <p class="hero-law">Nature’s scaling law: intelligence through computational diversity, not uniformity.</p>
@@ -1460,48 +1336,15 @@
           <p class="eyebrow">The composition</p>
           <h2 class="section-heading" id="architecture-heading">Seven capabilities. One learning system.</h2>
         </div>
-        <p class="section-intro">The pillars are not seven disconnected projects. They are a proposed circuit: richer learning signals update a world model; memory carries state; attention routes scarce compute; audited experience closes the loop; governance constrains it; and search explores what gradient descent cannot.</p>
+        <p class="section-intro">The pillars are not seven disconnected projects. Richer signals guide learning; world models support planning; memory carries state; attention routes compute; audited experience closes the loop; governance constrains it; and evolutionary methods compete or combine with gradient-based learning.</p>
       </header>
 
-      <div class="architecture-wrap">
-        <ol class="architecture-circuit" aria-label="Seven DAEDALUS capabilities and their conceptual relationships">
-          <li class="architecture-node node-c1">
-            <span class="component-id">C1 · Signals</span>
-            <strong>Better learning signals</strong>
-            <small>Teach from temporal structure, not only the next token.</small>
-          </li>
-          <li class="architecture-node node-c2">
-            <span class="component-id">C2 · World model</span>
-            <strong>World modelling for planning</strong>
-            <small>Predict, simulate, then choose.</small>
-          </li>
-          <li class="architecture-node node-c3">
-            <span class="component-id">C3 · State</span>
-            <strong>Memory + recursive reasoning</strong>
-            <small>Carry state and refine latent thought.</small>
-          </li>
-          <li class="architecture-node node-c4">
-            <span class="component-id">C4 · Routing</span>
-            <strong>Compute-aware attention</strong>
-            <small>Spend depth where information gain is highest.</small>
-          </li>
-          <li class="architecture-node node-c5">
-            <span class="component-id">C5 · Experience loop</span>
-            <strong>Audited self-improvement</strong>
-            <small>Reuse generated experience only after independent checks.</small>
-          </li>
-          <li class="architecture-node node-c6">
-            <span class="component-id">C6 · Governance envelope</span>
-            <strong>Built-in norms constrain learning and action.</strong>
-          </li>
-          <li class="architecture-node node-c7">
-            <span class="component-id">C7 · Search</span>
-            <strong>Learning beyond backprop</strong>
-            <small>Search architectures, objectives, and adaptations.</small>
-          </li>
-        </ol>
-        <p class="architecture-caption"><strong>Conceptual architecture, not a literal tensor graph.</strong><span>Mobile order follows C1 → C7.</span></p>
-      </div>
+      <figure class="architecture-wrap">
+        <a class="architecture-image-link" href="/daedalus/daedalus-seven-pillars-v4.png" target="_blank" rel="noopener noreferrer" aria-label="Open the DAEDALUS seven-pillars diagram at full size (opens in a new tab)">
+          <img class="architecture-image" src="/daedalus/daedalus-seven-pillars-v4.png" width="1672" height="941" loading="lazy" decoding="async" alt="DAEDALUS: C1 CHRONOS, richer learning signals; C2 GESTALT, world modelling and planning; C3 MNEME + ANUBIS, memory and recursive reasoning; C4 SOMA, compute-aware attention; C5 SYMPHONIA, audited self-improvement; C6 TALOS, built-in governance; C7 APEX, evolutionary optimisation that competes with SGD and RL or combines with them.">
+        </a>
+        <figcaption class="architecture-caption"><strong>Conceptual research directions, not an achieved system. Each pillar is explained below.</strong><span><a href="/daedalus/daedalus-seven-pillars-v4.png" target="_blank" rel="noopener noreferrer">Open full-size diagram ↗</a></span></figcaption>
+      </figure>
     </section>
 
     <section class="section" aria-labelledby="thermo-heading">
@@ -1641,7 +1484,7 @@
           <header class="pillar-title">
             <span class="component-id">C5 · Audited self-improvement</span>
             <h3>Experience must earn the right to teach.</h3>
-            <span class="handle">Secondary label · CONSENSUS</span>
+            <span class="handle">Secondary label · SYMPHONIA</span>
           </header>
           <dl>
             <dt>Missing capability</dt>
@@ -1653,7 +1496,7 @@
             <dt>Falsifiable test / current state</dt>
             <dd>Measure downstream gain per generated token, contamination, and error amplification against unaudited self-training. The deployed curation technique is <strong>TRL 5</strong>; its use as an integrated training filter is <strong>TRL 3</strong>.</dd>
             <dt>Secondary implementation label</dt>
-            <dd>CONSENSUS</dd>
+            <dd>SYMPHONIA</dd>
           </dl>
         </article>
 
@@ -1679,19 +1522,19 @@
 
         <article class="pillar-ledger__item" id="c7">
           <header class="pillar-title">
-            <span class="component-id">C7 · Learning beyond backprop</span>
-            <h3>Search the space gradients cannot see.</h3>
+            <span class="component-id">C7 · Evolutionary optimisation</span>
+            <h3>Make evolution a first-class optimiser.</h3>
             <span class="handle">Secondary label · APEX</span>
           </header>
           <dl>
             <dt>Missing capability</dt>
-            <dd>Backpropagation optimises differentiable parameters inside a chosen system; it does not by itself choose the right architecture, objective, curriculum, or adaptation rule.</dd>
+            <dd>Can evolutionary methods become competitive optimisers for learning, rather than being restricted to an outer search over a gradient-trained system?</dd>
             <dt>Mechanism</dt>
-            <dd>Use search, evolution, and gradient-free adaptation to explore those higher-level choices under explicit resource budgets.</dd>
+            <dd>Evaluate candidate solutions, select useful variation, and repeat. Investigate how far evolutionary optimisation can compete with stochastic gradient descent (SGD) and reinforcement learning (RL), and where useful hybrids emerge.</dd>
             <dt>Role in composition</dt>
-            <dd>Select and adapt the forge itself: its topology, learning signals, routing rules, and interactions.</dd>
+            <dd>Provide an alternative or complementary way to optimise the learner and its components, including their parameters, structures and interactions.</dd>
             <dt>Falsifiable test / current state</dt>
-            <dd>Test whether search produces stable, useful adaptation under fixed compute, latency, and evaluation budgets—and whether selected systems survive perturbation rather than overfit the search environment. Current readiness is <strong>TRL 4</strong>.</dd>
+            <dd>Compare evolutionary, SGD, RL and hybrid methods under matched total evaluation and compute budgets, including unsuccessful candidates. Test held-out performance and robustness. Competitive performance is a research ambition, not a reported result. The programme’s previously reported readiness is <strong>TRL 4</strong>; this framing does not establish a new validation result.</dd>
             <dt>Secondary implementation label</dt>
             <dd>APEX</dd>
           </dl>
@@ -1705,7 +1548,7 @@
           <p class="eyebrow">Public record</p>
           <h2 class="section-heading" id="record-heading">Follow the programme.</h2>
         </div>
-        <p class="section-intro">The public trail currently contains the programme framing, the SPRIND outcome, and related Axiotic work.</p>
+        <p class="section-intro">Explore the research agenda, the SPRIND outcome, and my wider work on learning systems.</p>
       </header>
 
       <article class="sprind-outcome" aria-labelledby="sprind-outcome-heading">
@@ -1730,10 +1573,9 @@
           <span class="micro-label">Related public work</span>
           <h3>Follow the programme</h3>
           <ul class="resource-list">
-            <li><a href="https://github.com/axiotic-ai" target="_blank" rel="noopener noreferrer">Axiotic AI on GitHub <small>Organisation ↗</small></a></li>
-            <li><a href="https://github.com/axiotic-ai/tsp" target="_blank" rel="noopener noreferrer">Structure experiments <small>Repository ↗</small></a></li>
-            <li><a href="https://axiotic.ai/" target="_blank" rel="noopener noreferrer">Axiotic research lab <small>Lab ↗</small></a></li>
-            <li><a href="https://axiotic.ai/init/" target="_blank" rel="noopener noreferrer">Axiotic INIT <small>Context ↗</small></a></li>
+            <li><a href="/#publications">Selected research <small>Publications →</small></a></li>
+            <li><a href="/frontier-ai/">Intelligence Beyond Scale <small>Forum contribution →</small></a></li>
+            <li><a href="/archivum/">Research that accumulates <small>Archivum →</small></a></li>
           </ul>
         </nav>
       </div>

@@ -32,14 +32,23 @@ test('makes DAEDALUS prominent inside current work without crowding the hero', (
   assert.doesNotMatch(home, /hero-daedalus/);
   assert.match(home, /<section id="building"/);
   assert.match(home, /class="programme-feature"/);
-  assert.match(home, /DAEDALUS is where that thesis becomes a learning system/);
+  assert.match(home, /DAEDALUS is the research programme behind that thesis/);
   assert.match(home, /Seven capabilities\. One programme\./);
   assert.match(home, /href="\/daedalus\/" class="btn-primary btn-sm programme-feature__cta"/);
   assert.match(home, /Explore DAEDALUS/);
   assert.ok(
-    home.indexOf('id="building"') < home.indexOf('href="/daedalus/"'),
-    'DAEDALUS should live inside the current-work section',
+    home.indexOf('id="building"') < home.indexOf('class="programme-feature"'),
+    'The detailed DAEDALUS feature should live inside the current-work section',
   );
+});
+
+test('keeps the homepage and share metadata focused on the research agenda', () => {
+  assert.doesNotMatch(home, /axiotic/i);
+  assert.match(home, /My research agenda/);
+  assert.match(home, /evolutionary optimisation/);
+  const schema = JSON.parse(home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(schema.jobTitle, 'AI Researcher and Engineer');
+  assert.equal(schema.worksFor, undefined);
 });
 
 test('retains the about, publications, and experience content sections', () => {
