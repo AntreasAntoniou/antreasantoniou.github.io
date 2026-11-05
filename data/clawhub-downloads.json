@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "metric": "clawhub-downloads",
   "label": "ClawHub downloads",
-  "total": 10300,
+  "total": 10324,
   "skillCount": 32,
   "catalogueSize": 32,
   "pendingSkills": [],
-  "checkedAt": "2026-11-04T14:40:28.953Z",
+  "checkedAt": "2026-11-05T14:45:21.805Z",
   "definition": "Sum of verified ClawHub download counters for listed Agent Toolkit skills. Pending first publications are enumerated separately, not treated as zero. Download events, not unique users. Excludes installs, Git clones and GitHub release assets.",
   "skills": [
     {
       "slug": "agent-collaboration-control",
-      "downloads": 331,
+      "downloads": 332,
       "source": "https://clawhub.ai/api/v1/skills/agent-collaboration-control?ownerHandle=antreasantoniou"
     },
     {
@@ -21,37 +21,37 @@
     },
     {
       "slug": "amber-agent-skill",
-      "downloads": 306,
+      "downloads": 307,
       "source": "https://clawhub.ai/api/v1/skills/amber-agent-skill?ownerHandle=antreasantoniou"
     },
     {
       "slug": "archivum",
-      "downloads": 330,
+      "downloads": 332,
       "source": "https://clawhub.ai/api/v1/skills/archivum?ownerHandle=antreasantoniou"
     },
     {
       "slug": "argus-skill",
-      "downloads": 338,
+      "downloads": 339,
       "source": "https://clawhub.ai/api/v1/skills/argus-skill?ownerHandle=antreasantoniou"
     },
     {
       "slug": "back-to-the-chronicle",
-      "downloads": 353,
+      "downloads": 354,
       "source": "https://clawhub.ai/api/v1/skills/back-to-the-chronicle?ownerHandle=antreasantoniou"
     },
     {
       "slug": "beautiful-pdf",
-      "downloads": 389,
+      "downloads": 390,
       "source": "https://clawhub.ai/api/v1/skills/beautiful-pdf?ownerHandle=antreasantoniou"
     },
     {
       "slug": "bitwarden-lease",
-      "downloads": 340,
+      "downloads": 341,
       "source": "https://clawhub.ai/api/v1/skills/bitwarden-lease?ownerHandle=antreasantoniou"
     },
     {
       "slug": "butler-agent-skill",
-      "downloads": 348,
+      "downloads": 349,
       "source": "https://clawhub.ai/api/v1/skills/butler-agent-skill?ownerHandle=antreasantoniou"
     },
     {
@@ -66,17 +66,17 @@
     },
     {
       "slug": "davinci-mode",
-      "downloads": 316,
+      "downloads": 317,
       "source": "https://clawhub.ai/api/v1/skills/davinci-mode?ownerHandle=antreasantoniou"
     },
     {
       "slug": "doppel",
-      "downloads": 333,
+      "downloads": 334,
       "source": "https://clawhub.ai/api/v1/skills/doppel?ownerHandle=antreasantoniou"
     },
     {
       "slug": "doppel-gang",
-      "downloads": 341,
+      "downloads": 342,
       "source": "https://clawhub.ai/api/v1/skills/doppel-gang?ownerHandle=antreasantoniou"
     },
     {
@@ -86,7 +86,7 @@
     },
     {
       "slug": "gcp-keyless",
-      "downloads": 355,
+      "downloads": 356,
       "source": "https://clawhub.ai/api/v1/skills/gcp-keyless?ownerHandle=antreasantoniou"
     },
     {
@@ -106,12 +106,12 @@
     },
     {
       "slug": "mailbutler-agent-skill",
-      "downloads": 329,
+      "downloads": 330,
       "source": "https://clawhub.ai/api/v1/skills/mailbutler-agent-skill?ownerHandle=antreasantoniou"
     },
     {
       "slug": "ml-research-skeptical-audit",
-      "downloads": 343,
+      "downloads": 344,
       "source": "https://clawhub.ai/api/v1/skills/ml-research-skeptical-audit?ownerHandle=antreasantoniou"
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "slug": "nexus",
-      "downloads": 338,
+      "downloads": 340,
       "source": "https://clawhub.ai/api/v1/skills/nexus?ownerHandle=antreasantoniou"
     },
     {
@@ -131,7 +131,7 @@
     },
     {
       "slug": "propagate",
-      "downloads": 339,
+      "downloads": 340,
       "source": "https://clawhub.ai/api/v1/skills/propagate?ownerHandle=antreasantoniou"
     },
     {
@@ -141,32 +141,32 @@
     },
     {
       "slug": "questlog-agent-skill",
-      "downloads": 353,
+      "downloads": 354,
       "source": "https://clawhub.ai/api/v1/skills/questlog-agent-skill?ownerHandle=antreasantoniou"
     },
     {
       "slug": "reconnect",
-      "downloads": 352,
+      "downloads": 353,
       "source": "https://clawhub.ai/api/v1/skills/reconnect?ownerHandle=antreasantoniou"
     },
     {
       "slug": "session-atlas-agent-skill",
-      "downloads": 302,
+      "downloads": 303,
       "source": "https://clawhub.ai/api/v1/skills/session-atlas-agent-skill?ownerHandle=antreasantoniou"
     },
     {
       "slug": "threadseer-agent-skill",
-      "downloads": 347,
+      "downloads": 348,
       "source": "https://clawhub.ai/api/v1/skills/threadseer-agent-skill?ownerHandle=antreasantoniou"
     },
     {
       "slug": "transfer-consciousness",
-      "downloads": 297,
+      "downloads": 298,
       "source": "https://clawhub.ai/api/v1/skills/transfer-consciousness?ownerHandle=antreasantoniou"
     },
     {
       "slug": "visual-qa",
-      "downloads": 139,
+      "downloads": 140,
       "source": "https://clawhub.ai/api/v1/skills/visual-qa?ownerHandle=antreasantoniou"
     }
   ]
