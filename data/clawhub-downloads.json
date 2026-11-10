@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "metric": "clawhub-downloads",
   "label": "ClawHub downloads",
-  "total": 10901,
+  "total": 10913,
   "skillCount": 32,
   "catalogueSize": 32,
   "pendingSkills": [],
-  "checkedAt": "2026-11-09T16:33:18.000Z",
+  "checkedAt": "2026-11-10T14:59:39.819Z",
   "definition": "Sum of verified ClawHub download counters for listed Agent Toolkit skills. Pending first publications are enumerated separately, not treated as zero. Download events, not unique users. Excludes installs, Git clones and GitHub release assets.",
   "skills": [
     {
@@ -66,12 +66,12 @@
     },
     {
       "slug": "davinci-mode",
-      "downloads": 336,
+      "downloads": 337,
       "source": "https://clawhub.ai/api/v1/skills/davinci-mode?ownerHandle=antreasantoniou"
     },
     {
       "slug": "doppel",
-      "downloads": 362,
+      "downloads": 367,
       "source": "https://clawhub.ai/api/v1/skills/doppel?ownerHandle=antreasantoniou"
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "slug": "nexus",
-      "downloads": 374,
+      "downloads": 379,
       "source": "https://clawhub.ai/api/v1/skills/nexus?ownerHandle=antreasantoniou"
     },
     {
@@ -136,7 +136,7 @@
     },
     {
       "slug": "pulse",
-      "downloads": 302,
+      "downloads": 303,
       "source": "https://clawhub.ai/api/v1/skills/pulse?ownerHandle=antreasantoniou"
     },
     {
