@@ -2,13 +2,11 @@
   "schemaVersion": 1,
   "metric": "clawhub-downloads",
   "label": "ClawHub downloads",
-  "total": 11249,
-  "skillCount": 32,
+  "total": 11250,
+  "skillCount": 33,
   "catalogueSize": 33,
-  "pendingSkills": [
-    "daedalus"
-  ],
-  "checkedAt": "2026-11-13T13:27:05.499Z",
+  "pendingSkills": [],
+  "checkedAt": "2026-11-13T13:28:55.389Z",
   "definition": "Sum of verified ClawHub download counters for listed Agent Toolkit skills. Pending first publications are enumerated separately, not treated as zero. Download events, not unique users. Excludes installs, Git clones and GitHub release assets.",
   "skills": [
     {
@@ -65,6 +63,11 @@
       "slug": "cross-agent-sync",
       "downloads": 342,
       "source": "https://clawhub.ai/api/v1/skills/cross-agent-sync?ownerHandle=antreasantoniou"
+    },
+    {
+      "slug": "daedalus",
+      "downloads": 1,
+      "source": "https://clawhub.ai/api/v1/skills/daedalus?ownerHandle=antreasantoniou"
     },
     {
       "slug": "davinci-mode",
