@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11",
+  "updated": "2026-11-13",
   "owner": "AntreasAntoniou",
   "skills": [
     {
@@ -230,6 +230,14 @@
       "group": "Continuity",
       "description": "Prepare a source-linked continuation brief and verify a single-owner handoff across hosts. Separates readiness, quiescence and ownership; instructions are not live process migration or a distributed lock.",
       "url": "https://github.com/AntreasAntoniou/transfer-consciousness",
+      "clawhubPending": true
+    },
+    {
+      "slug": "daedalus",
+      "name": "Daedalus",
+      "group": "Development",
+      "description": "Implement, refactor and debug through failing tests, falsifiable measurements, small edits and reviewed diffs.",
+      "url": "https://github.com/AntreasAntoniou/daedalus-agent-skill",
       "clawhubPending": true
     }
   ]
