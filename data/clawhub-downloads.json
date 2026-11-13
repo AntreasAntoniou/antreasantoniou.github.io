@@ -6,7 +6,7 @@
   "skillCount": 33,
   "catalogueSize": 33,
   "pendingSkills": [],
-  "checkedAt": "2026-11-13T13:40:42.879Z",
+  "checkedAt": "2026-11-13T14:41:18.262Z",
   "definition": "Sum of verified ClawHub download counters for listed Agent Toolkit skills. Pending first publications are enumerated separately, not treated as zero. Download events, not unique users. Excludes installs, Git clones and GitHub release assets.",
   "skills": [
     {
