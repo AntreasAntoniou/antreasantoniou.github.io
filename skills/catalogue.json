@@ -236,7 +236,7 @@
       "slug": "daedalus",
       "name": "Daedalus",
       "group": "Development",
-      "description": "Implement, refactor and debug through failing tests, falsifiable measurements, small edits and reviewed diffs.",
+      "description": "Implement, refactor and debug through failing tests, falsifiable measurements, small edits and reviewed diffs. Bundles a directory mapper and local/remote content ingestion.",
       "url": "https://github.com/AntreasAntoniou/daedalus-agent-skill",
       "clawhubPending": true
     }
