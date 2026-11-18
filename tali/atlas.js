@@ -974,7 +974,8 @@ function render(focus = false) {
     window.scrollTo({ top: 0, behavior: "instant" });
   }
 }
-fetch("atlas.json")
+const catalogueVersion = document.documentElement.dataset.catalogue;
+fetch(catalogueVersion ? "atlas.json?v=" + catalogueVersion : "atlas.json")
   .then((r) => {
     if (!r.ok) throw Error("Atlas unavailable");
     return r.json();
