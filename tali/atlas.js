@@ -236,6 +236,105 @@ function mini(route, title, desc) {
 }
 const grid = (list) => '<div class="grid">' + list.join("") + "</div>";
 const minis = (list) => '<div class="mini-grid">' + list.join("") + "</div>";
+function coverFrame() {
+  const c=atlas.paper.companion;
+  return '<figure class="visor-cover"><div class="visor-stage" data-cover-frame>' +
+    '<img class="standby-portrait" src="'+esc(c.asset)+'" alt="Detail of a masked Tali cosplay at San Diego Comic-Con in 2015">' +
+    '</div><figcaption class="credit">Companion photograph from WIT · cropped · '+
+    external(c.file, c.creator)+' · '+external(c.terms,c.license)+'</figcaption></figure>';
+}
+
+const stillCache = new Map();
+async function showCoverFrame(stage) {
+  const row=atlas.rows["504001602"];
+  const alt="Tali’s visor in the Mass Effect retrospective at 6:39";
+  const present = (src) => {
+    if (!stage.isConnected) return;
+    const image = new Image();
+    image.alt=alt;
+    image.className="cover-still";
+    image.src=src;
+    stage.replaceChildren(image);
+    stage.parentElement.querySelector("figcaption").innerHTML =
+      link("#record/504001602","Tali at 6:39 · verified release frame");
+    stage.dataset.verified = "true";
+  };
+  if (stillCache.has(row.clipHash)) { present(stillCache.get(row.clipHash)); return; }
+  if (navigator.connection?.saveData) return;
+  const controller=new AbortController();
+  mediaLoads.add(controller);
+  let url, timer;
+  try {
+    timer = setTimeout(() => controller.abort(),25000);
+    url = await verifiedClipURL(row,controller);
+    if (!stage.isConnected || controller.signal.aborted) return;
+    const video=document.createElement("video");
+    video.muted=true; video.playsInline=true; video.preload="auto";
+    await new Promise((resolve,reject) => {
+      controller.signal.addEventListener("abort",() => reject(new Error("Cover load stopped")), {once:true});
+      video.addEventListener("error",() => reject(new Error("Cover decode failed")),{once:true});
+      video.addEventListener("loadedmetadata",() => { video.currentTime=9; },{once:true});
+      video.addEventListener("seeked",resolve,{once:true});
+      video.src=url;
+    });
+    if (controller.signal.aborted || !stage.isConnected) return;
+    if (!video.videoWidth || Math.abs(video.currentTime-9)>.1) throw Error("Cover time changed");
+    const canvas=document.createElement("canvas");
+    canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+    canvas.getContext("2d").drawImage(video,0,0);
+    const frame=canvas.toDataURL("image/webp",.91);
+    stillCache.set(row.clipHash,frame);
+    present(frame);
+  } catch {
+    // Keep the separately credited WIT portrait available on slow or offline connections.
+  } finally {
+    clearTimeout(timer);
+    if (url) URL.revokeObjectURL(url);
+    mediaLoads.delete(controller);
+  }
+}
+
+function selectedItems() {
+  return [
+    ...atlas.paper.main.map((s,i) => ({...s,number:"Figure "+(i+2)})),
+    ...atlas.paper.appendix.flatMap(g=>g.items).map((s,i) => ({...s,number:"Figure A"+(i+1)})),
+  ];
+}
+function recordPhotos(p) {
+  return '<div class="photo-rail">'+p.records.map(({id,label}) => {
+    const w=atlas.rows[id].wit;
+    return '<figure><a href="#record/'+esc(id)+'">'+pic(w,label)+
+      '<span>'+esc(label)+'</span></a>'+credit(w)+'</figure>';
+  }).join("")+'</div>';
+}
+function guideTile(item) {
+  const p=atlas.plates[item.key];
+  const two=p.key==="original-02" || p.key==="original-03";
+  const art=two?'<div class="photo-strip">'+p.records.slice(0,3).map(({id,label})=>pic(atlas.rows[id].wit,label)).join("")+'</div>':
+    '<img loading="lazy" decoding="async" src="'+esc(p.thumb)+'" alt="">';
+  return '<a class="guide-tile" href="#atlas/'+esc(p.key)+'">'+art+'<article>'+tag(item.number)+
+    '<h3>'+esc(item.title||p.title)+'</h3><p>'+esc(item.note)+'</p>'+
+    (item.scope?'<small>'+esc(item.scope)+'</small>':'')+'</article></a>';
+}
+function paperGuide() {
+  const entries=selectedItems();
+  let n=4;
+  const groups=atlas.paper.appendix.map(g=>{
+    const cards=entries.slice(n,n+g.items.length);n+=g.items.length;
+    return section(g.title,'<div class="guide-grid appendix-grid">'+cards.map(guideTile).join("")+'</div>');
+  }).join("");
+  return back("#highlights","Atlas highlights")+headings("The illustrated paper",
+      "Follow one reference photograph into two recordings, then explore the paper’s figures and the data behind them.")+
+    '<section class="cover-intro">'+coverFrame()+'<div>'+tag("Figure 1")+
+    '<h2>TALI contains Tali.</h2><p>A Mass Effect retrospective and a Minecraft meetup share the same WIT photograph of Legion at PAX Prime. The two recording timelines show how.</p>'+
+    button("#case/mass-effect","Open the recordings →")+'</div></section>'+
+    section("The main figures",'<div class="guide-grid">'+entries.slice(0,4).map(guideTile).join("")+'</div>')+
+    '<section class="edition-callout">'+tag("Figure 6")+'<h2>'+link("#editions","Topics across Wikipedia editions")+'</h2>'+
+    '<p>43 release photographs illustrate eleven topic lists across four editions. Each cell counts distinct entries and recordings. Explore all 108 editions in the atlas.</p>'+
+    link("#editions","Open the contact sheet →")+'</section>'+
+    '<div class="appendix-intro"><h2>The visual appendix</h2><p>Sixteen plates, each with its own observations and population.</p></div>'+groups;
+}
+
 function home() {
   const h = atlas.highlights[0],
     r = atlas.rows[h.rid],
@@ -264,10 +363,7 @@ function home() {
       "See Tali at 6:39",
     ) +
     "</div><footer>Temporal Audio Language and Images</footer></div>" +
-    '<div class="hero-media"><figure>' +
-    pic(r.wit, h.reference, "hero-pic", false) +
-    credit(r.wit) +
-    "</figure><div>" +
+    '<div class="hero-media">' + coverFrame() + "<div>" +
     heroLine(h.rid, "Mass Effect retrospective") +
     heroLine("504001609", "PAX Prime meetup") +
     "</div></div></section>";
@@ -289,6 +385,10 @@ function home() {
     );
   return (
     hero +
+    section("Figures from the illustrated paper",
+      '<p class="guide-intro">Six paired views, two recording timelines and an answer to what happens when no subtitle starts.</p>' +
+      '<div class="guide-grid compact">'+selectedItems().slice(0,4).map(guideTile).join("")+"</div>",
+      link("#paper", "All paper figures →")) +
     section("More unexpected pairs", grid(top)) +
     section(
       "Look inside the dataset",
@@ -356,7 +456,7 @@ function feature(h) {
     tag(h.name) +
     headings(h.title, h.blurb) +
     '<div class="case-detail">' +
-    photo(r.wit, h.reference) +
+    (companion ? '<figure class="linked-inset"><div>'+pic(r.wit,"Detail of the linked Legion helmet at PAX Prime 2013")+'</div><figcaption>Linked WIT photograph · helmet detail.</figcaption>'+credit(r.wit)+'</figure>' : photo(r.wit, h.reference)) +
     "<div>" +
     recordBox(
       h.rid,
@@ -424,10 +524,13 @@ function pairs() {
   );
 }
 function plate(p) {
+  const pick = selectedItems().find(item => item.key === p.key);
   return (
     back("#plates", "All 110 plates") +
     tag(p.chapter + " · " + p.key) +
     headings(p.title, p.caption) +
+    (pick ? '<p class="paper-back">' + link("#paper",pick.number + " · illustrated paper")+"</p>" : "") +
+    (["original-02","original-03"].includes(p.key) ? recordPhotos(p) : "") +
     '<figure><a href="' +
     esc(p.image) +
     '" aria-label="Open full-size figure"><img class="plate-large" src="' +
@@ -752,6 +855,60 @@ function credits() {
     "</tbody></table></div>"
   );
 }
+async function verifiedClipURL(row, controller, onProgress = () => {}) {
+  const args = new URLSearchParams({
+    dataset: "Antreas/TALI",
+    config: "default",
+    split: row.split,
+    offset: row.viewerRow,
+    length: 1,
+  });
+  const response = await fetch(
+    "https://datasets-server.huggingface.co/rows?" + args,
+    { credentials: "omit", signal: controller.signal },
+  );
+  if (!response.ok || !response.body) throw Error("Dataset request failed");
+  const pieces = [];
+  let bytes = 0;
+  const reader = response.body.getReader();
+  const expected = Math.ceil(row.clipBytes / 3) * 4;
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    pieces.push(value);
+    bytes += value.length;
+    onProgress(bytes, expected);
+  }
+  onProgress(bytes, expected, true);
+  const payload = JSON.parse(await new Blob(pieces).text()).rows[0];
+  const source = payload.row;
+  if (
+    payload.row_idx !== row.viewerRow ||
+    Number(source.wit_idx) !== row.wit ||
+    Number(source.youtube_video_starting_time) !== row.start ||
+    !String(source.youtube_video_file_path).includes(row.video)
+  )
+    throw Error("Source identity changed");
+  const media = Uint8Array.from(atob(source.youtube_video_content), (c) =>
+    c.charCodeAt(0),
+  );
+  if (media.length !== row.clipBytes) throw Error("Clip length changed");
+  if (crypto.subtle) {
+    const digest = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", media)),
+      b => b.toString(16).padStart(2, "0")).join("");
+    if (digest !== row.clipHash) throw Error("Clip checksum changed");
+  } else {
+    // The private mini serves plain HTTP. Fetch integrity still checks the pinned bytes.
+    const pin = btoa(String.fromCharCode(...row.clipHash.match(/../g).map(h => parseInt(h,16))));
+    const testURL = URL.createObjectURL(new Blob([media]));
+    try {
+      await (await fetch(testURL, { integrity: "sha256-" + pin, signal: controller.signal })).arrayBuffer();
+    } finally { URL.revokeObjectURL(testURL); }
+  }
+  controller.signal.throwIfAborted();
+  return URL.createObjectURL(new Blob([media], { type: "video/mp4" }));
+}
+
 async function loadClip(button) {
   const row = atlas.rows[button.dataset.id];
   const offset = Number(button.dataset.offset);
@@ -770,53 +927,12 @@ async function loadClip(button) {
   const controller = new AbortController();
   mediaLoads.add(controller);
   try {
-    const args = new URLSearchParams({
-      dataset: "Antreas/TALI",
-      config: "default",
-      split: row.split,
-      offset: row.viewerRow,
-      length: 1,
-    });
-    const response = await fetch(
-      "https://datasets-server.huggingface.co/rows?" + args,
-      { credentials: "omit", signal: controller.signal },
-    );
-    if (!response.ok || !response.body) throw Error("Dataset request failed");
-    const pieces = [];
-    let bytes = 0;
-    const reader = response.body.getReader();
-    const expected = Math.ceil(row.clipBytes / 3) * 4;
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      pieces.push(value);
-      bytes += value.length;
+    const url = await verifiedClipURL(row, controller, (bytes,expected,checking) => {
       progress.max = 1;
-      progress.value = Math.min(0.98, bytes / expected);
-      label.textContent =
+      progress.value = Math.min(.98,bytes/expected);
+      label.textContent = checking ? "Checking the source and clip checksum…" :
         "Receiving clip · " + (bytes / 1e6).toFixed(1) + " MB received";
-    }
-    label.textContent = "Checking the source and clip checksum…";
-    const payload = JSON.parse(await new Blob(pieces).text()).rows[0];
-    const source = payload.row;
-    if (
-      payload.row_idx !== row.viewerRow ||
-      Number(source.wit_idx) !== row.wit ||
-      Number(source.youtube_video_starting_time) !== row.start ||
-      !String(source.youtube_video_file_path).includes(row.video)
-    )
-      throw Error("Source identity changed");
-    const media = Uint8Array.from(atob(source.youtube_video_content), (c) =>
-      c.charCodeAt(0),
-    );
-    if (media.length !== row.clipBytes) throw Error("Clip length changed");
-    const digest = Array.from(
-      new Uint8Array(await crypto.subtle.digest("SHA-256", media)),
-      (b) => b.toString(16).padStart(2, "0"),
-    ).join("");
-    if (digest !== row.clipHash) throw Error("Clip checksum changed");
-    if (controller.signal.aborted) return;
-    const url = URL.createObjectURL(new Blob([media], { type: "video/mp4" }));
+    });
     mediaUrls.add(url);
     const video = document.createElement("video");
     video.controls = true;
@@ -878,6 +994,9 @@ function render(focus = false) {
   ) {
     content = feature(atlas.highlights.find((x) => x.slug === key));
     active = "highlights";
+  } else if (sectionName === "paper" && !key) {
+    content = paperGuide();
+    active = "paper";
   } else if (sectionName === "matches") {
     content = matches();
     active = "highlights";
@@ -918,6 +1037,8 @@ function render(focus = false) {
       headings("Page not found.", "This item is outside the atlas catalogue.") +
       button("#highlights", "Atlas highlights");
   main.innerHTML = content;
+  const stage = main.querySelector("[data-cover-frame]");
+  if (stage) showCoverFrame(stage);
   document.title =
     main.querySelector("h1").textContent + " · TALI visual atlas";
   document.querySelectorAll(".mast nav a").forEach((a) => {

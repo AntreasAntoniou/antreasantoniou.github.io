@@ -703,3 +703,29 @@ td .cellpic {
   background: #162828;
   border-radius: 3px;
 }
+
+.visor-stage {display:grid;place-items:center;aspect-ratio:16/9;background:#15232a;border-radius:4px;overflow:hidden}
+.visor-stage img {display:block;height:100%;width:100%;object-fit:contain}
+.visor-stage img.standby-portrait {width:auto;max-height:132px}
+.visor-cover {min-width:0;margin:0}
+.visor-cover .credit {margin-top:5px}
+.hero-media {grid-template-columns:minmax(150px,1.6fr) minmax(110px,1fr)}
+.cover-intro {display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:clamp(1rem,4vw,3.4rem);padding:26px 0;border-block:1px solid var(--line)}
+.cover-intro h2,.edition-callout h2,.appendix-intro h2 {margin:.25em 0}
+.guide-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.guide-grid.compact,.appendix-grid {grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.guide-tile {min-width:0;text-decoration:none;color:inherit;display:block;border-top:2px solid #376660;padding-top:8px}
+.guide-tile>img,.guide-tile .photo-strip {display:block;width:100%;aspect-ratio:16/8;object-fit:contain;background:#f6f4ec}
+.guide-tile h3 {margin:.25rem 0;font-family:var(--serif);line-height:1.13;font-size:clamp(1.2rem,1.9vw,1.66rem)}
+.guide-tile p {line-height:1.47;margin:.42rem 0}.guide-tile small {display:block;color:#475b58;font-size:.81rem}
+.guide-tile:hover h3,.guide-tile:focus-visible h3 {text-decoration:underline}
+.guide-tile .photo-strip,.photo-rail {display:grid;gap:4px;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+.photo-strip img {width:100%;height:100%;min-height:0;object-fit:cover}
+.photo-rail {margin:18px 0;grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.photo-rail figure {margin:0}.photo-rail img {width:100%;height:105px;object-fit:contain;background:#f3f2e9}
+.photo-rail a span {display:block;font-weight:600}.compact .guide-tile p:not(.eyebrow),.compact .guide-tile small {display:none}
+.edition-callout {margin:28px 0;padding:22px;background:#e5eee6}.edition-callout p {max-width:66ch}
+.paper-back,.appendix-intro {margin:28px 0}.linked-inset>div {width:min(100%,220px);aspect-ratio:75/93;overflow:hidden}
+.linked-inset>div img {display:block;width:400%;max-width:none;height:auto;transform:translate(-47.66%,-21.55%)}
+@media(max-width:850px){.guide-grid.compact,.appendix-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-media{grid-template-columns:1fr}}
+@media(max-width:620px){.cover-intro{grid-template-columns:1fr}.guide-grid:not(.compact){grid-template-columns:1fr}.hero-media{grid-template-columns:minmax(0,1.65fr) minmax(95px,1fr)}.photo-rail{grid-template-columns:repeat(2,minmax(0,1fr))}.guide-tile h3 {font-size:1.32rem}.mast nav{flex-wrap:wrap;column-gap:12px}}
