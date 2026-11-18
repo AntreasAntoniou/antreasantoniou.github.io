@@ -138,7 +138,7 @@ function recordBox(
     clock(r.start + 10) +
     "</p>" +
     '<div class="links">' +
-    (r.clipHash && window.isSecureContext
+    (r.clipHash
       ? '<button class="btn load-clip" type="button" data-id="' +
         esc(id) +
         '" data-offset="' +
@@ -303,7 +303,7 @@ function selectedItems() {
 function recordPhotos(p) {
   return '<div class="photo-rail">'+p.records.map(({id,label}) => {
     const w=atlas.rows[id].wit;
-    return '<figure><a href="#record/'+esc(id)+'">'+pic(w,label)+
+    return '<figure><a href="#record/'+esc(id)+'">'+pic(w,'Reference photograph linked to '+label)+
       '<span>'+esc(label)+'</span></a>'+credit(w)+'</figure>';
   }).join("")+'</div>';
 }
@@ -336,9 +336,7 @@ function paperGuide() {
 }
 
 function home() {
-  const h = atlas.highlights[0],
-    r = atlas.rows[h.rid],
-    rr = atlas.rows["504001609"];
+  const h = atlas.highlights[0];
   const heroLine = (id, title) => {
     const row = atlas.rows[id];
     return (
@@ -359,7 +357,7 @@ function home() {
     '<div class="actions">' +
     button("#case/mass-effect", "Explore the two recordings →") +
     link(
-      privateEdition ? "/#record/" + h.rid : "#case/mass-effect/clip",
+      "#case/mass-effect/clip",
       "See Tali at 6:39",
     ) +
     "</div><footer>Temporal Audio Language and Images</footer></div>" +
