@@ -848,6 +848,9 @@ td .cellpic {
   width: 400%;
   max-width: none;
   height: auto;
+  min-height: 0;
+  max-height: none;
+  border: 0;
   transform: translate(-47.66%, -21.55%);
 }
 @media (max-width: 850px) {
