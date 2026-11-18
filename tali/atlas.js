@@ -51,7 +51,7 @@ const fieldNames = {
   subtitles: "Timed subtitles",
 };
 const mediaNames = {
-  av: "Audio + video",
+  av: "Audio + video (late fusion)",
   video: "Video only",
   image: "WIT image",
   audio: "Audio only",
@@ -293,13 +293,14 @@ function vizTimeline() {
 function vizHero() {
   return (
     '<section class="hero visualizer-hero"><div class="v-hero-copy">' +
-    tag("Temporal Audio Language and Images") +
-    "<h1>TALI <span>Visualizer</span></h1><p>Find a recording, see its Wikipedia photograph and play the original sound. Jump to the subtitle starts in each clip’s opening ten seconds.</p>" +
+    tag("The TALI dataset") +
+    '<h1 class="dataset-name">Temporal Audio <span>Language and Images</span></h1><p>TALI links Wikipedia photographs, captions and articles to clips from YouTube recordings. You can see how a subject looks in motion, hear its surroundings and follow the available timed subtitles.</p>' +
+    '<h2 class="home-search-label">' + link("#visualizer", "TALI Visualizer") + '</h2>' +
     vizForm() +
     vizExamples() +
     '<div class="v-hero-links">' +
     link(vizURL("", "all", 0, "concept"), "Explore by sound or image →") +
-    link("#paper", "Paper figures") +
+    link("#read/collection", "How TALI was built ↓") +
     '</div></div><div class="v-hero-plate">' +
     coverFrame() +
     '<div class="v-feature-caption"><div><span>FEATURED RECORDING</span><h2>' +
@@ -334,7 +335,7 @@ function vizSearchPage(params) {
   const top =
     '<div class="v-head">' +
     tag("Dataset explorer") +
-    '<h1>TALI Visualizer</h1></div><nav class="viz-modes" aria-label="Search mode">' +
+    '<h1>TALI Visualizer</h1><p class="visualizer-intro">Temporal Audio Language and Images (TALI) links Wikipedia photographs and text to YouTube clips, audio and timed subtitles. ' + link("#read/collection", "How the dataset was built") + '</p></div><nav class="viz-modes" aria-label="Search mode">' +
     "<a " +
     (!concept ? 'aria-current="page" ' : "") +
     'href="' +
@@ -1020,6 +1021,125 @@ function activateVisualizer(section, key) {
 
 ;
 "use strict";
+
+// Both examples are retained release rows under WIT index 235882.
+const openingRecords = [
+  { id: "504001602", title: "Mass Effect retrospective", offset: 9 },
+  { id: "504001609", title: "Minecraft meetup", offset: 1 },
+];
+
+function datasetCollection() {
+  return `<section class="story-section" id="story-collection" aria-labelledby="collection-heading">
+    <h2 id="collection-heading" tabindex="-1">How TALI was built</h2>
+    <ol class="collection-sequence">
+      <li><h3>Start with a Wikipedia image</h3><p>A Wikipedia-based Image Text (WIT) entry supplies a photograph or illustration, its caption when present, and text from the page where it appeared.</p></li>
+      <li><h3>Look for recordings</h3><p>The collector searched YouTube using Wikipedia titles or captions. It used CLIP text embeddings to rank candidate recording titles against the original query.</p></li>
+      <li><h3>Keep moments in time</h3><p>The filtering code compared the first frame of each 30-second segment with the search text and kept up to ten segments per recording, together with their source offsets.</p></li>
+    </ol>
+    <details class="collector-note"><summary>How much did the search order matter?</summary>
+      <p>A surviving notebook contains 62 queries run with both relevance and view-count ordering. Only 22 returned the same first-ranked recording. Eight shared no candidates at all. These counts describe the saved searches; the full release has 143,250 recordings.</p>
+      <p>The 2023 presentation names the recording title as the text used to score frames. The surviving filtering code uses the source query. The release preserves the chosen clips; its complete run history is unavailable.</p>
+    </details>
+  </section>`;
+}
+
+function datasetExample() {
+  const reference = atlas.rows[openingRecords[0].id].wit;
+  const end = Math.max(...openingRecords.flatMap(({ id }) => atlas.rows[id].starts));
+  const buttons = openingRecords.map(({ id, title }, i) =>
+    `<button type="button" data-story-record="${id}" aria-pressed="${i === 0}" aria-controls="moment-${id}">${esc(title)}</button>`
+  ).join("");
+  const moments = openingRecords.map(({ id, title, offset }, i) => {
+    const row = atlas.rows[id];
+    return `<div id="moment-${id}" class="story-moment"${i ? " hidden" : ""}>
+      ${recordBox(id, title, offset, end)}
+      <p class="moment-caption">In the ten seconds beginning at ${clock(row.start)}, ${row.cues.length} subtitle cues start.
+      ${i === 0 ? "The frame at 6:39 shows Tali’s visor. The linked photograph depicts a different Mass Effect character." : "Play the meetup at 2:01. PAX Prime connects this recording to the same photograph."}</p>
+    </div>`;
+  }).join("");
+  return `<section class="story-section" id="story-example" aria-labelledby="example-heading">
+    <h2 id="example-heading" tabindex="-1">One photograph, two recordings</h2>
+    <p class="story-intro">A photograph of Legion cosplay at PAX Prime leads to two very different places. Switch the recording to see which moments TALI retained and play the same moment in the source.</p>
+    <div class="story-example">
+      <figure class="linked-inset story-reference"><div>${pic(reference, "Helmet detail from the linked photograph of Legion cosplay at PAX Prime 2013")}</div>
+        <figcaption>Legion at PAX Prime, 2013 · detail of the linked WIT photograph</figcaption>${credit(reference)}
+      </figure>
+      <div class="story-player"><div class="story-switch" role="group" aria-label="Choose a linked recording">${buttons}</div>${moments}</div>
+    </div>
+    <p class="story-foot">The image and article belong to the reference entry. Audio and frames share the recording clock. A subtitle cue has its own start time. ${link("#pairs", "Explore 30 more two-recording references →")}</p>
+  </section>`;
+}
+
+function datasetEditions() {
+  const { topics, counts } = atlas.sheet;
+  const options = (values, selected, label) => values.map((v) =>
+    `<option value="${esc(v)}"${v === selected ? " selected" : ""}>${esc(label(v))}</option>`
+  ).join("");
+  const names = new Intl.DisplayNames("en", { type: "language" });
+  const editionLabel = (code) => {
+    if (code === "simple") return "Simple English (simple)";
+    try { return (names.of(code) || code) + " (" + code + ")"; }
+    catch { return code; }
+  };
+  return `<section class="story-section" id="story-editions" aria-labelledby="edition-heading">
+    <h2 id="edition-heading" tabindex="-1">Which subjects appear across editions?</h2>
+    <p class="story-intro">Choose a subject and a Wikipedia edition. The paper matched words in English page titles across all 105,544 WIT entries, then counted the distinct entries and recordings with a page in each edition.</p>
+    <div class="edition-reader"><div class="edition-inputs">
+      <label>Subject<select id="story-topic">${options(Object.keys(topics), "Land and water", v => v)}</select></label>
+      <label>Wikipedia edition<select id="story-edition">${options(Object.keys(counts).sort(), "ja", editionLabel)}</select></label>
+      ${link("#editions", "Compare the full contact sheet →")}</div>
+      <div class="edition-result" id="story-cell" aria-live="polite"></div>
+    </div>
+    <p class="story-foot">Eleven word lists match ${iso(atlas.sheet.matched_entries)} entries linked to ${iso(atlas.sheet.matched_recordings)} recordings. An entry can appear under several subjects or editions. The edition identifies the Wikipedia source; the recording may be in a different language.</p>
+  </section>`;
+}
+
+function drawDatasetCell() {
+  const topic = document.querySelector("#story-topic").value;
+  const code = document.querySelector("#story-edition").value;
+  const [entries, recordings] = atlas.sheet.counts[code][topic];
+  const sample = atlas.sheet.illustrated.find(item => item.topic === topic && item.edition === code);
+  let example = "";
+  if (entries > 0 && sample?.record && atlas.images[sample.wit]) {
+    example = `<figure class="cell-example"><a href="#record/${esc(sample.record)}">${pic(sample.wit, sample.example_title)}</a>
+      <figcaption>${link("#record/" + sample.record, sample.example_title)} · ${link("#credits", "Image credits")}</figcaption></figure>`;
+  } else if (!entries) {
+    example = '<p class="empty-cell">No title matched this word list in the selected edition.</p>';
+  }
+  document.querySelector("#story-cell").innerHTML = `<div class="edition-counts"><span><b>${iso(entries)}</b>distinct entries</span><span><b>${iso(recordings)}</b>distinct recordings</span></div>${example}`;
+}
+
+function bindDatasetStory() {
+  const topic = document.querySelector("#story-topic");
+  if (!topic) return;
+  topic.addEventListener("change", drawDatasetCell);
+  document.querySelector("#story-edition").addEventListener("change", drawDatasetCell);
+  drawDatasetCell();
+  const switches = [...document.querySelectorAll("[data-story-record]")];
+  for (const toggle of switches) {
+    toggle.addEventListener("click", () => {
+      for (const b of switches) {
+        const selected = b === toggle;
+        const panel = document.getElementById(b.getAttribute("aria-controls"));
+        if (!selected && !panel.hidden) {
+          panel.querySelectorAll("video,audio").forEach(media => media.pause());
+          const player = panel.querySelector("iframe");
+          if (player) {
+            player.remove();
+            const play = panel.querySelector("button.play");
+            play.disabled = false;
+            play.textContent = "Play on YouTube";
+          }
+        }
+        panel.hidden = !selected;
+        b.setAttribute("aria-pressed", String(selected));
+      }
+    });
+  }
+}
+
+;
+"use strict";
 let atlas;
 const main = document.querySelector("main");
 const privateEdition = document.documentElement.dataset.edition === "private";
@@ -1567,9 +1687,17 @@ function home() {
     );
   return (
     hero +
+    '<nav class="paper-chapters" aria-label="Interactive paper chapters"><strong>Read the interactive paper</strong>' +
+    link("#read/collection", "Collection") +
+    link("#read/example", "One image, two recordings") +
+    link("#read/editions", "Topics by edition") +
+    link("#paper", "Figures and appendix") + "</nav>" +
+    datasetCollection() +
+    datasetExample() +
+    datasetEditions() +
     section(
       "Figures from the illustrated paper",
-      '<p class="guide-intro">Six paired views, two recording timelines and an answer to what happens when no subtitle starts.</p>' +
+      '<p class="guide-intro">Across the release, 37,706 reference entries lead to two recordings. For 14,674 entries, both recordings contribute ten stored clips. Open a figure to see its population, examine examples and download the measurements.</p>' +
         '<div class="guide-grid compact">' +
         selectedItems().slice(0, 4).map(guideTile).join("") +
         "</div>",
@@ -2178,9 +2306,10 @@ function render(focus = false) {
     .split("/");
   let content,
     active = sectionName || "highlights";
-  if (!sectionName || ["highlights", "main", "explore"].includes(sectionName)) {
+  const storyRoute = sectionName === "read" && ["collection", "example", "editions"].includes(key);
+  if (!sectionName || storyRoute || ["highlights", "main", "explore"].includes(sectionName)) {
     content = home();
-    active = sectionName === "highlights" ? "highlights" : "visualizer";
+    active = storyRoute ? "read/" + key : "";
   } else if (
     sectionName === "case" &&
     atlas.highlights.some((x) => x.slug === key)
@@ -2234,6 +2363,7 @@ function render(focus = false) {
       headings("Page not found.", "This item is outside the atlas catalogue.") +
       button("#highlights", "Atlas highlights");
   main.innerHTML = content;
+  bindDatasetStory();
   activateVisualizer(sectionName, key);
   const stage = main.querySelector("[data-cover-frame]");
   if (stage) showCoverFrame(stage);
@@ -2291,7 +2421,11 @@ function render(focus = false) {
       b.textContent = "Player opened";
     };
   });
-  if (focus) {
+  if (storyRoute) {
+    const chapter = document.getElementById("story-" + key);
+    chapter.querySelector("h2").focus({ preventScroll: true });
+    chapter.scrollIntoView({ block: "start", behavior: "instant" });
+  } else if (focus) {
     main.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: "instant" });
   }
