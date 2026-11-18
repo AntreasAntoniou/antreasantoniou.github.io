@@ -391,8 +391,47 @@ function compactTitle(s) {
     .trim()
     .slice(0, 180);
 }
+let miniSourceOrder;
+async function vizMiniRecord(doc, w, signal) {
+  if (!privateEdition) return;
+  try {
+    if (!miniSourceOrder) {
+      const sources = await vizData("sources.gz");
+      const names = Object.values(sources)
+        .flat()
+        .map((s) => s[1])
+        .sort();
+      miniSourceOrder = new Map(names.map((name, i) => [name, i + 1]));
+    }
+    const [coord, idx] = await vizCoordinates(doc[2], doc[3][w][0]);
+    const id = miniSourceOrder.get(coord[1]) * 1000000 + idx;
+    const response = await fetch("/api/records/" + id, {
+      signal: AbortSignal.any([signal, AbortSignal.timeout(3500)]),
+      credentials: "omit",
+    });
+    if (!response.ok) return;
+    const row = await response.json();
+    if (
+      String(row.id) === String(id) &&
+      row.split === doc[2] &&
+      row.metadata?.release_revision === atlas.revision &&
+      Number(row.recording_start_seconds) === doc[3][w][1]
+    )
+      return row;
+  } catch {
+    signal.throwIfAborted();
+  }
+}
 async function vizResolveTitle(doc, signal) {
   if (vizNames.has(doc[0])) return vizNames.get(doc[0]);
+  if (privateEdition) {
+    const local = await vizMiniRecord(doc, 0, signal);
+    const name = compactTitle(local?.recording_title);
+    if (name) {
+      vizNames.set(doc[0], name);
+      return name;
+    }
+  }
   const [pin, idx] = await vizCoordinates(doc[2], doc[3][0][0]);
   const row = await TaliReader.read(
     pin,
@@ -771,6 +810,21 @@ async function vizShowItem(id, w, signal) {
     '</div></aside></div><div id="matched-windows"></div><section id="native-cues"></section>';
   document.querySelector("#v-window").onchange = (e) =>
     (location.hash = vizItem(id, Number(e.target.value)));
+  if (privateEdition)
+    vizMiniRecord(doc, w, signal)
+      .then((local) => {
+        if (!local || signal.aborted) return;
+        const a = document.createElement("a");
+        a.href = "/#record/" + encodeURIComponent(local.id);
+        a.textContent = local.playable
+          ? "Play local media"
+          : "Open in the Mac mini player";
+        document.querySelector(".window-pick")?.append(a);
+        if (local.recording_title)
+          qTitle.textContent =
+            compactTitle(local.recording_title) || qTitle.textContent;
+      })
+      .catch(() => {});
   const button = document.querySelector("#v-download");
   button.onclick = async () => {
     const status = document.querySelector("#transfer");
@@ -887,6 +941,44 @@ async function vizShowItem(id, w, signal) {
       (String(row.image_url || "").startsWith("https://")
         ? external(row.image_url, "Image source")
         : "");
+    const recoverPhoto = async () => {
+      if (signal.aborted || !ref.isConnected) return;
+      try {
+        const original = await vizProviderRow(doc, w, ["image"], signal);
+        signal.throwIfAborted();
+        let url;
+        if (original.image?.bytes) {
+          url = URL.createObjectURL(
+            new Blob([vizAsBytes(original.image.bytes)]),
+          );
+          vizBlobURLs.push(url);
+        } else if (
+          typeof original.image?.src === "string" &&
+          original.image.src.startsWith("https://")
+        )
+          url = original.image.src;
+        if (!url || !ref.isConnected) return;
+        let image = ref.querySelector("img");
+        if (!image) {
+          image = document.createElement("img");
+          image.className = "wit-picture";
+          image.alt = "Linked WIT reference photograph";
+          ref.prepend(image);
+        }
+        image.src = url;
+      } catch {
+        /* The source link and text remain available if a photograph cannot be read. */
+      }
+    };
+    const picture = ref.querySelector("img");
+    if (!picture || (picture.complete && !picture.naturalWidth)) recoverPhoto();
+    else picture.addEventListener("error", recoverPhoto, { once: true });
+    if (atlas.images[wit]) {
+      const creditLink = document.createElement("a");
+      creditLink.href = "#credits";
+      creditLink.textContent = "Image credits";
+      ref.append(document.createTextNode(" · "), creditLink);
+    }
     showSourceCues(row.youtube_subtitle_text, start);
     matchedWindows(row.youtube_subtitle_text, doc, id);
   } catch {
