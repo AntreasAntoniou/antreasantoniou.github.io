@@ -291,10 +291,14 @@ function vizTimeline() {
   );
 }
 function vizHero() {
+  const playback = atlas.scale
+    ? " Played end to end, the stored video would run for about " +
+      link("#read/scale", Math.round(atlas.scale.duration.video.estimate_seconds / 604800) + " weeks") + "."
+    : "";
   return (
     '<section class="hero visualizer-hero"><div class="v-hero-copy">' +
     tag("The TALI dataset") +
-    '<h1 class="dataset-name">Temporal Audio <span>Language and Images</span></h1><p>TALI links Wikipedia photographs, captions and articles to clips from YouTube recordings. You can see how a subject looks in motion, hear its surroundings and follow the available timed subtitles.</p>' +
+    '<h1 class="dataset-name">Temporal Audio <span>Language and Images</span></h1><p>TALI links Wikipedia photographs, captions and articles to clips from YouTube recordings. You can see how a subject looks in motion, hear its surroundings and follow the available timed subtitles.' + playback + '</p>' +
     '<h2 class="home-search-label">' + link("#visualizer", "TALI Visualizer") + '</h2>' +
     vizForm() +
     vizExamples() +
@@ -308,7 +312,7 @@ function vizHero() {
     '</h2></div><a class="play-source" href="#case/mass-effect/clip" aria-label="Play Tali at 6:39">▶</a></div>' +
     vizTimeline() +
     "</div></section>" +
-    '<div class="v-census"><span><b>1,172,262</b> stored clips</span><span><b>143,250</b> recordings</span><span><b>105,544</b> WIT entries</span></div>'
+    (atlas.scale ? datasetScale() : '<p class="scale-basis">1,172,262 stored clips · 143,250 recordings · 105,544 WIT entries</p>')
   );
 }
 function bindVizForms() {
@@ -995,6 +999,7 @@ async function vizShowItem(id, w, signal) {
 }
 function activateVisualizer(section, key) {
   bindVizForms();
+  bindScaleUnits();
   if (section !== "visualizer") return;
   vizController = new AbortController();
   const sig = vizController.signal;
@@ -1027,6 +1032,52 @@ const openingRecords = [
   { id: "504001602", title: "Mass Effect retrospective", offset: 9 },
   { id: "504001609", title: "Minecraft meetup", offset: 1 },
 ];
+
+const durationUnits = {
+  weeks: { seconds: 604800, decimals: 1 },
+  months: { seconds: 86400 * 365.2425 / 12, decimals: 1 },
+  hours: { seconds: 3600, decimals: 0 },
+};
+function scaleNumber(value, digits = 0) {
+  return value.toLocaleString("en-US", { maximumFractionDigits: digits, minimumFractionDigits: digits });
+}
+function playbackValues(unit) {
+  const { seconds, decimals } = durationUnits[unit];
+  return ["video", "audio"].map((kind) => {
+    const value = atlas.scale.duration[kind].estimate_seconds / seconds;
+    const rounded = unit === "hours" ? Math.round(value / 10) * 10 : value;
+    return `<div><dt>${kind === "video" ? "Video" : "Audio"}</dt><dd>${scaleNumber(rounded, decimals)} <small>${unit}</small></dd></div>`;
+  }).join("");
+}
+function bindScaleUnits() {
+  const select = main.querySelector("#duration-unit");
+  if (select) select.onchange = () => {
+    main.querySelector("#duration-values").innerHTML = playbackValues(select.value);
+  };
+}
+function datasetScale() {
+  const { census: c, duration: d, sample } = atlas.scale;
+  const span = c.median_span_between_first_and_last_start_s;
+  const nominalExtraDays = Math.round((c.nominal_row_seconds - d.video.estimate_seconds) / 86400);
+  const hourRange = (kind) => d[kind].interval_95_seconds.map((v) => scaleNumber(Math.round(v / 3600))).join("–");
+  return `<section class="release-scale" id="story-scale" aria-labelledby="scale-heading">
+    <div class="scale-top"><div><h2 id="scale-heading" tabindex="-1">How much is in TALI?</h2>
+    <p>${scaleNumber(c.rows)} stored clips from ${scaleNumber(c.recordings)} recordings, linked to ${scaleNumber(c.entries)} Wikipedia image–text entries.</p></div>
+    <label class="scale-unit">Playback unit <select id="duration-unit"><option value="weeks">Weeks</option><option value="months">Months</option><option value="hours">Hours</option></select></label></div>
+    <dl class="scale-durations" id="duration-values" aria-live="polite">${playbackValues("weeks")}</dl>
+    <p class="scale-basis">Estimated playback time if every clip is played once. Video and audio play together. The video adds up to about ${scaleNumber(d.video.estimate_seconds / durationUnits.months.seconds, 1)} months.</p>
+    <div class="scale-facts">
+      <article><h3>${scaleNumber(c.two_recording_entries)} paired references</h3><p>One Wikipedia reference leads to two recordings. In ${scaleNumber(c.sibling_titles_without_a_common_word)} pairs, the two titles share no words.</p>${link("#pairs","See paired recordings →")}</article>
+      <article><h3>${Math.floor(span/60)} min ${span%60} s apart</h3><p>The median distance from a recording’s first selected clip start to its last. The original timestamps let you see what the collector skipped.</p>${link("#read/example","Follow two recording timelines →")}</article>
+      <article><h3>${scaleNumber(c.wikipedia_editions)} Wikipedia editions</h3><p>The same reference image can appear in articles across editions. Browse real photographs by topic and edition.</p>${link("#editions","Explore the contact sheet →")}</article>
+    </div>
+    <details class="scale-details"><summary>Where do the numbers come from?</summary>
+      <p>Counts cover all ${scaleNumber(c.shards)} release shards. The stored clip-file sizes sum to ${scaleNumber(c.media_file_bytes / 1e12,2)} TB. We measured the video and audio track lengths separately in ${scaleNumber(sample.clips)} clips from ${sample.blocks} randomly selected blocks spanning ${sample.record_shards} shards across train, validation and test. We weighted each split back to its size.</p>
+      <p>In the sample, ${scaleNumber(d.video.sample_positive_tracks_under_ten_seconds)} clips contained less than ten seconds of video. Counting every row as exactly 30 seconds would overstate the estimated video total by about ${nominalExtraDays} days.</p>
+      <p>Approximate 95% sampling intervals are ${hourRange("video")} hours of video and ${hourRange("audio")} hours of audio. The audio total includes silence. A month here averages 30.44 days.</p>
+      <a href="measurements/000.json" download="tali-release-scale.json">Download the measurements and method (JSON) ↓</a>
+    </details></section>`;
+}
 
 function datasetCollection() {
   return `<section class="story-section" id="story-collection" aria-labelledby="collection-heading">
@@ -2306,7 +2357,7 @@ function render(focus = false) {
     .split("/");
   let content,
     active = sectionName || "highlights";
-  const storyRoute = sectionName === "read" && ["collection", "example", "editions"].includes(key);
+  const storyRoute = sectionName === "read" && (["collection", "example", "editions"].includes(key) || (key === "scale" && atlas.scale));
   if (!sectionName || storyRoute || ["highlights", "main", "explore"].includes(sectionName)) {
     content = home();
     active = storyRoute ? "read/" + key : "";

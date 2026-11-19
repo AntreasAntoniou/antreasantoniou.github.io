@@ -1,0 +1,113 @@
+{
+  "census": {
+    "clip_count_distribution": {
+      "1": 2435,
+      "10": 88075,
+      "2": 5432,
+      "3": 6676,
+      "4": 7361,
+      "5": 7337,
+      "6": 7103,
+      "7": 6867,
+      "8": 6307,
+      "9": 5657
+    },
+    "entries": 105544,
+    "media_file_bytes": 2069072134947,
+    "median_span_between_first_and_last_start_s": 330.0,
+    "nominal_row_seconds": 35167860,
+    "recording_starts": 1172262,
+    "recordings": 143250,
+    "recordings_with_starts_five_minutes_apart": 81057,
+    "rows": 1172262,
+    "shards": 620,
+    "sibling_titles_without_a_common_word": 24613,
+    "two_recording_entries": 37706,
+    "wikipedia_editions": 108
+  },
+  "duration": {
+    "audio": {
+      "estimate_seconds": 33864427.786,
+      "interval_95_seconds": [
+        33811510.895,
+        33917344.677
+      ],
+      "sample_median_seconds_when_present": 30.000998,
+      "sample_multiple_tracks": 0,
+      "sample_positive_tracks_under_29_5_seconds": 2409,
+      "sample_positive_tracks_under_ten_seconds": 722,
+      "sample_stream_seconds": 900647.568132,
+      "sample_track_count": 31185,
+      "stratum_moments": {
+        "test": {
+          "block_residual_sum_seconds": -3625.072693,
+          "block_residual_sum_squares_seconds2": 448556.269237
+        },
+        "train": {
+          "block_residual_sum_seconds": -27690.152536,
+          "block_residual_sum_squares_seconds2": 3390079.84262
+        },
+        "val": {
+          "block_residual_sum_seconds": -3587.206639,
+          "block_residual_sum_squares_seconds2": 463485.142242
+        }
+      }
+    },
+    "video": {
+      "estimate_seconds": 33939513.849,
+      "interval_95_seconds": [
+        33886771.254,
+        33992256.443
+      ],
+      "sample_median_seconds_when_present": 30.057,
+      "sample_multiple_tracks": 0,
+      "sample_positive_tracks_under_29_5_seconds": 2411,
+      "sample_positive_tracks_under_ten_seconds": 724,
+      "sample_stream_seconds": 902670.552991,
+      "sample_track_count": 31185,
+      "stratum_moments": {
+        "test": {
+          "block_residual_sum_seconds": -3399.389676,
+          "block_residual_sum_squares_seconds2": 400504.496445
+        },
+        "train": {
+          "block_residual_sum_seconds": -26105.223357,
+          "block_residual_sum_squares_seconds2": 3053820.456325
+        },
+        "val": {
+          "block_residual_sum_seconds": -3374.833976,
+          "block_residual_sum_squares_seconds2": 418240.032346
+        }
+      }
+    }
+  },
+  "method": "For each released split, rank consecutive blocks of up to 100 stored rows by seeded SHA-256 and sample blocks without replacement. Measure the presentation duration of the default video and audio track in each clip, using the first track if no default is marked. Exclude cover art. An absent track contributes zero. Estimate each total from the known row count times 30 seconds plus the split-weighted sum of observed deviations. Approximate 95% sampling intervals use between-block variance within each split, finite-population corrections and a Satterthwaite t multiplier. Each row counts once. The two tracks can play together. A month is 365.2425/12 days.",
+  "release": "753b14068682ac5fdf3de47dc1b695bc8f26331d",
+  "sample": {
+    "blocks": 320,
+    "clips": 31185,
+    "record_shards": 238,
+    "strata": {
+      "test": {
+        "population_blocks": 620,
+        "population_clips": 61389,
+        "sample_blocks": 32,
+        "sample_clips": 3200
+      },
+      "train": {
+        "population_blocks": 10800,
+        "population_clips": 1052915,
+        "sample_blocks": 256,
+        "sample_clips": 24789
+      },
+      "val": {
+        "population_blocks": 580,
+        "population_clips": 57958,
+        "sample_blocks": 32,
+        "sample_clips": 3196
+      }
+    }
+  },
+  "sample_seed": "tali-stored-stream-clock/v1/20261119",
+  "sampling_key": "Ascending SHA-256 of the UTF-8 string {seed}/{release shard path}/{zero-based first row}, within each split. Blocks partition each shard separately."
+}
