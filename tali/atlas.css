@@ -1078,6 +1078,8 @@ body {
   color: white;
 }
 
+/* A direct fragment also targets the static guide before the atlas renders. */
+html:has(#datasets:target) { scroll-behavior: auto; }
 .dataset-guide {
   margin-block: clamp(28px, 4vw, 64px);
   color: var(--ink);
