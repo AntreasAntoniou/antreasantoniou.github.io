@@ -58,6 +58,36 @@ const mediaNames = {
   text: "WIT context",
   title: "Recording title",
 };
+const semanticViews = {
+  av: "Joint audio + video",
+  image: "Wikipedia images",
+  audio: "Audio",
+  video: "Video",
+  text: "Text",
+};
+const semanticExamples = {
+  av: "A dog barking in a garden",
+  image: "A spiral staircase seen from above",
+  audio: "A train horn in the distance",
+  video: "Waves breaking against rocks",
+  text: "How a bicycle gear works",
+};
+const semanticView = (view) => Object.hasOwn(semanticViews, view) ? view : "av";
+const semanticPublicOrigin = "https://tali.antreas.io";
+const semanticLocalHost = () => ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
+function semanticURL(q = "", view = "av") {
+  const params = new URLSearchParams({ mode: "semantic" });
+  if (q) params.set("q", q);
+  params.set("view", semanticView(view));
+  return (privateEdition && !semanticLocalHost() ? semanticPublicOrigin + "/" : "") +
+    "#visualizer?" + params;
+}
+function semanticTime(seconds) {
+  return clock(seconds) + (seconds % 1 ? "." + String(seconds).split(".")[1] : "");
+}
+function semanticRange(start, end) {
+  return semanticTime(start) + "–" + semanticTime(end);
+}
 function vizClean() {
   vizController?.abort();
   for (const uri of vizBlobURLs) URL.revokeObjectURL(uri);
@@ -80,8 +110,10 @@ function vizURL(
   if (concept) p.set("concept", concept);
   return "#visualizer" + (p.size ? "?" + p : "");
 }
-function vizItem(id, w = 0) {
-  return "#visualizer/item/" + id + "/" + w;
+function vizItem(id, w = 0, segment) {
+  return "#visualizer/item/" + id + "/" + w + (segment
+    ? "?" + new URLSearchParams({ start: segment.start_s, end: segment.end_s })
+    : "");
 }
 function vizRoot() {
   // GitHub Pages supplies the index on both public sites. The mini keeps its own copy.
@@ -267,6 +299,20 @@ function vizExamples() {
     "</div>"
   );
 }
+function semanticForm(q = "", view = "av") {
+  return '<form class="viz-form semantic-form" role="search" aria-label="Live multimodal search" data-mode="semantic">' +
+    '<label class="v-search-input"><span class="search-glass" aria-hidden="true"></span><input type="search" name="q" aria-label="Describe what you want to find" placeholder="Describe what you want to find…" autocomplete="off" maxlength="110" required value="' +
+    esc(q) + '"></label><button type="submit">Search <span aria-hidden="true">↗</span></button>' +
+    '<label class="semantic-view">Match against <select name="view">' +
+    Object.entries(semanticViews).map(([key, label]) => '<option value="' + key + '"' +
+      (key === view ? " selected" : "") + ">" + esc(label) + "</option>").join("") +
+    "</select></label></form>";
+}
+function semanticSuggestions(views = Object.keys(semanticViews)) {
+  return '<div class="viz-suggestions"><span>Try</span>' +
+    views.map((view) => link(semanticURL(semanticExamples[view], view), semanticExamples[view])).join("") +
+    "</div>";
+}
 function vizTimeline() {
   const row = atlas.rows["504001602"],
     rms = atlas.paper.coverRMS,
@@ -299,11 +345,12 @@ function vizHero() {
     '<section class="hero visualizer-hero"><div class="v-hero-copy">' +
     tag("The TALI dataset") +
     '<h1 class="dataset-name">Temporal Audio <span>Language and Images</span></h1><p>TALI links Wikipedia photographs, captions and articles to clips from YouTube recordings. You can see how a subject looks in motion, hear its surroundings and follow the available timed subtitles.' + playback + '</p>' +
-    '<h2 class="home-search-label">' + link("#visualizer", "TALI Visualizer") + '</h2>' +
-    vizForm() +
-    vizExamples() +
+    '<h2 class="home-search-label">' + link(semanticURL(), "Live multimodal search") + '</h2>' +
+    semanticForm() +
+    semanticSuggestions(["av", "audio"]) +
     '<div class="v-hero-links">' +
-    link(vizURL("", "all", 0, "concept"), "Explore by sound or image →") +
+    link(vizURL(), "Keyword search →") +
+    link(vizURL("", "all", 0, "concept"), "Fixed concept gallery →") +
     link("#read/collection", "How TALI was built ↓") +
     '</div></div><div class="v-hero-plate">' +
     coverFrame() +
@@ -320,6 +367,15 @@ function bindVizForms() {
     f.onsubmit = (ev) => {
       ev.preventDefault();
       const d = new FormData(f);
+      if (f.dataset.mode === "semantic") {
+        const query = String(d.get("q") || "").trim();
+        if (!query) return;
+        const url = semanticURL(query, d.get("view"));
+        if (!url.startsWith("#")) location.assign(url);
+        else if (location.hash === url) render();
+        else location.hash = url;
+        return;
+      }
       location.hash = vizURL(
         String(d.get("q")).trim(),
         String(d.get("field") || "all"),
@@ -333,6 +389,7 @@ function vizSearchPage(params) {
       ? params.get("field")
       : "all";
   const concept = params.get("mode") === "concept",
+    semantic = params.get("mode") === "semantic",
     view = Object.hasOwn(mediaNames, params.get("view"))
       ? params.get("view")
       : "av";
@@ -340,15 +397,29 @@ function vizSearchPage(params) {
     '<div class="v-head">' +
     tag("Dataset explorer") +
     '<h1>TALI Visualizer</h1><p class="visualizer-intro">Temporal Audio Language and Images (TALI) links Wikipedia photographs and text to YouTube clips, audio and timed subtitles. ' + link("#read/collection", "How the dataset was built") + '</p></div><nav class="viz-modes" aria-label="Search mode">' +
-    "<a " +
-    (!concept ? 'aria-current="page" ' : "") +
+    "<a " + (semantic ? 'aria-current="page" ' : "") +
+    'href="' + esc(semanticURL(q, params.get("view"))) + '">Live multimodal search</a><a ' +
+    (!concept && !semantic ? 'aria-current="page" ' : "") +
     'href="' +
     esc(vizURL(q, field)) +
-    '">Search the release</a><a ' +
+    '">Keyword search</a><a ' +
     (concept ? 'aria-current="page" ' : "") +
     'href="' +
-    esc(vizURL(q, field, 0, "concept", view)) +
-    '">Match a concept</a></nav>';
+    esc(vizURL(semantic ? "" : q, field, 0, "concept", view)) +
+    '">Fixed concept gallery</a></nav>';
+  if (semantic) {
+    const url = semanticURL(q.trim().slice(0, 110), params.get("view"));
+    if (!url.startsWith("#"))
+      return top + '<p>Live multimodal search opens on the public TALI Visualizer.</p>' + button(url, "Open live multimodal search");
+    return top + '<section class="semantic-search" aria-labelledby="semantic-heading">' +
+      '<h2 id="semantic-heading">Describe a scene, sound or subject</h2>' +
+      '<p>Search the clips indexed so far with a phrase or sentence. Joint audio + video matches against an embedding of sound and moving images together.</p>' +
+      semanticForm(q.trim().slice(0, 110), semanticView(params.get("view"))) +
+      semanticSuggestions() +
+      '<div id="semantic-coverage" class="semantic-coverage" role="status">Checking index coverage…</div></section>' +
+      '<p id="semantic-feedback" role="status">' + (q.trim() ? "Searching the live index…" : "") +
+      '</p><section id="v-results" aria-label="Search results"></section>';
+  }
   if (concept)
     return (
       top +
@@ -531,7 +602,157 @@ async function vizResults(entries, config, signal) {
     .querySelectorAll("[data-title]")
     .forEach((h) => hydrateTitle(docs[Number(h.dataset.title)], h, signal));
 }
+const semanticScopes = {
+  window: "Clip segment",
+  "first-ten-second-search": "First ten seconds of the clip",
+  "WIT-card": "Wikipedia reference",
+  document: "Text match",
+};
+const semanticFields = {
+  youtube_title_text: "Recording title",
+  youtube_description_text: "Recording description",
+  subtitle_window: "Timed subtitles",
+  "wit_features.page_title": "Wikipedia title",
+  "wit_features.caption_reference_description": "Reference caption",
+  "wit_features.caption_alt_text_description": "Image alt text",
+  "wit_features.caption_title_and_reference_description": "Image caption",
+  "wit_features.context_page_description": "Wikipedia page context",
+  "wit_features.context_section_description": "Wikipedia section context",
+  "wit_features.hierarchical_section_title": "Wikipedia section headings",
+  "wit_features.section_title": "Wikipedia section heading",
+};
+function semanticSegment(start, end) {
+  if (Number.isFinite(start) && Number.isFinite(end) && start >= 0 && start < end && end <= 10)
+    return { start_s: start, end_s: end };
+}
+function semanticAPI(endpoint, params) {
+  const origin = location.origin === semanticPublicOrigin || semanticLocalHost()
+    ? location.origin
+    : semanticPublicOrigin;
+  const url = new URL("/api/vector/" + endpoint, origin);
+  if (params) url.search = new URLSearchParams(params);
+  return url;
+}
+async function semanticFetch(endpoint, params, signal) {
+  const response = await fetch(semanticAPI(endpoint, params), {
+    credentials: "omit",
+    signal: AbortSignal.any([signal, AbortSignal.timeout(25000)]),
+  });
+  if (!response.ok) throw Error("Live index unavailable");
+  return response.json();
+}
+function renderSemanticCoverage(node, coverage) {
+  const keys = ["rows", "total_rows", "shards", "total_shards"];
+  if (!coverage || !keys.every((key) => Number.isSafeInteger(coverage[key]) && coverage[key] >= 0) ||
+    coverage.rows > coverage.total_rows || coverage.shards > coverage.total_shards ||
+    !coverage.total_rows || !coverage.total_shards) throw Error("Invalid index coverage");
+  if (!node.isConnected) return;
+  node.innerHTML = '<span><strong>' + iso(coverage.rows) + '</strong> of ' + iso(coverage.total_rows) +
+    ' release clips indexed</span><span><strong>' + iso(coverage.shards) + '</strong> of ' +
+    iso(coverage.total_shards) + ' shards</span>';
+}
+function semanticRetry(label, action) {
+  const retry = document.createElement("button");
+  retry.type = "button";
+  retry.className = "semantic-retry";
+  retry.textContent = label;
+  retry.onclick = action;
+  return retry;
+}
+async function semanticResults(results, hits, q, view, signal) {
+  if (!Array.isArray(hits)) throw Error("Malformed search results");
+  const recordingCount = hits.length ? (await vizManifest()).recordings : 0;
+  const matches = await Promise.all(hits.slice(0, 24).map(async (hit) => {
+    if (!hit || !Number.isSafeInteger(hit.doc) || hit.doc < 0 || hit.doc >= recordingCount ||
+      !Number.isSafeInteger(hit.window) || hit.window < 0) return;
+    if (typeof hit.scope !== "string" || !Object.hasOwn(semanticScopes, hit.scope)) return;
+    const isTimed = hit.scope === "window" || hit.scope === "first-ten-second-search";
+    const segment = isTimed ? semanticSegment(hit.start_s, hit.end_s) : undefined;
+    if (isTimed && !segment) return;
+    // Resolve only against the checked release catalogue, which owns clip identity and source time.
+    const doc = await vizDoc(hit.doc);
+    const window = doc?.[3]?.[hit.window];
+    if (!window || !Number.isFinite(window[1]) || window[1] < 0) return;
+    return { hit, segment, doc, source: window[1] };
+  }));
+  signal.throwIfAborted();
+  const found = matches.filter(Boolean);
+  if (hits.length && !found.length) throw Error("No verified release windows");
+  const items = found.map(({ hit, segment, doc, source }, i) => {
+    const [id, wit, split] = doc;
+    const img = atlas.images[wit];
+    const known = vizNames.get(id) || atlas.search.examples[id];
+    const scope = semanticScopes[hit.scope];
+    const field = typeof hit.field === "string" && Object.hasOwn(semanticFields, hit.field) ? semanticFields[hit.field] : "";
+    const language = typeof hit.language === "string" && /^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$/i.test(hit.language) ? hit.language : "";
+    const times = segment
+      ? "Clip " + semanticRange(segment.start_s, segment.end_s) + " · source " +
+        semanticRange(source + segment.start_s, source + segment.end_s)
+      : "Linked clip · source " + semanticTime(source);
+    return '<article class="v-result"><a class="v-result-hit" href="' +
+      esc(vizItem(hit.doc, hit.window, segment)) + '">' +
+      (img ? '<img src="' + esc(img.asset) + '" loading="lazy" alt="">'
+        : '<span class="result-time" aria-hidden="true">▶</span>') +
+      '<div><small>' + esc([scope, field, language].filter(Boolean).join(" · ")) +
+      '</small><h3 data-title="' + i + '">' + esc(known || "Recording " + id) + '</h3><p>' +
+      esc(times + " · " + split) + '</p></div><b aria-hidden="true">↗</b></a></article>';
+  });
+  results.innerHTML = '<div class="results-head"><h2>Matches for “' + esc(q) + '”</h2><span>' +
+    esc(semanticViews[view]) + '</span></div>' + (found.length
+      ? '<div class="v-result-grid">' + items.join("") + '</div>'
+      : '<p>No matches in the indexed clips. Try another description or media view.</p>');
+  results.querySelectorAll("[data-title]").forEach((h) =>
+    hydrateTitle(found[Number(h.dataset.title)].doc, h, signal));
+  return found.length;
+}
+async function semanticStart(params, signal) {
+  const q = (params.get("q") || "").trim().slice(0, 110);
+  const view = semanticView(params.get("view"));
+  const feedback = document.querySelector("#semantic-feedback");
+  const coverage = document.querySelector("#semantic-coverage");
+  const results = document.querySelector("#v-results");
+  let coverageFromResults = false;
+  const loadCoverage = async () => {
+    coverage.textContent = "Checking index coverage…";
+    try {
+      const status = await semanticFetch("status", null, signal);
+      if (!signal.aborted && !coverageFromResults) renderSemanticCoverage(coverage, status);
+    } catch {
+      if (signal.aborted || coverageFromResults) return;
+      coverage.replaceChildren("Index coverage is unavailable. ", semanticRetry("Retry coverage", loadCoverage));
+    }
+  };
+  const search = async () => {
+    feedback.textContent = "Searching the live index…";
+    results.replaceChildren();
+    results.setAttribute("aria-busy", "true");
+    try {
+      const response = await semanticFetch("search", { q, view, k: 12 }, signal);
+      signal.throwIfAborted();
+      if (response.status) {
+        try {
+          renderSemanticCoverage(coverage, response.status);
+          coverageFromResults = true;
+        } catch {
+          // The dedicated coverage endpoint can supply the current counts independently.
+        }
+      }
+      const count = await semanticResults(results, response.results, q, view, signal);
+      if (!signal.aborted) feedback.textContent = iso(count) + (count === 1 ? " ranked match" : " ranked matches");
+    } catch {
+      if (signal.aborted) return;
+      feedback.replaceChildren("Live search could not load results. ", semanticRetry("Retry search", search));
+    } finally {
+      if (!signal.aborted) results.removeAttribute("aria-busy");
+    }
+  };
+  await Promise.all([loadCoverage(), q && search()]);
+}
 async function vizStart(params, signal) {
+  if (params.get("mode") === "semantic") {
+    if (!privateEdition || semanticLocalHost()) return semanticStart(params, signal);
+    return;
+  }
   const q = params.get("q") || "",
     field = Object.hasOwn(fields, params.get("field"))
       ? params.get("field")
@@ -707,10 +928,10 @@ async function vizProviderRow(doc, w, columns, signal, onProgress) {
 function matchedWindows(track, doc, id) {
   const here = document.querySelector("#matched-windows");
   if (!here) return;
-  const terms = vizTokens(
-    new URLSearchParams(lastVizSearch.split("?")[1] || "").get("q") || "",
-  );
-  if (!terms.length || lastVizSearch.includes("mode=concept")) return;
+  const params = new URLSearchParams(lastVizSearch.split("?")[1] || "");
+  if (["concept", "semantic"].includes(params.get("mode"))) return;
+  const terms = vizTokens(params.get("q") || "");
+  if (!terms.length) return;
   const entries = TaliReader.trackEntries(track);
   const groups = doc[3]
     .map(([, start], win) => {
@@ -765,7 +986,7 @@ function showSourceCues(track, second) {
       }),
   );
 }
-async function vizShowItem(id, w, signal) {
+async function vizShowItem(id, w, signal, segment) {
   const doc = await vizDoc(id);
   if (!Number.isSafeInteger(w) || w < 0 || w >= doc[3].length)
     throw Error("Unknown release window");
@@ -789,6 +1010,11 @@ async function vizShowItem(id, w, signal) {
     " · source " +
     clock(start) +
     "</p>" +
+    (segment
+      ? '<p class="v-record-meta semantic-item-time">Matched clip segment ' +
+        semanticRange(segment.start_s, segment.end_s) + ' · source ' +
+        semanticRange(start + segment.start_s, start + segment.end_s) + '</p>'
+      : "") +
     '<div class="window-pick"><label for="v-window">Retained window</label><select id="v-window">' +
     windows
       .map(([, s], j) => [s, j])
@@ -807,7 +1033,8 @@ async function vizShowItem(id, w, signal) {
     "</select>" +
     external(viewerURL(split, offset), "Release row") +
     '</div><div class="source-layout"><div class="source-screen" id="source-screen">' +
-    '<button id="v-download" type="button" class="v-download">▶ &nbsp; Load recording and sound</button><div id="transfer" role="status"></div></div>' +
+    '<button id="v-download" type="button" class="v-download">▶ &nbsp; ' +
+    (segment ? "Load matched segment" : "Load recording and sound") + '</button><div id="transfer" role="status"></div></div>' +
     '<aside class="source-context"><h2>Wikipedia reference</h2><div id="source-reference">' +
     (atlas.images[wit]
       ? photo(wit, "Linked WIT image")
@@ -878,10 +1105,14 @@ async function vizShowItem(id, w, signal) {
         "</small>";
       const v = document.querySelector("#source-video"),
         a = document.querySelector("#source-audio");
-      v.src = url;
-      a.src = url;
+      const mediaURL = segment ? url + "#t=" + segment.start_s + "," + segment.end_s : url;
+      v.src = mediaURL;
+      a.src = mediaURL;
       v.onplay = () => a.pause();
       a.onplay = () => v.pause();
+      if (segment) v.play().catch(() => {
+        // The media controls remain available when autoplay is blocked.
+      });
       qTitle.textContent =
         compactTitle(row.youtube_title_text) || qTitle.textContent;
       document.title = qTitle.textContent + " · TALI Visualizer";
@@ -1006,8 +1237,12 @@ function activateVisualizer(section, key) {
   const params = new URLSearchParams(location.hash.split("?")[1] || "");
   const pieces = location.hash.split("?")[0].slice(1).split("/");
   let work;
-  if (key === "item")
-    work = vizShowItem(Number(pieces[2]), Number(pieces[3] || 0), sig);
+  if (key === "item") {
+    const segment = params.has("start") && params.has("end") && params.get("start") !== "" && params.get("end") !== ""
+      ? semanticSegment(Number(params.get("start")), Number(params.get("end")))
+      : undefined;
+    work = vizShowItem(Number(pieces[2]), Number(pieces[3] || 0), sig, segment);
+  }
   else {
     lastVizSearch = location.hash;
     work = vizStart(params, sig);
