@@ -336,6 +336,7 @@ function vizTimeline() {
     "</div></div>"
   );
 }
+const embeddingDatasetURL = "https://huggingface.co/datasets/Antreas/TALI-gemma-embedding-2-vectors";
 function vizHero() {
   const playback = atlas.scale
     ? " Played end to end, the stored video would run for about " +
@@ -349,6 +350,7 @@ function vizHero() {
     semanticForm() +
     semanticSuggestions(["av", "audio"]) +
     '<div class="v-hero-links">' +
+    external(embeddingDatasetURL, "Download embeddings") +
     link(vizURL(), "Keyword search →") +
     link(vizURL("", "all", 0, "concept"), "Fixed concept gallery →") +
     link("#read/collection", "How TALI was built ↓") +
@@ -413,7 +415,7 @@ function vizSearchPage(params) {
       return top + '<p>Live multimodal search opens on the public TALI Visualizer.</p>' + button(url, "Open live multimodal search");
     return top + '<section class="semantic-search" aria-labelledby="semantic-heading">' +
       '<h2 id="semantic-heading">Describe a scene, sound or subject</h2>' +
-      '<p>Search the clips indexed so far with a phrase or sentence. Joint audio + video matches against an embedding of sound and moving images together.</p>' +
+      '<p>Search the clips indexed so far with a phrase or sentence. Joint audio + video matches against an embedding of sound and moving images together. ' + external(embeddingDatasetURL, "Download the vectors") + '.</p>' +
       semanticForm(q.trim().slice(0, 110), semanticView(params.get("view"))) +
       semanticSuggestions() +
       '<div id="semantic-coverage" class="semantic-coverage" role="status">Checking index coverage…</div></section>' +
