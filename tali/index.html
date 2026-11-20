@@ -10,8 +10,8 @@
     />
     <link rel="canonical" href="https://antreas.io/tali/" />
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="atlas.css?v=2f332932439f56be" />
-    <script defer src="atlas.js?v=23fe3e44209ee57d"></script>
+    <link rel="stylesheet" href="atlas.css?v=df1cfcf2d3b5d8f6" />
+    <script defer src="atlas.js?v=e464418b431e8185"></script>
   </head>
   <body>
     <a href="#main" class="skip">Skip to content</a>
@@ -19,8 +19,9 @@
       <div class="wrap mast-in">
         <div class="mast-identity">
           <a class="brand" href="#">TALI <span>dataset atlas</span></a>
-          <div class="project-resources" role="group" aria-label="Dataset and code">
-            <a href="https://huggingface.co/datasets/Antreas/TALI" aria-label="TALI dataset on Hugging Face">Hugging Face <span aria-hidden="true">↗</span></a>
+          <div class="project-resources" role="group" aria-label="Datasets and code">
+            <a href="https://huggingface.co/datasets/Antreas/TALI" aria-label="Original TALI dataset on Hugging Face"><span class="resource-long">Original dataset</span><span class="resource-short">TALI data</span> <span aria-hidden="true">↗</span></a>
+            <a href="https://huggingface.co/datasets/Antreas/TALI-gemma-embedding-2-vectors" aria-label="Embedding vectors on Hugging Face"><span class="resource-long">Embedding vectors</span><span class="resource-short">Vectors</span> <span aria-hidden="true">↗</span></a>
             <a href="https://github.com/AntreasAntoniou/TALI" aria-label="TALI code on GitHub">GitHub <span aria-hidden="true">↗</span></a>
           </div>
         </div>
@@ -58,6 +59,115 @@
           >Minecraft at 2:01</a
         ></noscript
       >
+      <section class="dataset-guide" id="datasets" aria-labelledby="datasets-title">
+        <h2 id="datasets-title" tabindex="-1">Use TALI in Python</h2>
+        <div class="dataset-offerings">
+          <a class="dataset-offering" href="https://huggingface.co/datasets/Antreas/TALI">
+            <h3>Original TALI dataset <span aria-hidden="true">↗</span></h3>
+            <p>Explore 1,172,262 stored clips. Read video and audio, linked Wikipedia images and text, YouTube metadata and available timed subtitles.</p>
+            <span class="repo-name">Hugging Face · Antreas/TALI</span>
+          </a>
+          <a class="dataset-offering" href="https://huggingface.co/datasets/Antreas/TALI-gemma-embedding-2-vectors">
+            <h3>EmbeddingGemma 2 vectors <span aria-hidden="true">↗</span></h3>
+            <p>Search with 768-dimensional embeddings of sound, video, joint audio and video, reference images and individual text fields.</p>
+            <span class="repo-name">Hugging Face · Antreas/TALI-gemma-embedding-2-vectors</span>
+          </a>
+        </div>
+        <p class="release-note">The vector collection grows as shards finish. Its <code>vectors</code> table has one row per encoded view. Its <code>coverage</code> table records each processed clip, including clips with no vector. <a href="https://huggingface.co/datasets/Antreas/TALI-gemma-embedding-2-vectors/blob/main/manifest.json">See current coverage on Hugging Face ↗</a></p>
+        <div class="example-setup"><span>Install once</span> <code>python -m pip install "datasets==5.1.0" pillow</code></div>
+        <p class="example-intro">Each example runs independently on a CPU and reads a small slice of a fixed public release.</p>
+        <div class="example-tabs" role="tablist" aria-label="Python examples" hidden>
+          <button role="tab" type="button" id="tab-clip" aria-controls="example-clip" data-example="clip">Read a clip</button>
+          <button role="tab" type="button" id="tab-vectors" aria-controls="example-vectors" data-example="vectors">Get a subtitle vector</button>
+          <button role="tab" type="button" id="tab-retrieval" aria-controls="example-retrieval" data-example="retrieval">Match text to video</button>
+        </div>
+        <article class="example-panel" id="example-clip" data-example-panel="clip">
+          <h3>Read a clip and save its Wikipedia reference image</h3>
+          <p>Open the first training clip. Requesting just three Parquet columns lets you read the image, recording title and starting time without fetching the video column.</p>
+          <div class="example-code"><button type="button" class="copy-example" hidden>Copy Python</button><pre tabindex="0" aria-label="Python for reading original TALI"><code>from io import BytesIO
+
+import pyarrow.parquet as pq
+from huggingface_hub import HfFileSystem
+from PIL import Image
+
+release = "753b14068682ac5fdf3de47dc1b695bc8f26331d"
+shard = "data/train-00000-of-00600-e9123a82b71a4590.parquet"
+path = f"datasets/Antreas/TALI@{release}/{shard}"
+columns = ["image", "youtube_title_text", "youtube_video_starting_time"]
+
+with HfFileSystem(token=False).open(path, "rb", block_size=65_536) as source:
+    group = pq.ParquetFile(source).read_row_group(0, columns=columns)
+    clip = group.slice(0, 1).to_pylist()[0]
+
+with Image.open(BytesIO(clip["image"]["bytes"])) as photo:
+    photo.save("tali-reference.png")
+print(clip["youtube_title_text"])
+print(f'{clip["youtube_video_starting_time"]} seconds into the recording')</code></pre></div>
+          <p class="example-result">You get <code>tali-reference.png</code> and “Shintomicho Station, Tokyo Subway Neighborhood” at <strong>18:00</strong>. <a href="#visualizer/item/7598/0">Open this clip in the visualizer →</a></p>
+        </article>
+        <article class="example-panel" id="example-vectors" data-example-panel="vectors">
+          <h3>Read the text vector for a subtitle window</h3>
+          <p>Use the <code>field</code> column to select subtitle text, YouTube titles, descriptions or individual Wikipedia text fields. The subtitle input includes the recording title and available cues starting in the clip’s first ten seconds.</p>
+          <div class="example-code"><button type="button" class="copy-example" hidden>Copy Python</button><pre tabindex="0" aria-label="Python for reading subtitle vectors"><code>from datasets import load_dataset
+
+views = load_dataset(
+    "Antreas/TALI-gemma-embedding-2-vectors",
+    "vectors",
+    revision="a5f6d5646229ca5009fd3d0b7e571b0391181ef5",
+    data_files={"train": "vectors/train/part-0010.parquet"},
+    split="train",
+    streaming=True,
+    filters=[("field", "=", "subtitle_window")],
+    columns=["source_shard", "source_row", "field", "embedding"],
+    token=False,
+)
+subtitle = next(iter(views))
+print(subtitle["field"], len(subtitle["embedding"]))
+print(subtitle["source_shard"], subtitle["source_row"])</code></pre></div>
+          <p class="example-result">The first match prints <code>subtitle_window 768</code>. Its <code>source_shard</code> and zero-based <code>source_row</code> point to the Tokyo clip at row 0 of the original training shard.</p>
+        </article>
+        <article class="example-panel" id="example-retrieval" data-example-panel="retrieval">
+          <h3>Find a video window using a stored title vector</h3>
+          <p>Compare the Tokyo title with 74 other video windows in the first two Parquet row groups of one part. The query clip is excluded. The vectors have unit length, so their dot product gives cosine similarity.</p>
+          <div class="example-code"><button type="button" class="copy-example" hidden>Copy Python</button><pre tabindex="0" aria-label="Python for matching a title to video"><code>import numpy as np
+import pyarrow.parquet as pq
+from huggingface_hub import HfFileSystem
+
+fs = HfFileSystem(token=False)
+snapshot = "a5f6d5646229ca5009fd3d0b7e571b0391181ef5"
+vectors = f"datasets/Antreas/TALI-gemma-embedding-2-vectors@{snapshot}"
+columns = ["source_shard", "source_row", "view", "field", "embedding"]
+
+part = f"{vectors}/vectors/train/part-0010.parquet"
+with fs.open(part, "rb", block_size=65_536) as file:
+    groups = pq.ParquetFile(file).read_row_groups([0, 1], columns=columns)
+    sample = groups.to_pylist()
+
+title = next(r for r in sample if r["field"] == "youtube_title_text")
+# Omit the query clip itself.
+query_id = (title["source_shard"], title["source_row"])
+gallery = [
+    r for r in sample
+    if r["view"] == "video" and (r["source_shard"], r["source_row"]) != query_id
+]
+video = np.asarray([r["embedding"] for r in gallery], dtype="float32")
+scores = video @ np.asarray(title["embedding"], dtype="float32")
+i = int(scores.argmax())
+match = gallery[i]
+
+# Look up the shard first, then the zero-based row within it.
+release = "753b14068682ac5fdf3de47dc1b695bc8f26331d"
+source = f'datasets/Antreas/TALI@{release}/{match["source_shard"]}'
+with fs.open(source, "rb", block_size=65_536) as file:
+    columns = ["youtube_title_text", "youtube_video_starting_time"]
+    metadata = pq.ParquetFile(file).read(columns=columns)
+clip = metadata.slice(match["source_row"], 1).to_pylist()[0]
+print(f'Top of {len(gallery)} candidate clips: cosine {scores[i]:.3f}')
+print(clip["youtube_title_text"], clip["youtube_video_starting_time"])</code></pre></div>
+          <p class="example-result">The nearest window is from the same recording at <strong>25:00</strong>, with cosine <strong>0.654</strong>. The example uses the returned shard and row to look up that timestamp in the original dataset. <a href="#visualizer/item/7598/4">Open the matching clip →</a></p>
+        </article>
+        <span class="copy-status" role="status" aria-live="polite"></span>
+      </section>
     </main>
     <footer class="wrap foot">
       <a href="https://antreas.io/">antreas.io</a
@@ -65,7 +175,7 @@
       ><a href="#credits">Image credits</a
       ><a
         href="https://huggingface.co/datasets/Antreas/TALI/tree/753b14068682ac5fdf3de47dc1b695bc8f26331d"
-        >Release files on Hugging Face ↗</a
+        >Original dataset files ↗</a
       ><a href="https://huggingface.co/datasets/Antreas/TALI-gemma-embedding-2-vectors"
         >Embedding vectors ↗</a
       ><a href="https://github.com/AntreasAntoniou/TALI"

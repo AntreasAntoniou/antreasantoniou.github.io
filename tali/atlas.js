@@ -350,7 +350,7 @@ function vizHero() {
     semanticForm() +
     semanticSuggestions(["av", "audio"]) +
     '<div class="v-hero-links">' +
-    external(embeddingDatasetURL, "Download embeddings") +
+    link("#datasets", "Datasets & Python examples →") +
     link(vizURL(), "Keyword search →") +
     link(vizURL("", "all", 0, "concept"), "Fixed concept gallery →") +
     link("#read/collection", "How TALI was built ↓") +
@@ -360,8 +360,7 @@ function vizHero() {
     link("#case/mass-effect", "TALI contains Tali.") +
     '</h2></div><a class="play-source" href="#case/mass-effect/clip" aria-label="Play Tali at 6:39">▶</a></div>' +
     vizTimeline() +
-    "</div></section>" +
-    (atlas.scale ? datasetScale() : '<p class="scale-basis">1,172,262 stored clips · 143,250 recordings · 105,544 WIT entries</p>')
+    "</div></section>"
   );
 }
 function bindVizForms() {
@@ -415,7 +414,7 @@ function vizSearchPage(params) {
       return top + '<p>Live multimodal search opens on the public TALI Visualizer.</p>' + button(url, "Open live multimodal search");
     return top + '<section class="semantic-search" aria-labelledby="semantic-heading">' +
       '<h2 id="semantic-heading">Describe a scene, sound or subject</h2>' +
-      '<p>Search the clips indexed so far with a phrase or sentence. Joint audio + video matches against an embedding of sound and moving images together. ' + external(embeddingDatasetURL, "Download the vectors") + '.</p>' +
+      '<p>Search the clips indexed so far with a phrase or sentence. Joint audio + video matches against an embedding of sound and moving images together. ' + external(embeddingDatasetURL, "Download the vectors") + ' or ' + link("#datasets/retrieval", "try a Python search example") + '.</p>' +
       semanticForm(q.trim().slice(0, 110), semanticView(params.get("view"))) +
       semanticSuggestions() +
       '<div id="semantic-coverage" class="semantic-coverage" role="status">Checking index coverage…</div></section>' +
@@ -1428,6 +1427,66 @@ function bindDatasetStory() {
 
 ;
 "use strict";
+
+const datasetGuide = document.getElementById("datasets");
+const exampleTabs = Array.from(datasetGuide.querySelectorAll("[data-example]"));
+const examplePanels = Array.from(datasetGuide.querySelectorAll("[data-example-panel]"));
+
+function selectDatasetExample(name) {
+  for (const tab of exampleTabs) {
+    const selected = tab.dataset.example === name;
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  }
+  for (const panel of examplePanels) {
+    panel.hidden = panel.dataset.examplePanel !== name;
+  }
+}
+
+for (const [index, tab] of exampleTabs.entries()) {
+  tab.addEventListener("click", () => selectDatasetExample(tab.dataset.example));
+  tab.addEventListener("keydown", (event) => {
+    const positions = {
+      ArrowLeft: (index + exampleTabs.length - 1) % exampleTabs.length,
+      ArrowRight: (index + 1) % exampleTabs.length,
+      Home: 0,
+      End: exampleTabs.length - 1,
+    };
+    if (!Object.hasOwn(positions, event.key)) return;
+    event.preventDefault();
+    const next = exampleTabs[positions[event.key]];
+    selectDatasetExample(next.dataset.example);
+    next.focus();
+  });
+}
+for (const panel of examplePanels) {
+  panel.setAttribute("role", "tabpanel");
+  panel.setAttribute("aria-labelledby", "tab-" + panel.dataset.examplePanel);
+  const button = panel.querySelector(".copy-example");
+  button.hidden = false;
+  button.addEventListener("click", async () => {
+    const code = panel.querySelector("pre code");
+    const status = datasetGuide.querySelector(".copy-status");
+    try {
+      await navigator.clipboard.writeText(code.textContent + "\n");
+      button.textContent = "Copied";
+      status.textContent = "Copied Python to clipboard.";
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(code);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      status.textContent = "Code selected. Use your system copy shortcut.";
+    }
+  });
+  button.addEventListener("blur", () => { button.textContent = "Copy Python"; });
+}
+selectDatasetExample("clip");
+datasetGuide.querySelector(".example-tabs").hidden = false;
+
+;
+"use strict";
 let atlas;
 const main = document.querySelector("main");
 const privateEdition = document.documentElement.dataset.edition === "private";
@@ -1974,7 +2033,8 @@ function home() {
       ),
     );
   return (
-    hero +
+    hero + '<div data-dataset-guide-slot></div>' +
+    (atlas.scale ? datasetScale() : '<p class="scale-basis">1,172,262 stored clips · 143,250 recordings · 105,544 WIT entries</p>') +
     '<nav class="paper-chapters" aria-label="Interactive paper chapters"><strong>Read the interactive paper</strong>' +
     link("#read/collection", "Collection") +
     link("#read/example", "One image, two recordings") +
@@ -2595,7 +2655,8 @@ function render(focus = false) {
   let content,
     active = sectionName || "highlights";
   const storyRoute = sectionName === "read" && (["collection", "example", "editions"].includes(key) || (key === "scale" && atlas.scale));
-  if (!sectionName || storyRoute || ["highlights", "main", "explore"].includes(sectionName)) {
+  const guideRoute = sectionName === "datasets" && ["", "clip", "vectors", "retrieval"].includes(key);
+  if (!sectionName || storyRoute || guideRoute || ["highlights", "main", "explore"].includes(sectionName)) {
     content = home();
     active = storyRoute ? "read/" + key : "";
   } else if (
@@ -2651,12 +2712,14 @@ function render(focus = false) {
       headings("Page not found.", "This item is outside the atlas catalogue.") +
       button("#highlights", "Atlas highlights");
   main.innerHTML = content;
+  main.querySelector("[data-dataset-guide-slot]")?.replaceWith(datasetGuide);
+  if (guideRoute) selectDatasetExample(key || "clip");
   bindDatasetStory();
   activateVisualizer(sectionName, key);
   const stage = main.querySelector("[data-cover-frame]");
   if (stage) showCoverFrame(stage);
   document.title =
-    main.querySelector("h1").textContent + " · TALI visual atlas";
+    (guideRoute ? "Use TALI in Python" : main.querySelector("h1").textContent) + " · TALI visual atlas";
   document.querySelectorAll(".mast nav a").forEach((a) => {
     if (a.hash === "#" + active) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
@@ -2709,7 +2772,11 @@ function render(focus = false) {
       b.textContent = "Player opened";
     };
   });
-  if (storyRoute) {
+  if (guideRoute) {
+    const target = key ? document.getElementById("tab-" + key) : document.getElementById("datasets-title");
+    target.focus({ preventScroll: true });
+    (key ? target : datasetGuide).scrollIntoView({ block: "start", behavior: "instant" });
+  } else if (storyRoute) {
     const chapter = document.getElementById("story-" + key);
     chapter.querySelector("h2").focus({ preventScroll: true });
     chapter.scrollIntoView({ block: "start", behavior: "instant" });
@@ -2732,6 +2799,7 @@ fetch(catalogueVersion ? "atlas.json?v=" + catalogueVersion : "atlas.json")
   .catch(() => {
     main.innerHTML =
       '<h1>The atlas could not load.</h1><p class="sub">Reload to request the catalogue again.</p><button class="btn top-space" id="retry">Reload atlas</button>';
+    main.append(datasetGuide);
     document.querySelector("#retry").onclick = () => location.reload();
   });
 
