@@ -93,6 +93,13 @@ function vizClean() {
   for (const uri of vizBlobURLs) URL.revokeObjectURL(uri);
   vizBlobURLs = [];
 }
+function vizSearchMode(params) {
+  const mode = params.get("mode");
+  if (mode === "semantic" || mode === "concept") return mode;
+  // Older keyword bookmarks include a field or page without an explicit mode.
+  if (mode || params.has("field") || params.has("page")) return "text";
+  return "semantic";
+}
 function vizURL(
   q = "",
   field = "all",
@@ -105,10 +112,10 @@ function vizURL(
   if (q) p.set("q", q);
   if (field !== "all") p.set("field", field);
   if (page) p.set("page", page);
-  if (mode === "concept") p.set("mode", mode);
+  p.set("mode", mode);
   if (view !== "av") p.set("view", view);
   if (concept) p.set("concept", concept);
-  return "#visualizer" + (p.size ? "?" + p : "");
+  return "#visualizer?" + p;
 }
 function vizItem(id, w = 0, segment) {
   return "#visualizer/item/" + id + "/" + w + (segment
@@ -389,8 +396,9 @@ function vizSearchPage(params) {
     field = Object.hasOwn(fields, params.get("field"))
       ? params.get("field")
       : "all";
-  const concept = params.get("mode") === "concept",
-    semantic = params.get("mode") === "semantic",
+  const mode = vizSearchMode(params),
+    concept = mode === "concept",
+    semantic = mode === "semantic",
     view = Object.hasOwn(mediaNames, params.get("view"))
       ? params.get("view")
       : "av";
@@ -399,7 +407,7 @@ function vizSearchPage(params) {
     tag("Dataset explorer") +
     '<h1>TALI Visualizer</h1><p class="visualizer-intro">Temporal Audio Language and Images (TALI) links Wikipedia photographs and text to YouTube clips, audio and timed subtitles. ' + link("#read/collection", "How the dataset was built") + '</p></div><nav class="viz-modes" aria-label="Search mode">' +
     "<a " + (semantic ? 'aria-current="page" ' : "") +
-    'href="' + esc(semanticURL(q, params.get("view"))) + '">Live multimodal search</a><a ' +
+    'href="' + esc(semanticURL(q, params.get("view"))) + '">Semantic search</a><a ' +
     (!concept && !semantic ? 'aria-current="page" ' : "") +
     'href="' +
     esc(vizURL(q, field)) +
@@ -409,17 +417,17 @@ function vizSearchPage(params) {
     esc(vizURL(semantic ? "" : q, field, 0, "concept", view)) +
     '">Fixed concept gallery</a></nav>';
   if (semantic) {
-    const url = semanticURL(q.trim().slice(0, 110), params.get("view"));
-    if (!url.startsWith("#"))
-      return top + '<p>Live multimodal search opens on the public TALI Visualizer.</p>' + button(url, "Open live multimodal search");
+    const searchHere = !privateEdition || semanticLocalHost();
+    const description = searchHere
+      ? 'Search the clips indexed so far with a phrase or sentence. Joint audio + video matches against an embedding of sound and moving images together. ' + external(embeddingDatasetURL, "Download the vectors") + ' or ' + link("#datasets/retrieval", "try a Python search example") + '.'
+      : 'Results open on the public TALI Visualizer.';
     return top + '<section class="semantic-search" aria-labelledby="semantic-heading">' +
-      '<h2 id="semantic-heading">Describe a scene, sound or subject</h2>' +
-      '<p>Search the clips indexed so far with a phrase or sentence. Joint audio + video matches against an embedding of sound and moving images together. ' + external(embeddingDatasetURL, "Download the vectors") + ' or ' + link("#datasets/retrieval", "try a Python search example") + '.</p>' +
+      '<h2 id="semantic-heading">Describe a scene, sound or subject</h2><p>' + description + '</p>' +
       semanticForm(q.trim().slice(0, 110), semanticView(params.get("view"))) +
       semanticSuggestions() +
-      '<div id="semantic-coverage" class="semantic-coverage" role="status">Checking index coverage…</div></section>' +
+      (searchHere ? '<div id="semantic-coverage" class="semantic-coverage" role="status">Checking index coverage…</div></section>' +
       '<p id="semantic-feedback" role="status">' + (q.trim() ? "Searching the live index…" : "") +
-      '</p><section id="v-results" aria-label="Search results"></section>';
+      '</p><section id="v-results" aria-label="Search results"></section>' : '</section>');
   }
   if (concept)
     return (
@@ -750,7 +758,8 @@ async function semanticStart(params, signal) {
   await Promise.all([loadCoverage(), q && search()]);
 }
 async function vizStart(params, signal) {
-  if (params.get("mode") === "semantic") {
+  const mode = vizSearchMode(params);
+  if (mode === "semantic") {
     if (!privateEdition || semanticLocalHost()) return semanticStart(params, signal);
     return;
   }
@@ -759,7 +768,7 @@ async function vizStart(params, signal) {
       ? params.get("field")
       : "all";
   const page = Math.max(0, parseInt(params.get("page") || "0", 10) || 0);
-  if (params.get("mode") !== "concept") {
+  if (mode !== "concept") {
     if (!q) return;
     const matches = await vizFind(q, field);
     return vizResults(
@@ -930,7 +939,7 @@ function matchedWindows(track, doc, id) {
   const here = document.querySelector("#matched-windows");
   if (!here) return;
   const params = new URLSearchParams(lastVizSearch.split("?")[1] || "");
-  if (["concept", "semantic"].includes(params.get("mode"))) return;
+  if (vizSearchMode(params) !== "text") return;
   const terms = vizTokens(params.get("q") || "");
   if (!terms.length) return;
   const entries = TaliReader.trackEntries(track);
