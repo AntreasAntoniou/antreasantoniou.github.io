@@ -553,15 +553,70 @@ html {
 
 /* Profile image */
 .profile-image {
+  position: relative;
   display: block;
+  isolation: isolate;
   border: 4px solid var(--border);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.25s ease;
 }
 
 [data-theme="dark"] .profile-image {
   border-color: var(--border);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.profile-portrait {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.profile-portrait--photo {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+}
+
+.profile-portrait--anime {
+  opacity: 0;
+  transform: scale(1.1) rotate(-1.5deg);
+  filter: blur(5px) saturate(1.15);
+  pointer-events: none;
+}
+
+.profile-portrait--anime img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 52% 22%;
+}
+
+.profile-cut-flash {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.58), transparent 64%);
+}
+
+.profile-evolve-control.is-cutting .profile-cut-flash {
+  animation: profile-cut-flash 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes profile-cut-flash {
+  0% { opacity: 0; }
+  28% { opacity: 0.52; }
+  100% { opacity: 0; }
 }
 
 .profile-evolve-control {
@@ -582,7 +637,29 @@ html {
   transform: translateY(-2px);
 }
 
-.profile-evolve-control:hover #hero-profile {
+.profile-evolve-control.is-anime .profile-image {
+  border-color: var(--accent);
+  box-shadow: 0 25px 54px -14px rgba(30, 58, 95, 0.42);
+}
+
+[data-theme="dark"] .profile-evolve-control.is-anime .profile-image {
+  box-shadow: 0 25px 56px -14px rgba(96, 165, 250, 0.32);
+}
+
+.profile-evolve-control.is-anime .profile-portrait--photo {
+  opacity: 0;
+  transform: scale(1.06);
+  filter: blur(4px);
+}
+
+.profile-evolve-control.is-anime .profile-portrait--anime {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  filter: blur(0px) saturate(1);
+}
+
+.profile-evolve-control:not(.is-anime):hover .profile-portrait--photo,
+.profile-evolve-control.is-anime:hover .profile-portrait--anime {
   transform: scale(1.04);
 }
 
@@ -655,6 +732,20 @@ html {
   color: var(--accent);
   border-color: var(--accent);
   transform: translateY(-1px);
+}
+
+.profile-hint__pun {
+  letter-spacing: 0.01em;
+}
+
+.profile-hint__cat {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.profile-evolve-control.is-anime .profile-hint {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
 }
 
 /* Public agent skills */
@@ -1052,5 +1143,12 @@ html {
   .profile-evolve-control *::before,
   .profile-evolve-control *::after {
     transition: none !important;
+    animation: none !important;
+  }
+
+  .profile-portrait--photo,
+  .profile-portrait--anime {
+    transform: none !important;
+    filter: none !important;
   }
 }

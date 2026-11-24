@@ -29,7 +29,7 @@
   <link rel="icon" type="image/jpeg" href="images/favicon-bot.jpeg">
   <link rel="apple-touch-icon" href="images/favicon-bot.jpeg">
 
-  <link rel="stylesheet" href="/styles.css?v=20261124-nav-cliphoard">
+  <link rel="stylesheet" href="/styles.css?v=20261124-directors-cat">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -184,13 +184,18 @@
       <div class="max-w-4xl mx-auto px-4 text-center space-y-8" style="position: relative; z-index: 1;">
         <!-- Profile Image -->
         <div data-aos="fade-up">
-          <button id="profile-evolve-control" type="button" class="profile-evolve-control" onclick="toggleProfileImage()" aria-label="Show the director’s cut">
+          <button id="profile-evolve-control" type="button" class="profile-evolve-control" onclick="toggleProfileImage()" aria-pressed="false" aria-label="Show the director’s cut (anime portrait with cat)">
             <span class="relative block w-64 h-64 rounded-full overflow-hidden profile-image">
-              <img id="hero-profile" src="images/profile.jpg" alt="Antreas Antoniou, AI Researcher and Engineer" class="w-full h-full object-cover transition-transform">
+              <img id="hero-profile" src="images/profile.jpg" alt="Antreas Antoniou, AI Researcher and Engineer" class="profile-portrait profile-portrait--photo w-full h-full object-cover">
+              <picture class="profile-portrait profile-portrait--anime" aria-hidden="true">
+                <source srcset="images/profile-anime.webp" type="image/webp">
+                <img id="hero-profile-anime" src="images/profile-anime.png" alt="" width="757" height="653" decoding="async" fetchpriority="low" class="w-full h-full object-cover">
+              </picture>
+              <span class="profile-cut-flash" aria-hidden="true"></span>
             </span>
             <span id="profile-hint" class="profile-hint">
-              <i class="fas fa-clapperboard" aria-hidden="true"></i>
-              <span id="profile-hint-label">Show the director’s cut</span>
+              <i id="profile-hint-icon" class="fas fa-clapperboard" aria-hidden="true"></i>
+              <span id="profile-hint-label">Show the director’s <span class="profile-hint__pun">c(u/<span class="profile-hint__cat">a</span>)t</span></span>
             </span>
           </button>
         </div>
@@ -1863,39 +1868,79 @@
     }
 
     // Profile image toggle
-    const profileImages = [
-      'images/profile.jpg',
-      'images/profile-anime.png'
-    ];
-    let currentProfileIndex = 0;
+    let isDirectorsCut = false;
+    let profileCutTimer = null;
+    let profileToggleToken = 0;
 
-    // Set initial non-anime image
-    (function() {
-      const heroProfile = document.getElementById('hero-profile');
-      if (heroProfile) {
-        heroProfile.src = profileImages[currentProfileIndex];
-      }
-    })();
-
-    // Toggle between images on click
+    // Toggle between documentary portrait and anime director's c(u/a)t on click
     function toggleProfileImage() {
-      currentProfileIndex = (currentProfileIndex + 1) % profileImages.length;
-      const heroProfile = document.getElementById('hero-profile');
-      const profileControl = document.getElementById('profile-evolve-control');
-      const profileHintLabel = document.getElementById('profile-hint-label');
-      if (heroProfile) {
-        heroProfile.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-          heroProfile.src = profileImages[currentProfileIndex];
-          heroProfile.style.transform = 'scale(1)';
-        }, 150);
+      const nextAnime = !isDirectorsCut;
+      const token = ++profileToggleToken;
+      const animeImage = document.getElementById('hero-profile-anime');
+
+      const commit = (showAnime) => {
+        if (token !== profileToggleToken) return;
+        const profileControl = document.getElementById('profile-evolve-control');
+        const heroProfile = document.getElementById('hero-profile');
+        const animeLayer = document.querySelector('.profile-portrait--anime');
+        const profileHintIcon = document.getElementById('profile-hint-icon');
+        const profileHintLabel = document.getElementById('profile-hint-label');
+
+        isDirectorsCut = showAnime;
+        if (profileControl) {
+          profileControl.classList.toggle('is-anime', showAnime);
+          profileControl.classList.remove('is-cutting');
+          void profileControl.offsetWidth;
+          profileControl.classList.add('is-cutting');
+          clearTimeout(profileCutTimer);
+          profileCutTimer = setTimeout(() => {
+            profileControl.classList.remove('is-cutting');
+          }, 560);
+          profileControl.setAttribute('aria-pressed', String(showAnime));
+          profileControl.setAttribute(
+            'aria-label',
+            showAnime
+              ? 'Return to documentary footage'
+              : 'Show the director’s cut (anime portrait with cat)',
+          );
+        }
+
+        if (heroProfile) {
+          heroProfile.setAttribute('aria-hidden', String(showAnime));
+        }
+        if (animeLayer) {
+          animeLayer.setAttribute('aria-hidden', String(!showAnime));
+        }
+        if (animeImage) {
+          animeImage.alt = showAnime
+            ? 'Anime director’s cut portrait of Antreas Antoniou with a tabby cat on his shoulder'
+            : '';
+        }
+
+        if (profileHintIcon) {
+          profileHintIcon.className = showAnime ? 'fas fa-cat' : 'fas fa-clapperboard';
+        }
+        if (profileHintLabel) {
+          if (showAnime) {
+            profileHintLabel.textContent = 'Return to documentary footage';
+          } else {
+            profileHintLabel.innerHTML = 'Show the director’s <span class="profile-hint__pun">c(u/<span class="profile-hint__cat">a</span>)t</span>';
+          }
+        }
+      };
+
+      if (nextAnime && animeImage && (!animeImage.complete || animeImage.naturalWidth === 0)) {
+        const finish = () => commit(true);
+        if (typeof animeImage.decode === 'function') {
+          animeImage.decode().then(finish, finish);
+        } else {
+          animeImage.addEventListener('load', finish, { once: true });
+          animeImage.addEventListener('error', finish, { once: true });
+        }
+        return;
       }
 
-      const nextLabel = currentProfileIndex === 0
-        ? 'Show the director’s cut'
-        : 'Return to documentary footage';
-      if (profileHintLabel) profileHintLabel.textContent = nextLabel;
-      if (profileControl) profileControl.setAttribute('aria-label', nextLabel);
+      commit(nextAnime);
     }
 
     // Initialize AOS
