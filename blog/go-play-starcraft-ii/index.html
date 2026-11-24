@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go Play StarCraft II to Get Better at AI Agents | Antreas Antoniou</title>
+  <meta name="description" content="What managing swarms of AI agents has in common with playing Protoss in StarCraft II (and learning the guitar), plus a runnable training regime for humans.">
+  <meta name="author" content="Antreas Antoniou">
+  <meta name="reading-time" content="8 min">
+  <link rel="canonical" href="https://antreas.io/blog/go-play-starcraft-ii/">
+  <meta property="og:title" content="Go Play StarCraft II to Get Better at AI Agents | Antreas Antoniou">
+  <meta property="og:description" content="What managing swarms of AI agents has in common with playing Protoss in StarCraft II (and learning the guitar), plus a runnable training regime for humans.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antreas.io/blog/go-play-starcraft-ii/">
+  <meta property="og:image" content="https://antreas.io/blog/go-play-starcraft-ii/assets/hero-protoss-command-chair.jpg">
+  <meta property="og:image:alt" content="Over-the-shoulder illustration of an engineer facing a curved studio display with code and loss curves on the left and a glowing Protoss Nexus, Pylons, and Stalkers on the right, with a fluffy silver Siberian cat on the desk and an acoustic guitar in the corner">
+  <meta property="article:author" content="Antreas Antoniou">
+  <meta property="article:published_time" content="2026-11-24">
+  <meta property="article:section" content="Agents and craft">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Go Play StarCraft II to Get Better at AI Agents | Antreas Antoniou">
+  <meta name="twitter:description" content="What managing swarms of AI agents has in common with playing Protoss in StarCraft II (and learning the guitar), plus a runnable training regime for humans.">
+  <meta name="twitter:image" content="https://antreas.io/blog/go-play-starcraft-ii/assets/hero-protoss-command-chair.jpg">
+  <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
+  <link rel="apple-touch-icon" href="/images/favicon-bot.jpeg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog/research-notes.css">
+  <style>
+    .published-essay-hero figcaption {
+      margin-top: .75rem;
+      color: var(--text-muted);
+      font-size: .84rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+    .essay-body p em:last-child {
+      color: inherit;
+      font-size: inherit;
+    }
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Go Play StarCraft II to Get Better at AI Agents","description":"What managing swarms of AI agents has in common with playing Protoss in StarCraft II (and learning the guitar), plus a runnable training regime for humans.","image":"https://antreas.io/blog/go-play-starcraft-ii/assets/hero-protoss-command-chair.jpg","author":{"@type":"Person","name":"Antreas Antoniou","url":"https://antreas.io/"},"datePublished":"2026-11-24","mainEntityOfPage":"https://antreas.io/blog/go-play-starcraft-ii/","url":"https://antreas.io/blog/go-play-starcraft-ii/"}
+  </script>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+  <nav class="research-note-nav" aria-label="Primary navigation">
+    <div class="research-note-nav__inner">
+      <a class="research-note-wordmark" href="/">Antreas<span>.</span></a>
+      <div class="research-note-actions">
+        <a href="/blog">← All writing</a>
+        <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="research-note-shell published-essay-shell">
+    <header class="research-note-header published-essay-header">
+      <p class="research-note-kicker">Essay · Agents &amp; Craft</p>
+      <h1>Go Play StarCraft II to Get Better at AI Agents</h1>
+      <p class="research-note-deck">How I used the way I trained to play Protoss in StarCraft II to train myself to run parallel AI agents, and how you can build the same muscle without losing your mind.</p>
+    </header>
+
+    <dl class="field-note-rail published-essay-rail" aria-label="Publication details">
+      <div><dt>Author</dt><dd>Written by <strong>Antreas Antoniou</strong></dd></div>
+      <div><dt>Published</dt><dd><time datetime="2026-11-24">24 November 2026</time></dd></div>
+      <div><dt>Reading time</dt><dd>8 min · 8 figures</dd></div>
+    </dl>
+
+    <figure class="published-essay-hero">
+      <img src="/blog/go-play-starcraft-ii/assets/hero-protoss-command-chair.jpg" alt="Over-the-shoulder illustration of an engineer facing a curved studio display with code and loss curves on the left and a glowing Protoss Nexus, Pylons, and Stalkers on the right, with a fluffy silver Siberian cat on the desk and an acoustic guitar in the corner">
+      <figcaption>Code and training curves on the left, Protoss macro on the right, acoustic guitar in the corner, Siberian cat supervising.</figcaption>
+    </figure>
+
+    <article class="essay-body published-essay-body">
+      <p>What is the commonality between managing projects augmented by agents (and swarms of agents) and playing a real-time strategy game like StarCraft II?</p>
+
+      <p>Whenever someone asks me what game I've been playing lately, half the time my honest answer is ChatGPT and Claude. Just be careful, because work has quietly turned into an RTS.</p>
+
+      <p>Everyone loves the pitch where you type two lines before bed and wake up to ten autonomous researchers who finished your roadmap. Maybe we get there eventually. Anyone actually building systems or doing research with frontier models today knows live work is much more interactive than that. Agents are fast and weirdly capable, yet they will happily spend forty minutes building around the wrong abstraction if nobody catches a bad assumption early.</p>
+
+      <p>It's a weird world right now. Half-jokingly, everybody is going to end up with ADHD trying to keep ten terminal tabs moving.</p>
+
+      <p>As an engineer, I trained for the exact opposite mode: sit down with one hard problem and lock onto it for eight hours straight. Context switching was the enemy. Honestly, I used to suck at it, and I still struggle with it at times.</p>
+
+      <p>Then in 2020 I started playing StarCraft II. It taught me the skill, and somehow the actual enjoyment, of cycling through a wheel of background tasks, dropping back into one main thing in front of me, and repeating that loop.</p>
+
+      <p>People usually hold up chess as the ultimate mental gym. I played chess as a kid, forgot almost all of it over twenty years, and only recently started messing around on chess.com again, so I say this fondly: chess has a huge luxury baked into its rules. On your turn, time stops. Nobody mines minerals behind a curtain to build extra queens while you calculate a fork.</p>
+
+      <p>StarCraft II is the chess of the 21st century. The clock never pauses, the map sits under fog of war, and your economy runs in real time alongside every fight. How I trained to play StarCraft turned out to be the cleanest way to train myself to work with agents.</p>
+
+      <figure class="published-essay-figure">
+        <img src="/blog/go-play-starcraft-ii/assets/fig1-cognitive-regime-map.png" alt="Cognitive Regime 2x2 Quadrant plotting Time Dynamics (turn-based vs. real-time) against Information (perfect vs. fog of war), placing StarCraft II and AI Agent Swarms together in the top-right 21st-century regime" loading="lazy">
+        <figcaption>Figure 1: Real-time clock plus hidden state puts StarCraft II and parallel AI agent work in the exact same cognitive corner.</figcaption>
+      </figure>
+
+      <h2>How Protoss players lose right after winning a fight</h2>
+
+      <p>Every second of StarCraft II pulls your attention between <strong>macro</strong> and <strong>micro</strong>.</p>
+
+      <p>I play Protoss, so let's use Protoss. <strong>Macro</strong> is economy and production, the loop you have to keep turning no matter what else is happening on the map. You keep one Probe building from every Nexus (without hard-queuing five and locking up your minerals) so your mineral lines and Assimilators stay saturated.</p>
+
+      <p>On top of workers, you warp in Pylons ahead of your supply cap, spend Chrono Boost on Probes or upgrades, and expand on time. Once Cybernetics Core research finishes Warp Gate, hitting <code>W</code> (the native key that selects all your Warp Gates) lets you warp units straight into any blue Pylon power field.</p>
+
+      <p><strong>Micro</strong> is surgical, full-attention control right now: blinking bruised Stalkers back the moment their shields pop so enemy fire doesn't chew into hull HP, splitting a ramp push with a Sentry Force Field, or landing Psionic Storms without roasting your own Zealots.</p>
+
+      <p>Protoss also has a nice built-in quirk for this. Unlike races that can tap army production hotkeys blind while staring at a battle, Protoss <code>W</code> warp-ins and Pylons force you to pull your camera away from the fight to click inside a blue power field back home. The race makes you practice looking away.</p>
+
+      <p>Every Protoss player knows what happens before that reflex exists. A mid-game skirmish breaks out, so you lock your camera onto six Stalkers for forty-five seconds, time every blink, trade four-for-one, and feel briefly like a god of war.</p>
+
+      <p>Then you glance at the top-right corner of the screen and see the damage. You've been supply-blocked on a missing Pylon for thirty seconds, zero Probes are building, your Warp Gates have been sitting idle off cooldown, and you're floating 1,800 unspent minerals. Meanwhile, the opponent you just outplayed kept making workers, hit their production cycles, and took a third Nexus. Two minutes later they walk across the map with three times your army and flatten you. You won the fight and lost the game.</p>
+
+      <figure class="published-essay-figure">
+        <img src="/blog/go-play-starcraft-ii/assets/fig2-hud-scoreboard.png" alt="Replay scoreboard at t+0:45 comparing You (won 4-for-1 fight, floating 1,800 minerals, supply-blocked at 62/62, 0 Probes, 4 idle Warp Gates, flattened 2 minutes later) against Opponent (lost fight, kept macroing, took 3rd Nexus, arrives with 3x army and wins)" loading="lazy">
+        <figcaption>Figure 2: The actual replay numbers behind "winning the fight and losing the game."</figcaption>
+      </figure>
+
+      <h2>Macro and micro with AI agents</h2>
+
+      <p>Pushed too far, the analogy gets silly. Your repository isn't trying to cannon-rush your main base (though a broken CUDA driver comes spiritually close), and agents move in minutes rather than milliseconds, so nobody needs 250 actions per minute. Still, the attention trap is basically identical.</p>
+
+      <p>The labels can feel slightly backwards at first, since engineers usually use "macro" for high-level strategy and "micro" for tiny details. Here it is simpler, and matches StarCraft directly: <strong>macro</strong> is the quick background loop keeping everything running, while <strong>micro</strong> is whatever currently has your full attention.</p>
+
+      <p><strong>Macro</strong> is the active background tasks your agents are working on that need quick feedback to stay unblocked. Approving a plan before an agent burns twenty minutes down a dead end, answering a clarifying question, checking a loss curve or test log, nudging the next step along. Skip that wheel for an hour and half your terminals end up supply-blocked on a ten-second prompt while the rest drift.</p>
+
+      <p><strong>Micro</strong> is anything in the foreground that needs your full attention for at least five minutes. Watching tokens stream line by line in a terminal is micro too, just the bad kind: locking onto six Stalkers while your economy dies, except staring at text print doesn't even improve the model's aim.</p>
+
+      <p>Good micro is whatever actually needs your human brain (or your actual life):</p>
+
+      <ul>
+        <li>Starting a new project or agent session and describing the task, vision, and a quick way to verify it (without over-planning every tiny branch in isolation, which adds its own complexity).</li>
+        <li>Digging into a tricky diff, bug, or proof that clearly needs more than a quick skim.</li>
+        <li>Reading a paper, looking something up online, or watching a video.</li>
+        <li>Chatting with teammates on Slack.</li>
+        <li>Playing catch down the hallway with your Siberian cat.</li>
+      </ul>
+
+      <p>Jokes aside, I mean that last one. Siberians are very insistent, and if eight minutes throwing a toy for my cat breaks my workflow while agents run in the background, something is off with how I'm working. The whole point of a steady background loop is being able to focus on the thing in front of you without half-panicking about five idle terminals.</p>
+
+      <p>In practice, my setup is tiny. I built a simple app that keeps track of the tasks and agents I currently have running, and offers to add a new one whenever it sees me start something. I sit with one main micro task in the forefront for five to ten minutes until a natural break in thought, sweep through my background wheel at roughly a minute per task (skipping straight ahead if one finished early or is still training cleanly on GPUs), and drop right back in.</p>
+
+      <p>Those one-minute sweeps don't mean rubber-stamping sketchy code. They stay fast because kicking off each agent got its own five-to-ten-minute micro block upfront with clear tests or checks. On a sweep I'm just reading that signal, answering questions, or stopping a bad direction early. Anything gnarly gets promoted into my next foreground micro block.</p>
+
+      <p>Once you get past two agents, <strong>clustering</strong> related tasks makes a huge difference. Bouncing between five completely unrelated repos wipes your head clean every time you switch. Put closely linked threads on the same wheel instead (say, parallel explorations into memory, attention, and learning objectives) and they stay in the same headspace. An observation from a one-minute check on one thread immediately sharpens how you steer the next one thirty seconds later, and feeds straight into the work open in front of you. A macro sweep turns into micro progress across three things at once.</p>
+
+      <p>Back in February, running five parallel research projects with agents, hitting that groove is when moving between projects actually became genuinely fun.</p>
+
+      <figure class="published-essay-figure">
+        <img src="/blog/go-play-starcraft-ii/assets/fig3-tiny-wheel-app.png" alt="Minimal corner task-wheel app mockup tracking foreground Micro and background Macro agents alongside a contrast card separating Bad Micro (token-babysitting) from Good Micro (vision brief, paper, Slack, Siberian cat)" loading="lazy">
+        <figcaption>Figure 3: A minimal corner task tracker kills window-hunting friction, while keeping real Micro distinct from staring at streaming tokens.</figcaption>
+      </figure>
+
+      <h2>Why it hurts at first (and where the guitar comes in)</h2>
+
+      <p>Running three or four agents at once feels terrible at first because you're trying to do it in conscious time. Conscious human attention is painfully serial (which, by the way, is half the reason we built CPUs in the first place). Hold four active agent tabs and a paper in conscious focus at once and twenty minutes in your brain goes, <em>"okay, fuck this, I'll just do it myself."</em></p>
+
+      <p>The subconscious part of your brain, though, is surprisingly concurrent. This is where learning to work with agents feels a lot like learning the guitar.</p>
+
+      <p>In month one on guitar, fretting a clean chord while keeping a basic strum takes 100% of your conscious focus. Ask a beginner what they want for dinner mid-bar and their hands freeze. Put in the hours, and those mechanics drop into subconscious muscle memory, freeing your conscious mind to focus on a solo or improvise in the moment.</p>
+
+      <p>Obviously live coding or research agents aren't fixed guitar chords. Catching data leakage or a rotten abstraction takes real conscious engineering judgment, and your hands aren't verifying a subtle diff on autopilot. What drops into muscle memory is the switching loop itself: parking a thought cleanly, cycling through active agents in order, resisting the urge to watch tokens stream, and picking your main thread back up without losing your mind.</p>
+
+      <figure class="published-essay-figure">
+        <img src="/blog/go-play-starcraft-ii/assets/fig4-guitar-split-scene.jpg" alt="Editorial split illustration contrasting clumsy, overwhelmed early guitar practice surrounded by tangled terminal windows on the left against calm autopilot strumming with neatly orbiting terminals and a golden creative ribbon on the right" loading="lazy">
+        <figcaption>Figure 4: Conscious multitasking feels like week-one guitar chords. Once the switching loop moves downstairs, your conscious brain gets its room back.</figcaption>
+      </figure>
+
+      <h2>A training regime you can actually try</h2>
+
+      <p>You can't build this just by reading about it. If you want the skill, treat it like an actual training exercise.</p>
+
+      <p><strong>1. Go play some StarCraft II as Protoss.</strong> Multiplayer and Versus AI skirmishes are free-to-play. Skip ranked ladder chaos and load custom games against an Easy AI with zero ego for a few evenings. Build an Assimilator, Gateway, and Cybernetics Core so you unlock Warp Gate research, bind your Nexuses to one control group (and a Robotics Facility or Stargate to another), and drill a simple 20-to-30-second beat:</p>
+
+      <ul>
+        <li>Tap your Nexus hotkey to keep one Probe building per base (don't stack five in the queue).</li>
+        <li>Warp in Pylons ahead of your top-right supply cap, and spend Chrono Boost on Probes or upgrades.</li>
+        <li>Hit <code>W</code> to warp Zealots or Stalkers into a blue Pylon field, expand to a new Nexus once a base hits around sixteen mineral Probes (or you bank 400 minerals), and glance at the minimap.</li>
+      </ul>
+
+      <p>Between beats, send your army across the map with <strong>Attack-Move</strong> (<code>A</code>-click on the ground, never a plain right-click where Stalkers happily walk past enemies without firing) and force yourself to click back to a Pylon field mid-fight for the next warp-in. Don't worry about winning the skirmish. Floating 1,500 minerals while staring at lasers for forty seconds is the habit you're there to break.</p>
+
+      <p><strong>2. Bring the wheel to your desk.</strong> You don't need weeks of StarCraft before trying this at work. Start small tomorrow: <strong>two</strong> background agents and <strong>one</strong> foreground micro block, plus a tiny corner list of active tasks so you aren't burning mental energy remembering which tabs exist. Give each agent a clean five-to-ten-minute kickoff brief with a clear check, sit with your foreground task until a natural pause five to ten minutes in, run a quick ~1-minute sweep per active agent, and drop back in.</p>
+
+      <p><strong>3. Scale, cluster, and know when to pause.</strong> Once two agents plus one foreground block feels calm, grow to four or five clustered streams (or small swarms you steer at checkpoints). Keep one honest boundary, though: when research hits a genuinely hard knot where an equation won't close or the framing feels off, shut the RTS down. Let long jobs run unattended, close the extra tabs, and take an isolated solo hour or two in silence until you figure out what's actually going on.</p>
+
+      <figure class="published-essay-figure">
+        <img src="/blog/go-play-starcraft-ii/assets/fig5-scaling-staircase.png" alt="Progressive staircase diagram moving from Evenings 1-3 Protoss vs. Easy AI to Week 1 2 Agents + 1 Micro to 4-5 Clustered Streams, alongside an always-available Solo-Hour Off Switch" loading="lazy">
+        <figcaption>Figure 5: Build up step by step from Easy AI Protoss reps to 4–5 clustered agent streams, with the solo-hour off switch always available.</figcaption>
+      </figure>
+
+      <h2>Don't bail in the clunky days</h2>
+
+      <p>The first few days of this will feel clumsy and slow. An agent will misread a path, switching contexts will feel awkward, and your single-threaded engineer instincts will tell you this whole thing is stupid and you'd be faster working alone in silence.</p>
+
+      <p>The way to improve is to practice, and to actually <em>believe</em> that practice can make you better. Do not despair. Do not get annoyed or feel like this is stupid. Getting frustrated burns the exact mental bandwidth you're trying to free up, and makes you quit right before the loop settles into intuition.</p>
+
+      <figure class="published-essay-figure">
+        <img src="/blog/go-play-starcraft-ii/assets/fig6-clunky-days-curve.png" alt="Annotated learning curve showing the Day 1-4 Clunky-Days Bail Zone ('okay, fuck this'), the dashed quit trajectory retreating to 1 tab, and the solid practice curve crossing 'The Click' into a genuinely fun flow state" loading="lazy">
+        <figcaption>Figure 6: Almost everyone quits inside the Day 1–4 bail zone right before the switching loop settles into intuition.</figcaption>
+      </figure>
+
+      <p>Keep running the reps and building those mechanical and multitasking skills. It's a genuinely weird feeling when something you sucked at for years suddenly becomes fun.</p>
+
+      <figure class="published-essay-figure">
+        <img src="/blog/go-play-starcraft-ii/assets/fig7-flow-state-finale.jpg" alt="Warm twilight editorial illustration of a smiling engineer leaning back effortlessly conducting an orbiting ring of glowing cyan Protoss Pylons, gold crystals, and calm code panels while a fluffy silver Siberian cat sleeps beside an amber lamp and an acoustic guitar rests in the corner" loading="lazy">
+        <figcaption>Figure 7: When something you sucked at for years suddenly clicks into calm, genuinely fun parallel flow.</figcaption>
+      </figure>
+    </article>
+
+    <footer class="research-note-footer">
+      <a href="/blog">← Return to all writing</a>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>
