@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://antreas.io/images/profile.jpg">
   <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
-  <link rel="stylesheet" href="/styles.css?v=20260724-daedalus-work">
+  <link rel="stylesheet" href="/styles.css?v=20261124-nav-tali">
   <link rel="stylesheet" href="/tailwind-built.css">
   <link rel="stylesheet" href="/supervision/supervision.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,10 +30,37 @@
       <div class="site-nav-links hidden md:flex">
         <a href="/#building" class="text-secondary hover:text-accent transition">Work</a>
         <a href="/#research" class="text-secondary hover:text-accent transition">Research</a>
+        <a href="/#demos" class="text-secondary hover:text-accent transition">Demos</a>
+        <a href="/#outreach" class="text-secondary hover:text-accent transition">Leadership</a>
         <a href="/#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
-        <a href="/skills/" class="text-secondary hover:text-accent transition">Agent Toolkit</a>
-        <a href="/writing/" class="text-secondary hover:text-accent transition">Writing advice</a>
         <a href="/blog" class="text-secondary hover:text-accent transition">Blog</a>
+        <details class="site-nav-dropdown">
+          <summary class="site-nav-dropdown__summary">More <span class="site-nav-dropdown__chevron" aria-hidden="true">▾</span></summary>
+          <div class="site-nav-dropdown__panel">
+            <div class="site-nav-dropdown__group">
+              <p class="site-nav-dropdown__heading">Sections</p>
+              <a href="/#about">About</a>
+              <a href="/#building">Work</a>
+              <a href="/#research">Research</a>
+              <a href="/#publications">Publications</a>
+              <a href="/#teaching">Teaching</a>
+              <a href="/#experience">Experience</a>
+              <a href="/#outreach">Leadership</a>
+              <a href="/#demos">Demos</a>
+              <a href="/#contact">Contact</a>
+            </div>
+            <div class="site-nav-dropdown__group">
+              <p class="site-nav-dropdown__heading">Pages &amp; Tools</p>
+              <a href="/tali/">TALI Visualizer <span class="nav-new-tag">New</span></a>
+              <a href="/daedalus/">DAEDALUS</a>
+              <a href="/supervision/">Supervision</a>
+              <a href="/skills/">Agent Toolkit</a>
+              <a href="/writing/">Writing advice</a>
+              <a href="/blog">Blog</a>
+              <a href="/cv/">Resume</a>
+            </div>
+          </div>
+        </details>
         <a href="/#contact" class="text-secondary hover:text-accent transition">Contact</a>
         <a href="/cv/" class="btn-primary btn-sm">Resume</a>
         <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -50,15 +77,33 @@
       </div>
     </div>
     <div id="mobile-menu" class="hidden md:hidden border-t" style="border-color: var(--border); background: var(--bg);">
-      <div class="px-4 py-4 space-y-3">
-        <a href="/#building" class="block text-secondary hover:text-accent">Work</a>
-        <a href="/#research" class="block text-secondary hover:text-accent">Research</a>
-        <a href="/#teaching" class="block text-secondary hover:text-accent">Teaching</a>
-        <a href="/skills/" class="block text-secondary hover:text-accent">Agent Toolkit</a>
-        <a href="/writing/" class="block text-secondary hover:text-accent">Writing advice</a>
-        <a href="/blog" class="block text-secondary hover:text-accent">Blog</a>
-        <a href="/#contact" class="block text-secondary hover:text-accent">Contact</a>
-        <a href="/cv/" class="block text-accent font-semibold">Resume</a>
+      <div class="px-4 py-4 mobile-nav-grid">
+        <div>
+          <p class="mobile-nav-heading">Sections</p>
+          <div class="mobile-nav-list">
+            <a href="/#about" class="block text-secondary hover:text-accent">About</a>
+            <a href="/#building" class="block text-secondary hover:text-accent">Work</a>
+            <a href="/#research" class="block text-secondary hover:text-accent">Research</a>
+            <a href="/#publications" class="block text-secondary hover:text-accent">Publications</a>
+            <a href="/#teaching" class="block text-secondary hover:text-accent">Teaching</a>
+            <a href="/#experience" class="block text-secondary hover:text-accent">Experience</a>
+            <a href="/#outreach" class="block text-secondary hover:text-accent">Leadership</a>
+            <a href="/#demos" class="block text-secondary hover:text-accent">Demos</a>
+            <a href="/#contact" class="block text-secondary hover:text-accent">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p class="mobile-nav-heading">Pages &amp; Tools</p>
+          <div class="mobile-nav-list">
+            <a href="/tali/" class="block text-secondary hover:text-accent">TALI Visualizer <span class="nav-new-tag">New</span></a>
+            <a href="/daedalus/" class="block text-secondary hover:text-accent">DAEDALUS</a>
+            <a href="/supervision/" class="block text-secondary hover:text-accent">Supervision</a>
+            <a href="/skills/" class="block text-secondary hover:text-accent">Agent Toolkit</a>
+            <a href="/writing/" class="block text-secondary hover:text-accent">Writing advice</a>
+            <a href="/blog" class="block text-secondary hover:text-accent">Blog</a>
+            <a href="/cv/" class="block text-accent font-semibold">Resume</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>

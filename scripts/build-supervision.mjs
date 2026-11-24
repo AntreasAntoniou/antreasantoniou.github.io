@@ -55,7 +55,7 @@ const html = `<!DOCTYPE html>
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://antreas.io/images/profile.jpg">
   <link rel="icon" type="image/jpeg" href="/images/favicon-bot.jpeg">
-  <link rel="stylesheet" href="/styles.css?v=20260724-daedalus-work">
+  <link rel="stylesheet" href="/styles.css?v=20261124-nav-tali">
   <link rel="stylesheet" href="/tailwind-built.css">
   <link rel="stylesheet" href="/supervision/supervision.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">

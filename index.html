@@ -29,7 +29,7 @@
   <link rel="icon" type="image/jpeg" href="images/favicon-bot.jpeg">
   <link rel="apple-touch-icon" href="images/favicon-bot.jpeg">
 
-  <link rel="stylesheet" href="/styles.css?v=20260831-agent-glyph">
+  <link rel="stylesheet" href="/styles.css?v=20261124-nav-tali">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -90,10 +90,37 @@
       <div class="site-nav-links hidden md:flex">
         <a href="/#building" class="text-secondary hover:text-accent transition">Work</a>
         <a href="/#research" class="text-secondary hover:text-accent transition">Research</a>
+        <a href="/#demos" class="text-secondary hover:text-accent transition">Demos</a>
+        <a href="/#outreach" class="text-secondary hover:text-accent transition">Leadership</a>
         <a href="/#teaching" class="text-secondary hover:text-accent transition">Teaching</a>
-        <a href="/skills/" class="text-secondary hover:text-accent transition">Agent Toolkit</a>
-        <a href="/writing/" class="text-secondary hover:text-accent transition">Writing advice</a>
         <a href="/blog" class="text-secondary hover:text-accent transition">Blog</a>
+        <details class="site-nav-dropdown">
+          <summary class="site-nav-dropdown__summary">More <span class="site-nav-dropdown__chevron" aria-hidden="true">▾</span></summary>
+          <div class="site-nav-dropdown__panel">
+            <div class="site-nav-dropdown__group">
+              <p class="site-nav-dropdown__heading">Sections</p>
+              <a href="/#about">About</a>
+              <a href="/#building">Work</a>
+              <a href="/#research">Research</a>
+              <a href="/#publications">Publications</a>
+              <a href="/#teaching">Teaching</a>
+              <a href="/#experience">Experience</a>
+              <a href="/#outreach">Leadership</a>
+              <a href="/#demos">Demos</a>
+              <a href="/#contact">Contact</a>
+            </div>
+            <div class="site-nav-dropdown__group">
+              <p class="site-nav-dropdown__heading">Pages &amp; Tools</p>
+              <a href="/tali/">TALI Visualizer <span class="nav-new-tag">New</span></a>
+              <a href="/daedalus/">DAEDALUS</a>
+              <a href="/supervision/">Supervision</a>
+              <a href="/skills/">Agent Toolkit</a>
+              <a href="/writing/">Writing advice</a>
+              <a href="/blog">Blog</a>
+              <a href="/cv/">Resume</a>
+            </div>
+          </div>
+        </details>
         <a href="/#contact" class="text-secondary hover:text-accent transition">Contact</a>
         <a href="/cv/" class="btn-primary btn-sm">Resume</a>
         <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
@@ -112,15 +139,33 @@
     </div>
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden border-t" style="border-color: var(--border); background: var(--bg);">
-      <div class="px-4 py-4 space-y-3">
-        <a href="/#building" class="block text-secondary hover:text-accent">Work</a>
-        <a href="/#research" class="block text-secondary hover:text-accent">Research</a>
-        <a href="/#teaching" class="block text-secondary hover:text-accent">Teaching</a>
-        <a href="/skills/" class="block text-secondary hover:text-accent">Agent Toolkit</a>
-        <a href="/writing/" class="block text-secondary hover:text-accent">Writing advice</a>
-        <a href="/blog" class="block text-secondary hover:text-accent">Blog</a>
-        <a href="/#contact" class="block text-secondary hover:text-accent">Contact</a>
-        <a href="/cv/" class="block text-accent font-semibold">Resume</a>
+      <div class="px-4 py-4 mobile-nav-grid">
+        <div>
+          <p class="mobile-nav-heading">Sections</p>
+          <div class="mobile-nav-list">
+            <a href="/#about" class="block text-secondary hover:text-accent">About</a>
+            <a href="/#building" class="block text-secondary hover:text-accent">Work</a>
+            <a href="/#research" class="block text-secondary hover:text-accent">Research</a>
+            <a href="/#publications" class="block text-secondary hover:text-accent">Publications</a>
+            <a href="/#teaching" class="block text-secondary hover:text-accent">Teaching</a>
+            <a href="/#experience" class="block text-secondary hover:text-accent">Experience</a>
+            <a href="/#outreach" class="block text-secondary hover:text-accent">Leadership</a>
+            <a href="/#demos" class="block text-secondary hover:text-accent">Demos</a>
+            <a href="/#contact" class="block text-secondary hover:text-accent">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p class="mobile-nav-heading">Pages &amp; Tools</p>
+          <div class="mobile-nav-list">
+            <a href="/tali/" class="block text-secondary hover:text-accent">TALI Visualizer <span class="nav-new-tag">New</span></a>
+            <a href="/daedalus/" class="block text-secondary hover:text-accent">DAEDALUS</a>
+            <a href="/supervision/" class="block text-secondary hover:text-accent">Supervision</a>
+            <a href="/skills/" class="block text-secondary hover:text-accent">Agent Toolkit</a>
+            <a href="/writing/" class="block text-secondary hover:text-accent">Writing advice</a>
+            <a href="/blog" class="block text-secondary hover:text-accent">Blog</a>
+            <a href="/cv/" class="block text-accent font-semibold">Resume</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -211,6 +256,18 @@
           <a href="https://calendar.app.google/jy778byT379ZtLnk8" class="btn-secondary" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-calendar-alt"></i> Schedule Meeting
           </a>
+        </div>
+
+        <!-- Latest / New highlight -->
+        <div class="hero-update" data-aos="fade-up" data-aos-delay="400">
+          <span class="hero-update__badge">New</span>
+          <div class="hero-update__copy">
+            <strong>TALI Visualizer</strong> — search and inspect 143,250 temporally aligned video, audio, image, and text recordings.
+          </div>
+          <div class="hero-update__actions">
+            <a href="/tali/" class="hero-update__link">Open visualizer <span aria-hidden="true">→</span></a>
+            <a href="/#demos" class="hero-update__secondary">Demos</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1841,6 +1898,17 @@
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.email-dropdown')) {
         document.querySelectorAll('.email-dropdown').forEach(d => d.classList.remove('active'));
+      }
+      document.querySelectorAll('.site-nav-dropdown[open]').forEach(d => {
+        if (!d.contains(e.target) || e.target.closest('a')) {
+          d.removeAttribute('open');
+        }
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.site-nav-dropdown[open]').forEach(d => d.removeAttribute('open'));
       }
     });
 

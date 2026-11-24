@@ -81,11 +81,11 @@ test('search combines all terms with mentorship and theme filters', () => {
   assert.equal(normalize('  Générative  '), 'generative');
 });
 
-test('the page follows the existing navigation rather than adding another menu item', () => {
+test('the page follows the shared site navigation including the full menu', () => {
   const links = page => [...page.match(/<nav class="nav"[\s\S]*?<\/nav>/)[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(links(html), links(writing));
   assert.match(home, /href="\/supervision\/"/);
-  assert.doesNotMatch(home.match(/<nav class="nav"[\s\S]*?<\/nav>/)[0], /supervision/);
+  assert.match(home.match(/<nav class="nav"[\s\S]*?<\/nav>/)[0], /href="\/supervision\/"/);
 });
 
 test('permalinks, printing and filters remain local and reversible', () => {

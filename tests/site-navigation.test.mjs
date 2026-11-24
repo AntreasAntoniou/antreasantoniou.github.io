@@ -11,14 +11,33 @@ const pages = [
 ];
 const styles = readFileSync(new URL('styles.css', root), 'utf8');
 
-const expectedDesktopLinks = [
+const expectedTopBarLinks = [
   ['/#building', 'Work'],
   ['/#research', 'Research'],
+  ['/#demos', 'Demos'],
+  ['/#outreach', 'Leadership'],
   ['/#teaching', 'Teaching'],
+  ['/blog', 'Blog'],
+  ['/#contact', 'Contact'],
+  ['/cv/', 'Resume'],
+];
+
+const expectedMenuLinks = [
+  ['/#about', 'About'],
+  ['/#building', 'Work'],
+  ['/#research', 'Research'],
+  ['/#publications', 'Publications'],
+  ['/#teaching', 'Teaching'],
+  ['/#experience', 'Experience'],
+  ['/#outreach', 'Leadership'],
+  ['/#demos', 'Demos'],
+  ['/#contact', 'Contact'],
+  ['/tali/', 'TALI Visualizer'],
+  ['/daedalus/', 'DAEDALUS'],
+  ['/supervision/', 'Supervision'],
   ['/skills/', 'Agent Toolkit'],
   ['/writing/', 'Writing advice'],
   ['/blog', 'Blog'],
-  ['/#contact', 'Contact'],
   ['/cv/', 'Resume'],
 ];
 
@@ -26,17 +45,25 @@ function mainNav(html) {
   return html.match(/<nav class="nav"[\s\S]*?<\/nav>/)?.[0] ?? '';
 }
 
-function desktopLinks(nav) {
-  const desktop = nav.match(/<div class="site-nav-links[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? '';
-  return [...desktop.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)]
+function desktopTopLinks(nav) {
+  const desktop = nav.match(/<div class="site-nav-links[^>]*>([\s\S]*?)<\/div>\s*(?:<!-- Mobile menu button -->\s*)?<div class="flex items-center gap-3 md:hidden">/)?.[1] ?? '';
+  const withoutDropdown = desktop.replace(/<details class="site-nav-dropdown">[\s\S]*?<\/details>/, '');
+  return [...withoutDropdown.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)]
     .map((match) => [match[1], match[2].trim()]);
 }
 
-test('uses one compact navigation and destination order across main site pages', () => {
+function dropdownLinks(nav) {
+  const panel = nav.match(/<details class="site-nav-dropdown">[\s\S]*?<div class="site-nav-dropdown__panel">([\s\S]*?)<\/details>/)?.[1] ?? '';
+  return [...panel.matchAll(/<a href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)]
+    .map((match) => [match[1], match[2].replace(/<span[^>]*>.*?<\/span>/g, '').replace(/<[^>]+>/g, '').trim()]);
+}
+
+test('uses one compact navigation and full menu across main site pages', () => {
   for (const [name, html] of pages) {
     const nav = mainNav(html);
     assert.ok(nav, `${name} is missing the canonical navigation`);
-    assert.deepEqual(desktopLinks(nav), expectedDesktopLinks, `${name} has a divergent desktop menu`);
+    assert.deepEqual(desktopTopLinks(nav), expectedTopBarLinks, `${name} has a divergent top bar`);
+    assert.deepEqual(dropdownLinks(nav), expectedMenuLinks, `${name} has a divergent full menu dropdown`);
     assert.match(nav, /id="mobile-menu"/);
     assert.match(nav, /aria-controls="mobile-menu"/);
     assert.match(nav, /href="\/cv\/" class="block[^"]*">Resume<\/a>/);
