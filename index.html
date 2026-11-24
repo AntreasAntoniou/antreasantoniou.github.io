@@ -29,7 +29,7 @@
   <link rel="icon" type="image/jpeg" href="images/favicon-bot.jpeg">
   <link rel="apple-touch-icon" href="images/favicon-bot.jpeg">
 
-  <link rel="stylesheet" href="/styles.css?v=20261124-directors-cat">
+  <link rel="stylesheet" href="/styles.css?v=20261124-directors-cat-hover">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -195,7 +195,7 @@
             </span>
             <span id="profile-hint" class="profile-hint">
               <i id="profile-hint-icon" class="fas fa-clapperboard" aria-hidden="true"></i>
-              <span id="profile-hint-label">Show the director’s <span class="profile-hint__pun">c(u/<span class="profile-hint__cat">a</span>)t</span></span>
+              <span id="profile-hint-label">Show the director’s <span class="profile-hint__word">c<span class="profile-hint__swap" data-alt="a"><span class="profile-hint__char">u</span></span>t</span></span>
             </span>
           </button>
         </div>
@@ -1924,7 +1924,7 @@
           if (showAnime) {
             profileHintLabel.textContent = 'Return to documentary footage';
           } else {
-            profileHintLabel.innerHTML = 'Show the director’s <span class="profile-hint__pun">c(u/<span class="profile-hint__cat">a</span>)t</span>';
+            profileHintLabel.innerHTML = 'Show the director’s <span class="profile-hint__word">c<span class="profile-hint__swap" data-alt="a"><span class="profile-hint__char">u</span></span>t</span>';
           }
         }
       };

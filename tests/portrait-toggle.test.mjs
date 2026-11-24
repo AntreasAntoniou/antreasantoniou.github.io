@@ -24,9 +24,13 @@ test('pre-mounts both documentary and lightweight WebP anime portrait layers for
   assert.match(buttonMarkup, /id="hero-profile-anime"[^>]*src="images\/profile-anime\.png"/);
 });
 
-test('shows the director’s cut/cat pun label and swaps cleanly on toggle without inline transform clobbering', () => {
+test('reads cleanly as director’s cut at rest and reveals cat on hover/focus without inline transform clobbering', () => {
   const buttonMarkup = home.match(/<button id="profile-evolve-control"[\s\S]*?<\/button>/)?.[0] ?? '';
-  assert.match(buttonMarkup, /Show the director’s[\s\S]*c\(u\/[\s\S]*a[\s\S]*\)t/);
+  const labelMarkup = buttonMarkup.match(/<span id="profile-hint-label">(.*)<\/span>/)?.[1] ?? '';
+  const plainLabel = labelMarkup.replace(/<[^>]+>/g, '').trim();
+  assert.equal(plainLabel, 'Show the director’s cut');
+  assert.match(buttonMarkup, /class="profile-hint__word"/);
+  assert.match(buttonMarkup, /class="profile-hint__swap"[^>]*data-alt="a"/);
   assert.match(buttonMarkup, /aria-label="Show the director’s cut \(anime portrait with cat\)"/);
   assert.match(buttonMarkup, /id="profile-hint-icon"[^>]*fa-clapperboard/);
 
@@ -40,13 +44,18 @@ test('shows the director’s cut/cat pun label and swaps cleanly on toggle witho
   assert.match(portraitFunction, /is-anime/);
   assert.match(portraitFunction, /aria-pressed/);
   assert.match(portraitFunction, /fa-cat/);
+  assert.match(portraitFunction, /profile-hint__word/);
+  assert.match(portraitFunction, /data-alt="a"/);
   assert.match(portraitFunction, /Return to documentary footage/);
 });
 
-test('defines smooth crossfade transition styles and honors reduced motion', () => {
+test('defines smooth crossfade and cut-to-cat hover styles while honoring reduced motion', () => {
   assert.match(css, /\.profile-portrait\s*\{[\s\S]*?transition:/);
   assert.match(css, /\.profile-evolve-control\.is-anime\s+\.profile-portrait--anime\s*\{[\s\S]*?opacity:\s*1/);
   assert.match(css, /\.profile-evolve-control\.is-anime\s+\.profile-portrait--photo\s*\{[\s\S]*?opacity:\s*0/);
+  assert.match(css, /\.profile-hint__word\s*\{/);
+  assert.match(css, /\.profile-hint__swap::after\s*\{[\s\S]*?content:\s*attr\(data-alt\)/);
+  assert.match(css, /:hover\s+\.profile-hint__swap::after/);
   assert.match(css, /@keyframes profile-cut-flash/);
   assert.match(
     css,

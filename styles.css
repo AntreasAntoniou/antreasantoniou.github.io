@@ -734,13 +734,62 @@ html {
   transform: translateY(-1px);
 }
 
-.profile-hint__pun {
-  letter-spacing: 0.01em;
+.profile-hint__word {
+  display: inline-block;
+  padding: 0.02rem 0.28rem 0.05rem;
+  margin: -0.02rem -0.06rem -0.05rem 0.04rem;
+  border-radius: 0.32rem;
+  background: color-mix(in srgb, var(--accent-light) 72%, transparent);
+  border-bottom: 1.5px dotted color-mix(in srgb, var(--accent) 55%, transparent);
+  color: var(--text);
+  line-height: 1.2;
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease;
 }
 
-.profile-hint__cat {
+.profile-hint__swap {
+  position: relative;
+  display: inline-block;
+  overflow: clip;
+  line-height: inherit;
+}
+
+.profile-hint__char {
+  display: inline-block;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+}
+
+.profile-hint__swap::after {
+  content: attr(data-alt);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+  line-height: inherit;
   color: var(--accent);
   font-weight: 800;
+  transform: translateY(105%);
+  opacity: 0;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+}
+
+.profile-evolve-control:not(.is-anime):hover .profile-hint__word,
+.profile-evolve-control:not(.is-anime):focus-visible .profile-hint__word {
+  background: var(--accent-light);
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+
+.profile-evolve-control:not(.is-anime):hover .profile-hint__char,
+.profile-evolve-control:not(.is-anime):focus-visible .profile-hint__char {
+  transform: translateY(-105%);
+  opacity: 0;
+}
+
+.profile-evolve-control:not(.is-anime):hover .profile-hint__swap::after,
+.profile-evolve-control:not(.is-anime):focus-visible .profile-hint__swap::after {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .profile-evolve-control.is-anime .profile-hint {
