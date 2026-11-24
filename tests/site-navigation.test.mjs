@@ -33,6 +33,7 @@ const expectedMenuLinks = [
   ['/#demos', 'Demos'],
   ['/#contact', 'Contact'],
   ['/tali/', 'TALI Visualizer'],
+  ['https://cliphoard.dev/', 'Cliphoard'],
   ['/daedalus/', 'DAEDALUS'],
   ['/supervision/', 'Supervision'],
   ['/skills/', 'Agent Toolkit'],

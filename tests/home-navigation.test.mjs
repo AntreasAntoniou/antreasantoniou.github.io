@@ -26,6 +26,7 @@ test('exposes primary sections and full menu options including demos and leaders
     ['/#publications', 'Publications'],
     ['/#experience', 'Experience'],
     ['/tali/', 'TALI Visualizer'],
+    ['https://cliphoard.dev/', 'Cliphoard'],
     ['/daedalus/', 'DAEDALUS'],
     ['/supervision/', 'Supervision'],
     ['/skills/', 'Agent Toolkit'],
@@ -40,13 +41,17 @@ test('exposes primary sections and full menu options including demos and leaders
   assert.match(nav, /<details class="site-nav-dropdown">/);
 });
 
-test('surfaces the TALI Visualizer at a glance near the top of the homepage', () => {
+test('surfaces TALI Visualizer and Cliphoard as New items at the top of the homepage', () => {
   const hero = home.match(/<!-- Hero Section -->([\s\S]*?)<!-- About Section/)?.[1] ?? '';
-  assert.match(hero, /class="hero-update"/);
+  assert.match(hero, /class="hero-updates"/);
+  assert.equal((hero.match(/class="hero-update"/g) ?? []).length, 2, 'should show two New spotlight items');
+  assert.equal((hero.match(/hero-update__badge[^>]*>New<\/span>/g) ?? []).length, 2, 'both spotlight items should carry a New badge');
   assert.match(hero, /TALI Visualizer/);
   assert.match(hero, /href="\/tali\/"/);
   assert.match(hero, /href="\/#demos"/);
-  assert.match(hero, /hero-update__badge[^>]*>New<\/span>/);
+  assert.match(hero, /Cliphoard/);
+  assert.match(hero, /href="https:\/\/cliphoard\.dev\/"/);
+  assert.match(hero, /href="https:\/\/github\.com\/AntreasAntoniou\/cliphoard"/);
 });
 
 test('makes DAEDALUS prominent inside current work without crowding the hero', () => {
