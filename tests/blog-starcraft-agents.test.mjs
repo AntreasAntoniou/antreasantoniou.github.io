@@ -27,6 +27,7 @@ test('publishes the StarCraft II and AI agents essay with all eight local figure
   const sitemap = fs.readFileSync(sitemapUrl, 'utf8');
 
   assert.match(html, /<h1>Go Play StarCraft II to Get Better at AI Agents<\/h1>/);
+  assert.match(html, /ChatGPT Codex, Claude Code, and Antigravity/);
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   assert.match(html, /<link rel="canonical" href="https:\/\/antreas\.io\/blog\/go-play-starcraft-ii\/">/);
   assert.match(
