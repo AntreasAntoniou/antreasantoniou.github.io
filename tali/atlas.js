@@ -65,6 +65,20 @@ const semanticViews = {
   video: "Video",
   text: "Text",
 };
+const semanticSourceNames = {
+  text: "Text",
+  image: "Image",
+  audio: "Audio",
+  video: "Video",
+  av: "Audio + Video",
+};
+const semanticClipSourceNames = {
+  av: "Joint audio + video",
+  audio: "Audio",
+  video: "Video",
+  image: "Wikipedia image",
+  text: "Text",
+};
 const semanticExamples = {
   av: "A dog barking in a garden",
   image: "A spiral staircase seen from above",
@@ -73,12 +87,29 @@ const semanticExamples = {
   text: "How a bicycle gear works",
 };
 const semanticView = (view) => Object.hasOwn(semanticViews, view) ? view : "av";
+const semanticSource = (source) => Object.hasOwn(semanticSourceNames, source) ? source : "text";
 const semanticPublicOrigin = "https://tali.antreas.io";
 const semanticLocalHost = () => ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
-function semanticURL(q = "", view = "av") {
+function semanticURL(q = "", view = "av", source = "text") {
   const params = new URLSearchParams({ mode: "semantic" });
   if (q) params.set("q", q);
+  if (source && source !== "text") params.set("source", semanticSource(source));
   params.set("view", semanticView(view));
+  return (privateEdition && !semanticLocalHost() ? semanticPublicOrigin + "/" : "") +
+    "#visualizer?" + params;
+}
+function semanticSimilarURL(doc, win = 0, source = "av", view = "av", segment) {
+  const params = new URLSearchParams({
+    mode: "semantic",
+    doc: String(doc),
+    window: String(win),
+    source: semanticView(source),
+    view: semanticView(view),
+  });
+  if (segment && Number.isFinite(segment.start_s) && Number.isFinite(segment.end_s)) {
+    params.set("start", String(segment.start_s));
+    params.set("end", String(segment.end_s));
+  }
   return (privateEdition && !semanticLocalHost() ? semanticPublicOrigin + "/" : "") +
     "#visualizer?" + params;
 }
@@ -418,15 +449,49 @@ function vizSearchPage(params) {
     '">Fixed concept gallery</a></nav>';
   if (semantic) {
     const searchHere = !privateEdition || semanticLocalHost();
+    const qSource = semanticSource(params.get("source"));
+    const targetView = semanticView(params.get("view"));
+    const hasClipQuery = params.has("doc") && /^\d{1,9}$/.test(params.get("doc") || "");
+    const clipDoc = hasClipQuery ? Number(params.get("doc")) : null;
+    const clipWin = hasClipQuery && /^\d{1,6}$/.test(params.get("window") || "0") ? Number(params.get("window") || "0") : 0;
+    const clipSource = semanticView(params.get("source") || "av");
     const description = searchHere
-      ? 'Search the clips indexed so far with a phrase or sentence. Joint audio + video matches against an embedding of sound and moving images together. ' + external(embeddingDatasetURL, "Download the vectors") + ' or ' + link("#datasets/retrieval", "try a Python search example") + '.'
+      ? 'Search all 1.17M indexed clips across any modality pair: query with text, an uploaded image, audio, video, or any TALI clip signal, and match against audio, video, joint audiovisual, Wikipedia images, or text. ' + external(embeddingDatasetURL, "Download the vectors") + ' or ' + link("#datasets/retrieval", "try a Python search example") + '.'
       : 'Results open on the public TALI Visualizer.';
+    const sourceTabs = searchHere
+      ? '<div class="semantic-source-tabs" role="group" aria-label="Query input modality"><span>Query with</span>' +
+        Object.entries(semanticSourceNames).map(([key, label]) =>
+          '<button type="button" data-qsource="' + key + '" aria-pressed="' + (!hasClipQuery && key === qSource ? "true" : "false") + '">' + esc(label) + '</button>'
+        ).join("") + '</div>'
+      : "";
+    const clipBanner = hasClipQuery && searchHere
+      ? '<div id="semantic-clip-query" class="semantic-clip-query"><div class="semantic-clip-query-meta"><small>All-to-all clip query</small><strong id="clip-query-title">Recording #' + clipDoc + '</strong></div>' +
+        '<div class="semantic-clip-controls"><label>Query signal <select id="clip-query-source">' +
+        Object.entries(semanticClipSourceNames).map(([k, lbl]) => '<option value="' + k + '"' + (k === clipSource ? " selected" : "") + '>' + esc(lbl) + '</option>').join("") +
+        '</select></label><label>Match against <select id="clip-query-view">' +
+        Object.entries(semanticViews).map(([k, lbl]) => '<option value="' + k + '"' + (k === targetView ? " selected" : "") + '>' + esc(lbl) + '</option>').join("") +
+        '</select></label><a href="' + esc(semanticURL("", targetView)) + '">Text / upload</a></div></div>'
+      : "";
+    const mediaBox = searchHere && !hasClipQuery && qSource !== "text"
+      ? '<div id="semantic-media-box" class="semantic-media-box" data-qsource="' + qSource + '"><div class="semantic-media-controls">' +
+        '<input id="semantic-media-file" type="file" accept="' +
+        (qSource === "image" ? "image/*" : qSource === "audio" ? "audio/*" : "video/*") +
+        '" aria-label="Choose ' + esc(semanticSourceNames[qSource]) + ' file">' +
+        (qSource === "audio" ? '<button id="semantic-mic-btn" type="button" class="semantic-media-btn secondary">Record mic (up to 10s)</button>' : "") +
+        '<label class="semantic-view" style="grid-column:auto">Match against <select id="semantic-media-view">' +
+        Object.entries(semanticViews).map(([key, label]) => '<option value="' + key + '"' + (key === targetView ? " selected" : "") + '>' + esc(label) + '</option>').join("") +
+        '</select></label><button id="semantic-media-go" type="button" class="semantic-media-btn" disabled>Search <span aria-hidden="true">↗</span></button>' +
+        '</div><div id="semantic-media-preview" class="semantic-media-preview">Choose ' +
+        (qSource === "image" ? "a JPEG, PNG or WebP image" : qSource === "audio" ? "an audio clip (or record up to 10s from your microphone)" : "a short video clip (first 10 seconds sampled at 2 fps)") +
+        ' to embed with EmbeddingGemma 2 and search the live index.</div></div>'
+      : "";
     return top + '<section class="semantic-search" aria-labelledby="semantic-heading">' +
       '<h2 id="semantic-heading">Describe a scene, sound or subject</h2><p>' + description + '</p>' +
-      semanticForm(q.trim().slice(0, 110), semanticView(params.get("view"))) +
-      semanticSuggestions() +
+      sourceTabs +
+      clipBanner +
+      (!hasClipQuery && qSource === "text" ? semanticForm(q.trim().slice(0, 110), targetView) + semanticSuggestions() : mediaBox) +
       (searchHere ? '<div id="semantic-coverage" class="semantic-coverage" role="status">Checking index coverage…</div></section>' +
-      '<p id="semantic-feedback" role="status">' + (q.trim() ? "Searching the live index…" : "") +
+      '<p id="semantic-feedback" role="status">' + (hasClipQuery || q.trim() ? "Searching the live index…" : "") +
       '</p><section id="v-results" aria-label="Search results"></section>' : '</section>');
   }
   if (concept)
@@ -645,10 +710,156 @@ function semanticAPI(endpoint, params) {
 async function semanticFetch(endpoint, params, signal) {
   const response = await fetch(semanticAPI(endpoint, params), {
     credentials: "omit",
-    signal: AbortSignal.any([signal, AbortSignal.timeout(25000)]),
+    signal: AbortSignal.any([signal, AbortSignal.timeout(40000)]),
   });
   if (!response.ok) throw Error("Live index unavailable");
   return response.json();
+}
+async function semanticPost(endpoint, payload, signal) {
+  const response = await fetch(semanticAPI(endpoint, null), {
+    method: "POST",
+    credentials: "omit",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    signal: AbortSignal.any([signal, AbortSignal.timeout(45000)]),
+  });
+  if (!response.ok) {
+    let msg = "Live multimodal search unavailable";
+    try {
+      const err = await response.json();
+      if (err?.error) msg = err.error;
+    } catch {}
+    throw Error(msg);
+  }
+  return response.json();
+}
+function bytesToBase64(bytes) {
+  let out = "";
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    out += String.fromCharCode(...bytes.subarray(i, i + chunk));
+  }
+  return btoa(out);
+}
+async function canvasToJpegBase64(canvas, quality = 0.85) {
+  const blob = await new Promise((resolve, reject) =>
+    canvas.toBlob((b) => (b ? resolve(b) : reject(Error("Could not encode frame"))), "image/jpeg", quality)
+  );
+  return bytesToBase64(new Uint8Array(await blob.arrayBuffer()));
+}
+async function encodeImageFileForSearch(file) {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((resolve, reject) => {
+      const el = new Image();
+      el.onload = () => resolve(el);
+      el.onerror = () => reject(Error("Could not decode image"));
+      el.src = url;
+    });
+    const maxSide = 512;
+    const scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+    canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+    const b64 = await canvasToJpegBase64(canvas, 0.88);
+    return { image_b64: b64, thumb: canvas.toDataURL("image/jpeg", 0.7), summary: canvas.width + "×" + canvas.height + " JPEG" };
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+async function audioBufferToWav16kBase64(audioBuffer) {
+  const maxSec = Math.min(audioBuffer.duration, 10.0);
+  if (maxSec < 0.2) throw Error("Audio clip must be at least 0.2 seconds long.");
+  const targetRate = 16000;
+  const targetLen = Math.max(1, Math.round(maxSec * targetRate));
+  const offline = new OfflineAudioContext(1, targetLen, targetRate);
+  const src = offline.createBufferSource();
+  src.buffer = audioBuffer;
+  src.connect(offline.destination);
+  src.start(0, 0, maxSec);
+  const rendered = await offline.startRendering();
+  const samples = rendered.getChannelData(0);
+  const wav = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(wav);
+  const str = (off, s) => { for (let i = 0; i < s.length; i++) view.setUint8(off + i, s.charCodeAt(i)); };
+  str(0, "RIFF");
+  view.setUint32(4, 36 + samples.length * 2, true);
+  str(8, "WAVE");
+  str(12, "fmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
+  view.setUint32(24, targetRate, true);
+  view.setUint32(28, targetRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  str(36, "data");
+  view.setUint32(40, samples.length * 2, true);
+  for (let i = 0; i < samples.length; i++) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(44 + i * 2, s < 0 ? s * 32768 : s * 32767, true);
+  }
+  return {
+    audio_wav_b64: bytesToBase64(new Uint8Array(wav)),
+    duration_s: maxSec,
+    summary: maxSec.toFixed(1) + "s · 16 kHz mono WAV (" + Math.round(wav.byteLength / 1024) + " KB)",
+  };
+}
+async function encodeAudioBlobForSearch(blob) {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  try {
+    const decoded = await ctx.decodeAudioData(await blob.arrayBuffer());
+    return await audioBufferToWav16kBase64(decoded);
+  } finally {
+    await ctx.close().catch(() => {});
+  }
+}
+async function encodeVideoFileForSearch(file, includeAudio) {
+  const url = URL.createObjectURL(file);
+  try {
+    const video = document.createElement("video");
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = "auto";
+    video.src = url;
+    await new Promise((resolve, reject) => {
+      video.onloadedmetadata = resolve;
+      video.onerror = () => reject(Error("Could not decode video file"));
+    });
+    const dur = Math.min(video.duration || 0, 10.0);
+    if (!Number.isFinite(dur) || dur <= 0.1) throw Error("Video duration could not be read.");
+    const nFrames = Math.max(2, Math.min(10, Math.round(dur * 2)));
+    const canvas = document.createElement("canvas");
+    canvas.width = 224;
+    canvas.height = 224;
+    const ctx = canvas.getContext("2d");
+    const frames = [];
+    let thumb = "";
+    for (let i = 0; i < nFrames; i++) {
+      const t = Math.min(dur - 0.05, ((i + 0.5) * dur) / nFrames);
+      await new Promise((resolve) => {
+        video.onseeked = resolve;
+        video.currentTime = Math.max(0, t);
+      });
+      ctx.drawImage(video, 0, 0, 224, 224);
+      frames.push(await canvasToJpegBase64(canvas, 0.8));
+      if (!thumb) thumb = canvas.toDataURL("image/jpeg", 0.7);
+    }
+    const out = {
+      frames_b64: frames,
+      thumb,
+      summary: frames.length + " frames (224×224) over " + dur.toFixed(1) + "s",
+    };
+    if (includeAudio) {
+      const audio = await encodeAudioBlobForSearch(file);
+      out.audio_wav_b64 = audio.audio_wav_b64;
+      out.summary += " + " + audio.summary;
+    }
+    return out;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
 }
 function renderSemanticCoverage(node, coverage) {
   const keys = ["rows", "total_rows", "shards", "total_shards"];
@@ -698,15 +909,24 @@ async function semanticResults(results, hits, q, view, signal) {
       ? "Clip " + semanticRange(segment.start_s, segment.end_s) + " · source " +
         semanticRange(source + segment.start_s, source + segment.end_s)
       : "Linked clip · source " + semanticTime(source);
+    const simLink = !privateEdition || semanticLocalHost()
+      ? '<div class="v-result-actions"><span>' +
+        (Number.isFinite(hit.score) ? "cos " + hit.score.toFixed(2) : "") +
+        '</span><a href="' + esc(semanticSimilarURL(hit.doc, hit.window, view, view, segment)) +
+        '">Search from this clip ⇄</a></div>'
+      : "";
     return '<article class="v-result"><a class="v-result-hit" href="' +
       esc(vizItem(hit.doc, hit.window, segment)) + '">' +
       (img ? '<img src="' + esc(img.asset) + '" loading="lazy" alt="">'
         : '<span class="result-time" aria-hidden="true">▶</span>') +
       '<div><small>' + esc([scope, field, language].filter(Boolean).join(" · ")) +
       '</small><h3 data-title="' + i + '">' + esc(known || "Recording " + id) + '</h3><p>' +
-      esc(times + " · " + split) + '</p></div><b aria-hidden="true">↗</b></a></article>';
+      esc(times + " · " + split) + '</p></div><b aria-hidden="true">↗</b></a>' + simLink + '</article>';
   });
-  results.innerHTML = '<div class="results-head"><h2>Matches for “' + esc(q) + '”</h2><span>' +
+  const headingText = q.startsWith("clip:")
+    ? "Matches for " + q.slice(5)
+    : "Matches for “" + q + "”";
+  results.innerHTML = '<div class="results-head"><h2>' + esc(headingText) + '</h2><span>' +
     esc(semanticViews[view]) + '</span></div>' + (found.length
       ? '<div class="v-result-grid">' + items.join("") + '</div>'
       : '<p>No matches in the indexed clips. Try another description or media view.</p>');
@@ -714,13 +934,32 @@ async function semanticResults(results, hits, q, view, signal) {
     hydrateTitle(found[Number(h.dataset.title)].doc, h, signal));
   return found.length;
 }
+let semanticPreparedMedia = null;
 async function semanticStart(params, signal) {
   const q = (params.get("q") || "").trim().slice(0, 110);
   const view = semanticView(params.get("view"));
+  const qSource = semanticSource(params.get("source"));
+  const hasClipQuery = params.has("doc") && /^\d{1,9}$/.test(params.get("doc") || "");
+  const clipDoc = hasClipQuery ? Number(params.get("doc")) : null;
+  const clipWin = hasClipQuery && /^\d{1,6}$/.test(params.get("window") || "0") ? Number(params.get("window") || "0") : 0;
+  const clipSource = semanticView(params.get("source") || "av");
+  const clipSegment = hasClipQuery && params.has("start") && params.has("end")
+    ? semanticSegment(Number(params.get("start")), Number(params.get("end")))
+    : undefined;
   const feedback = document.querySelector("#semantic-feedback");
   const coverage = document.querySelector("#semantic-coverage");
   const results = document.querySelector("#v-results");
   let coverageFromResults = false;
+
+  document.querySelectorAll(".semantic-source-tabs button[data-qsource]").forEach((btn) => {
+    btn.onclick = () => {
+      const next = btn.dataset.qsource;
+      const curView = document.querySelector("#semantic-media-view, .semantic-form select[name='view'], #clip-query-view")?.value || view;
+      semanticPreparedMedia = null;
+      location.hash = semanticURL(next === "text" ? q : "", curView, next);
+    };
+  });
+
   const loadCoverage = async () => {
     coverage.textContent = "Checking index coverage…";
     try {
@@ -731,31 +970,170 @@ async function semanticStart(params, signal) {
       coverage.replaceChildren("Index coverage is unavailable. ", semanticRetry("Retry coverage", loadCoverage));
     }
   };
-  const search = async () => {
+  const applyResponse = async (response, label, targetView) => {
+    if (response.status) {
+      try {
+        renderSemanticCoverage(coverage, response.status);
+        coverageFromResults = true;
+      } catch {}
+    }
+    const count = await semanticResults(results, response.results, label, targetView, signal);
+    if (!signal.aborted) feedback.textContent = iso(count) + (count === 1 ? " ranked match" : " ranked matches");
+  };
+  const searchText = async () => {
     feedback.textContent = "Searching the live index…";
     results.replaceChildren();
     results.setAttribute("aria-busy", "true");
     try {
       const response = await semanticFetch("search", { q, view, k: 12 }, signal);
       signal.throwIfAborted();
-      if (response.status) {
-        try {
-          renderSemanticCoverage(coverage, response.status);
-          coverageFromResults = true;
-        } catch {
-          // The dedicated coverage endpoint can supply the current counts independently.
-        }
-      }
-      const count = await semanticResults(results, response.results, q, view, signal);
-      if (!signal.aborted) feedback.textContent = iso(count) + (count === 1 ? " ranked match" : " ranked matches");
+      await applyResponse(response, q, view);
     } catch {
       if (signal.aborted) return;
-      feedback.replaceChildren("Live search could not load results. ", semanticRetry("Retry search", search));
+      feedback.replaceChildren("Live search could not load results. ", semanticRetry("Retry search", searchText));
     } finally {
       if (!signal.aborted) results.removeAttribute("aria-busy");
     }
   };
-  await Promise.all([loadCoverage(), q && search()]);
+  const searchClip = async () => {
+    feedback.textContent = "Searching " + semanticViews[view].toLowerCase() + " from clip " + semanticClipSourceNames[clipSource].toLowerCase() + "…";
+    results.replaceChildren();
+    results.setAttribute("aria-busy", "true");
+    const srcSel = document.querySelector("#clip-query-source");
+    const viewSel = document.querySelector("#clip-query-view");
+    if (srcSel) srcSel.onchange = () => { location.hash = semanticSimilarURL(clipDoc, clipWin, srcSel.value, viewSel?.value || view, clipSegment); };
+    if (viewSel) viewSel.onchange = () => { location.hash = semanticSimilarURL(clipDoc, clipWin, srcSel?.value || clipSource, viewSel.value, clipSegment); };
+    const titleNode = document.querySelector("#clip-query-title");
+    vizDoc(clipDoc).then((doc) => {
+      if (!signal.aborted && titleNode?.isConnected) hydrateTitle(doc, titleNode, signal);
+    }).catch(() => {});
+    try {
+      const qp = { doc: clipDoc, window: clipWin, source: clipSource, view, k: 12 };
+      if (clipSegment && ["av", "audio", "video"].includes(clipSource)) {
+        qp.start_s = clipSegment.start_s;
+        qp.end_s = clipSegment.end_s;
+      }
+      const response = await semanticFetch("similar", qp, signal);
+      signal.throwIfAborted();
+      if (Array.isArray(response.available_sources) && srcSel) {
+        const avail = new Set(response.available_sources);
+        [...srcSel.options].forEach((opt) => { opt.disabled = !avail.has(opt.value); });
+      }
+      const label = "clip:" + semanticClipSourceNames[clipSource] + " of recording #" + clipDoc;
+      await applyResponse(response, label, view);
+    } catch {
+      if (signal.aborted) return;
+      feedback.replaceChildren("Live clip-to-modality search could not load results. ", semanticRetry("Retry search", searchClip));
+    } finally {
+      if (!signal.aborted) results.removeAttribute("aria-busy");
+    }
+  };
+
+  if (!hasClipQuery && qSource !== "text") {
+    const fileInput = document.querySelector("#semantic-media-file");
+    const viewSelect = document.querySelector("#semantic-media-view");
+    const goBtn = document.querySelector("#semantic-media-go");
+    const preview = document.querySelector("#semantic-media-preview");
+    const micBtn = document.querySelector("#semantic-mic-btn");
+    const runMediaSearch = async () => {
+      if (!semanticPreparedMedia || semanticPreparedMedia.source !== qSource) return;
+      const tgt = semanticView(viewSelect?.value || view);
+      feedback.textContent = "Encoding " + semanticSourceNames[qSource].toLowerCase() + " with EmbeddingGemma 2 & searching " + semanticViews[tgt].toLowerCase() + "…";
+      results.replaceChildren();
+      results.setAttribute("aria-busy", "true");
+      if (goBtn) goBtn.disabled = true;
+      try {
+        const p = semanticPreparedMedia.payload;
+        const payload = { source: qSource, view: tgt, k: 12 };
+        if (p.image_b64) payload.image_b64 = p.image_b64;
+        if (p.audio_wav_b64) payload.audio_wav_b64 = p.audio_wav_b64;
+        if (p.frames_b64) payload.frames_b64 = p.frames_b64;
+        const response = await semanticPost("search", payload, signal);
+        signal.throwIfAborted();
+        await applyResponse(response, "clip:uploaded " + semanticSourceNames[qSource].toLowerCase() + " (" + semanticPreparedMedia.name + ")", tgt);
+      } catch (err) {
+        if (signal.aborted) return;
+        feedback.replaceChildren((err?.message || "Multimodal search failed") + ". ", semanticRetry("Retry search", runMediaSearch));
+      } finally {
+        if (!signal.aborted) {
+          results.removeAttribute("aria-busy");
+          if (goBtn) goBtn.disabled = false;
+        }
+      }
+    };
+    const showPreview = (name, prepared) => {
+      semanticPreparedMedia = { source: qSource, name, payload: prepared };
+      if (preview) {
+        preview.innerHTML = (prepared.thumb ? '<img src="' + esc(prepared.thumb) + '" alt="Query preview">' : "") +
+          '<span><strong>' + esc(name) + '</strong> · ' + esc(prepared.summary) + '</span>';
+      }
+      if (goBtn) goBtn.disabled = false;
+    };
+    if (fileInput) {
+      fileInput.onchange = async () => {
+        const file = fileInput.files?.[0];
+        if (!file) return;
+        if (preview) preview.textContent = "Preparing " + file.name + "…";
+        if (goBtn) goBtn.disabled = true;
+        try {
+          let prepared;
+          if (qSource === "image") prepared = await encodeImageFileForSearch(file);
+          else if (qSource === "audio") prepared = await encodeAudioBlobForSearch(file);
+          else prepared = await encodeVideoFileForSearch(file, qSource === "av");
+          if (signal.aborted) return;
+          showPreview(file.name, prepared);
+          await runMediaSearch();
+        } catch (err) {
+          if (!signal.aborted && preview) preview.textContent = "Could not read file: " + (err?.message || "unsupported format");
+        }
+      };
+    }
+    if (viewSelect) {
+      viewSelect.onchange = () => {
+        if (semanticPreparedMedia?.source === qSource) runMediaSearch();
+      };
+    }
+    if (goBtn) goBtn.onclick = runMediaSearch;
+    if (micBtn) {
+      let recorder = null;
+      let stopTimer = null;
+      micBtn.onclick = async () => {
+        if (recorder && recorder.state === "recording") {
+          recorder.stop();
+          return;
+        }
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const chunks = [];
+          recorder = new MediaRecorder(stream);
+          recorder.ondataavailable = (ev) => { if (ev.data.size) chunks.push(ev.data); };
+          recorder.onstop = async () => {
+            clearTimeout(stopTimer);
+            stream.getTracks().forEach((t) => t.stop());
+            micBtn.textContent = "Record mic (up to 10s)";
+            if (preview) preview.textContent = "Resampling recording to 16 kHz WAV…";
+            try {
+              const prepared = await encodeAudioBlobForSearch(new Blob(chunks, { type: recorder.mimeType || "audio/webm" }));
+              if (signal.aborted) return;
+              showPreview("Microphone recording", prepared);
+              await runMediaSearch();
+            } catch (err) {
+              if (!signal.aborted && preview) preview.textContent = "Recording failed: " + (err?.message || "decode error");
+            }
+          };
+          recorder.start();
+          micBtn.textContent = "Stop recording…";
+          if (preview) preview.textContent = "Recording microphone audio (stops automatically at 10s)…";
+          stopTimer = setTimeout(() => { if (recorder?.state === "recording") recorder.stop(); }, 10000);
+        } catch {
+          if (preview) preview.textContent = "Microphone access was unavailable or denied. You can still upload an audio file.";
+        }
+      };
+    }
+    await loadCoverage();
+    return;
+  }
+  await Promise.all([loadCoverage(), hasClipQuery ? searchClip() : (q && searchText())]);
 }
 async function vizStart(params, signal) {
   const mode = vizSearchMode(params);
@@ -1042,7 +1420,14 @@ async function vizShowItem(id, w, signal, segment) {
       .join("") +
     "</select>" +
     external(viewerURL(split, offset), "Release row") +
-    '</div><div class="source-layout"><div class="source-screen" id="source-screen">' +
+    '</div>' +
+    '<form id="item-similar-form" class="item-similar-bar"><strong>All-to-all search from this clip</strong>' +
+    '<label>Signal <select id="item-sim-source">' +
+    Object.entries(semanticClipSourceNames).map(([k, lbl]) => '<option value="' + k + '">' + esc(lbl) + '</option>').join("") +
+    '</select></label><label>Match against <select id="item-sim-view">' +
+    Object.entries(semanticViews).map(([k, lbl]) => '<option value="' + k + '">' + esc(lbl) + '</option>').join("") +
+    '</select></label><button type="submit" class="semantic-media-btn">Search <span aria-hidden="true">↗</span></button></form>' +
+    '<div class="source-layout"><div class="source-screen" id="source-screen">' +
     '<button id="v-download" type="button" class="v-download">▶ &nbsp; ' +
     (segment ? "Load matched segment" : "Load recording and sound") + '</button><div id="transfer" role="status"></div></div>' +
     '<aside class="source-context"><h2>Wikipedia reference</h2><div id="source-reference">' +
@@ -1052,6 +1437,17 @@ async function vizShowItem(id, w, signal, segment) {
     '</div></aside></div><div id="matched-windows"></div><section id="native-cues"></section>';
   document.querySelector("#v-window").onchange = (e) =>
     (location.hash = vizItem(id, Number(e.target.value)));
+  const simForm = document.querySelector("#item-similar-form");
+  if (simForm) {
+    simForm.onsubmit = (ev) => {
+      ev.preventDefault();
+      const src = document.querySelector("#item-sim-source")?.value || "av";
+      const tgt = document.querySelector("#item-sim-view")?.value || "av";
+      const nextURL = semanticSimilarURL(id, w, src, tgt, segment);
+      if (!nextURL.startsWith("#")) location.assign(nextURL);
+      else location.hash = nextURL;
+    };
+  }
   if (privateEdition)
     vizMiniRecord(doc, w, signal)
       .then((local) => {
